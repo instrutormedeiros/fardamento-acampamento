@@ -1,0 +1,649 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCM - Centro Cívico Militar - Equipamentos Profissionais</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #a3bffa;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 40px auto;
+            padding: 0 15px;
+        }
+        .section-title {
+            font-size: 1.8em;
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-bottom: 2px solid #1e3a8a;
+            padding-bottom: 10px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 70px;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        .product-card:hover .product-details {
+            max-height: 1200px;
+            padding: 20px 0;
+        }
+        .product-card h3 {
+            font-size: 1.3em;
+            color: #1e3a8a;
+            margin: 0;
+            font-weight: 500;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 8px;
+            text-align: center;
+        }
+        .product-card p {
+            font-size: 0.9em;
+            color: #666;
+            margin: 0 0 10px;
+            display: none;
+        }
+        .product-card ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+        }
+        .product-card ul li {
+            font-size: 0.85em;
+            color: #333;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: default;
+            transition: background 0.3s ease;
+        }
+        .product-card ul li:last-child {
+            border-bottom: none;
+        }
+        .product-card ul li:hover {
+            background-color: #f0f4ff;
+        }
+        .price-details {
+            display: none;
+            background-color: #e6f0ff;
+            padding: 6px;
+            border-top: 1px solid #d0d9ff;
+            margin-top: 5px;
+            font-size: 0.8em;
+            color: #1e3a8a;
+            font-weight: 500;
+        }
+        .price-details.active {
+            display: block;
+        }
+        .payment {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.4;
+            display: none;
+        }
+        .product-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        .product-card:hover .product-details p,
+        .product-card:hover .product-details ul,
+        .product-card:hover .product-details .payment {
+            display: block;
+        }
+        .contact-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .contact-section h2 {
+            font-size: 1.8em;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .contact-section p {
+            font-size: 1em;
+            color: #333;
+        }
+        .contact-section a {
+            color: #1e3a8a;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .contact-section a:hover {
+            color: #3b82f6;
+        }
+        .contact-section .contact-icon {
+            margin: 0 5px;
+            font-size: 1.1em;
+            vertical-align: middle;
+        }
+        .form-section {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .form-section h2 {
+            font-size: 1.8em;
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 1em;
+            color: #333;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.9em;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        .form-group select {
+            appearance: none;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" fill="none"><path d="M0 0h12L6 6z" fill="#666"/></svg>') no-repeat right 10px center;
+            background-size: 12px;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1e3a8a;
+            box-shadow: 0 0 5px rgba(30, 58, 138, 0.2);
+        }
+        .form-section button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .form-section button:hover {
+            background-color: #3b82f6;
+        }
+        footer {
+            background-color: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.8em;
+        }
+        footer p {
+            margin: 0;
+            line-height: 1.4;
+        }
+        footer a {
+            color: #a3bffa;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        footer a:hover {
+            color: white;
+        }
+        footer .footer-icon {
+            margin: 0 5px;
+            font-size: 1.1em;
+            vertical-align: middle;
+        }
+
+        /* Media Queries para dispositivos móveis */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            header h1 {
+                font-size: 1.3em;
+                text-align: center;
+            }
+            nav {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            nav a {
+                font-size: 0.85em;
+            }
+            .section-title {
+                font-size: 1.5em;
+                padding-bottom: 8px;
+            }
+            .product-grid {
+                grid-template-columns: 1fr; /* Uma coluna em telas menores */
+                gap: 15px;
+            }
+            .product-card {
+                min-height: 60px;
+                padding: 10px;
+            }
+            .product-card h3 {
+                font-size: 1.1em;
+                padding-bottom: 6px;
+            }
+            .product-card:hover .product-details {
+                padding: 15px 0;
+            }
+            .product-card p {
+                font-size: 0.85em;
+            }
+            .product-card ul li {
+                font-size: 0.8em;
+                padding: 8px 0;
+            }
+            .price-details {
+                font-size: 0.75em;
+                padding: 5px;
+            }
+            .payment {
+                font-size: 0.75em;
+            }
+            .contact-section h2 {
+                font-size: 1.5em;
+            }
+            .contact-section p {
+                font-size: 0.9em;
+            }
+            .contact-section a {
+                margin: 0 5px;
+                font-size: 0.9em;
+            }
+            .form-section {
+                padding: 15px;
+            }
+            .form-section h2 {
+                font-size: 1.5em;
+            }
+            .form-group label {
+                font-size: 0.9em;
+            }
+            .form-group input,
+            .form-group select {
+                padding: 7px;
+                font-size: 0.85em;
+            }
+            .form-section button {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+            footer {
+                padding: 15px 0;
+                font-size: 0.75em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.1em;
+            }
+            nav a {
+                font-size: 0.8em;
+            }
+            .section-title {
+                font-size: 1.3em;
+            }
+            .product-card h3 {
+                font-size: 1em;
+            }
+            .contact-section h2 {
+                font-size: 1.3em;
+            }
+            .contact-section p {
+                font-size: 0.85em;
+            }
+            .form-section h2 {
+                font-size: 1.3em;
+            }
+            .form-group label {
+                font-size: 0.85em;
+            }
+            .form-group input,
+            .form-group select {
+                font-size: 0.8em;
+            }
+            .form-section button {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>CCM - Centro Cívico Militar</h1>
+            <nav>
+                <a href="#fardamento">Kits de Fardamento</a>
+                <a href="#acampamento">Kits de Acampamento</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Kits de Fardamento -->
+        <div id="fardamento">
+            <h2 class="section-title">Kits de Fardamento</h2>
+            <div class="product-grid">
+                <!-- Kit Básico -->
+                <div class="product-card">
+                    <h3>Kit Básico</h3>
+                    <div class="product-details">
+                        <p>Fundação essencial para o uniforme de bombeiro civil, com durabilidade e funcionalidade.</p>
+                        <ul>
+                            <li data-price="79,90" onclick="toggleItemPrice(this)">Camiseta preta manga longa<div class="price-details">Preço: R$79,90</div></li>
+                            <li data-price="169,90" onclick="toggleItemPrice(this)">Calça tática ripstop<div class="price-details">Preço: R$169,90</div></li>
+                            <li data-price="169,90" onclick="toggleItemPrice(this)">Coturno extra leve com zíper<div class="price-details">Preço: R$169,90</div></li>
+                            <li data-price="39,90" onclick="toggleItemPrice(this)">Cinto<div class="price-details">Preço: R$39,90</div></li>
+                            <li data-price="89,90" onclick="toggleItemPrice(this)">Bornal<div class="price-details">Preço: R$89,90</div></li>
+                        </ul>
+                        <div class="payment">
+                            <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kit Avançado -->
+                <div class="product-card">
+                    <h3>Kit Avançado</h3>
+                    <div class="product-details">
+                        <p>Uniforme tático completo para maior proteção e mobilidade em operações.</p>
+                        <ul>
+                            <li data-price="489,90" onclick="toggleItemPrice(this)">Colete tático modular<div class="price-details">Preço: R$489,90</div></li>
+                            <li data-price="189,90" onclick="toggleItemPrice(this)">Suspensório<div class="price-details">Preço: R$189,90</div></li>
+                            <li data-price="79,90" onclick="toggleItemPrice(this)">Camiseta preta manga longa<div class="price-details">Preço: R$79,90</div></li>
+                            <li data-price="169,90" onclick="toggleItemPrice(this)">Calça tática ripstop<div class="price-details">Preço: R$169,90</div></li>
+                            <li data-price="169,90" onclick="toggleItemPrice(this)">Coturno extra leve com zíper<div class="price-details">Preço: R$169,90</div></li>
+                            <li data-price="39,90" onclick="toggleItemPrice(this)">Cinto<div class="price-details">Preço: R$39,90</div></li>
+                            <li data-price="89,90" onclick="toggleItemPrice(this)">Bornal<div class="price-details">Preço: R$89,90</div></li>
+                        </ul>
+                        <div class="payment">
+                            <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kit Monstro -->
+                <div class="product-card">
+                    <h3>Kit Monstro</h3>
+                    <div class="product-details">
+                        <p>O kit definitivo para operações extremas, com acessórios avançados.</p>
+                        <ul>
+                            <li data-price="489,90" onclick="toggleItemPrice(this)">Colete tático modular<div class="price-details">Preço: R$489,90</div></li>
+                            <li data-price="189,90" onclick="toggleItemPrice(this)">Suspensório<div class="price-details">Preço: R$189,90</div></li>
+                            <li data-price="79,90" onclick="toggleItemPrice(this)">Camiseta preta manga longa<div class="price-details">Preço: R$79,90</div></li>
+                            <li data-price="169,90" onclick="toggleItemPrice(this)">Calça tática ripstop<div class="price-details">Preço: R$169,90</div></li>
+                            <li data-price="169,90" onclick="toggleItemPrice(this)">Coturno extra leve com zíper<div class="price-details">Preço: R$169,90</div></li>
+                            <li data-price="39,90" onclick="toggleItemPrice(this)">Cinto<div class="price-details">Preço: R$39,90</div></li>
+                            <li data-price="89,90" onclick="toggleItemPrice(this)">Bornal<div class="price-details">Preço: R$89,90</div></li>
+                            <li data-price="149,90" onclick="toggleItemPrice(this)">Distintivo Bombeiro Civil<div class="price-details">Preço: R$149,90</div></li>
+                            <li data-price="79,90" onclick="toggleItemPrice(this)">Caneta quebra vidro<div class="price-details">Preço: R$79,90</div></li>
+                            <li data-price="79,90" onclick="toggleItemPrice(this)">Luva tática preta<div class="price-details">Preço: R$79,90</div></li>
+                            <li data-price="159,90" onclick="toggleItemPrice(this)">Joelheira e Cotoveleira<div class="price-details">Preço: R$159,90</div></li>
+                            <li data-price="199,90" onclick="toggleItemPrice(this)">Algema invictus para imobilização de paciente QBU<div class="price-details">Preço: R$199,90</div></li>
+                            <li data-price="59,90" onclick="toggleItemPrice(this)">Lanterna tática com LED lateral<div class="price-details">Preço: R$59,90</div></li>
+                        </ul>
+                        <div class="payment">
+                            <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kits de Acampamento -->
+        <div id="acampamento">
+            <h2 class="section-title">Kits de Acampamento</h2>
+            <div class="product-grid">
+                <!-- Kit Recruta -->
+                <div class="product-card">
+                    <h3>Kit Recruta (Básico)</h3>
+                    <div class="product-details">
+                        <p>Inicie sua jornada tática com o essencial para missões seguras e práticas.</p>
+                        <ul>
+                            <li data-price="150,00" onclick="toggleItemPrice(this)">Barraca: Camuflada, resistente<div class="price-details">Preço: R$150,00</div></li>
+                            <li data-price="100,00" onclick="toggleItemPrice(this)">Saco de dormir: Individual<div class="price-details">Preço: R$100,00</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Lanterna de cabeça: Uso mãos-livres<div class="price-details">Preço: R$40,00</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Pulseira Tática de Sobrevivência: Paracord com apito, pederneira, bússola, serra e cordão<div class="price-details">Preço: R$40,00</div></li>
+                            <li data-price="30,00" onclick="toggleItemPrice(this)">Repelente em Spray Compacto: 100 ml, resistente à água<div class="price-details">Preço: R$30,00</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Toalha de Microfibra Compacta: Secagem rápida, com estojo<div class="price-details">Preço: R$40,00</div></li>
+                        </ul>
+                        <div class="payment">
+                            <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto<br>Dinheiro: 5% de desconto</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kit Capitão -->
+                <div class="product-card">
+                    <h3>Kit Capitão (Intermediário)</h3>
+                    <div class="product-details">
+                        <p>Lidere com confiança, com equipamentos que equilibram conforto e funcionalidade.</p>
+                        <ul>
+                            <li data-price="150,00" onclick="toggleItemPrice(this)">Barraca: Camuflada, resistente<div class="price-details">Preço: R$150,00</div></li>
+                            <li data-price="100,00" onclick="toggleItemPrice(this)">Saco de dormir: Individual<div class="price-details">Preço: R$100,00</div></li>
+                            <li data-price="100,00" onclick="toggleItemPrice(this)">Kit térmico: Calça, camiseta e luva térmica<div class="price-details">Preço: R$100,00</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Lanterna de cabeça: Uso mãos-livres<div class="price-details">Preço: R$40,00</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Pulseira Tática de Sobrevivência: Paracord multifuncional<div class="price-details">Preço: R$40,00</div></li>
+                            <li data-price="59,90" onclick="toggleItemPrice(this)">Garrafa Tática Cantil: 900 ml<div class="price-details">Preço: R$59,90</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Toalha de Microfibra Compacta: Secagem rápida, com estojo<div class="price-details">Preço: R$40,00</div></li>
+                            <li data-price="50,00" onclick="toggleItemPrice(this)">Mosquetão Tático com Trava: Para amarrações<div class="price-details">Preço: R$50,00</div></li>
+                            <li data-price="30,00" onclick="toggleItemPrice(this)">Repelente em Spray Compacto: 100 ml<div class="price-details">Preço: R$30,00</div></li>
+                            <li data-price="20,00" onclick="toggleItemPrice(this)">Protetor Labial com FPS: FPS 50, hidratante<div class="price-details">Preço: R$20,00</div></li>
+                            <li data-price="25,00" onclick="toggleItemPrice(this)">Protetor de Pescoço (Buff): Tecido elástico, multifuncional<div class="price-details">Preço: R$25,00</div></li>
+                        </ul>
+                        <div class="payment">
+                            <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto<br>Dinheiro: 5% de desconto</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kit Comandos -->
+                <div class="product-card">
+                    <h3>Kit Comandos (Avançado)</h3>
+                    <div class="product-details">
+                        <p>Para a elite, com equipamentos de ponta para missões críticas e alta performance.</p>
+                        <ul>
+                            <li data-price="150,00" onclick="toggleItemPrice(this)">Barraca: Camuflada, resistente<div class="price-details">Preço: R$150,00</div></li>
+                            <li data-price="100,00" onclick="toggleItemPrice(this)">Saco de dormir: Individual<div class="price-details">Preço: R$100,00</div></li>
+                            <li data-price="100,00" onclick="toggleItemPrice(this)">Kit térmico: Calça, camiseta e luva térmica<div class="price-details">Preço: R$100,00</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Lanterna de cabeça: Uso mãos-livres<div class="price-details">Preço: R$40,00</div></li>
+                            <li data-price="150,00" onclick="toggleItemPrice(this)">Mochila Tática: Uso militar, durável<div class="price-details">Preço: R$150,00</div></li>
+                            <li data-price="150,00" onclick="toggleItemPrice(this)">Kit Joelheira e Cotoveleira: Proteção reforçada<div class="price-details">Preço: R$150,00</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Pulseira Tática de Sobrevivência: Paracord multifuncional<div class="price-details">Preço: R$40,00</div></li>
+                            <li data-price="59,90" onclick="toggleItemPrice(this)">Garrafa Tática Cantil: 900 ml<div class="price-details">Preço: R$59,90</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Cinto Tático: Resistente, funcional<div class="price-details">Preço: R$40,00</div></li>
+                            <li data-price="50,00" onclick="toggleItemPrice(this)">Mosquetão Tático com Trava: Para amarrações<div class="price-details">Preço: R$50,00</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Toalha de Microfibra Compacta: Secagem rápida<div class="price-details">Preço: R$40,00</div></li>
+                            <li data-price="80,00" onclick="toggleItemPrice(this)">Protetor Solar em Bastão: FPS 50/60/70, resistente à água<div class="price-details">Preço: R$80,00</div></li>
+                            <li data-price="50,00" onclick="toggleItemPrice(this)">Luvas Táticas Leves: Respiráveis, palma reforçada<div class="price-details">Preço: R$50,00</div></li>
+                            <li data-price="30,00" onclick="toggleItemPrice(this)">Repelente em Spray Compacto: 100 ml<div class="price-details">Preço: R$30,00</div></li>
+                            <li data-price="20,00" onclick="toggleItemPrice(this)">Protetor Labial com FPS: FPS 50<div class="price-details">Preço: R$20,00</div></li>
+                            <li data-price="25,00" onclick="toggleItemPrice(this)">Protetor de Pescoço (Buff): Multifuncional<div class="price-details">Preço: R$25,00</div></li>
+                            <li data-price="40,00" onclick="toggleItemPrice(this)">Garfo e Colher Dobráveis: Aço/polímero, com estojo<div class="price-details">Preço: R$40,00</div></li>
+                        </ul>
+                        <div class="payment">
+                            <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto<br>Dinheiro: 5% de desconto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contato -->
+        <div id="contato" class="contact-section">
+            <h2>Contato</h2>
+            <p>
+                <a href="https://wa.me/61981397421" target="_blank"><i class="fab fa-whatsapp contact-icon"></i> (61) 98139-7421</a> |
+                <a href="https://instagram.com/bombeirocivilbrasilia" target="_blank"><i class="fab fa-instagram contact-icon"></i> @bombeirocivilbrasilia</a>
+            </p>
+        </div>
+
+        <!-- Formulário de Pedido -->
+        <div class="form-section">
+            <h2>Faça Seu Pedido</h2>
+            <div class="form-group">
+                <label for="student-name">Nome do Aluno</label>
+                <input type="text" id="student-name" name="student-name" placeholder="Digite seu nome" required>
+            </div>
+            <div class="form-group">
+                <label for="items-requested">Itens Desejados (pode ser mais de um)</label>
+                <input type="text" id="items-requested" name="items-requested" placeholder="Ex.: Kit Monstro, Barraca" required>
+            </div>
+            <div class="form-group">
+                <label for="payment-method">Meio de Pagamento</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="Cartão de Débito">Cartão de Débito</option>
+                    <option value="Cartão de Crédito">Cartão de Crédito</option>
+                    <option value="PIX">PIX</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                </select>
+            </div>
+            <button type="button" onclick="alert('Pedido enviado com sucesso! Entraremos em contato em breve.')">Enviar Pedido</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            CCM - Centro Cívico Militar - Equipamentos Profissionais para Bombeiros Civis<br>
+            Contato: <a href="https://wa.me/61981397421" target="_blank"><i class="fab fa-whatsapp footer-icon"></i> (61) 98139-7421</a> | 
+            <a href="https://instagram.com/bombeirocivilbrasilia" target="_blank"><i class="fab fa-instagram footer-icon"></i> @bombeirocivilbrasilia</a><br>
+            © 2025 - Todos os direitos reservados
+        </p>
+    </footer>
+
+    <script>
+        function toggleItemPrice(item) {
+            const priceDetails = item.querySelector('.price-details');
+            priceDetails.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
