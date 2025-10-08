@@ -139,15 +139,15 @@
         .container { max-width: 1280px; margin: 40px auto; padding: 20px; background-color: rgba(0, 0, 0, 0.75); border-radius: 10px; }
         .section-title { font-size: 1.8em; color: #D3C4AB; text-align: center; margin-bottom: 30px; font-weight: 700; text-transform: uppercase; border-bottom: 2px solid #D3C4AB; padding-bottom: 10px; }
         .product-grid, .course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .product-card { background-color: rgba(255, 255, 255, 0.9); border: 1px solid #D3C4AB; border-radius: 10px; padding: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); position: relative; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; color: #000000; }
-        .product-card.active .product-details { max-height: 2000px; padding-top: 20px; }
-        .product-card.active .product-details p, .product-card.active .product-details ul, .product-card.active .product-details .payment { display: block; }
+        .product-card, .course-card { background-color: rgba(255, 255, 255, 0.9); border: 1px solid #D3C4AB; border-radius: 10px; padding: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); position: relative; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; color: #000000; }
+        .product-card.active .product-details { max-height: 2000px; padding: 20px 0 0; }
+        .product-card.active .product-details p, .product-card.active .product-details ul, .product-card.active .product-details .payment, .course-card.active .course-details p, .course-card.active .course-details .course-link { display: block; }
         .badge { position: absolute; top: 10px; right: 10px; background: linear-gradient(45deg, #FFD700, #FFA500); color: #000; padding: 4px 10px; border-radius: 15px; font-size: 0.75em; font-weight: bold; z-index: 2; text-transform: uppercase; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
-        .product-card h3 { font-size: 1.3em; color: #1A3C34; margin: 0 0 10px; font-weight: 500; border-bottom: 1px solid #D3C4AB; padding-bottom: 8px; text-align: center; }
+        .product-card:hover, .course-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+        .product-card h3, .course-card h3 { font-size: 1.3em; color: #1A3C34; margin: 0; font-weight: 500; border-bottom: 1px solid #D3C4AB; padding-bottom: 8px; text-align: center; }
         .product-card img.product-image-kit { max-width: 100%; height: auto; border-radius: 5px; margin: 15px auto; display: block; }
-        .product-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease; }
-        .product-details p, .product-details ul, .product-details .payment { display: none; }
+        .product-details, .course-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease; }
+        .product-details p, .product-details ul, .product-details .payment, .course-details p, .course-details .course-link { display: none; }
         .product-details ul { list-style-type: none; padding: 0; margin: 0; }
         .product-details ul li { font-size: 0.85em; padding: 10px 0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; gap: 8px; position: relative; flex-wrap: wrap; justify-content: space-between; }
         .product-details .quantity-selector { display: flex; gap: 5px; align-items: center; }
@@ -186,7 +186,7 @@
             header { position: static; }
             .header-container { flex-wrap: nowrap; }
             .logo-container a { font-size: 1em; }
-            nav { display: none; flex-direction: column; width: 100%; background-color: #1a3c34e8; backdrop-filter: blur(5px); position: absolute; top: 70px; left: 0; padding: 10px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 999; }
+            nav { display: none; flex-direction: column; width: 100%; background-color: #1a3c34e8; backdrop-filter: blur(5px); position: absolute; top: 70px; left: 0; padding: 10px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 1002; }
             nav.nav-active { display: flex; }
             nav a { padding: 12px 15px; width: 100%; text-align: center; border-bottom: 1px solid #ffffff22;}
             .menu-toggle { display: block; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
@@ -416,9 +416,9 @@
         <div id="cursos">
             <h2 class="section-title">Cursos</h2>
             <div class="course-grid">
-                <div class="product-card"><h3>Instrutor</h3></div>
-                <div class="product-card"><h3>NR10</h3></div>
-                <div class="product-card"><h3>Cuidador de Idosos</h3></div>
+                <div class="course-card"><h3>Instrutor</h3><div class="course-details"><p>Capacite-se para formar novos profissionais...</p><div class="course-link"><a href="#">Acesse o Curso</a></div></div></div>
+                <div class="course-card"><h3>NR10</h3><div class="course-details"><p>Aprenda normas de segurança...</p><div class="course-link"><a href="#">Acesse o Curso</a></div></div></div>
+                <div class="course-card"><h3>Cuidador de Idosos</h3><div class="course-details"><p>Desenvolva habilidades para cuidar de idosos...</p><div class="course-link"><a href="#">Acesse o Curso</a></div></div></div>
             </div>
         </div>
         <div id="contato" class="form-section">
@@ -505,7 +505,7 @@
 
         function toggleDetails(event, card) {
             if (event.target.closest('.quantity-selector, .add-to-cart-btn')) { return; }
-            document.querySelectorAll('.product-card.active').forEach(activeCard => {
+            document.querySelectorAll('.product-card.active, .course-card.active').forEach(activeCard => {
                 if (activeCard !== card) activeCard.classList.remove('active');
             });
             card.classList.toggle('active');
@@ -515,7 +515,8 @@
             if (event.target.closest('.quantity-selector, .add-to-cart-btn')) { return; }
             const modalProductName = document.getElementById('modalProductName');
             const modalProductContent = document.getElementById('modalProductContent');
-            const detailsClone = card.querySelector('.product-details').cloneNode(true);
+            const detailsSelector = card.querySelector('.product-details') ? '.product-details' : '.course-details';
+            const detailsClone = card.querySelector(detailsSelector).cloneNode(true);
             
             modalProductName.textContent = card.querySelector('h3').textContent;
             modalProductContent.innerHTML = '';
@@ -529,7 +530,7 @@
             if (event.target === productModal) productModal.classList.remove('active');
         });
 
-        document.querySelectorAll('.product-card').forEach(card => {
+        document.querySelectorAll('.product-card, .course-card').forEach(card => {
             card.addEventListener('click', function(event) {
                 if (window.innerWidth <= 768) {
                     openProductModal(this, event);
@@ -633,11 +634,122 @@
         
         document.addEventListener('DOMContentLoaded', function() {
             const fardamentoSection = document.getElementById('fardamento');
-            const eliteFardamentosSection = document.createElement('div');
-            eliteFardamentosSection.id = 'elite-fardamentos';
-            eliteFardamentosSection.innerHTML = `<h2 class="section-title">Elite dos Fardamentos</h2><div class="product-grid" id="elite-fardamentos-grid"></div>`;
-            if(fardamentoSection) {
+            if (fardamentoSection) {
+                const eliteFardamentosSection = document.createElement('div');
+                eliteFardamentosSection.id = 'elite-fardamentos';
+                eliteFardamentosSection.innerHTML = `<h2 class="section-title">Elite dos Fardamentos</h2><div class="product-grid" id="elite-fardamentos-grid"></div>`;
                 fardamentoSection.insertAdjacentElement('afterend', eliteFardamentosSection);
+
+                const eliteFardamentosGrid = document.getElementById('elite-fardamentos-grid');
+
+                function createProductListItem(price, name, iconClass, hasSize = false, sizes = [], hasColor = false, colors = []) {
+                    let optionsHtml = '';
+                    if (hasSize) {
+                        optionsHtml += `<select class="size-selector">`;
+                        sizes.forEach(size => { optionsHtml += `<option value="${size}">${size}</option>`; });
+                        optionsHtml += `</select>`;
+                    }
+                    if (hasColor) {
+                         optionsHtml += `<select class="color-selector">`;
+                         colors.forEach(color => { optionsHtml += `<option value="${color}">${color}</option>`; });
+                         optionsHtml += `</select>`;
+                    }
+
+                    return `
+                        <li data-price="${price.toFixed(2)}" onclick="prepareAddToCart(event, this)">
+                            <span class="item-name-icon"><i class="fa-solid ${iconClass}"></i> ${name}</span>
+                            <div class="quantity-selector">
+                                ${optionsHtml}
+                                <input type="number" min="1" value="1" class="quantity-input">
+                                <button class="add-to-cart-btn" onclick="addToCart(event, '${name}', ${price.toFixed(2)})">Adicionar</button>
+                            </div>
+                        </li>
+                    `;
+                }
+               
+                const kitsData = {
+                    "Kit Auxiliar": {
+                        image: "https://i.imgur.com/ih87A5E.jpeg",
+                        description: "O Kit Auxiliar oferece equipamentos essenciais para o suporte tático, combinando funcionalidade e conforto para missões de apoio.",
+                        items: [
+                            { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] },
+                            { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] },
+                            { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] },
+                            { name: "Calça tática foxboy", price: 289.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] },
+                            { name: "Coturno Atalaia", price: 389.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] },
+                            { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" },
+                            { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" },
+                            { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" },
+                            { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] },
+                            { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heartbeat" }
+                        ]
+                    },
+                    "Kit Instrutor": {
+                        image: "https://i.imgur.com/aYGnbsv.jpeg", 
+                        description: "Projetado para instrutores, este kit garante durabilidade e adaptabilidade, essencial para treinamento e demonstrações em campo.",
+                        items: [
+                            { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] },
+                            { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] },
+                            { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] },
+                            { name: "Calça tática invictus", price: 349.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] },
+                            { name: "Coturno Acero", price: 499.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] },
+                            { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" },
+                            { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" },
+                            { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" },
+                            { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" },
+                            { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" },
+                            { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" },
+                            { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] },
+                            { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }
+                        ]
+                    },
+                    "Kit G.A.T.E": {
+                        image: "https://i.imgur.com/L2PUx6z.jpeg", 
+                        description: "O Kit G.A.T.E (Grupo de Ações Táticas Especiais) é para operações de alto risco, oferecendo máxima proteção e funcionalidade em ambientes extremos.",
+                        items: [
+                            { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] },
+                            { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] },
+                            { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] },
+                            { name: "Calça tática invictus", price: 349.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] },
+                            { name: "Coturno Guartelá", price: 569.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] },
+                            { name: "Coturno Invictus", price: 649.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] },
+                            { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" },
+                            { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" },
+                            { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" },
+                            { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" },
+                            { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" },
+                            { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" },
+                            { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] },
+                            { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heartbeat" },
+                            { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" },
+                            { name: "Gorro vermelho Bombeiro Civil", price: 89.90, icon: "fa-hat-military" }
+                        ]
+                    }
+                };
+
+                for (const kitName in kitsData) {
+                    const kitInfo = kitsData[kitName];
+                    const newKitCard = document.createElement('div');
+                    newKitCard.classList.add('product-card');
+                    
+                    let itemsHtml = '';
+                    kitInfo.items.forEach(item => {
+                        itemsHtml += createProductListItem(item.price, item.name, item.icon, item.hasSize, item.sizes, item.hasColor, item.colors);
+                    });
+
+                    newKitCard.innerHTML = `
+                        <h3>${kitName}</h3>
+                        <img class="product-image-kit" src="${kitInfo.image}" alt="${kitName}">
+                        <div class="product-details">
+                            <p>${kitInfo.description}</p>
+                            <ul>${itemsHtml}</ul>
+                            <div class="payment">
+                                <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p>
+                            </div>
+                        </div>
+                    `;
+                    eliteFardamentosGrid.appendChild(newKitCard);
+                }
             }
         });
     </script>
