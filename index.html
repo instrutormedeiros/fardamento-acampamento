@@ -13,7 +13,6 @@
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #1A3C34;
-            /* IMAGEM DE FUNDO CORRIGIDA PARA O LINK DIRETO */
             background-image: url('https://i.imgur.com/nBroaKT.jpeg');
             background-repeat: no-repeat;
             background-position: center center;
@@ -75,6 +74,7 @@
             font-weight: 500;
             text-transform: uppercase;
             transition: color 0.3s ease;
+            cursor: pointer;
         }
         nav a:hover {
             color: #D3C4AB;
@@ -202,7 +202,7 @@
             max-width: 1280px;
             margin: 40px auto;
             padding: 0 15px;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.75);
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             color: #FFFFFF;
@@ -236,6 +236,19 @@
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             color: #000000;
+        }
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: bold;
+            z-index: 2;
+            text-transform: uppercase;
         }
         .product-card:hover, .course-card:hover {
             transform: scale(1.03);
@@ -353,6 +366,7 @@
             justify-content: flex-end;
             flex-shrink: 0;
             max-width: 50%;
+            position: relative; 
         }
         .quantity-selector select {
             padding: 2px;
@@ -389,6 +403,20 @@
         }
         .add-to-cart-btn:hover {
             background-color: #4A4A4A;
+        }
+        .add-feedback {
+            position: absolute;
+            top: -25px;
+            right: 0;
+            background-color: #1A3C34;
+            color: #FFFFFF;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            white-space: nowrap;
+            z-index: 10;
         }
         .payment {
             font-size: 0.8em;
@@ -461,6 +489,25 @@
             border-color: #1A3C34;
             box-shadow: 0 0 5px rgba(26, 60, 52, 0.2);
         }
+        .delivery-info {
+            font-size: 0.9em;
+            color: #4A4A4A;
+            background-color: #f0f0f0;
+            border-left: 4px solid #1A3C34;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .form-error {
+            color: #D8000C;
+            background-color: #FFD2D2;
+            border: 1px solid #D8000C;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
         .form-section button {
             display: block;
             width: 100%;
@@ -501,10 +548,10 @@
             font-size: 1.1em;
             vertical-align: middle;
         }
-        #cursos {
+        #cursos, #elite-fardamentos {
             display: none;
         }
-        #cursos.active {
+        #cursos.active, #elite-fardamentos.active {
             display: block;
         }
         @media (max-width: 768px) {
@@ -512,10 +559,19 @@
             .logo-container { flex-direction: column; align-items: center; gap: 5px; }
             .logo-container img { height: 40px; }
             .logo-container a { font-size: 1.0em; text-align: center; }
-            nav { flex-direction: column; gap: 10px; align-items: center; }
-            nav a { font-size: 0.85em; }
+            nav { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 15px; }
+            nav a { font-size: 0.80em; }
             .cart-toggle { margin-left: 0; }
-            .cart-container { top: 100px; right: 10px; width: 250px; }
+            .cart-container {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 90vw;
+                max-height: 70vh;
+            }
+            .cart-container.active {
+                display: block;
+            }
             .cart-container h3 { font-size: 1.1em; }
             .cart-items li { font-size: 0.85em; }
             .cart-total { font-size: 0.9em; }
@@ -524,39 +580,30 @@
             .product-grid, .course-grid { grid-template-columns: 1fr; gap: 15px; }
             .product-card, .course-card { min-height: 60px; padding: 10px; }
             .product-card h3, .course-card h3 { font-size: 1.1em; padding-bottom: 6px; }
-            .product-card.active .product-details, .course-card.active .course-details { padding: 15px 0; max-height: 1000px; }
+            .product-card.active .product-details, .course-card.active .course-details { padding: 15px 0; max-height: none; }
             .product-card p, .course-card p { font-size: 0.85em; }
             .course-card .course-link a { font-size: 0.85em; padding: 4px 8px; }
-            .product-card ul li { font-size: 0.8em; padding: 8px 0; flex-direction: column; align-items: flex-start; }
-            .product-card ul li .item-name-icon { flex-basis: 100%; margin-bottom: 5px; }
+            .product-card ul li { font-size: 0.8em; padding: 8px 0; flex-direction: row; align-items: center; flex-wrap: wrap; }
+            .product-card ul li .item-name-icon { flex-basis: 100%; margin-bottom: 8px; }
             .product-card ul li i { font-size: 0.9em; }
-            .quantity-selector { flex-direction: column; width: 100%; align-items: flex-start; margin-left: 0; max-width: 100%; }
-            .quantity-selector select, .quantity-selector input, .add-to-cart-btn { width: 100%; box-sizing: border-box; }
-            .quantity-selector select, .quantity-selector input { margin-bottom: 5px; }
+            .quantity-selector { flex-direction: row; width: auto; align-items: center; margin-left: auto; max-width: none; }
+            .quantity-selector select, .quantity-selector input { width: auto; margin-bottom: 0; }
             .add-to-cart-btn { font-size: 0.75em; padding: 3px 6px; min-width: unset; }
             .payment { font-size: 0.75em; }
             .form-section { padding: 15px; }
             .form-section h2 { font-size: 1.5em; }
             .form-group label { font-size: 0.9em; }
-            .form-group input, .form-group select { padding: 7px; font-size: 0.85em; }
-            .form-section button { padding: 8px; font-size: 0.9em; }
+            .form-group input, .form-group select { padding: 10px; font-size: 1em; }
+            .form-section button { padding: 12px; font-size: 1em; }
             footer { padding: 15px 0; font-size: 0.75em; }
         }
         @media (max-width: 480px) {
             .logo-container img { height: 35px; }
             .logo-container a { font-size: 0.9em; }
-            nav a { font-size: 0.8em; }
-            .cart-container { width: 200px; top: 90px; right: 5px; }
-            .cart-container h3 { font-size: 1em; }
-            .cart-items li { font-size: 0.8em; }
-            .cart-total { font-size: 0.85em; }
-            .cart-checkout { font-size: 0.8em; padding: 5px; }
+            nav a { font-size: 0.75em; }
             .section-title { font-size: 1.3em; }
             .product-card h3, .course-card h3 { font-size: 1em; }
             .form-section h2 { font-size: 1.3em; }
-            .form-group label { font-size: 0.85em; }
-            .form-group input, .form-group select { font-size: 0.8em; }
-            .form-section button { font-size: 0.85em; }
         }
     </style>
 </head>
@@ -569,9 +616,10 @@
             </div>
             <nav>
                 <a href="#fardamento">Kits de Fardamento</a>
+                <a onclick="toggleSection('elite-fardamentos')">Elite dos Fardamentos</a>
                 <a href="#acampamento">Kits de Acampamento</a>
-                <a href="#cursos" onclick="toggleCourses()">Cursos</a>
-                </nav>
+                <a onclick="toggleSection('cursos')">Cursos</a>
+            </nav>
             <div class="cart-toggle" onclick="toggleCart()">
                 <i class="fa-solid fa-shopping-cart"></i> Carrinho
                 <span class="cart-count" id="cartCount">0</span>
@@ -633,10 +681,11 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto</p></div>
+                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
                 <div class="product-card" onclick="toggleDetails(event, this)">
+                    <div class="badge">MAIS VENDIDO</div>
                     <h3>Kit Avançado</h3>
                     <img src="https://i.imgur.com/2w9HPjA.jpeg" alt="Kit Avançado" class="product-image-kit">
                     <div class="product-details">
@@ -738,7 +787,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto</p></div>
+                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
                 <div class="product-card" onclick="toggleDetails(event, this)">
@@ -851,11 +900,14 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto</p></div>
+                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div id="elite-fardamentos"></div>
+        
         <div id="acampamento">
             <h2 class="section-title">Kits de Acampamento</h2>
             <div class="product-grid">
@@ -873,7 +925,7 @@
                             <li data-price="40.00" onclick="prepareAddToCart(event, this)"><span class="item-name-icon"><i class="fa-solid fa-towel"></i> Toalha de Microfibra Compacta: Secagem rápida, com estojo</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Toalha de Microfibra Compacta', 40.00)">Adicionar</button></div></li>
                             <li data-price="20.00" onclick="prepareAddToCart(event, this)"><span class="item-name-icon"><i class="fa-solid fa-box"></i> Lenço umedecido</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lenço umedecido', 20.00)">Adicionar</button></div></li>
                         </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto<br>Dinheiro: 5% de desconto</p></div>
+                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
                 <div class="product-card" onclick="toggleDetails(event, this)">
@@ -895,10 +947,11 @@
                             <li data-price="25.00" onclick="prepareAddToCart(event, this)"><span class="item-name-icon"><i class="fa-solid fa-head-side-mask"></i> Protetor de Pescoço (Buff): Tecido elástico, multifuncional</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Protetor de Pescoço (Buff)', 25.00)">Adicionar</button></div></li>
                             <li data-price="20.00" onclick="prepareAddToCart(event, this)"><span class="item-name-icon"><i class="fa-solid fa-box"></i> Lenço umedecido</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lenço umedecido', 20.00)">Adicionar</button></div></li>
                         </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto<br>Dinheiro: 5% de desconto</p></div>
+                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
                 <div class="product-card" onclick="toggleDetails(event, this)">
+                    <div class="badge">MAIS COMPLETO</div>
                     <h3>Kit Comandos (Avançado)</h3>
                     <img src="https://i.imgur.com/jbpqCx4.png" alt="Kit Comandos" class="product-image">
                     <div class="product-details" id="comandos-details">
@@ -922,7 +975,7 @@
                             <li data-price="25.00" onclick="prepareAddToCart(event, this)"><span class="item-name-icon"><i class="fa-solid fa-head-side-mask"></i> Protetor de Pescoço (Buff): Tecido elástico</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Protetor de Pescoço (Buff)', 25.00)">Adicionar</button></div></li>
                             <li data-price="20.00" onclick="prepareAddToCart(event, this)"><span class="item-name-icon"><i class="fa-solid fa-box"></i> Lenço umedecido</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lenço umedecido', 20.00)">Adicionar</button></div></li>
                         </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto<br>Dinheiro: 5% de desconto</p></div>
+                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
             </div>
@@ -1014,10 +1067,15 @@
             </div>
         </div>
         <div id="contato" class="form-section">
-            <h2>Entre em Contato</h2>
+            <h2>Finalizar Pedido</h2>
+            <div class="form-error" id="formError"></div>
             <div class="form-group">
                 <label for="student-name">Nome do Aluno</label>
-                <input type="text" id="student-name" placeholder="Digite seu nome" required>
+                <input type="text" id="student-name" placeholder="Digite seu nome completo" required>
+            </div>
+            <div class="form-group">
+                <label for="student-class">Turma do Aluno</label>
+                <input type="text" id="student-class" placeholder="Ex: Bombeiro Civil Turma 10" required>
             </div>
             <div class="form-group">
                 <label for="payment-method">Método de Pagamento</label>
@@ -1026,8 +1084,11 @@
                     <option value="Cartão de Débito">Cartão de Débito</option>
                     <option value="Cartão de Crédito">Cartão de Crédito</option>
                     <option value="PIX">PIX</option>
-                    <option value="Dinheiro">Dinheiro</option>
                 </select>
+            </div>
+            <div class="delivery-info">
+                <p>Os itens devem ser retirados no local da instrução.<br>
+                Por favor, combine as datas de pagamento e as parcelas, após a confirmação do pedido.</p>
             </div>
             <button onclick="checkout()">Enviar Pedido</button>
         </div>
@@ -1082,10 +1143,24 @@
                 image.style.display = isActive ? 'block' : 'none';
             }
         }
+        
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const isActive = section.classList.contains('active');
+                
+                document.getElementById('cursos').classList.remove('active');
+                document.getElementById('elite-fardamentos').classList.remove('active');
 
-        function toggleCourses() {
-            const coursesSection = document.getElementById('cursos');
-            coursesSection.classList.toggle('active');
+                if (!isActive) {
+                    section.classList.add('active');
+                }
+                
+                if (section.classList.contains('active')) {
+                    const sectionTop = section.offsetTop - document.querySelector('header').offsetHeight - 20;
+                    window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                }
+            }
         }
 
         function toggleCart() {
@@ -1103,6 +1178,7 @@
             const sizeSelector = li.querySelector('.size-selector');
             const colorSelector = li.querySelector('.color-selector');
             const quantityInput = li.querySelector('.quantity-input');
+            const quantitySelectorDiv = li.querySelector('.quantity-selector');
 
             const size = sizeSelector ? sizeSelector.value : '';
             const color = colorSelector ? colorSelector.value : '';
@@ -1123,6 +1199,21 @@
             } else {
                  cart.push({ name: itemName, price: price, quantity: quantity });
             }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'add-feedback';
+            feedback.textContent = '✅ Item Adicionado!';
+            quantitySelectorDiv.appendChild(feedback);
+            
+            setTimeout(() => {
+                feedback.style.opacity = '1';
+                setTimeout(() => {
+                    feedback.style.opacity = '0';
+                    setTimeout(() => {
+                        feedback.remove();
+                    }, 500);
+                }, 1500);
+            }, 10);
 
             li.classList.add('adding');
             setTimeout(() => li.classList.remove('adding'), 500);
@@ -1177,17 +1268,23 @@
         }
 
         function checkout() {
+            const formError = document.getElementById('formError');
+            formError.style.display = 'none';
+
             if (cart.length === 0) {
-                alert('Seu carrinho está vazio!');
+                formError.textContent = 'Seu carrinho está vazio!';
+                formError.style.display = 'block';
                 return;
             }
 
             const studentName = document.getElementById('student-name').value;
+            const studentClass = document.getElementById('student-class').value;
             const paymentMethod = document.getElementById('payment-method').value;
 
-            if (!studentName || !paymentMethod) {
-                alert('Por favor, preencha o nome e o método de pagamento.');
-                // ALTERAÇÃO AQUI: Rola a página para a seção de contato
+            if (!studentName || !paymentMethod || !studentClass) {
+                formError.textContent = 'Por favor, preencha todos os campos: Nome, Turma e Método de Pagamento.';
+                formError.style.display = 'block';
+                
                 const contatoSection = document.getElementById('contato');
                 if (contatoSection) {
                     contatoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1198,6 +1295,7 @@
             let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
             let message = `Olá, gostaria de finalizar meu pedido!\n\n`;
             message += `Nome: ${studentName}\n`;
+            message += `Turma: ${studentClass}\n`;
             message += `Método de Pagamento: ${paymentMethod}\n\n`;
             message += `Itens:\n`;
             cart.forEach(item => {
@@ -1212,6 +1310,7 @@
             cart = [];
             updateCart();
             document.getElementById('student-name').value = '';
+            document.getElementById('student-class').value = '';
             document.getElementById('payment-method').value = '';
         }
 
@@ -1335,7 +1434,7 @@
                                 ${itemsHtml}
                             </ul>
                             <div class="payment">
-                                <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: 5% de desconto</p>
+                                <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p>
                             </div>
                         </div>
                     `;
