@@ -110,6 +110,14 @@
             top: -8px;
             right: -10px;
         }
+        .cart-toggle.cart-added .fa-shopping-cart {
+            animation: cartAnimation 0.5s ease;
+        }
+        @keyframes cartAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
         .menu-toggle { display: none; }
         .cart-container {
             display: none;
@@ -137,20 +145,8 @@
         .cart-total { font-size: 1.1em; font-weight: 700; color: #1A3C34; text-align: right; margin-bottom: 15px; }
         .cart-checkout { display: block; width: 100%; padding: 12px; background-color: #1A3C34; color: #FFFFFF; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; }
         .container { max-width: 1280px; margin: 40px auto; padding: 20px; background-color: rgba(0, 0, 0, 0.75); border-radius: 10px; }
-        .filters {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .filters input, .filters select {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #D3C4AB;
-            background-color: #fff;
-            color: #333;
-            font-size: 1em;
-        }
+        .filters { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .filters input { padding: 10px; border-radius: 5px; border: 1px solid #D3C4AB; background-color: #fff; color: #333; font-size: 1em; }
         .section-title { font-size: 1.8em; color: #D3C4AB; text-align: center; margin-bottom: 30px; font-weight: 700; text-transform: uppercase; border-bottom: 2px solid #D3C4AB; padding-bottom: 10px; }
         .product-grid, .course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .product-card, .course-card { background-color: rgba(255, 255, 255, 0.9); border: 1px solid #D3C4AB; border-radius: 10px; padding: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); position: relative; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; color: #000000; }
@@ -164,10 +160,14 @@
         .product-details p, .product-details ul, .product-details .payment, .course-details p, .course-details .course-link { display: none; }
         .product-details ul, .course-details ul { list-style-type: none; padding: 0; margin: 0; }
         .product-details ul li, .course-details ul li { font-size: 0.85em; padding: 10px 0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; gap: 8px; position: relative; flex-wrap: wrap; justify-content: space-between; }
-        .product-details .quantity-selector { display: flex; gap: 5px; align-items: center; }
+        .product-details .quantity-selector { display: flex; gap: 5px; align-items: center; position: relative; }
         .product-details input.quantity-input { width: 40px; text-align: center; border: 1px solid #D3C4AB; border-radius: 3px; padding: 2px; }
         .product-details select.size-selector { border: 1px solid #D3C4AB; border-radius: 3px; padding: 2px; }
         .product-details .add-to-cart-btn { padding: 4px 8px; background-color: #1A3C34; color: #FFFFFF; border: none; border-radius: 5px; cursor: pointer; }
+        .add-feedback { position: absolute; top: -25px; right: 0; background-color: #28a745; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; white-space: nowrap; opacity: 0; transition: opacity 0.3s ease; }
+        .course-details .course-link { text-align: center; margin-top: 10px; }
+        .course-details .course-link a { color: #1A3C34; text-decoration: none; border: 1px solid #1A3C34; padding: 5px 10px; border-radius: 5px; transition: all 0.3s ease; }
+        .course-details .course-link a:hover { background-color: #1A3C34; color: #fff; }
         .form-section { max-width: 600px; margin: 40px auto; background-color: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; color: #000000; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 6px; font-weight: 500; }
@@ -191,14 +191,17 @@
         .modal-body { overflow-y: auto; color: #000; }
         .modal-body .product-details, .modal-body .course-details { display: block !important; max-height: none !important; padding: 0 !important;}
         .modal-body p, .modal-body ul { display: block !important; }
-        .modal-body .payment { display: block !important; margin-top: 15px; }
+        .modal-body .payment, .modal-body .course-link { display: block !important; margin-top: 15px; }
         .modal-body li { flex-direction: column; align-items: flex-start; }
         .modal-body .quantity-selector { margin-top: 10px; width: 100%; }
         .modal-body .add-to-cart-btn { width: 100%; padding: 8px; }
+        #backToTopBtn { display: none; position: fixed; bottom: 25px; right: 25px; z-index: 99; border: none; outline: none; background-color: #D3C4AB; color: #1A3C34; cursor: pointer; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s, visibility 0.3s; visibility: hidden; }
+        #backToTopBtn.show { opacity: 1; visibility: visible; }
+        #backToTopBtn:hover { background-color: #bcae96; }
         
         @media (max-width: 768px) {
             header { position: static; }
-            .header-container { flex-wrap: nowrap; }
+            .header-container { flex-wrap: nowrap; padding-right: 75px; position: relative; }
             .logo-container a { font-size: 1em; }
             nav { display: none; flex-direction: column; width: 100%; background-color: #1a3c34e8; backdrop-filter: blur(5px); position: absolute; top: 78px; left: 0; padding: 10px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 1002; }
             nav.nav-active { display: flex; }
@@ -219,6 +222,8 @@
     </style>
 </head>
 <body>
+    <a href="#" id="backToTopBtn" title="Voltar ao topo"><i class="fas fa-arrow-up"></i></a>
+
     <div class="cart-toggle" id="floating-cart-toggle" onclick="toggleCart()">
         <i class="fa-solid fa-shopping-cart"></i>
         <span class="cart-count" id="floatingCartCount">0</span>
@@ -254,7 +259,7 @@
         <ul class="cart-items"></ul>
         <div class="cart-footer">
             <div class="cart-total">Total: R$0,00</div>
-            <button class="cart-checkout" onclick="checkout()">Finalizar Pedido</button>
+            <button class="cart-checkout" onclick="scrollToCheckout()">Finalizar Pedido</button>
         </div>
     </div>
     
@@ -265,50 +270,22 @@
         <div id="fardamento">
             <h2 class="section-title">Kits de Fardamento</h2>
             <div class="product-grid">
-                <div class="product-card">
+                <div class="product-card" onclick="toggleDetails(event, this)">
                     <h3>Kit Básico</h3>
                     <img class="product-image-kit" src="https://i.imgur.com/t2VQ9MF.jpeg" alt="Kit Básico">
                     <div class="product-details">
                         <p>Kit inicial prático e durável para o uniforme de bombeiro civil, ideal para iniciantes.</p>
                         <ul>
-                            <li data-price="79.90"><span class="item-name-icon"><i class="fa-solid fa-tshirt"></i> Camiseta preta manga longa</span>
-                                <div class="quantity-selector">
-                                    <select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select>
-                                    <input type="number" min="1" value="1" class="quantity-input">
-                                    <button class="add-to-cart-btn" onclick="addToCart(event, 'Camiseta preta manga longa', 79.90)">Adicionar</button>
-                                </div>
-                            </li>
-                            <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-socks"></i> Calça tática ripstop</span>
-                                <div class="quantity-selector">
-                                    <select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select>
-                                    <input type="number" min="1" value="1" class="quantity-input">
-                                    <button class="add-to-cart-btn" onclick="addToCart(event, 'Calça tática ripstop', 169.90)">Adicionar</button>
-                                </div>
-                            </li>
-                            <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-shoe-prints"></i> Coturno extra leve com zíper</span>
-                                <div class="quantity-selector">
-                                    <select class="size-selector"><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option></select>
-                                    <input type="number" min="1" value="1" class="quantity-input">
-                                    <button class="add-to-cart-btn" onclick="addToCart(event, 'Coturno extra leve com zíper', 169.90)">Adicionar</button>
-                                </div>
-                            </li>
-                            <li data-price="39.90"><span class="item-name-icon"><i class="fa-solid fa-link"></i> Cinto</span>
-                                <div class="quantity-selector">
-                                    <input type="number" min="1" value="1" class="quantity-input">
-                                    <button class="add-to-cart-btn" onclick="addToCart(event, 'Cinto', 39.90)">Adicionar</button>
-                                </div>
-                            </li>
-                            <li data-price="89.90"><span class="item-name-icon"><i class="fa-solid fa-shopping-bag"></i> Bornal</span>
-                                <div class="quantity-selector">
-                                    <input type="number" min="1" value="1" class="quantity-input">
-                                    <button class="add-to-cart-btn" onclick="addToCart(event, 'Bornal', 89.90)">Adicionar</button>
-                                </div>
-                            </li>
+                            <li data-price="79.90"><span class="item-name-icon"><i class="fa-solid fa-tshirt"></i> Camiseta preta manga longa</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Camiseta preta manga longa', 79.90)">Adicionar</button></div></li>
+                            <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-socks"></i> Calça tática ripstop</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Calça tática ripstop', 169.90)">Adicionar</button></div></li>
+                            <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-shoe-prints"></i> Coturno extra leve com zíper</span><div class="quantity-selector"><select class="size-selector"><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Coturno extra leve com zíper', 169.90)">Adicionar</button></div></li>
+                            <li data-price="39.90"><span class="item-name-icon"><i class="fa-solid fa-link"></i> Cinto</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Cinto', 39.90)">Adicionar</button></div></li>
+                            <li data-price="89.90"><span class="item-name-icon"><i class="fa-solid fa-shopping-bag"></i> Bornal</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Bornal', 89.90)">Adicionar</button></div></li>
                         </ul>
                         <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card" onclick="toggleDetails(event, this)">
                     <div class="badge">MAIS VENDIDO</div>
                     <h3>Kit Avançado</h3>
                     <img class="product-image-kit" src="https://i.imgur.com/2w9HPjA.jpeg" alt="Kit Avançado">
@@ -332,7 +309,7 @@
                         <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card" onclick="toggleDetails(event, this)">
                     <h3>Kit Monstro</h3>
                     <img class="product-image-kit" src="https://i.imgur.com/Y6LT4jq.jpeg" alt="Kit Monstro">
                     <div class="product-details">
@@ -362,7 +339,7 @@
         <div id="acampamento">
             <h2 class="section-title">Kits de Acampamento</h2>
             <div class="product-grid">
-                <div class="product-card">
+                <div class="product-card" onclick="toggleDetails(event, this)">
                     <h3>Kit Recruta (Básico)</h3>
                     <img class="product-image-kit" src="https://i.imgur.com/adECSak.jpeg" alt="Kit Recruta">
                     <div class="product-details">
@@ -379,7 +356,7 @@
                         <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card" onclick="toggleDetails(event, this)">
                     <h3>Kit Capitão (Intermediário)</h3>
                     <img class="product-image-kit" src="https://i.imgur.com/FkZVMfX.jpeg" alt="Kit Capitão">
                     <div class="product-details">
@@ -401,7 +378,7 @@
                         <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
                     </div>
                 </div>
-                <div class="product-card">
+                <div class="product-card" onclick="toggleDetails(event, this)">
                     <div class="badge">MAIS COMPLETO</div>
                     <h3>Kit Comandos (Avançado)</h3>
                     <img class="product-image-kit" src="https://i.imgur.com/jbpqCx4.png" alt="Kit Comandos">
@@ -434,15 +411,15 @@
         <div id="cursos">
             <h2 class="section-title">Cursos</h2>
             <div class="course-grid">
-                <div class="course-card"><h3>Instrutor</h3><div class="course-details"><p>Capacite-se para formar novos profissionais com técnicas de ensino e liderança.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/cursoinstrutor/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card"><h3>NR10</h3><div class="course-details"><p>Aprenda normas de segurança em instalações e serviços com eletricidade.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/cursonr10/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card"><h3>Cuidador de Idosos</h3><div class="course-details"><p>Desenvolva habilidades para cuidar de idosos com atenção e responsabilidade.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Cuidador%20de%20Idosos." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card"><h3>Agente de Portaria</h3><div class="course-details"><p>Prepare-se para atuar na portaria com foco em segurança e atendimento.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Agente%20de%20Portaria." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card"><h3>Segurança Patrimonial</h3><div class="course-details"><p>Treinamento para proteger patrimônios com técnicas de vigilância avançadas.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/segurancapatrimonial/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card"><h3>Libras</h3><div class="course-details"><p>Domine a Língua Brasileira de Sinais e promova a inclusão social.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Libras." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card"><h3>Urgência e Emergência</h3><div class="course-details"><p>Aprenda a agir rapidamente em situações críticas de saúde e salvamento.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgência%20e%20Emergência." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card"><h3>Urgências Psiquiátricas</h3><div class="course-details"><p>Treinamento para lidar com crises psiquiátricas de forma segura e eficaz.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgências%20Psiquiátricas." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card"><h3>Animais Peçonhentos</h3><div class="course-details"><p>Conheça técnicas e tratamentos para o manejo de acidentes com animais peçonhentos.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/animaispeconhentos/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
+                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Instrutor</h3><div class="course-details"><p>Capacite-se para formar novos profissionais com técnicas de ensino e liderança.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/cursoinstrutor/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
+                <div class="course-card" onclick="toggleDetails(event, this)"><h3>NR10</h3><div class="course-details"><p>Aprenda normas de segurança em instalações e serviços com eletricidade.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/cursonr10/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
+                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Cuidador de Idosos</h3><div class="course-details"><p>Desenvolva habilidades para cuidar de idosos com atenção e responsabilidade.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Cuidador%20de%20Idosos." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
+                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Agente de Portaria</h3><div class="course-details"><p>Prepare-se para atuar na portaria com foco em segurança e atendimento.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Agente%20de%20Portaria." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
+                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Segurança Patrimonial</h3><div class="course-details"><p>Treinamento para proteger patrimônios com técnicas de vigilância avançadas.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/segurancapatrimonial/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
+                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Libras</h3><div class="course-details"><p>Domine a Língua Brasileira de Sinais e promova a inclusão social.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Libras." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
+                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Urgência e Emergência</h3><div class="course-details"><p>Aprenda a agir rapidamente em situações críticas de saúde e salvamento.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgência%20e%20Emergência." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
+                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Urgências Psiquiátricas</h3><div class="course-details"><p>Treinamento para lidar com crises psiquiátricas de forma segura e eficaz.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgências%20Psiquiátricas." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
+                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Animais Peçonhentos</h3><div class="course-details"><p>Conheça técnicas e tratamentos para o manejo de acidentes com animais peçonhentos.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/animaispeconhentos/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
             </div>
         </div>
         <div id="contato" class="form-section">
@@ -469,7 +446,7 @@
                 <p>Os itens devem ser retirados no local da instrução.<br>
                 Por favor, combine as datas de pagamento e as parcelas, após a confirmação do pedido.</p>
             </div>
-            <button onclick="checkout()">Enviar Pedido</button>
+            <button onclick="sendOrderToWhatsapp()">Enviar Pedido</button>
         </div>
     </div>
 
@@ -504,12 +481,26 @@
 
         document.addEventListener('click', function(event) {
             const cartContainer = document.getElementById('cartContainer');
-            const isClickInsideCart = cartContainer.contains(event.target);
-            const isClickOnCartToggle = event.target.closest('.cart-toggle');
-
-            if (cartContainer.classList.contains('active') && !isClickInsideCart && !isClickOnCartToggle) {
-                toggleCart();
+            if (cartContainer.classList.contains('active')) {
+                const isClickInsideCart = cartContainer.contains(event.target);
+                const isClickOnCartToggle = event.target.closest('.cart-toggle');
+                if (!isClickInsideCart && !isClickOnCartToggle) {
+                    toggleCart();
+                }
             }
+        });
+
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        };
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
         });
 
         function navigateToSection(event, sectionId) {
@@ -538,11 +529,18 @@
         const closeModalBtn = productModal.querySelector('.close-modal-btn');
 
         function toggleDetails(event, card) {
+            if (window.innerWidth <= 768) {
+                openProductModal(card, event);
+                return; 
+            }
             if (event.target.closest('.quantity-selector, .add-to-cart-btn, a')) { return; }
+            const isActive = card.classList.contains('active');
             document.querySelectorAll('.product-card.active, .course-card.active').forEach(activeCard => {
-                if (activeCard !== card) activeCard.classList.remove('active');
+                activeCard.classList.remove('active');
             });
-            card.classList.toggle('active');
+            if (!isActive) {
+                card.classList.add('active');
+            }
         }
 
         function openProductModal(card, event) {
@@ -564,19 +562,6 @@
             if (event.target === productModal) productModal.classList.remove('active');
         });
 
-        function applyClickListeners() {
-            document.querySelectorAll('.product-card, .course-card').forEach(card => {
-                card.addEventListener('click', function(event) {
-                    if (window.innerWidth <= 768) {
-                        openProductModal(this, event);
-                    } else {
-                        toggleDetails(event, this);
-                    }
-                });
-            });
-        }
-        applyClickListeners();
-
         function addToCart(event, name, price) {
             event.stopPropagation();
             const container = event.target.closest('li');
@@ -593,6 +578,19 @@
             } else {
                 cart.push({ name: itemName, price: price, quantity: quantity });
             }
+
+            const cartToggles = document.querySelectorAll('.cart-toggle');
+            cartToggles.forEach(toggle => {
+                toggle.classList.add('cart-added');
+                setTimeout(() => toggle.classList.remove('cart-added'), 500);
+            });
+            
+            const feedback = container.querySelector('.quantity-selector').querySelector('.add-feedback');
+            if (feedback) {
+                feedback.style.opacity = '1';
+                setTimeout(() => { feedback.style.opacity = '0'; }, 1500);
+            }
+
             updateCart();
         }
 
@@ -604,16 +602,19 @@
             cartList.innerHTML = '';
             let total = 0;
             let totalItems = 0;
+            const isSingleItemTypeInCart = new Set(cart.map(item => item.name)).size === 1;
 
             cart.forEach((item, index) => {
                 total += item.price * item.quantity;
                 totalItems += item.quantity;
                 const li = document.createElement('li');
-                li.innerHTML = `<span>${item.name} (x${item.quantity}) - R$${(item.price * item.quantity).toFixed(2)}</span>
-                    <div class="item-actions">
-                        <button class="decrease-btn" onclick="changeQuantity(${index}, -1)">-</button>
-                        <button class="remove-one-btn" onclick="changeQuantity(${index}, -item.quantity)">Remover</button>
-                    </div>`;
+                
+                let itemHTML = `<div class="item-info"><span>${item.name} (x${item.quantity})</span>`;
+                if (isSingleItemTypeInCart) {
+                    itemHTML += `<span>R$${(item.price * item.quantity).toFixed(2)}</span>`;
+                }
+                itemHTML += `</div><div class="item-actions"><button class="decrease-btn" onclick="decreaseQuantity(event, ${index})">-</button><button class="remove-one-btn" onclick="removeFromCart(event, ${index})">Remover</button></div>`;
+                li.innerHTML = itemHTML;
                 cartList.appendChild(li);
             });
 
@@ -622,21 +623,32 @@
             cartTotal.textContent = `Total: R$${total.toFixed(2)}`;
         }
 
-        function changeQuantity(index, amount) {
-            if (cart[index]) {
-                cart[index].quantity += amount;
-                if (cart[index].quantity <= 0) {
-                    cart.splice(index, 1);
-                }
-                updateCart();
+        function decreaseQuantity(event, index) {
+            event.stopPropagation();
+            if (cart[index] && cart[index].quantity > 1) {
+                cart[index].quantity--;
+            } else {
+                cart.splice(index, 1);
             }
+            updateCart();
+        }
+
+        function removeFromCart(event, index) {
+            event.stopPropagation();
+            cart.splice(index, 1);
+            updateCart();
         }
 
         function toggleCart() {
             document.getElementById('cartContainer').classList.toggle('active');
         }
 
-        function checkout() {
+        function scrollToCheckout() {
+            toggleCart();
+            document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function sendOrderToWhatsapp() {
             const formError = document.getElementById('formError');
             formError.style.display = 'none';
             if (cart.length === 0) {
@@ -668,6 +680,18 @@
             document.getElementById('student-class').value = '';
             document.getElementById('payment-method').value = '';
         }
+
+        function promptForCourseCode(url, event) {
+            event.preventDefault(); 
+            const accessCode = "GATE.CURSOS.2025";
+            const userCode = prompt("Para acessar o curso, por favor, insira o código de acesso:");
+
+            if (userCode === accessCode) {
+                window.open(url, '_blank'); 
+            } else if (userCode !== null && userCode !== "") { 
+                alert("Código de acesso inválido!");
+            }
+        }
         
         document.addEventListener('DOMContentLoaded', function() {
             const fardamentoSection = document.getElementById('fardamento');
@@ -698,96 +722,33 @@
                             <div class="quantity-selector">
                                 ${optionsHtml}
                                 <input type="number" min="1" value="1" class="quantity-input">
-                                <button class="add-to-cart-btn" onclick="addToCart(event, '${name}', ${price.toFixed(2)})">Adicionar</button>
+                                <button class="add-to-cart-btn" onclick="addToCart(event, '${name.replace(/'/g, "\\'")}', ${price.toFixed(2)})">Adicionar</button>
+                                <span class="add-feedback">✅ Adicionado!</span>
                             </div>
                         </li>
                     `;
                 }
                
                 const kitsData = {
-                    "Kit Auxiliar": {
-                        image: "https://i.imgur.com/ih87A5E.jpeg",
-                        description: "O Kit Auxiliar oferece equipamentos essenciais para o suporte tático, combinando funcionalidade e conforto para missões de apoio.",
-                        items: [
-                            { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] },
-                            { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] },
-                            { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] },
-                            { name: "Calça tática foxboy", price: 289.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] },
-                            { name: "Coturno Atalaia", price: 389.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] },
-                            { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" },
-                            { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" },
-                            { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" },
-                            { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] },
-                            { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heartbeat" }
-                        ]
-                    },
-                    "Kit Instrutor": {
-                        image: "https://i.imgur.com/aYGnbsv.jpeg", 
-                        description: "Projetado para instrutores, este kit garante durabilidade e adaptabilidade, essencial para treinamento e demonstrações em campo.",
-                        items: [
-                            { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] },
-                            { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] },
-                            { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] },
-                            { name: "Calça tática invictus", price: 349.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] },
-                            { name: "Coturno Acero", price: 499.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] },
-                            { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" },
-                            { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" },
-                            { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" },
-                            { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" },
-                            { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" },
-                            { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" },
-                            { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] },
-                            { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }
-                        ]
-                    },
-                    "Kit G.A.T.E": {
-                        image: "https://i.imgur.com/L2PUx6z.jpeg", 
-                        description: "O Kit G.A.T.E (Grupo de Ações Táticas Especiais) é para operações de alto risco, oferecendo máxima proteção e funcionalidade em ambientes extremos.",
-                        items: [
-                            { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] },
-                            { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] },
-                            { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] },
-                            { name: "Calça tática invictus", price: 349.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] },
-                            { name: "Coturno Guartelá", price: 569.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] },
-                            { name: "Coturno Invictus", price: 649.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] },
-                            { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" },
-                            { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" },
-                            { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" },
-                            { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" },
-                            { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" },
-                            { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" },
-                            { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] },
-                            { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heartbeat" },
-                            { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" },
-                            { name: "Gorro vermelho Bombeiro Civil", price: 89.90, icon: "fa-hat-military" }
-                        ]
-                    }
+                    "Kit Auxiliar": { image: "https://i.imgur.com/ih87A5E.jpeg", description: "O Kit Auxiliar oferece equipamentos essenciais para o suporte tático, combinando funcionalidade e conforto para missões de apoio.", items: [ { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática foxboy", price: 289.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Atalaia", price: 389.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heartbeat" } ] },
+                    "Kit Instrutor": { image: "https://i.imgur.com/aYGnbsv.jpeg", description: "Projetado para instrutores, este kit garante durabilidade e adaptabilidade, essencial para treinamento e demonstrações em campo.", items: [ { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Acero", price: 499.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" } ] },
+                    "Kit G.A.T.E": { image: "https://i.imgur.com/L2PUx6z.jpeg", description: "O Kit G.A.T.E (Grupo de Ações Táticas Especiais) é para operações de alto risco, oferecendo máxima proteção e funcionalidade em ambientes extremos.", items: [ { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Guartelá", price: 569.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Coturno Invictus", price: 649.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heartbeat" }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }, { name: "Gorro vermelho Bombeiro Civil", price: 89.90, icon: "fa-hat-military" } ] }
                 };
 
                 for (const kitName in kitsData) {
                     const kitInfo = kitsData[kitName];
                     const newKitCard = document.createElement('div');
                     newKitCard.classList.add('product-card');
+                    newKitCard.setAttribute('onclick', 'toggleDetails(event, this)');
                     
                     let itemsHtml = '';
                     kitInfo.items.forEach(item => {
                         itemsHtml += createProductListItem(item.price, item.name, item.icon, item.hasSize, item.sizes, item.hasColor, item.colors);
                     });
 
-                    newKitCard.innerHTML = `
-                        <h3>${kitName}</h3>
-                        <img class="product-image-kit" src="${kitInfo.image}" alt="${kitName}">
-                        <div class="product-details">
-                            <p>${kitInfo.description}</p>
-                            <ul>${itemsHtml}</ul>
-                            <div class="payment">
-                                <p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p>
-                            </div>
-                        </div>
-                    `;
+                    newKitCard.innerHTML = `<h3>${kitName}</h3><img class="product-image-kit" src="${kitInfo.image}" alt="${kitName}"><div class="product-details"><p>${kitInfo.description}</p><ul>${itemsHtml}</ul><div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div></div>`;
                     eliteFardamentosGrid.appendChild(newKitCard);
                 }
-                applyClickListeners();
             }
 
             document.getElementById('searchInput').addEventListener('input', function(e) {
