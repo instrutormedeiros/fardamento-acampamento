@@ -3,677 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medeiros Artigos Militares</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Medeiros Artigos Militares - Equipado para a Missão</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-gold': '#FFD700',
+                        'brand-green-dark': '#1A3C34',
+                        'brand-dark': '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'gradient-bg': 'gradient-bg 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s infinite ease-in-out',
+                        'gradient-text-scroll': 'gradient-text-scroll 4s linear infinite',
+                        'blob-walk-1': 'blob-walk-1 30s ease-in-out infinite',
+                        'blob-walk-2': 'blob-walk-2 35s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'gradient-bg': { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+                        'float': { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-20px)' } },
+                        'pulse-glow': { '0%, 100%': { boxShadow: '0 0 20px rgba(255, 215, 0, 0.5)' }, '50%': { boxShadow: '0 0 35px rgba(255, 215, 0, 1)' } },
+                        'gradient-text-scroll': { '0%': { backgroundPosition: '0% 50%' }, '100%': { backgroundPosition: '200% 50%' } },
+                        'blob-walk-1': { '0%': { transform: 'translate(0, 0) scale(1)' }, '25%': { transform: 'translate(20vw, 15vh) scale(1.2)'}, '50%': { transform: 'translate(-10vw, -20vh) scale(0.9)'}, '75%': { transform: 'translate(15vw, -10vh) scale(1.1)'}, '100%': { transform: 'translate(0, 0) scale(1)' } },
+                        'blob-walk-2': { '0%': { transform: 'translate(0, 0) scale(1)' }, '25%': { transform: 'translate(-15vw, -10vh) scale(0.8)'}, '50%': { transform: 'translate(20vw, 10vh) scale(1.1)'}, '75%': { transform: 'translate(-10vw, 15vh) scale(1)'}, '100%': { transform: 'translate(0, 0) scale(1)' } },
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #1A3C34;
-            background-image: url('https://i.imgur.com/nBroaKT.jpeg');
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            background-attachment: fixed;
-            color: #E0E0E0;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #1A3C34;
-            color: #FFFFFF;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        .header-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 15px;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo-container img {
-            height: 50px;
-        }
-        .logo-container a {
-            margin: 0;
-            font-size: 1.2em;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #FFFFFF;
-            text-decoration: none;
-            text-transform: capitalize;
-            transition: color 0.3s ease;
-        }
-        .logo-container a:hover {
-            color: #D3C4AB;
-        }
-        nav {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-        nav a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 0.9em;
-            font-weight: 500;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-        nav a:hover {
-            color: #D3C4AB;
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .cart-toggle {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #FFFFFF;
-            font-size: 1.2em;
-            cursor: pointer;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        .cart-toggle:hover {
-            color: #D3C4AB;
-        }
-        .cart-count {
-            background-color: #FF0000;
-            color: #FFFFFF;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8em;
-            position: absolute;
-            top: -8px;
-            right: -10px;
-        }
-        .cart-toggle.cart-added .fa-shopping-cart {
-            animation: cartAnimation 0.5s ease;
-        }
-        @keyframes cartAnimation {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        .menu-toggle { display: none; }
-        .cart-container {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 350px;
-            height: 100%;
-            background-color: #FFFFFF;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-            z-index: 2001;
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        .cart-container.active { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
-        .cart-header h3 { margin: 0; font-size: 1.2em; color: #1A3C34; }
-        .close-cart-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #333; }
-        .cart-items { list-style: none; padding: 0 15px; margin: 0; overflow-y: auto; flex-grow: 1; }
-        .cart-items li { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #D3C4AB; font-size: 0.9em; color: #000000; }
-        .cart-items .item-actions { display: flex; gap: 8px; }
-        .cart-items .remove-one-btn, .cart-items .decrease-btn { background: none; border: none; color: #1A3C34; cursor: pointer; }
-        .cart-footer { padding: 15px; border-top: 1px solid #eee; background: #f9f9f9; }
-        .cart-total { font-size: 1.1em; font-weight: 700; color: #1A3C34; text-align: right; margin-bottom: 15px; }
-        .cart-checkout { display: block; width: 100%; padding: 12px; background-color: #1A3C34; color: #FFFFFF; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; }
-        .container { max-width: 1280px; margin: 40px auto; padding: 20px; background-color: rgba(0, 0, 0, 0.75); border-radius: 10px; }
-        .filters { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
-        .filters input { padding: 10px; border-radius: 5px; border: 1px solid #D3C4AB; background-color: #fff; color: #333; font-size: 1em; }
-        .section-title { font-size: 1.8em; color: #D3C4AB; text-align: center; margin-bottom: 30px; font-weight: 700; text-transform: uppercase; border-bottom: 2px solid #D3C4AB; padding-bottom: 10px; }
-        .product-grid, .course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .product-card, .course-card { background-color: rgba(255, 255, 255, 0.9); border: 1px solid #D3C4AB; border-radius: 10px; padding: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); position: relative; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; color: #000000; }
-        .product-card.active .product-details, .course-card.active .course-details { max-height: 2000px; padding-top: 20px; }
-        .product-card.active .product-details p, .product-card.active .product-details ul, .product-card.active .product-details .payment, .course-card.active .course-details p, .course-card.active .course-details .course-link { display: block; }
-        .badge { position: absolute; top: 10px; right: 10px; background: linear-gradient(45deg, #FFD700, #FFA500); color: #000; padding: 4px 10px; border-radius: 15px; font-size: 0.75em; font-weight: bold; z-index: 2; text-transform: uppercase; }
-        .product-card:hover, .course-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
-        .product-card h3, .course-card h3 { font-size: 1.3em; color: #1A3C34; margin: 0; font-weight: 500; border-bottom: 1px solid #D3C4AB; padding-bottom: 8px; text-align: center; }
-        .product-card img.product-image-kit { max-width: 100%; height: auto; border-radius: 5px; margin: 15px auto; display: block; }
-        .product-details, .course-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease; }
-        .product-details p, .product-details ul, .product-details .payment, .course-details p, .course-details .course-link { display: none; }
-        .product-details ul, .course-details ul { list-style-type: none; padding: 0; margin: 0; }
-        .product-details ul li, .course-details ul li { font-size: 0.85em; padding: 10px 0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; gap: 8px; position: relative; flex-wrap: wrap; justify-content: space-between; }
-        .product-details .quantity-selector { display: flex; gap: 5px; align-items: center; position: relative; }
-        .product-details input.quantity-input { width: 40px; text-align: center; border: 1px solid #D3C4AB; border-radius: 3px; padding: 2px; }
-        .product-details select.size-selector { border: 1px solid #D3C4AB; border-radius: 3px; padding: 2px; }
-        .product-details .add-to-cart-btn { padding: 4px 8px; background-color: #1A3C34; color: #FFFFFF; border: none; border-radius: 5px; cursor: pointer; }
-        .add-feedback { position: absolute; top: -25px; right: 0; background-color: #28a745; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; white-space: nowrap; opacity: 0; transition: opacity 0.3s ease; }
-        .course-details .course-link { text-align: center; margin-top: 10px; }
-        .course-details .course-link a { color: #1A3C34; text-decoration: none; border: 1px solid #1A3C34; padding: 5px 10px; border-radius: 5px; transition: all 0.3s ease; }
-        .course-details .course-link a:hover { background-color: #1A3C34; color: #fff; }
-        .form-section { max-width: 600px; margin: 40px auto; background-color: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; color: #000000; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 6px; font-weight: 500; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; font-size: 1em; border: 1px solid #D3C4AB; border-radius: 5px; box-sizing: border-box; }
-        .delivery-info { font-size: 0.9em; color: #4A4A4A; background-color: #f0f0f0; border-left: 4px solid #1A3C34; padding: 10px; margin: 20px 0; border-radius: 5px; }
-        .form-error { color: #D8000C; background-color: #FFD2D2; border-radius: 5px; padding: 10px; margin-bottom: 15px; text-align: center; display: none; }
-        .form-section button { display: block; width: 100%; padding: 12px; background-color: #1A3C34; color: #FFFFFF; border: none; border-radius: 5px; font-size: 1.1em; cursor: pointer; }
+        html { scroll-behavior: smooth; }
+        .gradient-text { background: linear-gradient(90deg, #FFD700, #E0E0E0, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; background-size: 200% auto; }
+        .glassmorphism { background: rgba(26, 60, 52, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 215, 0, 0.1); z-index: 2; position: relative; }
+        header.scrolled { background-color: rgba(17, 24, 39, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal-on-scroll.visible { opacity: 1; transform: translateY(0); }
+        .hero-image { filter: drop-shadow(0 0 35px rgba(255, 215, 0, 0.3)); transition: filter 0.3s ease; }
+        .hero-image-container:hover .hero-image { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.5)); }
+        .cart-container { display: none; position: absolute; top: 70px; right: 0; width: 320px; background-color: #111827; border: 1px solid #FFD700; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 999; padding: 15px; max-height: 400px; overflow-y: auto; color: #E0E0E0; }
+        .cart-container.active { display: block; }
+        .cart-items li { border-bottom: 1px solid rgba(255, 215, 0, 0.2); }
+        .cart-items .remove-one-btn, .cart-items .decrease-btn { color: #FFD700; }
         #cursos, #elite-fardamentos { display: none; }
         #cursos.active, #elite-fardamentos.active { display: block; }
-        footer { background-color: #1A3C34; color: #FFFFFF; text-align: center; padding: 20px 0; font-size: 0.8em; }
-        footer p { margin: 0; line-height: 1.4; }
-        footer a { color: #D3C4AB; text-decoration: none; margin: 0 5px; }
-        footer a:hover { color: #FFFFFF; }
-        footer .footer-icon { margin: 0 5px; font-size: 1.1em; vertical-align: middle; }
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-overlay.active { display: flex; }
-        .modal-content { background: #fff; padding: 20px; border-radius: 10px; width: 90%; max-width: 600px; max-height: 90vh; display: flex; flex-direction: column; position: relative; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
-        .modal-header h3 { color: #1A3C34; margin: 0; }
-        .close-modal-btn { background:none; border:none; font-size: 1.8rem; cursor: pointer; color: #555; }
-        .modal-body { overflow-y: auto; color: #000; }
-        .modal-body .product-details, .modal-body .course-details { display: block !important; max-height: none !important; padding: 0 !important;}
-        .modal-body p, .modal-body ul { display: block !important; }
-        .modal-body .payment, .modal-body .course-link { display: block !important; margin-top: 15px; }
-        .modal-body li { flex-direction: column; align-items: flex-start; }
-        .modal-body .quantity-selector { margin-top: 10px; width: 100%; }
-        .modal-body .add-to-cart-btn { width: 100%; padding: 8px; }
-        #backToTopBtn { display: none; position: fixed; bottom: 25px; right: 25px; z-index: 99; border: none; outline: none; background-color: #D3C4AB; color: #1A3C34; cursor: pointer; border-radius: 50%; width: 45px; height: 45px; font-size: 20px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s, visibility 0.3s; visibility: hidden; }
-        #backToTopBtn.show { opacity: 1; visibility: visible; }
-        #backToTopBtn:hover { background-color: #bcae96; }
-        
-        @media (max-width: 768px) {
-            header { position: static; }
-            .header-container { flex-wrap: nowrap; padding-right: 75px; position: relative; }
-            .logo-container a { font-size: 1em; }
-            nav { display: none; flex-direction: column; width: 100%; background-color: #1a3c34e8; backdrop-filter: blur(5px); position: absolute; top: 78px; left: 0; padding: 10px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 1002; }
-            nav.nav-active { display: flex; }
-            nav a { padding: 12px 15px; width: 100%; text-align: center; border-bottom: 1px solid #ffffff22;}
-            .menu-toggle { display: block; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
-            #floating-cart-toggle { position: fixed; top: 15px; right: 15px; width: 55px; height: 55px; background-color: #1A3C34; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1001; }
-            #header-cart-toggle { display: none; }
-            .cart-container { width: 90%; max-width: 400px; right: -100%; }
-            .product-grid, .course-grid { grid-template-columns: 1fr; }
-            .product-details li { flex-direction: column; align-items: flex-start; }
-            .product-details .quantity-selector { margin-top: 10px; width: 100%; }
-            .product-details .add-to-cart-btn { width: 100%; padding: 8px; }
-            .filters { flex-direction: column; }
-        }
-        @media (min-width: 769px) {
-            #floating-cart-toggle { display: none; }
-        }
+        .liquid-container { position: fixed; inset: 0; z-index: 0; overflow: hidden; filter: blur(100px) saturate(150%); }
+        .liquid-blob { position: absolute; border-radius: 50%; opacity: 0.5; }
+        .product-details, .course-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .product-card.active .product-details, .course-card.active .course-details { max-height: 2000px; }
+        .product-image-kit, .course-card h3 { cursor: pointer; }
     </style>
 </head>
-<body>
-    <a href="#" id="backToTopBtn" title="Voltar ao topo"><i class="fas fa-arrow-up"></i></a>
+<body class="bg-gradient-to-r from-brand-dark via-brand-green-dark to-brand-dark text-gray-200 font-sans antialiased" style="background-size: 400% 400%;">
 
-    <div class="cart-toggle" id="floating-cart-toggle" onclick="toggleCart()">
-        <i class="fa-solid fa-shopping-cart"></i>
-        <span class="cart-count" id="floatingCartCount">0</span>
+    <div class="liquid-container">
+        <div class="liquid-blob top-1/4 left-1/3 w-96 h-96 bg-brand-gold animate-blob-walk-1"></div>
+        <div class="liquid-blob bottom-1/4 right-1/3 w-80 h-80 bg-brand-green-dark animate-blob-walk-2"></div>
     </div>
 
-    <header>
-        <div class="header-container">
-            <div class="logo-container">
-                <img src="https://i.imgur.com/pNd3LVh.png" alt="Medeiros Artigos Militares Logo">
-                <a href="#">Medeiros Artigos Militares</a>
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="https://i.imgur.com/pNd3LVh.png" alt="Logo" class="h-10">
+                <h1 class="text-lg sm:text-xl font-bold gradient-text animate-gradient-text-scroll">Medeiros A.M.</h1>
             </div>
-            <nav id="main-nav">
-                <a href="#fardamento" onclick="navigateToSection(event, 'fardamento')">Kits de Fardamento</a>
-                <a href="#elite-fardamentos" onclick="navigateToSection(event, 'elite-fardamentos')">Elite dos Fardamentos</a>
-                <a href="#acampamento" onclick="navigateToSection(event, 'acampamento')">Kits de Acampamento</a>
-                <a href="#cursos" onclick="navigateToSection(event, 'cursos')">Cursos</a>
-            </nav>
-            <div class="header-actions">
-                <div class="cart-toggle" id="header-cart-toggle" onclick="toggleCart()">
-                    <i class="fa-solid fa-shopping-cart"></i>
-                    <span class="cart-count" id="headerCartCount">0</span>
+            
+            <div class="hidden md:flex items-center gap-6">
+                 <a href="#fardamento" class="text-sm font-semibold hover:text-brand-gold transition-colors">Fardamentos</a>
+                 <a href="#acampamento" class="text-sm font-semibold hover:text-brand-gold transition-colors">Acampamento</a>
+                 <a href="#cursos" onclick="toggleSection('cursos')" class="text-sm font-semibold hover:text-brand-gold transition-colors">Cursos</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <button class="bg-brand-gold text-brand-dark font-bold py-2 px-4 rounded-full text-sm transition-transform transform hover:scale-105 flex items-center gap-2" onclick="toggleCart()">
+                        <i class="fa-solid fa-shopping-cart"></i> <span id="cartCount">0</span>
+                    </button>
+                    <div class="cart-container" id="cartContainer">
+                        <h3 class="text-lg font-bold text-brand-gold text-center mb-4"><i class="fa-solid fa-shopping-cart"></i> Carrinho</h3>
+                        <ul class="cart-items list-none p-0 m-0 mb-4"></ul>
+                        <div class="cart-total text-right font-bold text-lg mb-4">Total: R$0,00</div>
+                        <a href="#contato" class="cart-checkout block w-full text-center bg-brand-green-dark hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded-lg transition-colors" onclick="toggleCart()">Finalizar Pedido</a>
+                    </div>
                 </div>
-                <button class="menu-toggle" id="menu-toggle">☰</button>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-white text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
             </div>
+        </nav>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark/90 backdrop-blur-sm">
+            <a href="#fardamento" class="block py-2 px-4 text-sm text-gray-200 hover:bg-brand-green-dark">Fardamentos</a>
+            <a href="#acampamento" class="block py-2 px-4 text-sm text-gray-200 hover:bg-brand-green-dark">Acampamento</a>
+            <a href="#cursos" class="block py-2 px-4 text-sm text-gray-200 hover:bg-brand-green-dark" onclick="toggleSection('cursos')">Cursos</a>
         </div>
     </header>
 
-    <div class="cart-container" id="cartContainer">
-        <div class="cart-header">
-            <h3><i class="fa-solid fa-shopping-cart"></i> Carrinho</h3>
-            <button class="close-cart-btn" onclick="toggleCart()">&times;</button>
-        </div>
-        <ul class="cart-items"></ul>
-        <div class="cart-footer">
-            <div class="cart-total">Total: R$0,00</div>
-            <button class="cart-checkout" onclick="scrollToCheckout()">Finalizar Pedido</button>
-        </div>
-    </div>
-    
-    <div class="container">
-        <div class="filters">
-            <input type="text" id="searchInput" placeholder="🔍 Digite um item para buscar...">
-        </div>
-        <div id="fardamento">
-            <h2 class="section-title">Kits de Fardamento</h2>
-            <div class="product-grid">
-                <div class="product-card" onclick="toggleDetails(event, this)">
-                    <h3>Kit Básico</h3>
-                    <img class="product-image-kit" src="https://i.imgur.com/t2VQ9MF.jpeg" alt="Kit Básico">
-                    <div class="product-details">
-                        <p>Kit inicial prático e durável para o uniforme de bombeiro civil, ideal para iniciantes.</p>
-                        <ul>
-                            <li data-price="79.90"><span class="item-name-icon"><i class="fa-solid fa-tshirt"></i> Camiseta preta manga longa</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Camiseta preta manga longa', 79.90)">Adicionar</button></div></li>
-                            <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-socks"></i> Calça tática ripstop</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Calça tática ripstop', 169.90)">Adicionar</button></div></li>
-                            <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-shoe-prints"></i> Coturno extra leve com zíper</span><div class="quantity-selector"><select class="size-selector"><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Coturno extra leve com zíper', 169.90)">Adicionar</button></div></li>
-                            <li data-price="39.90"><span class="item-name-icon"><i class="fa-solid fa-link"></i> Cinto</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Cinto', 39.90)">Adicionar</button></div></li>
-                            <li data-price="89.90"><span class="item-name-icon"><i class="fa-solid fa-shopping-bag"></i> Bornal</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Bornal', 89.90)">Adicionar</button></div></li>
-                        </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
+    <main class="relative z-10">
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 lg:pt-20">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="container mx-auto px-4 sm:px-6 z-10">
+                <div class="lg:flex lg:items-center">
+                    <div class="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
+                        <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4 reveal-on-scroll">
+                             Equipado para a <span class="gradient-text">Missão</span>. Pronto para o <span class="gradient-text">Dever</span>.
+                        </h2>
+                        <p class="text-lg sm:text-xl text-gray-300 mb-8 reveal-on-scroll" style="transition-delay: 0.2s;">
+                           Os melhores kits de fardamento, acampamento e cursos para quem vive e respira o operacional.
+                        </p>
+                        <a href="#search-section" class="bg-brand-gold hover:bg-yellow-500 text-brand-dark font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105 inline-block shadow-lg shadow-yellow-500/50 reveal-on-scroll" style="transition-delay: 0.4s;">
+                            Ver Equipamentos
+                        </a>
                     </div>
-                </div>
-                <div class="product-card" onclick="toggleDetails(event, this)">
-                    <div class="badge">MAIS VENDIDO</div>
-                    <h3>Kit Avançado</h3>
-                    <img class="product-image-kit" src="https://i.imgur.com/2w9HPjA.jpeg" alt="Kit Avançado">
-                    <div class="product-details">
-                        <p>Uniforme tático completo para maior proteção e mobilidade em operações.</p>
-                        <ul>
-                           <li data-price="489.90"><span class="item-name-icon"><i class="fa-solid fa-vest"></i> Colete tático modular</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Colete tático modular', 489.90)">Adicionar</button></div></li>
-                           <li data-price="189.90"><span class="item-name-icon"><i class="fa-solid fa-straps"></i> Suspensório</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Suspensório', 189.90)">Adicionar</button></div></li>
-                           <li data-price="79.90"><span class="item-name-icon"><i class="fa-solid fa-tshirt"></i> Camiseta preta manga longa</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Camiseta preta manga longa', 79.90)">Adicionar</button></div></li>
-                           <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-socks"></i> Calça tática ripstop</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Calça tática ripstop', 169.90)">Adicionar</button></div></li>
-                           <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-shoe-prints"></i> Coturno extra leve com zíper</span><div class="quantity-selector"><select class="size-selector"><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Coturno extra leve com zíper', 169.90)">Adicionar</button></div></li>
-                           <li data-price="39.90"><span class="item-name-icon"><i class="fa-solid fa-link"></i> Cinto</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Cinto', 39.90)">Adicionar</button></div></li>
-                           <li data-price="89.90"><span class="item-name-icon"><i class="fa-solid fa-shopping-bag"></i> Bornal</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Bornal', 89.90)">Adicionar</button></div></li>
-                           <li data-price="149.90"><span class="item-name-icon"><i class="fa-solid fa-medal"></i> Distintivo Bombeiro Civil</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Distintivo Bombeiro Civil', 149.90)">Adicionar</button></div></li>
-                           <li data-price="79.90"><span class="item-name-icon"><i class="fa-solid fa-hammer"></i> Caneta quebra vidro</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Caneta quebra vidro', 79.90)">Adicionar</button></div></li>
-                           <li data-price="79.90"><span class="item-name-icon"><i class="fa-solid fa-gloves"></i> Luva tática preta</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Luva tática preta', 79.90)">Adicionar</button></div></li>
-                           <li data-price="159.90"><span class="item-name-icon"><i class="fa-solid fa-shield-alt"></i> Joelheira e Cotoveleira</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Joelheira e Cotoveleira', 159.90)">Adicionar</button></div></li>
-                           <li data-price="199.90"><span class="item-name-icon"><i class="fa-solid fa-handcuffs"></i> Algema invictus para imobilização de paciente QBU</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Algema invictus', 199.90)">Adicionar</button></div></li>
-                           <li data-price="59.90"><span class="item-name-icon"><i class="fa-solid fa-lightbulb"></i> Lanterna tática com LED lateral</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lanterna tática com LED lateral', 59.90)">Adicionar</button></div></li>
-                        </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
-                    </div>
-                </div>
-                <div class="product-card" onclick="toggleDetails(event, this)">
-                    <h3>Kit Monstro</h3>
-                    <img class="product-image-kit" src="https://i.imgur.com/Y6LT4jq.jpeg" alt="Kit Monstro">
-                    <div class="product-details">
-                        <p>O kit definitivo para operações extremas, com acessórios avançados.</p>
-                        <ul>
-                            <li data-price="489.90"><span class="item-name-icon"><i class="fa-solid fa-vest"></i> Colete tático modular</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Colete tático modular', 489.90)">Adicionar</button></div></li>
-                            <li data-price="189.90"><span class="item-name-icon"><i class="fa-solid fa-straps"></i> Suspensório</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Suspensório', 189.90)">Adicionar</button></div></li>
-                            <li data-price="79.90"><span class="item-name-icon"><i class="fa-solid fa-tshirt"></i> Camiseta preta manga longa</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Camiseta preta manga longa', 79.90)">Adicionar</button></div></li>
-                            <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-socks"></i> Calça tática ripstop</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option><option>EXG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Calça tática ripstop', 169.90)">Adicionar</button></div></li>
-                            <li data-price="169.90"><span class="item-name-icon"><i class="fa-solid fa-shoe-prints"></i> Coturno extra leve com zíper</span><div class="quantity-selector"><select class="size-selector"><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option><option>46</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Coturno extra leve com zíper', 169.90)">Adicionar</button></div></li>
-                            <li data-price="39.90"><span class="item-name-icon"><i class="fa-solid fa-link"></i> Cinto</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Cinto', 39.90)">Adicionar</button></div></li>
-                            <li data-price="89.90"><span class="item-name-icon"><i class="fa-solid fa-shopping-bag"></i> Bornal</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Bornal', 89.90)">Adicionar</button></div></li>
-                            <li data-price="149.90"><span class="item-name-icon"><i class="fa-solid fa-medal"></i> Distintivo Bombeiro Civil</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Distintivo Bombeiro Civil', 149.90)">Adicionar</button></div></li>
-                            <li data-price="79.90"><span class="item-name-icon"><i class="fa-solid fa-hammer"></i> Caneta quebra vidro</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Caneta quebra vidro', 79.90)">Adicionar</button></div></li>
-                            <li data-price="79.90"><span class="item-name-icon"><i class="fa-solid fa-gloves"></i> Luva tática preta</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Luva tática preta', 79.90)">Adicionar</button></div></li>
-                            <li data-price="159.90"><span class="item-name-icon"><i class="fa-solid fa-shield-alt"></i> Joelheira e Cotoveleira</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Joelheira e Cotoveleira', 159.90)">Adicionar</button></div></li>
-                            <li data-price="199.90"><span class="item-name-icon"><i class="fa-solid fa-handcuffs"></i> Algema invictus para imobilização de paciente QBU</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Algema invictus', 199.90)">Adicionar</button></div></li>
-                            <li data-price="59.90"><span class="item-name-icon"><i class="fa-solid fa-lightbulb"></i> Lanterna tática com LED lateral</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lanterna tática com LED lateral', 59.90)">Adicionar</button></div></li>
-                            <li data-price="179.90"><span class="item-name-icon"><i class="fa-solid fa-socks"></i> Calça tática bege / P.R.F., P.F.</span><div class="quantity-selector"><select class="size-selector"><option>P</option><option>M</option><option>G</option><option>GG</option></select><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Calça tática bege / P.R.F., P.F.', 179.90)">Adicionar</button></div></li>
-                        </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
+                    <div class="lg:w-1/2 flex justify-center items-center mt-8 lg:mt-0">
+                        <div class="animate-float hero-image-container">
+                             <img src="https://i.imgur.com/jbpqCx4.png" alt="Kit Comandos" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl mx-auto hero-image">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="elite-fardamentos"></div>
-        <div id="acampamento">
-            <h2 class="section-title">Kits de Acampamento</h2>
-            <div class="product-grid">
-                <div class="product-card" onclick="toggleDetails(event, this)">
-                    <h3>Kit Recruta (Básico)</h3>
-                    <img class="product-image-kit" src="https://i.imgur.com/adECSak.jpeg" alt="Kit Recruta">
-                    <div class="product-details">
-                        <p>Inicie sua jornada tática com o essencial para missões seguras e práticas.</p>
-                        <ul>
-                            <li data-price="150.00"><span class="item-name-icon"><i class="fa-solid fa-tent"></i> Barraca: Camuflada, resistente</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Barraca Camuflada', 150.00)">Adicionar</button></div></li>
-                            <li data-price="100.00"><span class="item-name-icon"><i class="fa-solid fa-bed"></i> Saco de dormir: Individual</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Saco de dormir Individual', 100.00)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-lightbulb"></i> Lanterna de cabeça: Uso mãos-livres</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lanterna de cabeça', 40.00)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-bandage"></i> Pulseira Tática de Sobrevivência</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Pulseira Tática de Sobrevivência', 40.00)">Adicionar</button></div></li>
-                            <li data-price="30.00"><span class="item-name-icon"><i class="fa-solid fa-spray-can"></i> Repelente em Spray Compacto</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Repelente em Spray Compacto', 30.00)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-towel"></i> Toalha de Microfibra Compacta</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Toalha de Microfibra Compacta', 40.00)">Adicionar</button></div></li>
-                            <li data-price="20.00"><span class="item-name-icon"><i class="fa-solid fa-box"></i> Lenço umedecido</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lenço umedecido', 20.00)">Adicionar</button></div></li>
-                        </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
-                    </div>
-                </div>
-                <div class="product-card" onclick="toggleDetails(event, this)">
-                    <h3>Kit Capitão (Intermediário)</h3>
-                    <img class="product-image-kit" src="https://i.imgur.com/FkZVMfX.jpeg" alt="Kit Capitão">
-                    <div class="product-details">
-                        <p>Lidere com confiança, com equipamentos que equilibram conforto e funcionalidade.</p>
-                        <ul>
-                            <li data-price="150.00"><span class="item-name-icon"><i class="fa-solid fa-tent"></i> Barraca: Camuflada, resistente</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Barraca Camuflada', 150.00)">Adicionar</button></div></li>
-                            <li data-price="100.00"><span class="item-name-icon"><i class="fa-solid fa-bed"></i> Saco de dormir: Individual</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Saco de dormir Individual', 100.00)">Adicionar</button></div></li>
-                            <li data-price="100.00"><span class="item-name-icon"><i class="fa-solid fa-temperature-low"></i> Kit térmico</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Kit térmico', 100.00)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-lightbulb"></i> Lanterna de cabeça</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lanterna de cabeça', 40.00)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-bandage"></i> Pulseira Tática de Sobrevivência</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Pulseira Tática de Sobrevivência', 40.00)">Adicionar</button></div></li>
-                            <li data-price="59.90"><span class="item-name-icon"><i class="fa-solid fa-bottle-water"></i> Garrafa Tática Cantil</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Garrafa Tática Cantil', 59.90)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-towel"></i> Toalha de Microfibra Compacta</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Toalha de Microfibra Compacta', 40.00)">Adicionar</button></div></li>
-                            <li data-price="50.00"><span class="item-name-icon"><i class="fa-solid fa-hiking"></i> Mosquetão Tático com Trava</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Mosquetão Tático com Trava', 50.00)">Adicionar</button></div></li>
-                            <li data-price="30.00"><span class="item-name-icon"><i class="fa-solid fa-spray-can"></i> Repelente em Spray Compacto</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Repelente em Spray Compacto', 30.00)">Adicionar</button></div></li>
-                            <li data-price="20.00"><span class="item-name-icon"><i class="fa-solid fa-heart"></i> Protetor Labial com FPS</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Protetor Labial com FPS', 20.00)">Adicionar</button></div></li>
-                            <li data-price="25.00"><span class="item-name-icon"><i class="fa-solid fa-head-side-mask"></i> Protetor de Pescoço (Buff)</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Protetor de Pescoço (Buff)', 25.00)">Adicionar</button></div></li>
-                            <li data-price="20.00"><span class="item-name-icon"><i class="fa-solid fa-box"></i> Lenço umedecido</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lenço umedecido', 20.00)">Adicionar</button></div></li>
-                        </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
-                    </div>
-                </div>
-                <div class="product-card" onclick="toggleDetails(event, this)">
-                    <div class="badge">MAIS COMPLETO</div>
-                    <h3>Kit Comandos (Avançado)</h3>
-                    <img class="product-image-kit" src="https://i.imgur.com/jbpqCx4.png" alt="Kit Comandos">
-                    <div class="product-details">
-                        <p>Para a elite, com equipamentos de ponta para missões críticas e alta performance.</p>
-                        <ul>
-                            <li data-price="150.00"><span class="item-name-icon"><i class="fa-solid fa-tent"></i> Barraca</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Barraca', 150.00)">Adicionar</button></div></li>
-                            <li data-price="100.00"><span class="item-name-icon"><i class="fa-solid fa-bed"></i> Saco de dormir</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Saco de dormir', 100.00)">Adicionar</button></div></li>
-                            <li data-price="100.00"><span class="item-name-icon"><i class="fa-solid fa-temperature-low"></i> Kit térmico</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Kit térmico', 100.00)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-lightbulb"></i> Lanterna de cabeça</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lanterna de cabeça', 40.00)">Adicionar</button></div></li>
-                            <li data-price="150.00"><span class="item-name-icon"><i class="fa-solid fa-backpack"></i> Mochila Tática</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Mochila Tática', 150.00)">Adicionar</button></div></li>
-                            <li data-price="159.90"><span class="item-name-icon"><i class="fa-solid fa-shield-alt"></i> Kit Joelheira e Cotoveleira</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Kit Joelheira e Cotoveleira', 159.90)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-bandage"></i> Pulseira Tática de Sobrevivência</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Pulseira Tática de Sobrevivência', 40.00)">Adicionar</button></div></li>
-                            <li data-price="59.90"><span class="item-name-icon"><i class="fa-solid fa-bottle-water"></i> Garrafa Tática Cantil</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Garrafa Tática Cantil', 59.90)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-link"></i> Cinto Tático</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Cinto Tático', 40.00)">Adicionar</button></div></li>
-                            <li data-price="50.00"><span class="item-name-icon"><i class="fa-solid fa-hiking"></i> Mosquetão Tático com Trava</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Mosquetão Tático com Trava', 50.00)">Adicionar</button></div></li>
-                            <li data-price="40.00"><span class="item-name-icon"><i class="fa-solid fa-towel"></i> Toalha de Microfibra Compacta</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Toalha de Microfibra Compacta', 40.00)">Adicionar</button></div></li>
-                            <li data-price="80.00"><span class="item-name-icon"><i class="fa-solid fa-sun"></i> Protetor Solar em Bastão</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Protetor Solar em Bastão', 80.00)">Adicionar</button></div></li>
-                            <li data-price="50.00"><span class="item-name-icon"><i class="fa-solid fa-gloves"></i> Luvas Táticas Leves</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Luvas Táticas Leves', 50.00)">Adicionar</button></div></li>
-                            <li data-price="30.00"><span class="item-name-icon"><i class="fa-solid fa-spray-can"></i> Repelente em Spray Compacto</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Repelente em Spray Compacto', 30.00)">Adicionar</button></div></li>
-                            <li data-price="20.00"><span class="item-name-icon"><i class="fa-solid fa-heart"></i> Protetor Labial com FPS</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Protetor Labial com FPS', 20.00)">Adicionar</button></div></li>
-                            <li data-price="25.00"><span class="item-name-icon"><i class="fa-solid fa-head-side-mask"></i> Protetor de Pescoço (Buff)</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Protetor de Pescoço (Buff)', 25.00)">Adicionar</button></div></li>
-                            <li data-price="20.00"><span class="item-name-icon"><i class="fa-solid fa-box"></i> Lenço umedecido</span><div class="quantity-selector"><input type="number" min="1" value="1" class="quantity-input"><button class="add-to-cart-btn" onclick="addToCart(event, 'Lenço umedecido', 20.00)">Adicionar</button></div></li>
-                        </ul>
-                        <div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="cursos">
-            <h2 class="section-title">Cursos</h2>
-            <div class="course-grid">
-                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Instrutor</h3><div class="course-details"><p>Capacite-se para formar novos profissionais com técnicas de ensino e liderança.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/cursoinstrutor/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card" onclick="toggleDetails(event, this)"><h3>NR10</h3><div class="course-details"><p>Aprenda normas de segurança em instalações e serviços com eletricidade.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/cursonr10/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Cuidador de Idosos</h3><div class="course-details"><p>Desenvolva habilidades para cuidar de idosos com atenção e responsabilidade.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Cuidador%20de%20Idosos." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Agente de Portaria</h3><div class="course-details"><p>Prepare-se para atuar na portaria com foco em segurança e atendimento.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Agente%20de%20Portaria." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Segurança Patrimonial</h3><div class="course-details"><p>Treinamento para proteger patrimônios com técnicas de vigilância avançadas.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/segurancapatrimonial/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Libras</h3><div class="course-details"><p>Domine a Língua Brasileira de Sinais e promova a inclusão social.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Libras." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Urgência e Emergência</h3><div class="course-details"><p>Aprenda a agir rapidamente em situações críticas de saúde e salvamento.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgência%20e%20Emergência." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Urgências Psiquiátricas</h3><div class="course-details"><p>Treinamento para lidar com crises psiquiátricas de forma segura e eficaz.</p><div class="course-link"><a href="https://wa.me/5561999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgências%20Psiquiátricas." onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-                <div class="course-card" onclick="toggleDetails(event, this)"><h3>Animais Peçonhentos</h3><div class="course-details"><p>Conheça técnicas e tratamentos para o manejo de acidentes com animais peçonhentos.</p><div class="course-link"><a href="https://instrutormedeiros.github.io/animaispeconhentos/" onclick="promptForCourseCode(this.href, event)">Acesse o Curso</a></div></div></div>
-            </div>
-        </div>
-        <div id="contato" class="form-section">
-            <h2>Finalizar Pedido</h2>
-            <div class="form-error" id="formError"></div>
-            <div class="form-group">
-                <label for="student-name">Nome do Aluno</label>
-                <input type="text" id="student-name" placeholder="Digite seu nome completo" required>
-            </div>
-            <div class="form-group">
-                <label for="student-class">Turma do Aluno</label>
-                <input type="text" id="student-class" placeholder="Ex: Bombeiro Civil Turma 10" required>
-            </div>
-            <div class="form-group">
-                <label for="payment-method">Método de Pagamento</label>
-                <select id="payment-method" required>
-                    <option value="" disabled selected>Selecione o método</option>
-                    <option value="Cartão de Débito">Cartão de Débito</option>
-                    <option value="Cartão de Crédito">Cartão de Crédito</option>
-                    <option value="PIX">PIX</option>
-                </select>
-            </div>
-            <div class="delivery-info">
-                <p>Os itens devem ser retirados no local da instrução.<br>
-                Por favor, combine as datas de pagamento e as parcelas, após a confirmação do pedido.</p>
-            </div>
-            <button onclick="sendOrderToWhatsapp()">Enviar Pedido</button>
-        </div>
-    </div>
+        </section>
 
-    <div class="modal-overlay" id="productModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modalProductName"></h3>
-                <button class="close-modal-btn">&times;</button>
+        <section id="search-section" class="py-16">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-2xl mx-auto reveal-on-scroll glassmorphism p-6 rounded-2xl">
+                    <label for="searchInput" class="block text-xl md:text-2xl font-bold text-center mb-4 text-white">Busca de Equipamentos</label>
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Digite o nome de um kit ou item..." class="w-full bg-gray-900/50 border border-gray-600 rounded-full px-6 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-gold">
+                        <i class="fa-solid fa-search absolute right-6 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body" id="modalProductContent"></div>
+        </section>
+
+        <div id="fardamento" class="product-section py-10 sm:py-16">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16 reveal-on-scroll section-header">
+                    <h3 class="text-3xl sm:text-4xl font-bold text-white">Kits de <span class="gradient-text">Fardamento</span></h3>
+                    <p class="text-gray-400 mt-2">Do básico ao avançado, a prontidão que você precisa.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 product-grid"></div>
+                <div class="text-center mt-12 reveal-on-scroll section-header">
+                    <button onclick="toggleSection('elite-fardamentos')" class="bg-brand-green-dark text-white font-semibold py-3 px-8 rounded-full border-2 border-brand-gold hover:bg-brand-gold hover:text-brand-dark transition-all duration-300">
+                        Ver Elite dos Fardamentos <i class="fa-solid fa-angles-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-    
-    <footer>
-        <p>Medeiros Artigos Militares - Uniformizando Profissionais</p>
-        <p>
-            Contato:
-            <a href="https://wa.me/5561998300711" target="_blank"><i class="fab fa-whatsapp footer-icon"></i> (61) 99830-0711</a> |
-            <a href="mailto:coordenadormedeiros@gmail.com">coordenadormedeiros@gmail.com</a> |
-            <a href="https://www.instagram.com/bombeirocivilbrasilia/" target="_blank">@bombeirocivilbrasilia</a> |
-            <a href="https://www.instagram.com/gateeducacional/" target="_blank">@gateeducacional</a>
-        </p>
-        <p>© 2019 - Todos os direitos reservados</p>
+        
+        <div id="elite-fardamentos" class="product-section py-20 sm:py-24 bg-brand-dark/50">
+             <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16 reveal-on-scroll section-header">
+                    <h3 class="text-3xl sm:text-4xl font-bold text-white">Elite dos <span class="gradient-text">Fardamentos</span></h3>
+                    <p class="text-gray-400 mt-2">Equipamentos premium para operadores de alto desempenho.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 product-grid" id="elite-fardamentos-grid"></div>
+            </div>
+        </div>
+        
+        <div id="acampamento" class="product-section py-10 sm:py-16">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16 reveal-on-scroll section-header">
+                    <h3 class="text-3xl sm:text-4xl font-bold text-white">Kits de <span class="gradient-text">Acampamento</span></h3>
+                    <p class="text-gray-400 mt-2">Prepare-se para qualquer terreno com nossos kits de sobrevivência.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 product-grid"></div>
+            </div>
+        </div>
+        
+        <div id="cursos" class="product-section py-20 sm:py-24 bg-brand-dark/50">
+             <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16 reveal-on-scroll section-header">
+                    <h3 class="text-3xl sm:text-4xl font-bold text-white">Capacitação e <span class="gradient-text">Cursos</span></h3>
+                    <p class="text-gray-400 mt-2">Conhecimento que salva vidas e impulsiona carreiras.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 course-grid"></div>
+            </div>
+        </div>
+        
+        <section id="contato" class="py-20 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="glassmorphism max-w-2xl mx-auto p-6 md:p-8 rounded-2xl reveal-on-scroll">
+                    <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-white">Finalizar Pedido</h2>
+                    <div id="formError" class="hidden text-red-400 bg-red-900/50 border border-red-400 rounded-lg p-3 mb-4 text-center"></div>
+                    <form onsubmit="event.preventDefault(); checkout();" class="space-y-6">
+                        <div>
+                            <label for="student-name" class="block text-sm font-semibold text-gray-300 mb-2">Nome do Aluno</label>
+                            <input type="text" id="student-name" placeholder="Digite seu nome completo" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-gold">
+                        </div>
+                        <div>
+                            <label for="student-class" class="block text-sm font-semibold text-gray-300 mb-2">Turma do Aluno</label>
+                            <input type="text" id="student-class" placeholder="Ex: Bombeiro Civil Turma 10" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-gold">
+                        </div>
+                        <div>
+                            <label for="payment-method" class="block text-sm font-semibold text-gray-300 mb-2">Método de Pagamento</label>
+                            <select id="payment-method" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-gold">
+                                <option value="" disabled selected>Selecione o método de pagamento</option>
+                                <option value="Cartão de Débito">Cartão de Débito</option>
+                                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                <option value="PIX">PIX</option>
+                            </select>
+                        </div>
+                        <div class="text-xs text-gray-400 bg-gray-900/50 p-3 rounded-lg border-l-4 border-brand-gold">
+                            Os itens devem ser retirados no local da instrução. Por favor, combine as datas de pagamento e as parcelas após a confirmação do pedido.
+                        </div>
+                        <button type="submit" class="w-full bg-brand-gold text-brand-dark font-bold py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 animate-pulse-glow">
+                            Enviar Pedido via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black text-gray-400 py-10 relative z-10">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <p class="text-lg font-bold text-white mb-2">Medeiros Artigos Militares</p>
+            <p class="text-sm mb-6">Uniformizando Profissionais desde 2019</p>
+            <div class="flex justify-center items-center space-x-6 mb-8">
+                <a href="https://wa.me/5561998300711" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/bombeirocivilbrasilia/" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-instagram"></i></a>
+                 <a href="https://www.instagram.com/gateeducacional/" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:coordenadormedeiros@gmail.com" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p class="text-xs text-gray-500">&copy; 2019. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
     <script>
+        // Scripts essenciais
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 10));
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        
+        // NOVO: LÓGICA DO MENU HAMBÚRGUER
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        // Fecha o menu ao clicar em um link
+        mobileMenu.addEventListener('click', (e) => {
+            if(e.target.tagName === 'A'){
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
         let cart = [];
 
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('main-nav').classList.toggle('nav-active');
-        });
-
-        document.addEventListener('click', function(event) {
-            const cartContainer = document.getElementById('cartContainer');
-            if (cartContainer.classList.contains('active')) {
-                const isClickInsideCart = cartContainer.contains(event.target);
-                const isClickOnCartToggle = event.target.closest('.cart-toggle');
-                if (!isClickInsideCart && !isClickOnCartToggle) {
-                    toggleCart();
-                }
-            }
-        });
-
-        const backToTopBtn = document.getElementById('backToTopBtn');
-        window.onscroll = function() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        };
-        backToTopBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        });
-
-        function navigateToSection(event, sectionId) {
+        function promptForCourseCode(url, event) {
             event.preventDefault();
-            document.getElementById('main-nav').classList.remove('nav-active');
-            const section = document.getElementById(sectionId);
-            if (!section) return;
-
-            if (sectionId === 'cursos' || sectionId === 'elite-fardamentos') {
-                const isAlreadyActive = section.classList.contains('active');
-                document.getElementById('cursos').classList.remove('active');
-                document.getElementById('elite-fardamentos').classList.remove('active');
-                if (!isAlreadyActive) {
-                    section.classList.add('active');
-                }
-            }
-            setTimeout(() => {
-                const headerOffset = (window.innerWidth <= 768) ? 15 : document.querySelector('header').offsetHeight + 20;
-                const elementPosition = section.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-            }, 50);
+            const accessCode = "GATE.CURSOS.2025";
+            const userCode = prompt("Para acessar o curso, por favor, insira o código de acesso:");
+            if (userCode === accessCode) window.open(url, '_blank');
+            else if (userCode !== null) alert("Código de acesso inválido!");
         }
-        
-        const productModal = document.getElementById('productModal');
-        const closeModalBtn = productModal.querySelector('.close-modal-btn');
 
-        function toggleDetails(event, card) {
-            if (window.innerWidth <= 768) {
-                openProductModal(card, event);
-                return; 
-            }
-            if (event.target.closest('.quantity-selector, .add-to-cart-btn, a')) { return; }
-            const isActive = card.classList.contains('active');
-            document.querySelectorAll('.product-card.active, .course-card.active').forEach(activeCard => {
-                activeCard.classList.remove('active');
+        function toggleCard(element) {
+            const card = element.closest('.product-card, .course-card');
+            if (!card) return;
+            const wasActive = card.classList.contains('active');
+            document.querySelectorAll('.product-card.active, .course-card.active').forEach(otherCard => {
+                otherCard.classList.remove('active');
             });
-            if (!isActive) {
+            if (!wasActive) {
                 card.classList.add('active');
             }
         }
-
-        function openProductModal(card, event) {
-            if (event.target.closest('.quantity-selector, .add-to-cart-btn, a')) { return; }
-            const modalProductName = document.getElementById('modalProductName');
-            const modalProductContent = document.getElementById('modalProductContent');
-            const detailsSelector = card.querySelector('.product-details') ? '.product-details' : '.course-details';
-            const detailsClone = card.querySelector(detailsSelector).cloneNode(true);
-            
-            modalProductName.textContent = card.querySelector('h3').textContent;
-            modalProductContent.innerHTML = '';
-            modalProductContent.appendChild(detailsClone);
-            
-            productModal.classList.add('active');
+        
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+            mobileMenu.classList.add('hidden'); // Fecha o menu mobile ao clicar
+            const isActive = section.style.display === 'block';
+            document.getElementById('cursos').style.display = 'none';
+            document.getElementById('elite-fardamentos').style.display = 'none';
+            if (!isActive) {
+                section.style.display = 'block';
+                setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+            }
         }
 
-        closeModalBtn.addEventListener('click', () => productModal.classList.remove('active'));
-        productModal.addEventListener('click', (event) => {
-            if (event.target === productModal) productModal.classList.remove('active');
-        });
-
+        // Demais funções do carrinho (sem alteração)
+        function toggleCart() { document.getElementById('cartContainer').classList.toggle('active'); }
+        function prepareAddToCart(event) { event.stopPropagation(); }
         function addToCart(event, name, price) {
             event.stopPropagation();
-            const container = event.target.closest('li');
-            const sizeSelector = container.querySelector('.size-selector');
-            const quantityInput = container.querySelector('.quantity-input');
-            const quantity = parseInt(quantityInput.value) || 1;
-            const size = sizeSelector ? sizeSelector.value : null;
+            const li = event.target.closest('li');
+            const quantity = parseInt(li.querySelector('.quantity-input').value) || 1;
+            const size = li.querySelector('.size-selector')?.value || '';
+            const color = li.querySelector('.color-selector')?.value || '';
             let itemName = name;
-            if (size) itemName += ` (${size})`;
-
+            if (size && color) itemName = `${name} (${size} / ${color})`; else if (size) itemName = `${name} (${size})`; else if (color) itemName = `${name} (${color})`;
             const existingItem = cart.find(item => item.name === itemName);
-            if (existingItem) {
-                existingItem.quantity += quantity;
-            } else {
-                cart.push({ name: itemName, price: price, quantity: quantity });
-            }
-
-            const cartToggles = document.querySelectorAll('.cart-toggle');
-            cartToggles.forEach(toggle => {
-                toggle.classList.add('cart-added');
-                setTimeout(() => toggle.classList.remove('cart-added'), 500);
-            });
-            
-            const feedback = container.querySelector('.quantity-selector').querySelector('.add-feedback');
-            if (feedback) {
-                feedback.style.opacity = '1';
-                setTimeout(() => { feedback.style.opacity = '0'; }, 1500);
-            }
-
+            if (existingItem) existingItem.quantity += quantity; else cart.push({ name: itemName, price: price, quantity: quantity });
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = `Adicionado! <i class="fa-solid fa-check"></i>`;
+            button.classList.add('bg-green-500');
+            setTimeout(() => { button.innerHTML = originalText; button.classList.remove('bg-green-500'); }, 2000);
             updateCart();
         }
-
         function updateCart() {
-            const cartList = document.querySelector('.cart-items');
-            const floatingCartCount = document.getElementById('floatingCartCount');
-            const headerCartCount = document.getElementById('headerCartCount');
-            const cartTotal = document.querySelector('.cart-total');
-            cartList.innerHTML = '';
+            const cartItemsEl = document.querySelector('.cart-items');
+            const cartCountEl = document.getElementById('cartCount');
+            const cartTotalEl = document.querySelector('.cart-total');
+            cartItemsEl.innerHTML = '';
             let total = 0;
             let totalItems = 0;
-            const isSingleItemTypeInCart = new Set(cart.map(item => item.name)).size === 1;
-
             cart.forEach((item, index) => {
                 total += item.price * item.quantity;
                 totalItems += item.quantity;
                 const li = document.createElement('li');
-                
-                let itemHTML = `<div class="item-info"><span>${item.name} (x${item.quantity})</span>`;
-                if (isSingleItemTypeInCart) {
-                    itemHTML += `<span>R$${(item.price * item.quantity).toFixed(2)}</span>`;
-                }
-                itemHTML += `</div><div class="item-actions"><button class="decrease-btn" onclick="decreaseQuantity(event, ${index})">-</button><button class="remove-one-btn" onclick="removeFromCart(event, ${index})">Remover</button></div>`;
-                li.innerHTML = itemHTML;
-                cartList.appendChild(li);
+                li.className = 'flex justify-between items-center py-2 text-sm';
+                li.innerHTML = `<span class="flex-1">${item.quantity}x ${item.name}</span><div class="item-actions flex items-center gap-2"><button class="decrease-btn font-bold" onclick="decreaseQuantity(${index})">-</button><button class="remove-one-btn text-red-400 hover:text-red-300" onclick="removeFromCart(${index})"><i class="fa-solid fa-trash"></i></button></div>`;
+                cartItemsEl.appendChild(li);
             });
-
-            floatingCartCount.textContent = totalItems;
-            headerCartCount.textContent = totalItems;
-            cartTotal.textContent = `Total: R$${total.toFixed(2)}`;
+            cartCountEl.textContent = totalItems;
+            cartTotalEl.textContent = `Total: R$${total.toFixed(2)}`;
         }
-
-        function decreaseQuantity(event, index) {
-            event.stopPropagation();
-            if (cart[index] && cart[index].quantity > 1) {
-                cart[index].quantity--;
-            } else {
-                cart.splice(index, 1);
-            }
-            updateCart();
-        }
-
-        function removeFromCart(event, index) {
-            event.stopPropagation();
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function toggleCart() {
-            document.getElementById('cartContainer').classList.toggle('active');
-        }
-
-        function scrollToCheckout() {
-            toggleCart();
-            document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function sendOrderToWhatsapp() {
+        function decreaseQuantity(index) { if (cart[index].quantity > 1) cart[index].quantity--; else cart.splice(index, 1); updateCart(); }
+        function removeFromCart(index) { cart.splice(index, 1); updateCart(); }
+        function checkout() {
             const formError = document.getElementById('formError');
             formError.style.display = 'none';
-            if (cart.length === 0) {
-                formError.textContent = 'Seu carrinho está vazio!';
-                formError.style.display = 'block';
-                return;
-            }
+            if (cart.length === 0) { formError.textContent = 'Seu carrinho está vazio!'; formError.style.display = 'block'; return; }
             const studentName = document.getElementById('student-name').value;
             const studentClass = document.getElementById('student-class').value;
             const paymentMethod = document.getElementById('payment-method').value;
-            if (!studentName || !paymentMethod || !studentClass) {
-                formError.textContent = 'Por favor, preencha todos os campos: Nome, Turma e Método de Pagamento.';
-                formError.style.display = 'block';
-                document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
-                return;
-            }
+            if (!studentName || !studentClass || !paymentMethod) { formError.textContent = 'Por favor, preencha todos os campos.'; formError.style.display = 'block'; return; }
             let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            let message = `Olá, gostaria de finalizar meu pedido!\n\n*Nome:* ${studentName}\n*Turma:* ${studentClass}\n*Método de Pagamento:* ${paymentMethod}\n\n*Itens:*\n`;
-            cart.forEach(item => {
-                message += `- ${item.quantity}x ${item.name}\n`;
-            });
-            message += `\n*Total:* R$${total.toFixed(2)}\n`;
+            let message = `*PEDIDO - Medeiros Artigos Militares*\n\n*Nome:* ${studentName}\n*Turma:* ${studentClass}\n*Pagamento:* ${paymentMethod}\n\n*ITENS DO PEDIDO:*\n`;
+            cart.forEach(item => { message += ` - ${item.quantity}x ${item.name}\n`; });
+            message += `\n*TOTAL: R$${total.toFixed(2)}*\n\nAguardando instruções para pagamento e retirada.`;
             const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/5561998300711?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
+            window.open(`https://wa.me/5561998300711?text=${encodedMessage}`, '_blank');
             cart = [];
             updateCart();
             document.getElementById('student-name').value = '';
@@ -681,85 +366,89 @@
             document.getElementById('payment-method').value = '';
         }
 
-        function promptForCourseCode(url, event) {
-            event.preventDefault(); 
-            const accessCode = "GATE.CURSOS.2025";
-            const userCode = prompt("Para acessar o curso, por favor, insira o código de acesso:");
-
-            if (userCode === accessCode) {
-                window.open(url, '_blank'); 
-            } else if (userCode !== null && userCode !== "") { 
-                alert("Código de acesso inválido!");
-            }
+        function createProductCard(kit) {
+            let itemsHtml = kit.items.map(item => `
+                <li data-price="${item.price.toFixed(2)}" class="flex flex-col sm:flex-row justify-between items-center py-3 border-b border-gray-700/50 gap-2">
+                    <span class="item-name-icon flex-1 text-center sm:text-left"><i class="fa-solid ${item.icon} text-brand-gold w-6"></i> ${item.name}</span>
+                    <div class="quantity-selector flex items-center gap-2">
+                         ${item.hasSize ? `<select class="size-selector bg-brand-dark text-xs rounded p-1 border border-gray-600">${item.sizes.map(s => `<option>${s}</option>`).join('')}</select>` : ''}
+                         ${item.hasColor ? `<select class="color-selector bg-brand-dark text-xs rounded p-1 border border-gray-600">${item.colors.map(c => `<option>${c}</option>`).join('')}</select>` : ''}
+                        <input type="number" min="1" value="1" class="quantity-input w-12 text-center bg-brand-dark rounded border border-gray-600">
+                        <button class="add-to-cart-btn bg-brand-green-dark text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-opacity-80" onclick="addToCart(event, '${item.name.replace(/'/g, "\\'")}', ${item.price.toFixed(2)})">Adicionar</button>
+                    </div>
+                </li>`).join('');
+            return `
+                <div class="product-card glassmorphism p-6 rounded-2xl border-2 border-transparent hover:border-brand-gold transition-all duration-300 reveal-on-scroll">
+                    ${kit.badge ? `<div class="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-amber-500 text-brand-dark px-3 py-1 rounded-full text-xs font-bold uppercase z-20">${kit.badge}</div>` : ''}
+                    <h3 class="text-2xl font-bold text-white mb-4 text-center">${kit.title}</h3>
+                    <img src="${kit.image}" alt="${kit.title}" class="w-full h-auto rounded-lg mb-4 mx-auto product-image-kit" onclick="toggleCard(this)">
+                    <div class="product-details">
+                        <p class="text-gray-300 text-sm mb-4">${kit.description}</p>
+                        <ul class="text-sm">${itemsHtml}</ul>
+                        <div class="payment text-xs text-gray-400 mt-4 p-3 bg-gray-900/50 rounded-lg"><strong>Pagamento:</strong> Débito, Crédito (até 12x), PIX (até 5% de desconto)</div>
+                    </div>
+                </div>`;
         }
         
+         function createCourseCard(course) { 
+             return `<div class="course-card glassmorphism p-6 rounded-2xl text-center border-2 border-transparent hover:border-brand-gold transition-all duration-300 reveal-on-scroll">
+                    <h3 class="text-xl font-bold text-white mb-4" onclick="toggleCard(this)">${course.title}</h3>
+                    <div class="course-details">
+                        <p class="text-gray-300 text-sm my-4">${course.description}</p>
+                        <div class="course-link">
+                            <a href="${course.link}" onclick="${course.needsCode ? `promptForCourseCode('${course.link}', event)` : 'event.stopPropagation()'}" target="_blank" class="inline-block bg-brand-gold text-brand-dark font-bold py-2 px-5 rounded-full text-sm transition-transform transform hover:scale-105">Acessar Curso</a>
+                        </div>
+                    </div>
+                </div>`;
+         }
+
         document.addEventListener('DOMContentLoaded', function() {
-            const fardamentoSection = document.getElementById('fardamento');
-            if (fardamentoSection) {
-                const eliteFardamentosSection = document.createElement('div');
-                eliteFardamentosSection.id = 'elite-fardamentos';
-                eliteFardamentosSection.innerHTML = `<h2 class="section-title">Elite dos Fardamentos</h2><div class="product-grid" id="elite-fardamentos-grid"></div>`;
-                fardamentoSection.insertAdjacentElement('afterend', eliteFardamentosSection);
+            const fardamentoGrid = document.querySelector('#fardamento .product-grid');
+            const acampamentoGrid = document.querySelector('#acampamento .product-grid');
+            const eliteGrid = document.getElementById('elite-fardamentos-grid');
+            const cursosGrid = document.querySelector('#cursos .course-grid');
+            
+            // DADOS DOS PRODUTOS
+            const fardamentoKits = [
+                { title: 'Kit Básico', image: 'https://i.imgur.com/t2VQ9MF.jpeg', description: 'Kit inicial prático e durável...', items: [{name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}]},
+                { title: 'Kit Avançado', badge: 'Mais Vendido', image: 'https://i.imgur.com/2w9HPjA.jpeg', description: 'Uniforme tático completo...', items: [{name: 'Colete tático modular', price: 489.90, icon: 'fa-vest', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Suspensório', price: 189.90, icon: 'fa-grip-lines-vertical'}, {name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}, {name: 'Distintivo Bombeiro Civil', price: 149.90, icon: 'fa-medal'}, {name: 'Caneta quebra vidro', price: 79.90, icon: 'fa-pen-nib'}, {name: 'Luva tática preta', price: 79.90, icon: 'fa-hand-fist' }, {name: 'Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Algema invictus', price: 199.90, icon: 'fa-lock'}, {name: 'Lanterna tática com LED lateral', price: 59.90, icon: 'fa-lightbulb'}]},
+                { title: 'Kit Monstro', image: 'https://i.imgur.com/Y6LT4jq.jpeg', description: 'O kit definitivo para operações extremas...', items: [{name: 'Colete tático modular', price: 489.90, icon: 'fa-vest', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Suspensório', price: 189.90, icon: 'fa-grip-lines-vertical'}, {name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}, {name: 'Distintivo Bombeiro Civil', price: 149.90, icon: 'fa-medal'}, {name: 'Caneta quebra vidro', price: 79.90, icon: 'fa-pen-nib'}, {name: 'Luva tática preta', price: 79.90, icon: 'fa-hand-fist' }, {name: 'Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Algema invictus', price: 199.90, icon: 'fa-lock'}, {name: 'Lanterna tática com LED lateral', price: 59.90, icon: 'fa-lightbulb'}, {name: 'Calça tática bege / P.R.F., P.F.', price: 179.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG']}]},
+            ];
+            const eliteKits = [
+                { title: "Kit Auxiliar", image: "https://i.imgur.com/ih87A5E.jpeg", description: "Equipamentos essenciais para suporte tático...", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática foxboy", price: 289.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Atalaia", price: 389.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heart-pulse" }]},
+                { title: "Kit Instrutor", image: "https://i.imgur.com/aYGnbsv.jpeg", description: "Projetado para instrutores, este kit garante durabilidade...", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Acero", price: 499.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }]},
+                { title: "Kit G.A.T.E", image: "https://i.imgur.com/L2PUx6z.jpeg", description: "Kit para operações de alto risco...", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Guartelá", price: 569.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Coturno Invictus", price: 649.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heart-pulse" }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }, { name: "Gorro vermelho Bombeiro Civil", price: 89.90, icon: "fa-hat-winter" }]},
+            ];
+            const acampamentoKits = [
+                { title: 'Kit Recruta (Básico)', image: 'https://i.imgur.com/adECSak.jpeg', description: 'O essencial para missões seguras...', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
+                { title: 'Kit Capitão (Intermediário)', image: 'https://i.imgur.com/FkZVMfX.jpeg', description: 'Equilíbrio entre conforto e funcionalidade.', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Kit térmico', price: 100.00, icon: 'fa-temperature-full'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Garrafa Tática Cantil', price: 59.90, icon: 'fa-bottle-water'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Mosquetão Tático com Trava', price: 50.00, icon: 'fa-link'}, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Protetor Labial com FPS', price: 20.00, icon: 'fa-sun'}, {name: 'Protetor de Pescoço (Buff)', price: 25.00, icon: 'fa-user-ninja'}, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
+                { title: 'Kit Comandos (Avançado)', badge: 'Mais Completo', image: 'https://i.imgur.com/jbpqCx4.png', description: 'Equipamentos de ponta para missões críticas...', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Kit térmico', price: 100.00, icon: 'fa-temperature-full'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Mochila Tática', price: 150.00, icon: 'fa-bag-shopping'}, {name: 'Kit Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Garrafa Tática Cantil', price: 59.90, icon: 'fa-bottle-water'}, {name: 'Cinto Tático', price: 40.00, icon: 'fa-circle-notch'}, {name: 'Mosquetão Tático com Trava', price: 50.00, icon: 'fa-link'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Protetor Solar em Bastão', price: 80.00, icon: 'fa-sun'}, {name: 'Luvas Táticas Leves', price: 50.00, icon: 'fa-hand-fist' }, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Protetor Labial com FPS', price: 20.00, icon: 'fa-sun'}, {name: 'Protetor de Pescoço (Buff)', price: 25.00, icon: 'fa-user-ninja'}, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
+            ];
+            const cursos = [
+                { title: 'Instrutor', description: 'Capacite-se para formar novos profissionais.', link: 'https://instrutormedeiros.github.io/cursoinstrutor/', needsCode: true }, { title: 'NR10', description: 'Segurança em instalações e serviços com eletricidade.', link: 'https://instrutormedeiros.github.io/cursonr10/', needsCode: true }, { title: 'Cuidador de Idosos', description: 'Desenvolva habilidades para cuidar de idosos.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Cuidador%20de%20Idosos.', needsCode: false }, { title: 'Agente de Portaria', description: 'Prepare-se para atuar na portaria com foco em segurança.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Agente%20de%20Portaria.', needsCode: false }, { title: 'Segurança Patrimonial', description: 'Técnicas de vigilância para proteger patrimônios.', link: 'https://instrutormedeiros.github.io/segurancapatrimonial/', needsCode: true }, { title: 'Libras', description: 'Domine a Língua Brasileira de Sinais.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Libras.', needsCode: false }, { title: 'Urgência e Emergência', description: 'Aprenda a agir em situações críticas de saúde.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgência%20e%20Emergência.', needsCode: false }, { title: 'Urgências Psiquiátricas', description: 'Treinamento para lidar com crises psiquiátricas.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgências%20Psiquiátricas.', needsCode: false }, { title: 'Animais Peçonhentos', description: 'Manejo de acidentes com animais peçonhentos.', link: 'https://instrutormedeiros.github.io/animaispeconhentos/', needsCode: true },
+            ];
+            
+            fardamentoGrid.innerHTML = fardamentoKits.map(createProductCard).join('');
+            eliteGrid.innerHTML = eliteKits.map(createProductCard).join('');
+            acampamentoGrid.innerHTML = acampamentoKits.map(createProductCard).join('');
+            cursosGrid.innerHTML = cursos.map(createCourseCard).join('');
 
-                const eliteFardamentosGrid = document.getElementById('elite-fardamentos-grid');
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+            
+            const searchInput = document.getElementById('searchInput');
+            const productSections = document.querySelectorAll('.product-section');
 
-                function createProductListItem(price, name, iconClass, hasSize = false, sizes = [], hasColor = false, colors = []) {
-                    let optionsHtml = '';
-                    if (hasSize) {
-                        optionsHtml += `<select class="size-selector">`;
-                        sizes.forEach(size => { optionsHtml += `<option value="${size}">${size}</option>`; });
-                        optionsHtml += `</select>`;
-                    }
-                    if (hasColor) {
-                         optionsHtml += `<select class="color-selector">`;
-                         colors.forEach(color => { optionsHtml += `<option value="${color}">${color}</option>`; });
-                         optionsHtml += `</select>`;
-                    }
-
-                    return `
-                        <li data-price="${price.toFixed(2)}">
-                            <span class="item-name-icon"><i class="fa-solid ${iconClass}"></i> ${name}</span>
-                            <div class="quantity-selector">
-                                ${optionsHtml}
-                                <input type="number" min="1" value="1" class="quantity-input">
-                                <button class="add-to-cart-btn" onclick="addToCart(event, '${name.replace(/'/g, "\\'")}', ${price.toFixed(2)})">Adicionar</button>
-                                <span class="add-feedback">✅ Adicionado!</span>
-                            </div>
-                        </li>
-                    `;
-                }
-               
-                const kitsData = {
-                    "Kit Auxiliar": { image: "https://i.imgur.com/ih87A5E.jpeg", description: "O Kit Auxiliar oferece equipamentos essenciais para o suporte tático, combinando funcionalidade e conforto para missões de apoio.", items: [ { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática foxboy", price: 289.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Atalaia", price: 389.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heartbeat" } ] },
-                    "Kit Instrutor": { image: "https://i.imgur.com/aYGnbsv.jpeg", description: "Projetado para instrutores, este kit garante durabilidade e adaptabilidade, essencial para treinamento e demonstrações em campo.", items: [ { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Acero", price: 499.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" } ] },
-                    "Kit G.A.T.E": { image: "https://i.imgur.com/L2PUx6z.jpeg", description: "O Kit G.A.T.E (Grupo de Ações Táticas Especiais) é para operações de alto risco, oferecendo máxima proteção e funcionalidade em ambientes extremos.", items: [ { name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-hoodie", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-socks", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Guartelá", price: 569.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Coturno Invictus", price: 649.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heartbeat" }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }, { name: "Gorro vermelho Bombeiro Civil", price: 89.90, icon: "fa-hat-military" } ] }
-                };
-
-                for (const kitName in kitsData) {
-                    const kitInfo = kitsData[kitName];
-                    const newKitCard = document.createElement('div');
-                    newKitCard.classList.add('product-card');
-                    newKitCard.setAttribute('onclick', 'toggleDetails(event, this)');
-                    
-                    let itemsHtml = '';
-                    kitInfo.items.forEach(item => {
-                        itemsHtml += createProductListItem(item.price, item.name, item.icon, item.hasSize, item.sizes, item.hasColor, item.colors);
+            searchInput.addEventListener('keyup', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                productSections.forEach(section => {
+                    const cards = section.querySelectorAll('.product-card, .course-card');
+                    let visibleCards = 0;
+                    cards.forEach(card => {
+                        if (card.textContent.toLowerCase().includes(searchTerm)) { card.style.display = ''; visibleCards++; } 
+                        else { card.style.display = 'none'; }
                     });
-
-                    newKitCard.innerHTML = `<h3>${kitName}</h3><img class="product-image-kit" src="${kitInfo.image}" alt="${kitName}"><div class="product-details"><p>${kitInfo.description}</p><ul>${itemsHtml}</ul><div class="payment"><p><strong>Formas de Pagamento:</strong><br>Cartão de Débito: À vista<br>Cartão de Crédito: Até 12x<br>PIX: Até 5% de desconto</p></div></div>`;
-                    eliteFardamentosGrid.appendChild(newKitCard);
-                }
-            }
-
-            document.getElementById('searchInput').addEventListener('input', function(e) {
-                const searchTerm = e.target.value.toLowerCase();
-                document.querySelectorAll('.product-card, .course-card').forEach(card => {
-                    const cardText = card.textContent.toLowerCase();
-                    if (cardText.includes(searchTerm)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    const sectionHeader = section.querySelector('.section-header');
+                    if (sectionHeader) sectionHeader.style.display = visibleCards > 0 ? '' : 'none';
                 });
             });
         });
