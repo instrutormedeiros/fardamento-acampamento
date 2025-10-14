@@ -6,9 +6,7 @@
     <title>Medeiros Artigos Militares - Equipado para a Missão</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -17,21 +15,12 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        'brand-gold': '#FFD700',
-                        'brand-green-dark': '#1A3C34',
-                        'brand-dark': '#111827',
-                    },
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                    },
+                    colors: { 'brand-gold': '#FFD700', 'brand-green-dark': '#1A3C34', 'brand-dark': '#111827' },
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
                     animation: {
-                        'gradient-bg': 'gradient-bg 15s ease infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulse-glow 2s infinite ease-in-out',
-                        'gradient-text-scroll': 'gradient-text-scroll 4s linear infinite',
-                        'blob-walk-1': 'blob-walk-1 30s ease-in-out infinite',
-                        'blob-walk-2': 'blob-walk-2 35s ease-in-out infinite',
+                        'gradient-bg': 'gradient-bg 15s ease infinite', 'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s infinite ease-in-out', 'gradient-text-scroll': 'gradient-text-scroll 4s linear infinite',
+                        'blob-walk-1': 'blob-walk-1 30s ease-in-out infinite', 'blob-walk-2': 'blob-walk-2 35s ease-in-out infinite',
                     },
                     keyframes: {
                         'gradient-bg': { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
@@ -58,13 +47,12 @@
         .cart-container { display: none; position: absolute; top: 70px; right: 0; width: 320px; background-color: #111827; border: 1px solid #FFD700; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); z-index: 999; padding: 15px; max-height: 400px; overflow-y: auto; color: #E0E0E0; }
         .cart-container.active { display: block; }
         .cart-items li { border-bottom: 1px solid rgba(255, 215, 0, 0.2); }
-        .cart-items .remove-one-btn, .cart-items .decrease-btn { color: #FFD700; }
         #cursos, #elite-fardamentos { display: none; }
         #cursos.active, #elite-fardamentos.active { display: block; }
         .liquid-container { position: fixed; inset: 0; z-index: 0; overflow: hidden; filter: blur(100px) saturate(150%); }
         .liquid-blob { position: absolute; border-radius: 50%; opacity: 0.5; }
-        .product-image-kit, .course-card h3 { cursor: pointer; }
-        body.modal-open { overflow: hidden; } /* Impede o scroll da página quando o modal está aberto */
+        .product-card, .course-card { cursor: pointer; }
+        body.modal-open { overflow: hidden; }
     </style>
 </head>
 <body class="bg-gradient-to-r from-brand-dark via-brand-green-dark to-brand-dark text-gray-200 font-sans antialiased" style="background-size: 400% 400%;">
@@ -80,13 +68,11 @@
                 <img src="https://i.imgur.com/pNd3LVh.png" alt="Logo" class="h-10">
                 <h1 class="text-sm sm:text-base md:text-xl font-bold gradient-text animate-gradient-text-scroll">Medeiros Artigos Militares</h1>
             </div>
-            
             <div class="hidden md:flex items-center gap-6">
                  <a href="#fardamento" class="text-sm font-semibold hover:text-brand-gold transition-colors">Fardamentos</a>
                  <a href="#acampamento" class="text-sm font-semibold hover:text-brand-gold transition-colors">Acampamento</a>
                  <a href="#cursos" onclick="toggleSection('cursos')" class="text-sm font-semibold hover:text-brand-gold transition-colors">Cursos</a>
             </div>
-
             <div class="flex items-center gap-4">
                 <div class="relative">
                     <button class="bg-brand-gold text-brand-dark font-bold py-2 px-4 rounded-full text-sm transition-transform transform hover:scale-105 flex items-center gap-2" onclick="toggleCart()">
@@ -106,7 +92,6 @@
                 </div>
             </div>
         </nav>
-        
         <div id="mobile-menu" class="hidden md:hidden bg-brand-dark/90 backdrop-blur-sm">
             <a href="#fardamento" class="block py-2 px-4 text-sm text-gray-200 hover:bg-brand-green-dark">Fardamentos</a>
             <a href="#acampamento" class="block py-2 px-4 text-sm text-gray-200 hover:bg-brand-green-dark">Acampamento</a>
@@ -238,7 +223,7 @@
             <div class="flex justify-center items-center space-x-6 mb-8">
                 <a href="https://wa.me/5561998300711" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-whatsapp"></i></a>
                 <a href="https://www.instagram.com/bombeirocivilbrasilia/" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-instagram"></i></a>
-                 <a href="https://www.instagram.com/gateeducacional/" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/gateeducacional/" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-instagram"></i></a>
                 <a href="mailto:coordenadormedeiros@gmail.com" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fas fa-envelope"></i></a>
             </div>
             <p class="text-xs text-gray-500">&copy; 2019. Todos os direitos reservados.</p>
@@ -248,14 +233,11 @@
     <div id="product-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onclick="closeModal()">
         <div class="glassmorphism w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl p-6 relative" onclick="event.stopPropagation()">
             <button class="absolute top-4 right-4 text-white text-2xl" onclick="closeModal()">&times;</button>
-            <div id="modal-content">
-                </div>
+            <div id="modal-content"></div>
         </div>
     </div>
 
-
     <script>
-        // Scripts essenciais
         const header = document.querySelector('header');
         window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 10));
 
@@ -271,6 +253,8 @@
         mobileMenu.addEventListener('click', (e) => { if(e.target.tagName === 'A') mobileMenu.classList.add('hidden'); });
 
         let cart = [];
+        const modal = document.getElementById('product-modal');
+        const modalContent = document.getElementById('modal-content');
 
         function promptForCourseCode(url, event) {
             event.preventDefault();
@@ -280,22 +264,17 @@
             else if (userCode !== null) alert("Código de acesso inválido!");
         }
 
-        // LÓGICA DO NOVO MODAL (JANELA SUSPENSA)
-        const modal = document.getElementById('product-modal');
-        const modalContent = document.getElementById('modal-content');
-
-        function openModal(element) {
-            const card = element.closest('.product-card, .course-card');
-            if (!card) return;
-
-            // Clona o conteúdo do card para dentro do modal
-            const contentToClone = card.querySelector('.product-details, .course-details');
-            const titleToClone = card.querySelector('h3');
+        function openModal(cardElement) {
+            const contentToClone = cardElement.querySelector('.product-details, .course-details');
+            const titleToClone = cardElement.querySelector('h3');
             if(!contentToClone || !titleToClone) return;
 
-            modalContent.innerHTML = ''; // Limpa o conteúdo anterior
+            modalContent.innerHTML = '';
             modalContent.appendChild(titleToClone.cloneNode(true));
-            modalContent.appendChild(contentToClone.cloneNode(true));
+            // Precisamos clonar o conteúdo e torná-lo visível para o modal
+            const clonedDetails = contentToClone.cloneNode(true);
+            clonedDetails.classList.remove('hidden'); // Garante que o conteúdo seja visível no modal
+            modalContent.appendChild(clonedDetails);
             
             modal.classList.remove('hidden');
             document.body.classList.add('modal-open');
@@ -303,7 +282,7 @@
 
         function closeModal() {
             modal.classList.add('hidden');
-            modalContent.innerHTML = ''; // Limpa o conteúdo ao fechar
+            modalContent.innerHTML = '';
             document.body.classList.remove('modal-open');
         }
         
@@ -393,10 +372,10 @@
                     </div>
                 </li>`).join('');
             return `
-                <div class="product-card glassmorphism p-6 rounded-2xl border-2 border-transparent hover:border-brand-gold">
+                <div class="product-card glassmorphism p-6 rounded-2xl border-2 border-transparent hover:border-brand-gold" onclick="openModal(this)">
                     ${kit.badge ? `<div class="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-amber-500 text-brand-dark px-3 py-1 rounded-full text-xs font-bold uppercase z-20">${kit.badge}</div>` : ''}
                     <h3 class="text-2xl font-bold text-white mb-4 text-center">${kit.title}</h3>
-                    <img src="${kit.image}" alt="${kit.title}" class="w-full h-auto rounded-lg mb-4 mx-auto product-image-kit" onclick="openModal(this)">
+                    <img src="${kit.image}" alt="${kit.title}" class="w-full h-auto rounded-lg mb-4 mx-auto product-image-kit">
                     <div class="product-details hidden">
                         <p class="text-gray-300 text-sm mb-4">${kit.description}</p>
                         <ul class="text-sm">${itemsHtml}</ul>
@@ -406,8 +385,8 @@
         }
         
          function createCourseCard(course) { 
-             return `<div class="course-card glassmorphism p-6 rounded-2xl text-center border-2 border-transparent hover:border-brand-gold">
-                    <h3 class="text-xl font-bold text-white mb-0" onclick="openModal(this)">${course.title}</h3>
+             return `<div class="course-card glassmorphism p-6 rounded-2xl text-center border-2 border-transparent hover:border-brand-gold" onclick="openModal(this)">
+                    <h3 class="text-xl font-bold text-white mb-0">${course.title}</h3>
                     <div class="course-details hidden">
                         <p class="text-gray-300 text-sm my-4">${course.description}</p>
                         <div class="course-link">
@@ -418,7 +397,7 @@
          }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Lógica de renderização de cards e busca (sem alterações)
+            // Lógica de renderização de cards e busca
             const fardamentoGrid = document.querySelector('#fardamento .product-grid');
             const acampamentoGrid = document.querySelector('#acampamento .product-grid');
             const eliteGrid = document.getElementById('elite-fardamentos-grid');
