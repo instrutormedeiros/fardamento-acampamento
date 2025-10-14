@@ -63,28 +63,8 @@
         #cursos.active, #elite-fardamentos.active { display: block; }
         .liquid-container { position: fixed; inset: 0; z-index: 0; overflow: hidden; filter: blur(100px) saturate(150%); }
         .liquid-blob { position: absolute; border-radius: 50%; opacity: 0.5; }
-        
-        .product-details, .course-details { 
-            max-height: 0; 
-            overflow: hidden; 
-            transition: max-height 0.5s ease-in-out;
-        }
-        .product-card, .course-card {
-            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
-        }
-
-        /* EFEITO "JANELA SUSPENSA" AO ABRIR O CARD */
-        .product-card.active, .course-card.active {
-            transform: scale(1.03);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            z-index: 10;
-            max-height: 2000px; /* Garante que o conteúdo não seja cortado */
-        }
-        .product-card.active .product-details, .course-card.active .course-details {
-            max-height: 2000px; /* Valor alto para garantir que todo o conteúdo caiba */
-        }
-
         .product-image-kit, .course-card h3 { cursor: pointer; }
+        body.modal-open { overflow: hidden; } /* Impede o scroll da página quando o modal está aberto */
     </style>
 </head>
 <body class="bg-gradient-to-r from-brand-dark via-brand-green-dark to-brand-dark text-gray-200 font-sans antialiased" style="background-size: 400% 400%;">
@@ -265,6 +245,15 @@
         </div>
     </footer>
 
+    <div id="product-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onclick="closeModal()">
+        <div class="glassmorphism w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl p-6 relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-white text-2xl" onclick="closeModal()">&times;</button>
+            <div id="modal-content">
+                </div>
+        </div>
+    </div>
+
+
     <script>
         // Scripts essenciais
         const header = document.querySelector('header');
@@ -291,14 +280,31 @@
             else if (userCode !== null) alert("Código de acesso inválido!");
         }
 
-        function toggleCard(element) {
+        // LÓGICA DO NOVO MODAL (JANELA SUSPENSA)
+        const modal = document.getElementById('product-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal(element) {
             const card = element.closest('.product-card, .course-card');
             if (!card) return;
-            const wasActive = card.classList.contains('active');
-            document.querySelectorAll('.product-card.active, .course-card.active').forEach(otherCard => {
-                otherCard.classList.remove('active');
-            });
-            if (!wasActive) card.classList.add('active');
+
+            // Clona o conteúdo do card para dentro do modal
+            const contentToClone = card.querySelector('.product-details, .course-details');
+            const titleToClone = card.querySelector('h3');
+            if(!contentToClone || !titleToClone) return;
+
+            modalContent.innerHTML = ''; // Limpa o conteúdo anterior
+            modalContent.appendChild(titleToClone.cloneNode(true));
+            modalContent.appendChild(contentToClone.cloneNode(true));
+            
+            modal.classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            modalContent.innerHTML = ''; // Limpa o conteúdo ao fechar
+            document.body.classList.remove('modal-open');
         }
         
         function toggleSection(sectionId) {
@@ -314,7 +320,7 @@
             }
         }
 
-        // Demais funções do carrinho (sem alteração)
+        // Demais funções do carrinho
         function toggleCart() { document.getElementById('cartContainer').classList.toggle('active'); }
         function prepareAddToCart(event) { event.stopPropagation(); }
         function addToCart(event, name, price) {
@@ -390,8 +396,8 @@
                 <div class="product-card glassmorphism p-6 rounded-2xl border-2 border-transparent hover:border-brand-gold">
                     ${kit.badge ? `<div class="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-amber-500 text-brand-dark px-3 py-1 rounded-full text-xs font-bold uppercase z-20">${kit.badge}</div>` : ''}
                     <h3 class="text-2xl font-bold text-white mb-4 text-center">${kit.title}</h3>
-                    <img src="${kit.image}" alt="${kit.title}" class="w-full h-auto rounded-lg mb-4 mx-auto product-image-kit" onclick="toggleCard(this)">
-                    <div class="product-details">
+                    <img src="${kit.image}" alt="${kit.title}" class="w-full h-auto rounded-lg mb-4 mx-auto product-image-kit" onclick="openModal(this)">
+                    <div class="product-details hidden">
                         <p class="text-gray-300 text-sm mb-4">${kit.description}</p>
                         <ul class="text-sm">${itemsHtml}</ul>
                         <div class="payment text-xs text-gray-400 mt-4 p-3 bg-gray-900/50 rounded-lg"><strong>Pagamento:</strong> Débito, Crédito (até 12x), PIX (até 5% de desconto)</div>
@@ -401,8 +407,8 @@
         
          function createCourseCard(course) { 
              return `<div class="course-card glassmorphism p-6 rounded-2xl text-center border-2 border-transparent hover:border-brand-gold">
-                    <h3 class="text-xl font-bold text-white mb-0" onclick="toggleCard(this)">${course.title}</h3>
-                    <div class="course-details">
+                    <h3 class="text-xl font-bold text-white mb-0" onclick="openModal(this)">${course.title}</h3>
+                    <div class="course-details hidden">
                         <p class="text-gray-300 text-sm my-4">${course.description}</p>
                         <div class="course-link">
                             <a href="${course.link}" onclick="${course.needsCode ? `promptForCourseCode('${course.link}', event)` : 'event.stopPropagation()'}" target="_blank" class="inline-block bg-brand-gold text-brand-dark font-bold py-2 px-5 rounded-full text-sm transition-transform transform hover:scale-105">Acessar Curso</a>
@@ -412,12 +418,12 @@
          }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Lógica de renderização de cards e busca (sem alterações)
             const fardamentoGrid = document.querySelector('#fardamento .product-grid');
             const acampamentoGrid = document.querySelector('#acampamento .product-grid');
             const eliteGrid = document.getElementById('elite-fardamentos-grid');
             const cursosGrid = document.querySelector('#cursos .course-grid');
             
-            // DADOS DOS PRODUTOS
             const fardamentoKits = [
                 { title: 'Kit Básico', image: 'https://i.imgur.com/t2VQ9MF.jpeg', description: 'Kit inicial prático e durável...', items: [{name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}]},
                 { title: 'Kit Avançado', badge: 'Mais Vendido', image: 'https://i.imgur.com/2w9HPjA.jpeg', description: 'Uniforme tático completo...', items: [{name: 'Colete tático modular', price: 489.90, icon: 'fa-vest', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Suspensório', price: 189.90, icon: 'fa-grip-lines-vertical'}, {name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}, {name: 'Distintivo Bombeiro Civil', price: 149.90, icon: 'fa-medal'}, {name: 'Caneta quebra vidro', price: 79.90, icon: 'fa-pen-nib'}, {name: 'Luva tática preta', price: 79.90, icon: 'fa-hand-fist' }, {name: 'Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Algema invictus', price: 199.90, icon: 'fa-lock'}, {name: 'Lanterna tática com LED lateral', price: 59.90, icon: 'fa-lightbulb'}]},
