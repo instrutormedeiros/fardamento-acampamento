@@ -73,6 +73,17 @@
             font-size: 0.9rem;
             border-radius: 4px;
         }
+        
+        .admin-textarea {
+            background: #000;
+            border: 1px solid #ef4444;
+            color: #fff;
+            padding: 8px;
+            width: 100%;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            resize: none;
+        }
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0F1115; }
@@ -117,9 +128,8 @@
 <body class="antialiased relative">
 
     <div id="admin-indicator" class="admin-badge flex items-center gap-2">
-        <i class="fa-solid fa-user-shield"></i> MODO ADMIN - BRAVUS
-        <button onclick="window.adminLogout()" class="ml-2 underline text-xs">Sair</button>
-        <button onclick="window.forceTestimonialsUpdate()" class="ml-2 bg-white text-red-600 px-2 py-0.5 rounded text-[10px] font-bold hover:bg-gray-200 transition-colors shadow">Zerar Depoimentos</button>
+        <i class="fa-solid fa-user-shield"></i> MODO ADMIN
+        <button onclick="window.adminLogout()" class="ml-2 bg-white text-red-600 px-2 py-0.5 rounded text-[10px] font-bold hover:bg-gray-200 transition-colors shadow">Sair do Modo Admin</button>
     </div>
 
     <!-- Header BRAVUS -->
@@ -248,9 +258,16 @@
         <section id="depoimentos" class="py-20 bg-[#0A0C10] border-t border-gray-900 relative overflow-hidden">
              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gold-accent/5 rounded-full blur-[100px]"></div>
              <div class="container mx-auto px-4 relative z-10">
-                <div class="text-center mb-12">
-                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-sm mb-2">Vozes do Campo</h3>
-                    <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase">O que dizem os alunos</h2>
+                <div class="flex justify-between items-center mb-12">
+                    <div class="text-center md:text-left flex-1">
+                        <h3 class="text-gold-accent font-bold uppercase tracking-widest text-sm mb-2">Vozes do Campo</h3>
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase">O que dizem os alunos</h2>
+                    </div>
+                    <div id="admin-testimonial-btn" class="hidden">
+                        <button onclick="window.addTestimonial()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs shadow-lg transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i> Add Depoimento
+                        </button>
+                    </div>
                 </div>
                 <div class="carousel-container max-w-7xl mx-auto">
                     <button onclick="window.moveCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-gold-accent hover:text-black text-white p-3 rounded-full border border-gray-700 transition backdrop-blur-sm">
@@ -417,7 +434,7 @@
 
         let db = JSON.parse(JSON.stringify(defaultData)); 
         let cart = [];
-        let isAdmin = false;
+        let isAdmin = localStorage.getItem('bravus_admin_session') === 'active'; // Verifica memória do navegador
         let currentSlide = 0;
 
         // Função utilitária para Ancoragem de Preço
@@ -458,7 +475,10 @@
             renderGrid('elite', db.elite);
             renderGrid('acampamento', db.acampamento);
             window.renderTestimonials();
+            
             document.getElementById('admin-indicator').style.display = isAdmin ? 'flex' : 'none';
+            const adminTestimonialBtn = document.getElementById('admin-testimonial-btn');
+            if(adminTestimonialBtn) adminTestimonialBtn.style.display = isAdmin ? 'block' : 'none';
         };
 
         function renderGrid(sectionId, items) {
@@ -485,13 +505,32 @@
             track.innerHTML = db.testimonials.map((t, index) => `
                 <div class="testimonial-card">
                     <div class="glass-panel p-6 rounded-lg h-full border border-gray-800 flex flex-col">
-                        <div class="flex gap-1 mb-4">
-                            ${Array(t.stars).fill('<i class="fa-solid fa-star text-gold-accent text-xs"></i>').join('')}
+                        
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex gap-1 items-center">
+                                ${isAdmin ? 
+                                    `<input type="number" min="1" max="5" value="${t.stars}" onchange="window.updateTestimonial(${index}, 'stars', this.value)" class="admin-input w-12 text-xs text-center" title="Avaliação (1 a 5)"> <i class="fa-solid fa-star text-gold-accent text-[10px]"></i>` 
+                                    : Array(t.stars).fill('<i class="fa-solid fa-star text-gold-accent text-xs"></i>').join('')
+                                }
+                            </div>
+                            ${isAdmin ? `<button onclick="window.removeTestimonial(${index})" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-900 rounded bg-black" title="Excluir"><i class="fa-solid fa-trash"></i></button>` : ''}
                         </div>
-                        <p class="text-gray-300 italic mb-6 text-sm flex-1">"${t.text}"</p>
+                        
+                        ${isAdmin ? 
+                            `<textarea onchange="window.updateTestimonial(${index}, 'text', this.value)" class="admin-textarea flex-1 mb-4 h-24">${t.text}</textarea>`
+                            : `<p class="text-gray-300 italic mb-6 text-sm flex-1">"${t.text}"</p>`
+                        }
+                        
                         <div class="mt-4 pt-4 border-t border-gray-800">
-                            <h4 class="font-bold text-white text-sm uppercase">${t.name}</h4>
-                            <p class="text-[10px] text-gold-accent uppercase tracking-widest">${t.squad}</p>
+                            ${isAdmin ? `
+                                <div class="space-y-2">
+                                    <input type="text" value="${t.name}" onchange="window.updateTestimonial(${index}, 'name', this.value)" class="admin-input w-full text-xs" placeholder="Nome do Aluno">
+                                    <input type="text" value="${t.squad}" onchange="window.updateTestimonial(${index}, 'squad', this.value)" class="admin-input w-full text-xs" placeholder="Ex: Turma Alfa">
+                                </div>
+                            ` : `
+                                <h4 class="font-bold text-white text-sm uppercase">${t.name}</h4>
+                                <p class="text-[10px] text-gold-accent uppercase tracking-widest">${t.squad}</p>
+                            `}
                         </div>
                     </div>
                 </div>
@@ -513,6 +552,43 @@
             if(!track || !items.length) return;
             const width = items[0].offsetWidth;
             track.style.transform = `translateX(-${currentSlide * width}px)`;
+        };
+
+        // --- ADMIN DEPOIMENTOS ---
+        window.updateTestimonial = async function(index, field, value) {
+            if(!isAdmin) return;
+            if(field === 'stars') {
+                value = parseInt(value);
+                if(value < 1) value = 1;
+                if(value > 5) value = 5;
+            }
+            db.testimonials[index][field] = value;
+            try {
+                const docRef = doc(firestore, "loja", "dadosPrincipais");
+                await setDoc(docRef, db);
+            } catch (e) { alert("Erro ao salvar no banco: " + e.message); }
+        };
+
+        window.removeTestimonial = async function(index) {
+            if(!isAdmin) return;
+            if(confirm("Tem certeza que deseja excluir este depoimento?")) {
+                db.testimonials.splice(index, 1);
+                try {
+                    const docRef = doc(firestore, "loja", "dadosPrincipais");
+                    await setDoc(docRef, db);
+                    window.renderAll();
+                } catch (e) { alert("Erro ao deletar do banco: " + e.message); }
+            }
+        };
+
+        window.addTestimonial = async function() {
+            if(!isAdmin) return;
+            db.testimonials.unshift({ name: "Novo Aluno", squad: "Turma Nova", role: "Aluno", text: "Escreva o depoimento aqui...", stars: 5 });
+            try {
+                const docRef = doc(firestore, "loja", "dadosPrincipais");
+                await setDoc(docRef, db);
+                window.renderAll();
+            } catch (e) { alert("Erro ao adicionar no banco: " + e.message); }
         };
 
         // --- CARRINHO E MODAIS ---
@@ -732,13 +808,18 @@
             const p = document.getElementById('admin-pass').value;
             if (u === 'admin' && p === '559988') {
                 isAdmin = true;
+                localStorage.setItem('bravus_admin_session', 'active'); // Grava a sessão no cache do navegador
                 window.toggleAdminModal();
                 window.renderAll();
                 alert("Acesso Administrativo Bravus Ativo.");
             } else alert("Credenciais Incorretas.");
         };
 
-        window.adminLogout = () => { isAdmin = false; window.renderAll(); };
+        window.adminLogout = () => { 
+            isAdmin = false; 
+            localStorage.removeItem('bravus_admin_session'); // Limpa o cache
+            window.renderAll(); 
+        };
         window.toggleAdminModal = () => document.getElementById('admin-modal').classList.toggle('hidden');
         window.closeModal = () => document.getElementById('product-modal').classList.add('hidden');
         window.openCartModal = () => document.getElementById('cart-modal').classList.remove('hidden');
