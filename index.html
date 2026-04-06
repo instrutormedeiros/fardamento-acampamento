@@ -3,33 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medeiros Artigos Militares - Equipado para a Missão</title>
+    <title>BRAVUS Artigos Militares - Equipamento de Elite</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+    <!-- FontAwesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+    <!-- Fontes Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { 'brand-gold': '#FFD700', 'brand-green-dark': '#1A3C34', 'brand-dark': '#111827' },
-                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
-                    animation: {
-                        'gradient-bg': 'gradient-bg 20s ease infinite', // Velocidade ajustada para mais lento
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulse-glow 2s infinite ease-in-out', 'gradient-text-scroll': 'gradient-text-scroll 4s linear infinite',
-                        'blob-walk-1': 'blob-walk-1 30s ease-in-out infinite', 'blob-walk-2': 'blob-walk-2 35s ease-in-out infinite',
+                    colors: { 
+                        'tactical-black': '#0F1115', 
+                        'tactical-gray': '#1A1D24',
+                        'tactical-card': '#232730',
+                        'gold-accent': '#C6A87C', 
+                        'gold-hover': '#E0C090',
+                        'success': '#27C96E',
+                        'danger': '#E74C3C'
                     },
-                    keyframes: {
-                        'gradient-bg': { '0%, 100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
-                        'float': { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-20px)' } },
-                        'pulse-glow': { '0%, 100%': { boxShadow: '0 0 20px rgba(255, 215, 0, 0.5)' }, '50%': { boxShadow: '0 0 35px rgba(255, 215, 0, 1)' } },
-                        'gradient-text-scroll': { '0%': { backgroundPosition: '0% 50%' }, '100%': { backgroundPosition: '200% 50%' } },
-                        'blob-walk-1': { '0%': { transform: 'translate(0, 0) scale(1)' }, '25%': { transform: 'translate(20vw, 15vh) scale(1.2)'}, '50%': { transform: 'translate(-10vw, -20vh) scale(0.9)'}, '75%': { transform: 'translate(15vw, -10vh) scale(1.1)'}, '100%': { transform: 'translate(0, 0) scale(1)' } },
-                        'blob-walk-2': { '0%': { transform: 'translate(0, 0) scale(1)' }, '25%': { transform: 'translate(-15vw, -10vh) scale(0.8)'}, '50%': { transform: 'translate(20vw, 10vh) scale(1.1)'}, '75%': { transform: 'translate(-10vw, 15vh) scale(1)'}, '100%': { transform: 'translate(0, 0) scale(1)' } },
+                    fontFamily: { 
+                        sans: ['Montserrat', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to bottom, rgba(15,17,21,0.8), rgba(15,17,21,1)), url('https://i.imgur.com/L2PUx6z.jpeg')"
                     }
                 }
             }
@@ -37,184 +40,260 @@
     </script>
     
     <style>
-        html { scroll-behavior: smooth; }
-        .gradient-text { background: linear-gradient(90deg, #FFD700, #E0E0E0, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; background-size: 200% auto; }
-        .glassmorphism { background: rgba(26, 60, 52, 0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 215, 0, 0.1); z-index: 2; position: relative; }
-        header.scrolled { background-color: rgba(17, 24, 39, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-        .reveal-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .reveal-on-scroll.visible { opacity: 1; transform: translateY(0); }
-        .hero-image { filter: drop-shadow(0 0 35px rgba(255, 215, 0, 0.3)); transition: filter 0.3s ease; }
-        .hero-image-container:hover .hero-image { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.5)); }
-        #cursos, #elite-fardamentos { display: none; }
-        #cursos.active, #elite-fardamentos.active { display: block; }
-        .liquid-container { position: fixed; inset: 0; z-index: 0; overflow: hidden; filter: blur(100px) saturate(150%); }
-        .liquid-blob { position: absolute; border-radius: 50%; opacity: 0.5; }
-        .product-card, .course-card { cursor: pointer; }
-        body.modal-open { overflow: hidden; }
+        /* Estilização Premium BRAVUS */
+        body { background-color: #0F1115; color: #E5E7EB; }
+        
+        .gold-text { color: #C6A87C; }
+        .gold-border { border-color: #C6A87C; }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, #B88A44 0%, #E6C685 100%);
+            color: #0F1115;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(198, 168, 124, 0.3); }
 
-        /* ESTILO DA NOTIFICAÇÃO DO CARRINHO */
-        .cart-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 22px;
-            height: 22px;
-            background-color: red;
+        .btn-outline {
+            border: 1px solid #C6A87C;
+            color: #C6A87C;
+            background: transparent;
+            font-weight: 600;
+        }
+        .btn-outline:hover { background: rgba(198, 168, 124, 0.1); color: white; }
+
+        .admin-input {
+            background: #000;
+            border: 1px solid #ef4444;
+            color: #fff;
+            padding: 2px 5px;
+            width: 80px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0F1115; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #C6A87C; }
+
+        .glass-panel {
+            background: rgba(35, 39, 48, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .admin-badge {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #ef4444;
             color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 5px 15px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: bold;
-            border: 2px solid #111827; /* Cor do fundo do botão */
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+            display: none;
         }
+
+        .carousel-container { overflow: hidden; position: relative; }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .testimonial-card { flex: 0 0 100%; padding: 0 10px; }
+        @media (min-width: 768px) { .testimonial-card { flex: 0 0 50%; } }
+        @media (min-width: 1024px) { .testimonial-card { flex: 0 0 33.333%; } }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 3s ease-in-out infinite; }
     </style>
 </head>
-<body class="bg-gradient-to-r from-brand-green-dark via-brand-dark to-brand-dark text-gray-200 font-sans antialiased animate-gradient-bg" style="background-size: 200% 200%;">
+<body class="antialiased relative">
 
-    <div class="liquid-container">
-        <div class="liquid-blob top-1/4 left-1/3 w-96 h-96 bg-brand-gold animate-blob-walk-1"></div>
-        <div class="liquid-blob bottom-1/4 right-1/3 w-80 h-80 bg-brand-green-dark animate-blob-walk-2"></div>
+    <div id="admin-indicator" class="admin-badge flex items-center gap-2">
+        <i class="fa-solid fa-user-shield"></i> MODO ADMIN - BRAVUS
+        <button onclick="window.adminLogout()" class="ml-2 underline text-xs">Sair</button>
+        <button onclick="window.forceTestimonialsUpdate()" class="ml-2 bg-white text-red-600 px-2 py-0.5 rounded text-[10px] font-bold hover:bg-gray-200 transition-colors shadow">Zerar Depoimentos</button>
     </div>
 
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <!-- Header BRAVUS -->
+    <header class="fixed w-full z-50 bg-tactical-black/95 border-b border-gray-800 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <img src="https://i.imgur.com/pNd3LVh.png" alt="Logo" class="h-10">
-                <h1 class="text-sm sm:text-base md:text-xl font-bold gradient-text animate-gradient-text-scroll">Medeiros Artigos Militares</h1>
-            </div>
-            
-            <div class="hidden md:flex items-center gap-6">
-                 <a href="#fardamento" class="text-sm font-semibold hover:text-brand-gold transition-colors">Fardamentos</a>
-                 <a href="#acampamento" class="text-sm font-semibold hover:text-brand-gold transition-colors">Acampamento</a>
-                 <a href="#cursos" onclick="toggleSection('cursos')" class="text-sm font-semibold hover:text-brand-gold transition-colors">Cursos</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="md:hidden">
-                    <button id="menu-btn" class="text-white text-2xl focus:outline-none">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
+                <img src="https://i.imgur.com/pNd3LVh.png" alt="Bravus Logo" class="h-10 md:h-12 drop-shadow-lg">
+                <div class="leading-tight hidden sm:block">
+                    <h1 class="font-display font-bold text-xl md:text-2xl text-white tracking-widest uppercase">BRAVUS</h1>
+                    <p class="text-[10px] md:text-xs text-gold-accent uppercase tracking-[0.2em]">Artigos Militares</p>
                 </div>
             </div>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark/90 backdrop-blur-sm">
-            <a href="#fardamento" class="block py-2 px-4 text-sm text-gray-200 hover:bg-brand-green-dark">Fardamentos</a>
-            <a href="#acampamento" class="block py-2 px-4 text-sm text-gray-200 hover:bg-brand-green-dark">Acampamento</a>
-            <a href="#cursos" class="block py-2 px-4 text-sm text-gray-200 hover:bg-brand-green-dark" onclick="toggleSection('cursos')">Cursos</a>
+
+            <nav class="hidden md:flex gap-8 text-sm font-semibold tracking-wide text-gray-400">
+                <a href="#" onclick="window.filterCategory('all')" class="hover:text-gold-accent transition-colors">INÍCIO</a>
+                <a href="#fardamento" class="hover:text-gold-accent transition-colors">FARDAMENTOS</a>
+                <a href="#elite" class="hover:text-gold-accent transition-colors">ELITE</a>
+                <a href="#acampamento" class="hover:text-gold-accent transition-colors">CAMPO</a>
+                <a href="#depoimentos" class="hover:text-gold-accent transition-colors">FEEDBACK</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <button onclick="window.toggleAdminModal()" class="text-gray-500 hover:text-white transition-colors p-2" title="Acesso Restrito">
+                    <i class="fa-solid fa-lock"></i>
+                </button>
+                <div class="relative cursor-pointer" onclick="window.openCartModal()">
+                    <i class="fa-solid fa-bag-shopping text-xl text-gold-accent hover:text-white transition-colors"></i>
+                    <span id="cartCountHeader" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </div>
+                <button class="md:hidden text-gold-accent text-xl" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden bg-tactical-gray border-t border-gray-800 md:hidden">
+            <a href="#fardamento" class="block py-3 px-4 text-gray-300 hover:bg-black hover:text-gold-accent">Fardamentos</a>
+            <a href="#elite" class="block py-3 px-4 text-gray-300 hover:bg-black hover:text-gold-accent">Linha Elite</a>
+            <a href="#acampamento" class="block py-3 px-4 text-gray-300 hover:bg-black hover:text-gold-accent">Acampamento</a>
+            <a href="#depoimentos" class="block py-3 px-4 text-gray-300 hover:bg-black hover:text-gold-accent">Depoimentos</a>
         </div>
     </header>
 
-    <main class="relative z-10">
-        <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 lg:pt-20">
-            <div class="absolute inset-0 bg-black opacity-50"></div>
-            <div class="container mx-auto px-4 sm:px-6 z-10">
-                <div class="lg:flex lg:items-center">
-                    <div class="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
-                        <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4 reveal-on-scroll">
-                             Equipado para a <span class="gradient-text">Missão</span>. Pronto para o <span class="gradient-text">Dever</span>.
-                        </h2>
-                        <p class="text-lg sm:text-xl text-gray-300 mb-8 reveal-on-scroll" style="transition-delay: 0.2s;">
-                           Os melhores kits de fardamento, acampamento e cursos para quem vive e respira o operacional.
-                        </p>
-                        <a href="#search-section" class="bg-brand-gold hover:bg-yellow-500 text-brand-dark font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105 inline-block shadow-lg shadow-yellow-500/50 reveal-on-scroll" style="transition-delay: 0.4s;">
+    <button onclick="window.openCartModal()" class="fixed bottom-6 right-6 z-40 btn-gold rounded-full w-16 h-16 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform animate-float border-2 border-white/10 group">
+        <div class="relative">
+            <i class="fa-solid fa-cart-shopping text-2xl text-black"></i>
+            <span id="cartCountFloat" class="absolute -top-3 -right-3 bg-red-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#0F1115] hidden">0</span>
+        </div>
+        <span class="absolute right-full mr-3 bg-tactical-black text-gold-accent px-3 py-1 rounded text-xs font-bold uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-gray-700">
+            Meu Pedido
+        </span>
+    </button>
+
+    <main>
+        <section class="relative h-[500px] md:h-[600px] flex items-center bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed">
+            <div class="container mx-auto px-4 relative z-10 pt-20">
+                <div class="max-w-3xl border-l-4 border-gold-accent pl-6 md:pl-10">
+                    <span class="text-gold-accent font-bold tracking-[0.2em] text-sm uppercase mb-2 block animate-pulse">Prontidão e Excelência</span>
+                    <h2 class="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight drop-shadow-2xl uppercase">
+                        BRAVUS <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-700">Artigos Militares</span>
+                    </h2>
+                    <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-xl font-light">
+                        Equipamentos táticos de alta performance para Bombeiros Civis e Operações de Resgate. O padrão que a sua farda exige.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#fardamento" class="btn-gold py-4 px-10 rounded text-center shadow-lg shadow-yellow-900/20">
                             Ver Equipamentos
                         </a>
-                    </div>
-                    <div class="lg:w-1/2 flex justify-center items-center mt-8 lg:mt-0">
-                        <div class="animate-float hero-image-container">
-                             <img src="https://i.imgur.com/jbpqCx4.png" alt="Kit Comandos" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl mx-auto hero-image">
-                        </div>
+                        <a href="#footer" class="btn-outline py-4 px-10 rounded text-center">
+                            Falar com Instrutor
+                        </a>
                     </div>
                 </div>
             </div>
+            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0F1115] to-transparent"></div>
         </section>
 
-        <section id="search-section" class="py-16">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="max-w-2xl mx-auto reveal-on-scroll glassmorphism p-6 rounded-2xl">
-                    <label for="searchInput" class="block text-xl md:text-2xl font-bold text-center mb-4 text-white">Busca de Equipamentos</label>
-                    <div class="relative">
-                        <input type="text" id="searchInput" placeholder="Digite o nome de um kit ou item..." class="w-full bg-gray-900/50 border border-gray-600 rounded-full px-6 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-gold">
-                        <i class="fa-solid fa-search absolute right-6 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    </div>
+        <!-- Busca -->
+        <div class="container mx-auto px-4 -mt-8 relative z-20 mb-12">
+            <div class="glass-panel p-4 rounded-lg shadow-2xl max-w-4xl mx-auto flex gap-2">
+                <div class="flex-1 relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <input type="text" id="searchInput" placeholder="Busque por item ou kit operacional..." class="w-full bg-tactical-black border border-gray-700 rounded-md py-3 pl-12 pr-4 text-white focus:outline-none focus:border-gold-accent transition-all">
                 </div>
+                <button class="bg-tactical-card hover:bg-gold-accent hover:text-black border border-gray-700 text-white px-6 rounded-md transition-colors font-bold uppercase text-sm">
+                    Buscar
+                </button>
+            </div>
+        </div>
+
+        <section id="fardamento" class="py-16 container mx-auto px-4">
+            <div class="flex items-end justify-between mb-10 border-b border-gray-800 pb-4">
+                <div>
+                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-sm mb-1">Linha Operacional</h3>
+                    <h2 class="text-3xl font-display font-bold text-white uppercase">Kits de Fardamento</h2>
+                </div>
+                <i class="fa-solid fa-shirt text-4xl text-gray-800"></i>
+            </div>
+            <div id="fardamento-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </section>
+
+        <section id="elite" class="py-16 bg-tactical-card relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-gold-accent opacity-5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="flex items-end justify-between mb-10 border-b border-gray-700 pb-4">
+                    <div>
+                        <span class="bg-gold-accent text-black text-xs font-bold px-2 py-1 rounded mb-2 inline-block uppercase tracking-wider">Padrão Bravus</span>
+                        <h2 class="text-3xl font-display font-bold text-white uppercase">Linha Elite</h2>
+                    </div>
+                    <i class="fa-solid fa-medal text-4xl text-gray-700"></i>
+                </div>
+                <div id="elite-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
             </div>
         </section>
 
-        <div id="fardamento" class="product-section py-10 sm:py-16">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 sm:mb-16 reveal-on-scroll section-header">
-                    <h3 class="text-3xl sm:text-4xl font-bold text-white">Kits de <span class="gradient-text">Fardamento</span></h3>
-                    <p class="text-gray-400 mt-2">Do básico ao avançado, a prontidão que você precisa.</p>
+        <section id="acampamento" class="py-16 container mx-auto px-4">
+            <div class="flex items-end justify-between mb-10 border-b border-gray-800 pb-4">
+                <div>
+                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-sm mb-1">Missão e Campo</h3>
+                    <h2 class="text-3xl font-display font-bold text-white uppercase">Itens de Sobrevivência</h2>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 product-grid"></div>
-                <div class="text-center mt-12 reveal-on-scroll section-header">
-                    <button onclick="toggleSection('elite-fardamentos')" class="bg-brand-green-dark text-white font-semibold py-3 px-8 rounded-full border-2 border-brand-gold hover:bg-brand-gold hover:text-brand-dark transition-all duration-300">
-                        Ver Elite dos Fardamentos <i class="fa-solid fa-angles-right ml-2"></i>
+                <i class="fa-solid fa-campground text-4xl text-gray-800"></i>
+            </div>
+            <div id="acampamento-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </section>
+
+        <section id="depoimentos" class="py-20 bg-[#0A0C10] border-t border-gray-900 relative overflow-hidden">
+             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gold-accent/5 rounded-full blur-[100px]"></div>
+             <div class="container mx-auto px-4 relative z-10">
+                <div class="text-center mb-12">
+                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-sm mb-2">Vozes do Campo</h3>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase">O que dizem os alunos</h2>
+                </div>
+                <div class="carousel-container max-w-7xl mx-auto">
+                    <button onclick="window.moveCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-gold-accent hover:text-black text-white p-3 rounded-full border border-gray-700 transition backdrop-blur-sm">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel-track" id="testimonial-track"></div>
+                    <button onclick="window.moveCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-gold-accent hover:text-black text-white p-3 rounded-full border border-gray-700 transition backdrop-blur-sm">
+                        <i class="fa-solid fa-chevron-right"></i>
                     </button>
                 </div>
-            </div>
-        </div>
-        
-        <div id="elite-fardamentos" class="product-section py-20 sm:py-24 bg-brand-dark/50">
-             <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 sm:mb-16 reveal-on-scroll section-header">
-                    <h3 class="text-3xl sm:text-4xl font-bold text-white">Elite dos <span class="gradient-text">Fardamentos</span></h3>
-                    <p class="text-gray-400 mt-2">Equipamentos premium para operadores de alto desempenho.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 product-grid" id="elite-fardamentos-grid"></div>
-            </div>
-        </div>
-        
-        <div id="acampamento" class="product-section py-10 sm:py-16">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 sm:mb-16 reveal-on-scroll section-header">
-                    <h3 class="text-3xl sm:text-4xl font-bold text-white">Kits de <span class="gradient-text">Acampamento</span></h3>
-                    <p class="text-gray-400 mt-2">Prepare-se para qualquer terreno com nossos kits de sobrevivência.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 product-grid"></div>
-            </div>
-        </div>
-        
-        <div id="cursos" class="product-section py-20 sm:py-24 bg-brand-dark/50">
-             <div class="container mx-auto px-4 sm:px-6">
-                <div class="text-center mb-12 sm:mb-16 reveal-on-scroll section-header">
-                    <h3 class="text-3xl sm:text-4xl font-bold text-white">Capacitação e <span class="gradient-text">Cursos</span></h3>
-                    <p class="text-gray-400 mt-2">Conhecimento que salva vidas e impulsiona carreiras.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 course-grid"></div>
-            </div>
-        </div>
-        
-        <section id="contato" class="py-20 sm:py-24">
-            <div class="container mx-auto px-4 sm:px-6">
-                <div class="glassmorphism max-w-2xl mx-auto p-6 md:p-8 rounded-2xl reveal-on-scroll">
-                    <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-white">Finalizar Pedido</h2>
-                    <div id="formError" class="hidden text-red-400 bg-red-900/50 border border-red-400 rounded-lg p-3 mb-4 text-center"></div>
-                    <form onsubmit="event.preventDefault(); checkout();" class="space-y-6">
-                        <div>
-                            <label for="student-name" class="block text-sm font-semibold text-gray-300 mb-2">Nome do Aluno</label>
-                            <input type="text" id="student-name" placeholder="Digite seu nome completo" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-gold">
+             </div>
+        </section>
+
+        <section id="contato" class="py-20 bg-tactical-black border-t border-gray-800">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto glass-panel p-8 md:p-12 rounded-xl relative">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-gold-accent text-black p-4 rounded-full shadow-lg shadow-gold-accent/20">
+                        <i class="fa-brands fa-whatsapp text-3xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-display font-bold text-center text-white mb-2 mt-4 uppercase">Finalizar Pedido</h2>
+                    <p class="text-gray-400 text-center mb-8">Envie sua lista de equipamentos para a Bravus.</p>
+                    <form onsubmit="event.preventDefault(); window.checkout();" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-gold-accent mb-2 uppercase">Nome Completo</label>
+                                <input type="text" id="student-name" placeholder="Nome do Aluno/Militar" required class="w-full bg-black/50 border border-gray-700 rounded p-3 text-white focus:border-gold-accent focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gold-accent mb-2 uppercase">Turma / Batalhão</label>
+                                <input type="text" id="student-class" placeholder="Ex: Turma Bravo" required class="w-full bg-black/50 border border-gray-700 rounded p-3 text-white focus:border-gold-accent focus:outline-none transition">
+                            </div>
                         </div>
                         <div>
-                            <label for="student-class" class="block text-sm font-semibold text-gray-300 mb-2">Turma do Aluno</label>
-                            <input type="text" id="student-class" placeholder="Ex: Bombeiro Civil Turma 10" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-gold">
-                        </div>
-                        <div>
-                            <label for="payment-method" class="block text-sm font-semibold text-gray-300 mb-2">Método de Pagamento</label>
-                            <select id="payment-method" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-gold">
-                                <option value="" disabled selected>Selecione o método de pagamento</option>
-                                <option value="Cartão de Débito">Cartão de Débito</option>
-                                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                            <label class="block text-xs font-bold text-gold-accent mb-2 uppercase">Forma de Pagamento</label>
+                            <select id="payment-method" required class="w-full bg-black/50 border border-gray-700 rounded p-3 text-white focus:border-gold-accent focus:outline-none transition">
+                                <option value="" disabled selected>Selecione...</option>
                                 <option value="PIX">PIX</option>
+                                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                <option value="Cartão de Débito">Cartão de Débito</option>
                             </select>
                         </div>
-                        <div class="text-xs text-gray-400 bg-gray-900/50 p-3 rounded-lg border-l-4 border-brand-gold">
-                            Os itens devem ser retirados no local da instrução. Por favor, combine as datas de pagamento e as parcelas após a confirmação do pedido.
-                        </div>
-                        <button type="submit" class="w-full bg-brand-gold text-brand-dark font-bold py-3 rounded-full text-lg transition duration-300 transform hover:scale-105 animate-pulse-glow">
-                            Enviar Pedido via WhatsApp
+                        <button type="submit" class="w-full btn-gold py-4 rounded text-lg shadow-xl hover:brightness-110 transition">
+                            ENVIAR PEDIDO AGORA
                         </button>
                     </form>
                 </div>
@@ -222,266 +301,452 @@
         </section>
     </main>
 
-    <footer class="bg-black text-gray-400 py-10 relative z-10">
-        <div class="container mx-auto px-4 sm:px-6 text-center">
-            <p class="text-lg font-bold text-white mb-2">Medeiros Artigos Militares</p>
-            <p class="text-sm mb-6">Uniformizando Profissionais desde 2019</p>
-            <div class="flex justify-center items-center space-x-6 mb-8">
-                <a href="https://wa.me/5561998300711" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/bombeirocivilbrasilia/" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.instagram.com/gateeducacional/" target="_blank" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fab fa-instagram"></i></a>
-                <a href="mailto:coordenadormedeiros@gmail.com" class="text-3xl hover:text-brand-gold transition-all duration-300 transform hover:scale-125"><i class="fas fa-envelope"></i></a>
+    <footer id="footer" class="bg-[#050608] border-t border-gray-900 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-10 text-center md:text-left">
+                <div>
+                    <h4 class="text-white font-display font-bold text-xl mb-4 uppercase tracking-widest">BRAVUS Artigos Militares</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Excelência técnica em fardamentos e equipamentos operacionais para bombeiros civis e forças táticas.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-bold text-xl mb-4 uppercase tracking-widest">Contato</h4>
+                    <p class="text-gray-400 text-sm mb-2"><i class="fa-solid fa-phone text-gold-accent mr-2"></i> (61) 99830-0711</p>
+                    <p class="text-gray-400 text-sm mb-2"><i class="fa-solid fa-envelope text-gold-accent mr-2"></i> coordenadormedeiros@gmail.com</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-display font-bold text-xl mb-4 uppercase tracking-widest">Acompanhe</h4>
+                    <div class="flex justify-center md:justify-start gap-4">
+                        <a href="https://wa.me/5561998300711" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gold-accent hover:text-black transition-all">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://instagram.com/bombeirocivilbrasilia" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gold-accent hover:text-black transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <p class="text-xs text-gray-500">&copy; 2019. Todos os direitos reservados.</p>
+            <div class="border-t border-gray-900 mt-12 pt-8 text-center text-xs text-gray-600 uppercase tracking-widest">
+                &copy; 2026 BRAVUS ARTIGOS MILITARES. TODOS OS DIREITOS RESERVADOS.
+            </div>
         </div>
     </footer>
 
-    <div id="cart-button-container" class="relative">
-        <button class="fixed bottom-6 right-6 z-40 bg-brand-dark text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg text-2xl transition-transform transform hover:scale-110" onclick="openCartModal()">
-            <i class="fa-solid fa-shopping-cart"></i>
-            <span id="cartCount" class="cart-badge hidden">0</span>
-        </button>
-    </div>
-    
-    <div id="cart-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onclick="closeCartModal()">
-         <div class="glassmorphism w-full max-w-md max-h-[90vh] overflow-y-auto rounded-2xl p-6 relative" onclick="event.stopPropagation()">
-            <button class="absolute top-4 right-4 text-white text-2xl" onclick="closeCartModal()">&times;</button>
-            <h3 class="text-2xl font-bold text-brand-gold text-center mb-4"><i class="fa-solid fa-shopping-cart mr-2"></i> Carrinho</h3>
-            <ul id="cart-items-list" class="list-none p-0 m-0 mb-4 divide-y divide-gray-700"></ul>
-            <div id="cart-total" class="text-right font-bold text-lg my-4">Total: R$0,00</div>
-            <a href="#contato" class="cart-checkout block w-full text-center bg-brand-green-dark hover:bg-opacity-80 text-white font-bold py-3 px-4 rounded-lg transition-colors" onclick="closeCartModal()">Finalizar Pedido</a>
+    <!-- MODAIS -->
+    <div id="admin-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="glass-panel p-8 rounded-lg max-w-sm w-full border border-gray-700">
+            <h3 class="text-white font-display font-bold text-xl mb-4 text-center">ACESSO RESTRITO - BRAVUS</h3>
+            <div class="space-y-4">
+                <input type="text" id="admin-user" placeholder="Usuário" class="w-full bg-black border border-gray-600 rounded p-2 text-white">
+                <input type="password" id="admin-pass" placeholder="Senha" class="w-full bg-black border border-gray-600 rounded p-2 text-white">
+                <button onclick="window.adminLogin()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded transition">ENTRAR</button>
+                <button onclick="window.toggleAdminModal()" class="w-full text-gray-500 text-sm hover:text-white">Cancelar</button>
+            </div>
         </div>
     </div>
 
-    <div id="product-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onclick="closeModal()">
-        <div class="glassmorphism w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl p-6 relative" onclick="event.stopPropagation()">
-            <button class="absolute top-4 right-4 text-white text-2xl" onclick="closeModal()">&times;</button>
-            <div id="modal-content"></div>
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black/80 z-[90] flex items-center justify-center p-4 backdrop-blur-sm" onclick="window.closeCartModal()">
+        <div class="glass-panel w-full max-w-md max-h-[90vh] flex flex-col rounded-xl border border-gray-700" onclick="event.stopPropagation()">
+            <div class="p-5 border-b border-gray-700 flex justify-between items-center">
+                <h3 class="text-xl font-display font-bold text-white uppercase"><i class="fa-solid fa-cart-shopping mr-2 text-gold-accent"></i> Pedido Bravus</h3>
+                <button onclick="window.closeCartModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            <div class="p-5 flex-1 overflow-y-auto"><ul id="cart-items-list" class="space-y-3"></ul></div>
+            <div class="p-5 border-t border-gray-700 bg-black/30">
+                <div id="cart-total" class="flex flex-col items-end font-bold text-xl text-white mb-4">
+                    <div class="flex justify-between w-full">
+                        <span>INVESTIMENTO:</span>
+                        <span class="text-gold-accent" id="cart-total-value">0,00 em 12x</span>
+                    </div>
+                </div>
+                <button onclick="window.closeCartModal(); document.getElementById('contato').scrollIntoView({behavior: 'smooth'});" class="w-full btn-gold py-3 rounded text-center">FINALIZAR PEDIDO</button>
+            </div>
         </div>
     </div>
 
+    <div id="product-modal" class="hidden fixed inset-0 bg-black/90 z-[90] flex items-center justify-center p-2 sm:p-4 backdrop-blur-md" onclick="window.closeModal()">
+        <div class="bg-tactical-card w-full max-w-4xl max-h-[95vh] overflow-y-auto rounded-xl border border-gray-700 relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl z-10" onclick="window.closeModal()">&times;</button>
+            <div id="modal-content" class="p-6 md:p-10"></div>
+        </div>
+    </div>
 
-    <script>
-        // Scripts essenciais
-        const header = document.querySelector('header');
-        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 10));
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
+        // Firebase Configurado
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTXuF1Tgrqn7PM9dURpZ4GS2pBRgpFomQ",
+            authDomain: "medeiros-artigos-militares.firebaseapp.com",
+            projectId: "medeiros-artigos-militares",
+            storageBucket: "medeiros-artigos-militares.firebasestorage.app",
+            messagingSenderId: "75959891752",
+            appId: "1:75959891752:web:c02349e98a5771b7ed821d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const firestore = getFirestore(app);
+        const auth = getAuth(app);
         
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-        mobileMenu.addEventListener('click', (e) => { if(e.target.tagName === 'A') mobileMenu.classList.add('hidden'); });
+        // Memória Secundária completa com todas as variáveis originais
+        const defaultData = {
+            fardamento: [
+                { title: 'Kit Básico', image: 'https://i.imgur.com/t2VQ9MF.jpeg', description: 'Kit inicial prático e durável. Ideal para quem está começando.', items: [{name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
+                { title: 'Kit Avançado', badge: 'Mais Vendido', image: 'https://i.imgur.com/2w9HPjA.jpeg', description: 'Uniforme tático completo. O preferido dos bombeiros.', items: [{name: 'Colete tático modular', price: 489.90, icon: 'fa-vest', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Suspensório', price: 189.90, icon: 'fa-grip-lines-vertical'}, {name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}, {name: 'Distintivo Bombeiro Civil', price: 149.90, icon: 'fa-medal'}, {name: 'Caneta quebra vidro', price: 79.90, icon: 'fa-pen-nib'}, {name: 'Luva tática preta', price: 79.90, icon: 'fa-hand-fist'}, {name: 'Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Algema invictus', price: 199.90, icon: 'fa-lock'}, {name: 'Lanterna tática com LED lateral', price: 59.90, icon: 'fa-lightbulb'}, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
+                { title: 'Kit Monstro', image: 'https://i.imgur.com/Y6LT4jq.jpeg', description: 'O kit definitivo para operações extremas. Prontidão total.', items: [{name: 'Colete tático modular', price: 489.90, icon: 'fa-vest', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Suspensório', price: 189.90, icon: 'fa-grip-lines-vertical'}, {name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 39.90, icon: 'fa-briefcase'}, {name: 'Distintivo Bombeiro Civil', price: 149.90, icon: 'fa-medal'}, {name: 'Caneta quebra vidro', price: 79.90, icon: 'fa-pen-nib'}, {name: 'Luva tática preta', price: 79.90, icon: 'fa-hand-fist'}, {name: 'Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Algema invictus', price: 199.90, icon: 'fa-lock'}, {name: 'Lanterna tática com LED lateral', price: 59.90, icon: 'fa-lightbulb'}, {name: 'Calça tática bege / P.R.F., P.F.', price: 179.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG']}, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
+            ],
+            elite: [
+                { title: "Kit Auxiliar", image: "https://i.imgur.com/ih87A5E.jpeg", description: "Equipamentos essenciais para suporte tático e APH.", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática foxboy", price: 289.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Atalaia", price: 389.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heart-pulse" }, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
+                { title: "Kit Instrutor", image: "https://i.imgur.com/aYGnbsv.jpeg", description: "Projetado para instrutores, este kit garante durabilidade extrema.", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Acero", price: 499.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
+                { title: "Kit G.A.T.E", image: "https://i.imgur.com/L2PUx6z.jpeg", description: "Kit para operações de alto risco. O topo de linha.", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Guartelá", price: 569.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Coturno Invictus", price: 649.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heart-pulse" }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }, { name: "Gorro vermelho Bombeiro Civil", price: 89.90, icon: "fa-hat-winter" }, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
+            ],
+            acampamento: [
+                { title: 'Kit Recruta (Básico)', image: 'https://i.imgur.com/adECSak.jpeg', description: 'O essencial para missões seguras.', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
+                { title: 'Kit Capitão (Intermediário)', image: 'https://i.imgur.com/FkZVMfX.jpeg', description: 'Equilíbrio entre conforto e funcionalidade.', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Kit térmico', price: 100.00, icon: 'fa-temperature-full'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Garrafa Tática Cantil', price: 59.90, icon: 'fa-bottle-water'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Mosquetão Tático com Trava', price: 50.00, icon: 'fa-link'}, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Protetor Labial com FPS', price: 20.00, icon: 'fa-sun'}, {name: 'Protetor de Pescoço (Buff)', price: 25.00, icon: 'fa-user-ninja'}, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
+                { title: 'Kit Comandos (Avançado)', badge: 'Mais Completo', image: 'https://i.imgur.com/jbpqCx4.png', description: 'Equipamentos de ponta para missões críticas.', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Kit térmico', price: 100.00, icon: 'fa-temperature-full'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Mochila Tática', price: 150.00, icon: 'fa-bag-shopping'}, {name: 'Kit Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Garrafa Tática Cantil', price: 59.90, icon: 'fa-bottle-water'}, {name: 'Cinto Tático', price: 40.00, icon: 'fa-circle-notch'}, {name: 'Mosquetão Tático com Trava', price: 50.00, icon: 'fa-link'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Protetor Solar em Bastão', price: 80.00, icon: 'fa-sun'}, {name: 'Luvas Táticas Leves', price: 50.00, icon: 'fa-hand-fist' }, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Protetor Labial com FPS', price: 20.00, icon: 'fa-sun'}, {name: 'Protetor de Pescoço (Buff)', price: 25.00, icon: 'fa-user-ninja'}, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
+            ],
+            testimonials: [
+                { name: "BC Carlos", squad: "Turma Alfa", role: "Aluno", text: "A barraca camuflada que peguei com a Bravus aguentou uma chuva pesada no acampamento e não entrou uma gota. Salvou minha noite!", stars: 5 },
+                { name: "BC Ana", squad: "Turma Bravo", role: "Aluna", text: "Fui pro campo achando que ia congelar, mas com o kit térmico que ele me indicou eu dormi super bem no saco de dormir.", stars: 5 },
+                { name: "BC Roberto", squad: "Turma Charlie", role: "Aluno", text: "Peguei o Kit Comandos pro acampamento. A lanterna de cabeça clareia muito longe, ajudou demais na trilha noturna. Material profissional.", stars: 4 },
+                { name: "BC Mendes", squad: "Turma Delta", role: "Líder de Equipe", text: "A calça tática ripstop é guerreira demais. Rastejei no barro, passei em galho e não rasgou nada. O material da Bravus não decepciona.", stars: 5 },
+                { name: "BC Juliana", squad: "Turma B05", role: "Aluna", text: "Gente, a lona da barraca é bem grossa. Montagem fácil e rápida, essencial pra quem tá correndo contra o tempo na instrução de acampamento.", stars: 5 }
+            ]
+        };
 
+        let db = JSON.parse(JSON.stringify(defaultData)); 
         let cart = [];
-        const productModal = document.getElementById('product-modal');
-        const modalContent = document.getElementById('modal-content');
-        const cartModal = document.getElementById('cart-modal');
-        const cartItemsList = document.getElementById('cart-items-list');
-        const cartTotalEl = document.getElementById('cart-total');
-        const cartCountBadge = document.getElementById('cartCount');
+        let isAdmin = false;
+        let currentSlide = 0;
 
+        // Função utilitária para Ancoragem de Preço
+        window.getInstallmentText = function(basePrice) {
+            const withFee = basePrice * 1.124;
+            const installment = withFee / 12;
+            return `${installment.toFixed(2).replace('.', ',')} em 12x`;
+        };
 
-        function promptForCourseCode(url, event) {
-            event.preventDefault();
-            const accessCode = "GATE.CURSOS.2025";
-            const userCode = prompt("Para acessar o curso, por favor, insira o código de acesso:");
-            if (userCode === accessCode) window.open(url, '_blank');
-            else if (userCode !== null) alert("Código de acesso inválido!");
-        }
+        window.getFullPriceText = function(basePrice) {
+            return `${basePrice.toFixed(2).replace('.', ',')}`;
+        };
 
-        function openModal(cardElement) {
-            const contentToClone = cardElement.querySelector('.product-details, .course-details');
-            const titleToClone = cardElement.querySelector('h3');
-            if(!contentToClone || !titleToClone) return;
-
-            modalContent.innerHTML = '';
-            modalContent.appendChild(titleToClone.cloneNode(true));
-            const clonedDetails = contentToClone.cloneNode(true);
-            clonedDetails.classList.remove('hidden');
-            modalContent.appendChild(clonedDetails);
-            
-            productModal.classList.remove('hidden');
-            document.body.classList.add('modal-open');
-        }
-
-        function closeModal() {
-            productModal.classList.add('hidden');
-            modalContent.innerHTML = '';
-            document.body.classList.remove('modal-open');
-        }
-        
-        function toggleSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (!section) return;
-            mobileMenu.classList.add('hidden');
-            const isActive = section.style.display === 'block';
-            document.getElementById('cursos').style.display = 'none';
-            document.getElementById('elite-fardamentos').style.display = 'none';
-            if (!isActive) {
-                section.style.display = 'block';
-                setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        // --- SISTEMA FIREBASE ---
+        async function initFirebaseDB() {
+            try {
+                await signInAnonymously(auth).catch(e => console.warn("Aviso Auth Firebase:", e.message));
+                
+                const docRef = doc(firestore, "loja", "dadosPrincipais");
+                onSnapshot(docRef, (snapshot) => {
+                    if (snapshot.exists()) {
+                        db = snapshot.data();
+                        window.renderAll();
+                    }
+                }, (err) => {
+                    console.warn("Acesso bloqueado por regras de segurança no Firebase. O site continuará funcionando com o catálogo local.", err.message);
+                    window.renderAll();
+                });
+            } catch (error) {
+                console.warn("Falha na autenticação do Firebase. Usando catálogo local.", error.message);
+                window.renderAll();
             }
         }
 
-        // LÓGICA DO CARRINHO (ADAPTADA PARA O MODAL)
-        function openCartModal() { cartModal.classList.remove('hidden'); document.body.classList.add('modal-open'); }
-        function closeCartModal() { cartModal.classList.add('hidden'); document.body.classList.remove('modal-open'); }
-        
-        function prepareAddToCart(event) { event.stopPropagation(); }
-        function addToCart(event, name, price) {
-            event.stopPropagation();
-            const li = event.target.closest('li');
-            const quantity = parseInt(li.querySelector('.quantity-input').value) || 1;
-            const size = li.querySelector('.size-selector')?.value || '';
-            const color = li.querySelector('.color-selector')?.value || '';
-            let itemName = name;
-            if (size && color) itemName = `${name} (${size} / ${color})`; else if (size) itemName = `${name} (${size})`; else if (color) itemName = `${name} (${color})`;
-            const existingItem = cart.find(item => item.name === itemName);
-            if (existingItem) existingItem.quantity += quantity; else cart.push({ name: itemName, price: price, quantity: quantity });
-            const button = event.target;
-            const originalText = button.innerHTML;
-            button.innerHTML = `Adicionado! <i class="fa-solid fa-check"></i>`;
-            button.classList.add('bg-green-500');
-            setTimeout(() => { button.innerHTML = originalText; button.classList.remove('bg-green-500'); }, 2000);
-            updateCart();
-        }
-        function updateCart() {
-            cartItemsList.innerHTML = '';
-            let total = 0;
-            let totalItems = 0;
-            cart.forEach((item, index) => {
-                total += item.price * item.quantity;
-                totalItems += item.quantity;
-                const li = document.createElement('li');
-                li.className = 'py-3 flex justify-between items-center text-sm';
-                li.innerHTML = `<div><span class="font-bold">${item.quantity}x</span> ${item.name}</div><div class="item-actions flex items-center gap-3"><button class="text-lg" onclick="decreaseQuantity(${index})">-</button><button class="text-red-400" onclick="removeFromCart(${index})"><i class="fa-solid fa-trash"></i></button></div>`;
-                cartItemsList.appendChild(li);
-            });
-            cartTotalEl.textContent = `Total: R$${total.toFixed(2)}`;
-            
-            if (totalItems > 0) {
-                cartCountBadge.textContent = totalItems;
-                cartCountBadge.classList.remove('hidden');
-            } else {
-                cartCountBadge.classList.add('hidden');
-            }
-        }
-        function decreaseQuantity(index) { if (cart[index].quantity > 1) cart[index].quantity--; else cart.splice(index, 1); updateCart(); }
-        function removeFromCart(index) { cart.splice(index, 1); updateCart(); }
-        
-        function checkout() {
-            closeCartModal(); // Fecha o modal do carrinho
-            const formError = document.getElementById('formError');
-            formError.style.display = 'none';
-            if (cart.length === 0) { formError.textContent = 'Seu carrinho está vazio!'; formError.style.display = 'block'; return; }
-            const studentName = document.getElementById('student-name').value;
-            const studentClass = document.getElementById('student-class').value;
-            const paymentMethod = document.getElementById('payment-method').value;
-            if (!studentName || !studentClass || !paymentMethod) { formError.textContent = 'Por favor, preencha todos os campos.'; formError.style.display = 'block'; document.getElementById('contato').scrollIntoView({ behavior: 'smooth' }); return; }
-            let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-            let message = `*PEDIDO - Medeiros Artigos Militares*\n\n*Nome:* ${studentName}\n*Turma:* ${studentClass}\n*Pagamento:* ${paymentMethod}\n\n*ITENS DO PEDIDO:*\n`;
-            cart.forEach(item => { message += ` - ${item.quantity}x ${item.name}\n`; });
-            message += `\n*TOTAL: R$${total.toFixed(2)}*\n\nAguardando instruções para pagamento e retirada.`;
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/5561998300711?text=${encodedMessage}`, '_blank');
-            cart = [];
-            updateCart();
-            document.getElementById('student-name').value = '';
-            document.getElementById('student-class').value = '';
-            document.getElementById('payment-method').value = '';
+        // --- RENDERIZAÇÃO UI ---
+        window.renderAll = function() {
+            renderGrid('fardamento', db.fardamento);
+            renderGrid('elite', db.elite);
+            renderGrid('acampamento', db.acampamento);
+            window.renderTestimonials();
+            document.getElementById('admin-indicator').style.display = isAdmin ? 'flex' : 'none';
+        };
+
+        function renderGrid(sectionId, items) {
+            const grid = document.getElementById(`${sectionId}-grid`);
+            if(!grid || !items) return;
+            grid.innerHTML = items.map(kit => `
+                <div class="glass-panel rounded-lg overflow-hidden group cursor-pointer hover:border-gold-accent transition-all duration-300 relative flex flex-col h-full" onclick="window.openProductModal('${kit.title}')">
+                    <div class="h-56 overflow-hidden bg-gray-900 relative">
+                        <img src="${kit.image}" alt="${kit.title}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <h3 class="text-xl font-display font-bold text-white mb-2 uppercase group-hover:text-gold-accent transition-colors">${kit.title}</h3>
+                        <p class="text-sm text-gray-400 mb-4 line-clamp-2">${kit.description}</p>
+                        <button class="w-full btn-outline py-2 rounded text-sm uppercase mt-auto group-hover:bg-gold-accent group-hover:text-black transition-all">Detalhes</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function createProductCard(kit) {
-            let itemsHtml = kit.items.map(item => `
-                <li data-price="${item.price.toFixed(2)}" class="flex flex-col sm:flex-row justify-between items-center py-3 border-b border-gray-700/50 gap-3">
-                    <span class="item-name-icon flex-1 text-center sm:text-left"><i class="fa-solid ${item.icon} text-brand-gold w-6"></i> ${item.name}</span>
-                    <div class="quantity-selector flex items-center gap-2">
-                         ${item.hasSize ? `<select class="size-selector bg-brand-dark text-xs rounded p-1 border border-gray-600">${item.sizes.map(s => `<option>${s}</option>`).join('')}</select>` : ''}
-                         ${item.hasColor ? `<select class="color-selector bg-brand-dark text-xs rounded p-1 border border-gray-600">${item.colors.map(c => `<option>${c}</option>`).join('')}</select>` : ''}
-                        <input type="number" min="1" value="1" class="quantity-input w-12 text-center bg-brand-dark rounded border border-gray-600">
-                        <button class="add-to-cart-btn bg-brand-green-dark text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-opacity-80" onclick="addToCart(event, '${item.name.replace(/'/g, "\\'")}', ${item.price.toFixed(2)})">Adicionar</button>
-                    </div>
-                </li>`).join('');
-            return `
-                <div class="product-card glassmorphism p-6 rounded-2xl border-2 border-transparent hover:border-brand-gold" onclick="openModal(this)">
-                    ${kit.badge ? `<div class="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-amber-500 text-brand-dark px-3 py-1 rounded-full text-xs font-bold uppercase z-20">${kit.badge}</div>` : ''}
-                    <h3 class="text-2xl font-bold text-white mb-4 text-center">${kit.title}</h3>
-                    <img src="${kit.image}" alt="${kit.title}" class="w-full h-auto rounded-lg mb-4 mx-auto product-image-kit">
-                    <div class="product-details hidden">
-                        <p class="text-gray-300 text-sm mb-4">${kit.description}</p>
-                        <ul class="text-sm">${itemsHtml}</ul>
-                        <div class="payment text-xs text-gray-400 mt-4 p-3 bg-gray-900/50 rounded-lg"><strong>Pagamento:</strong> Débito, Crédito (até 12x), PIX (até 5% de desconto)</div>
-                    </div>
-                </div>`;
-        }
-        
-         function createCourseCard(course) { 
-             return `<div class="course-card glassmorphism p-6 rounded-2xl text-center border-2 border-transparent hover:border-brand-gold" onclick="openModal(this)">
-                    <h3 class="text-xl font-bold text-white mb-0">${course.title}</h3>
-                    <div class="course-details hidden">
-                        <p class="text-gray-300 text-sm my-4">${course.description}</p>
-                        <div class="course-link">
-                            <a href="${course.link}" onclick="${course.needsCode ? `promptForCourseCode('${course.link}', event)` : 'event.stopPropagation()'}" target="_blank" class="inline-block bg-brand-gold text-brand-dark font-bold py-2 px-5 rounded-full text-sm transition-transform transform hover:scale-105">Acessar Curso</a>
+        window.renderTestimonials = function() {
+            const track = document.getElementById('testimonial-track');
+            if(!track || !db.testimonials) return;
+
+            track.innerHTML = db.testimonials.map((t, index) => `
+                <div class="testimonial-card">
+                    <div class="glass-panel p-6 rounded-lg h-full border border-gray-800 flex flex-col">
+                        <div class="flex gap-1 mb-4">
+                            ${Array(t.stars).fill('<i class="fa-solid fa-star text-gold-accent text-xs"></i>').join('')}
+                        </div>
+                        <p class="text-gray-300 italic mb-6 text-sm flex-1">"${t.text}"</p>
+                        <div class="mt-4 pt-4 border-t border-gray-800">
+                            <h4 class="font-bold text-white text-sm uppercase">${t.name}</h4>
+                            <p class="text-[10px] text-gold-accent uppercase tracking-widest">${t.squad}</p>
                         </div>
                     </div>
-                </div>`;
-         }
+                </div>
+            `).join('');
+            window.updateCarouselPosition();
+        };
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Lógica de renderização de cards e busca
-            const fardamentoGrid = document.querySelector('#fardamento .product-grid');
-            const acampamentoGrid = document.querySelector('#acampamento .product-grid');
-            const eliteGrid = document.getElementById('elite-fardamentos-grid');
-            const cursosGrid = document.querySelector('#cursos .course-grid');
-            
-            const fardamentoKits = [
-                { title: 'Kit Básico', image: 'https://i.imgur.com/t2VQ9MF.jpeg', description: 'Kit inicial prático e durável...', items: [{name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}]},
-                { title: 'Kit Avançado', badge: 'Mais Vendido', image: 'https://i.imgur.com/2w9HPjA.jpeg', description: 'Uniforme tático completo...', items: [{name: 'Colete tático modular', price: 489.90, icon: 'fa-vest', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Suspensório', price: 189.90, icon: 'fa-grip-lines-vertical'}, {name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}, {name: 'Distintivo Bombeiro Civil', price: 149.90, icon: 'fa-medal'}, {name: 'Caneta quebra vidro', price: 79.90, icon: 'fa-pen-nib'}, {name: 'Luva tática preta', price: 79.90, icon: 'fa-hand-fist' }, {name: 'Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Algema invictus', price: 199.90, icon: 'fa-lock'}, {name: 'Lanterna tática com LED lateral', price: 59.90, icon: 'fa-lightbulb'}]},
-                { title: 'Kit Monstro', image: 'https://i.imgur.com/Y6LT4jq.jpeg', description: 'O kit definitivo para operações extremas...', items: [{name: 'Colete tático modular', price: 489.90, icon: 'fa-vest', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Suspensório', price: 189.90, icon: 'fa-grip-lines-vertical'}, {name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}, {name: 'Distintivo Bombeiro Civil', price: 149.90, icon: 'fa-medal'}, {name: 'Caneta quebra vidro', price: 79.90, icon: 'fa-pen-nib'}, {name: 'Luva tática preta', price: 79.90, icon: 'fa-hand-fist' }, {name: 'Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Algema invictus', price: 199.90, icon: 'fa-lock'}, {name: 'Lanterna tática com LED lateral', price: 59.90, icon: 'fa-lightbulb'}, {name: 'Calça tática bege / P.R.F., P.F.', price: 179.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG']}]},
-            ];
-            const eliteKits = [
-                { title: "Kit Auxiliar", image: "https://i.imgur.com/ih87A5E.jpeg", description: "Equipamentos essenciais para suporte tático...", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática foxboy", price: 289.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Atalaia", price: 389.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heart-pulse" }]},
-                { title: "Kit Instrutor", image: "https://i.imgur.com/aYGnbsv.jpeg", description: "Projetado para instrutores, este kit garante durabilidade...", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Acero", price: 499.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }]},
-                { title: "Kit G.A.T.E", image: "https://i.imgur.com/L2PUx6z.jpeg", description: "Kit para operações de alto risco...", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Guartelá", price: 569.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Coturno Invictus", price: 649.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heart-pulse" }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }, { name: "Gorro vermelho Bombeiro Civil", price: 89.90, icon: "fa-hat-winter" }]},
-            ];
-            const acampamentoKits = [
-                { title: 'Kit Recruta (Básico)', image: 'https://i.imgur.com/adECSak.jpeg', description: 'O essencial para missões seguras...', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
-                { title: 'Kit Capitão (Intermediário)', image: 'https://i.imgur.com/FkZVMfX.jpeg', description: 'Equilíbrio entre conforto e funcionalidade.', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Kit térmico', price: 100.00, icon: 'fa-temperature-full'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Garrafa Tática Cantil', price: 59.90, icon: 'fa-bottle-water'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Mosquetão Tático com Trava', price: 50.00, icon: 'fa-link'}, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Protetor Labial com FPS', price: 20.00, icon: 'fa-sun'}, {name: 'Protetor de Pescoço (Buff)', price: 25.00, icon: 'fa-user-ninja'}, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
-                { title: 'Kit Comandos (Avançado)', badge: 'Mais Completo', image: 'https://i.imgur.com/jbpqCx4.png', description: 'Equipamentos de ponta para missões críticas...', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Kit térmico', price: 100.00, icon: 'fa-temperature-full'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Mochila Tática', price: 150.00, icon: 'fa-bag-shopping'}, {name: 'Kit Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Garrafa Tática Cantil', price: 59.90, icon: 'fa-bottle-water'}, {name: 'Cinto Tático', price: 40.00, icon: 'fa-circle-notch'}, {name: 'Mosquetão Tático com Trava', price: 50.00, icon: 'fa-link'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Protetor Solar em Bastão', price: 80.00, icon: 'fa-sun'}, {name: 'Luvas Táticas Leves', price: 50.00, icon: 'fa-hand-fist' }, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Protetor Labial com FPS', price: 20.00, icon: 'fa-sun'}, {name: 'Protetor de Pescoço (Buff)', price: 25.00, icon: 'fa-user-ninja'}, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
-            ];
-            const cursos = [
-                { title: 'Instrutor', description: 'Capacite-se para formar novos profissionais.', link: 'https://instrutormedeiros.github.io/cursoinstrutor/', needsCode: true }, { title: 'NR10', description: 'Segurança em instalações e serviços com eletricidade.', link: 'https://instrutormedeiros.github.io/cursonr10/', needsCode: true }, { title: 'Cuidador de Idosos', description: 'Desenvolva habilidades para cuidar de idosos.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Cuidador%20de%20Idosos.', needsCode: false }, { title: 'Agente de Portaria', description: 'Prepare-se para atuar na portaria com foco em segurança.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Agente%20de%20Portaria.', needsCode: false }, { title: 'Segurança Patrimonial', description: 'Técnicas de vigilância para proteger patrimônios.', link: 'https://instrutormedeiros.github.io/segurancapatrimonial/', needsCode: true }, { title: 'Libras', description: 'Domine a Língua Brasileira de Sinais.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Libras.', needsCode: false }, { title: 'Urgência e Emergência', description: 'Aprenda a agir em situações críticas de saúde.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgência%20e%20Emergência.', needsCode: false }, { title: 'Urgências Psiquiátricas', description: 'Treinamento para lidar com crises psiquiátricas.', link: 'https://wa.me/5561998300711?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20curso%20de%20Urgências%20Psiquiátricas.', needsCode: false }, { title: 'Animais Peçonhentos', description: 'Manejo de acidentes com animais peçonhentos.', link: 'https://instrutormedeiros.github.io/animaispeconhentos/', needsCode: true },
-            ];
-            
-            fardamentoGrid.innerHTML = fardamentoKits.map(createProductCard).join('');
-            eliteGrid.innerHTML = eliteKits.map(createProductCard).join('');
-            acampamentoGrid.innerHTML = acampamentoKits.map(createProductCard).join('');
-            cursosGrid.innerHTML = cursos.map(createCourseCard).join('');
+        // --- CARROSSEL ---
+        window.moveCarousel = function(dir) {
+            const items = document.querySelectorAll('.testimonial-card');
+            if(!items.length) return;
+            currentSlide = (currentSlide + dir + items.length) % items.length;
+            window.updateCarouselPosition();
+        };
 
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-            
-            const searchInput = document.getElementById('searchInput');
-            const productSections = document.querySelectorAll('.product-section');
+        window.updateCarouselPosition = function() {
+            const track = document.getElementById('testimonial-track');
+            const items = document.querySelectorAll('.testimonial-card');
+            if(!track || !items.length) return;
+            const width = items[0].offsetWidth;
+            track.style.transform = `translateX(-${currentSlide * width}px)`;
+        };
 
-            searchInput.addEventListener('keyup', () => {
-                const searchTerm = searchInput.value.toLowerCase();
-                productSections.forEach(section => {
-                    const cards = section.querySelectorAll('.product-card, .course-card');
-                    let visibleCards = 0;
-                    cards.forEach(card => {
-                        if (card.textContent.toLowerCase().includes(searchTerm)) { card.style.display = ''; visibleCards++; } 
-                        else { card.style.display = 'none'; }
+        // --- CARRINHO E MODAIS ---
+        window.openProductModal = function(title) {
+            let kit = [...db.fardamento, ...db.elite, ...db.acampamento].find(k => k.title === title);
+            if(!kit) return;
+            
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = `
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div class="md:col-span-5">
+                        <div class="relative rounded overflow-hidden border border-gray-700 shadow-2xl">
+                            <img src="${kit.image}" class="w-full h-full object-cover">
+                            ${kit.badge ? `<div class="absolute top-4 left-4 bg-red-600 text-white font-bold px-3 py-1 rounded text-xs shadow-lg uppercase">${kit.badge}</div>` : ''}
+                        </div>
+                        <div class="mt-4 bg-gray-800/50 border border-gray-700 p-4 rounded-lg">
+                            <p class="text-gold-accent font-bold text-xs uppercase mb-2"><i class="fa-solid fa-truck-fast mr-2"></i> Logística</p>
+                            <p class="text-gray-400 text-xs">Os itens são separados mediante confirmação do pedido. Retirada a combinar com o comando.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="md:col-span-7 flex flex-col max-h-[80vh]">
+                        <h2 class="text-3xl font-display font-bold text-white mb-2 uppercase">${kit.title}</h2>
+                        <p class="text-gray-400 mb-6 border-l-2 border-gold-accent pl-4 text-sm">${kit.description}</p>
+                        
+                        <div class="bg-black/30 rounded-t-lg border-b border-gray-700 p-3 flex justify-between items-center">
+                            <h4 class="font-bold text-white uppercase text-sm">Itens Inclusos</h4>
+                            <span class="text-xs text-gray-500">${kit.items.length} itens</span>
+                        </div>
+                        
+                        <div class="flex-1 overflow-y-auto custom-scrollbar pr-2">
+                            <ul class="space-y-1 mb-8">
+                                ${kit.items.map((item, index) => `
+                                    <li class="flex flex-col sm:flex-row justify-between items-center py-4 border-b border-gray-700 gap-4 group hover:bg-gray-800/50 rounded px-2 transition">
+                                        <div class="flex items-center gap-4 w-full sm:w-auto flex-1">
+                                            <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gold-accent border border-gray-700 shrink-0">
+                                                <i class="fa-solid ${item.icon || 'fa-box'}"></i>
+                                            </div>
+                                            <div class="flex flex-col justify-center">
+                                                <span class="font-medium text-gray-200 text-sm md:text-base">${item.name}</span>
+                                            </div>
+                                            
+                                            ${isAdmin ? `
+                                                <div class="flex items-center gap-1 ml-4 shrink-0 bg-black p-1 rounded border border-red-900">
+                                                    <span class="text-[10px] text-red-500 font-bold uppercase">Base:</span>
+                                                    <input type="number" step="0.01" value="${item.price}" 
+                                                        onchange="window.updatePrice('${kit.title}', ${index}, this.value)" 
+                                                        class="admin-input" onclick="event.stopPropagation()">
+                                                </div>
+                                            ` : ''}
+                                        </div>
+                                        
+                                        <div class="flex items-center gap-3 w-full sm:w-auto justify-end shrink-0">
+                                            ${item.hasSize ? `
+                                                <select class="bg-black border border-gray-600 text-gray-300 text-xs rounded p-1 focus:border-gold-accent outline-none">
+                                                    <option value="" disabled selected>Tam.</option>
+                                                    ${item.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+                                                </select>
+                                            ` : ''}
+                                            ${item.hasColor ? `
+                                                <select class="bg-black border border-gray-600 text-gray-300 text-xs rounded p-1 focus:border-gold-accent outline-none">
+                                                    <option value="" disabled selected>Cor</option>
+                                                    ${item.colors.map(c => `<option value="${c}">${c}</option>`).join('')}
+                                                </select>
+                                            ` : ''}
+                                            ${item.hasGender ? `
+                                                <select class="bg-black border border-gray-600 text-gray-300 text-xs rounded p-1 focus:border-gold-accent outline-none">
+                                                    <option value="" disabled selected>Modelo</option>
+                                                    ${item.genders.map(g => `<option value="${g}">${g}</option>`).join('')}
+                                                </select>
+                                            ` : ''}
+                                            
+                                            <button onclick="window.addToCart(this, '${item.name}', ${item.price})" class="bg-gray-700 hover:bg-gold-accent hover:text-black text-white px-4 py-1.5 rounded text-xs font-bold uppercase transition-all whitespace-nowrap">
+                                                Incluir
+                                            </button>
+                                        </div>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-4 pt-4 border-t border-gray-700">
+                            <button onclick="window.addFullKit('${kit.title}')" class="w-full btn-gold py-4 rounded font-bold shadow-lg">ADICIONAR KIT COMPLETO AO PEDIDO</button>
+                            <p class="text-center text-xs text-gray-500 mt-2">Você pode ajustar as quantidades no carrinho.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('product-modal').classList.remove('hidden');
+        };
+
+        window.addToCart = function(btnOrName, nameOrPrice, priceOpt) {
+            let name, price;
+            
+            if (typeof btnOrName === 'object' && btnOrName !== null) {
+                name = nameOrPrice;
+                price = priceOpt;
+                const parentLi = btnOrName.closest('li');
+                if (parentLi) {
+                    const selects = parentLi.querySelectorAll('select');
+                    selects.forEach(sel => {
+                        if(sel.value) name += ` (${sel.value})`;
                     });
-                    const sectionHeader = section.querySelector('.section-header');
-                    if (sectionHeader) sectionHeader.style.display = visibleCards > 0 ? '' : 'none';
-                });
-            });
-        });
+                }
+            } else {
+                name = btnOrName;
+                price = nameOrPrice;
+            }
+
+            const existing = cart.find(i => i.name === name);
+            if(existing) existing.qty++;
+            else cart.push({name, price, qty: 1});
+            window.updateCartUI();
+        };
+
+        window.addFullKit = function(title) {
+            let kit = [...db.fardamento, ...db.elite, ...db.acampamento].find(k => k.title === title);
+            if(kit) {
+                kit.items.forEach(i => window.addToCart(i.name, i.price));
+                window.closeModal();
+                window.openCartModal();
+            }
+        };
+
+        window.updateCartUI = function() {
+            const list = document.getElementById('cart-items-list');
+            const countH = document.getElementById('cartCountHeader');
+            const countF = document.getElementById('cartCountFloat');
+            const totalEl = document.getElementById('cart-total-value');
+            
+            const totalQty = cart.reduce((a, b) => a + b.qty, 0);
+            countH.innerText = totalQty;
+            countF.innerText = totalQty;
+            countH.classList.toggle('hidden', totalQty === 0);
+            countF.classList.toggle('hidden', totalQty === 0);
+
+            let baseTotal = 0;
+            list.innerHTML = cart.map((item, idx) => {
+                baseTotal += item.price * item.qty;
+                return `
+                    <li class="flex justify-between items-center bg-gray-800/50 p-3 rounded border border-gray-700">
+                        <div class="text-[11px] leading-tight flex-1 pr-2">
+                            <span class="font-bold text-gold-accent mr-2">${item.qty}x</span> 
+                            <span class="text-white">${item.name}</span>
+                        </div>
+                        <button onclick="window.removeFromCart(${idx})" class="text-red-500 hover:text-red-400 p-2"><i class="fa-solid fa-trash-can"></i></button>
+                    </li>
+                `;
+            }).join('') || '<div class="text-center py-8 text-gray-500 italic text-sm">Seu pedido está vazio.</div>';
+            
+            if(baseTotal > 0) {
+                totalEl.innerHTML = `${window.getInstallmentText(baseTotal)} <span class="block text-xs text-gray-500 font-normal mt-1 text-right">ou ${window.getFullPriceText(baseTotal)} à vista</span>`;
+            } else {
+                totalEl.innerHTML = `0,00 em 12x`;
+            }
+        };
+
+        window.removeFromCart = function(idx) {
+            cart.splice(idx, 1);
+            window.updateCartUI();
+        };
+
+        // --- ATUALIZAÇÃO DE PREÇO NO FIREBASE (MODO ADMIN) ---
+        window.updatePrice = async function(kitTitle, itemIndex, newPrice) {
+            if(!isAdmin) return;
+            
+            let category;
+            for(let cat in db) {
+                if(cat === 'testimonials') continue;
+                if(db[cat].find(k => k.title === kitTitle)) { category = cat; break; }
+            }
+            
+            if(category) {
+                const kit = db[category].find(k => k.title === kitTitle);
+                if(kit) {
+                    kit.items[itemIndex].price = parseFloat(newPrice);
+                    try {
+                        const docRef = doc(firestore, "loja", "dadosPrincipais");
+                        await setDoc(docRef, db);
+                    } catch (error) {
+                        console.error("Erro ao gravar novo valor no banco de dados", error);
+                        alert("Erro ao sincronizar preço com o banco de dados. " + error.message);
+                    }
+                }
+            }
+        };
+
+        // --- CHECKOUT WHATSAPP ---
+        window.checkout = function() {
+            if(!cart.length) return alert("Adicione itens ao seu pedido primeiro.");
+            
+            const name = document.getElementById('student-name').value;
+            const turma = document.getElementById('student-class').value;
+            const pay = document.getElementById('payment-method').value;
+            
+            if(!name || !turma || !pay) return alert("Por favor, preencha todos os campos obrigatórios.");
+
+            let baseTotal = cart.reduce((a, b) => a + (b.price * b.qty), 0);
+            
+            let msg = `*PEDIDO BRAVUS Artigos Militares*\n\n`;
+            msg += `*Nome:* ${name}\n`;
+            msg += `*Turma/Bat.:* ${turma}\n`;
+            msg += `*Pagamento:* ${pay}\n\n`;
+            msg += `*ITENS DO PEDIDO:*\n`;
+            
+            cart.forEach(i => msg += `• ${i.qty}x ${i.name}\n`);
+            
+            msg += `\n*TOTAL:* ${window.getInstallmentText(baseTotal)} (ou ${window.getFullPriceText(baseTotal)} à vista)\n\n`;
+            msg += `_Solicito confirmação para pagamento e prazo para recebimento._`;
+            
+            window.open(`https://wa.me/5561998300711?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        // --- ADMIN ---
+        window.adminLogin = function() {
+            const u = document.getElementById('admin-user').value;
+            const p = document.getElementById('admin-pass').value;
+            if (u === 'admin' && p === '559988') {
+                isAdmin = true;
+                window.toggleAdminModal();
+                window.renderAll();
+                alert("Acesso Administrativo Bravus Ativo.");
+            } else alert("Credenciais Incorretas.");
+        };
+
+        window.adminLogout = () => { isAdmin = false; window.renderAll(); };
+        window.toggleAdminModal = () => document.getElementById('admin-modal').classList.toggle('hidden');
+        window.closeModal = () => document.getElementById('product-modal').classList.add('hidden');
+        window.openCartModal = () => document.getElementById('cart-modal').classList.remove('hidden');
+        window.closeCartModal = () => document.getElementById('cart-modal').classList.add('hidden');
+        window.filterCategory = (cat) => cat === 'all' && window.scrollTo({top: 0, behavior: 'smooth'});
+
+        // Inicialização
+        initFirebaseDB();
     </script>
 </body>
 </html>
