@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BRAVUS Artigos Militares - Equipamento de Elite</title>
     
     <!-- Tailwind CSS -->
@@ -41,7 +41,7 @@
     
     <style>
         /* Estilização Premium BRAVUS */
-        body { background-color: #0F1115; color: #E5E7EB; }
+        body { background-color: #0F1115; color: #E5E7EB; -webkit-tap-highlight-color: transparent; }
         
         .gold-text { color: #C6A87C; }
         .gold-border { border-color: #C6A87C; }
@@ -85,10 +85,13 @@
             resize: none;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0F1115; }
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #C6A87C; }
+
+        /* Otimização Mobile Scroll */
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 
         .glass-panel {
             background: rgba(35, 39, 48, 0.95);
@@ -123,6 +126,11 @@
             100% { transform: translateY(0px); }
         }
         .animate-float { animation: float 3s ease-in-out infinite; }
+        
+        /* Previne zoom no iOS em inputs e selects */
+        @media screen and (max-width: 768px) {
+            select, input { font-size: 16px !important; }
+        }
     </style>
 </head>
 <body class="antialiased relative">
@@ -135,11 +143,11 @@
     <!-- Header BRAVUS -->
     <header class="fixed w-full z-50 bg-tactical-black/95 border-b border-gray-800 backdrop-blur-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <img src="https://i.imgur.com/pNd3LVh.png" alt="Bravus Logo" class="h-10 md:h-12 drop-shadow-lg">
-                <div class="leading-tight hidden sm:block">
-                    <h1 class="font-display font-bold text-xl md:text-2xl text-white tracking-widest uppercase">BRAVUS</h1>
-                    <p class="text-[10px] md:text-xs text-gold-accent uppercase tracking-[0.2em]">Artigos Militares</p>
+            <div class="flex items-center gap-2 md:gap-3">
+                <img src="https://i.imgur.com/pNd3LVh.png" alt="Bravus Logo" class="h-8 md:h-12 drop-shadow-lg">
+                <div class="leading-tight">
+                    <h1 class="font-display font-bold text-lg md:text-2xl text-white tracking-widest uppercase">BRAVUS</h1>
+                    <p class="text-[8px] md:text-xs text-gold-accent uppercase tracking-[0.2em]">Artigos Militares</p>
                 </div>
             </div>
 
@@ -153,163 +161,163 @@
 
             <div class="flex items-center gap-4">
                 <button onclick="window.toggleAdminModal()" class="text-gray-500 hover:text-white transition-colors p-2" title="Acesso Restrito">
-                    <i class="fa-solid fa-lock"></i>
+                    <i class="fa-solid fa-lock text-sm md:text-base"></i>
                 </button>
-                <div class="relative cursor-pointer" onclick="window.openCartModal()">
+                <div class="relative cursor-pointer p-2" onclick="window.openCartModal()">
                     <i class="fa-solid fa-bag-shopping text-xl text-gold-accent hover:text-white transition-colors"></i>
-                    <span id="cartCountHeader" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    <span id="cartCountHeader" class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
                 </div>
-                <button class="md:hidden text-gold-accent text-xl" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <button class="md:hidden text-gold-accent text-2xl p-1" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden bg-tactical-gray border-t border-gray-800 md:hidden">
-            <a href="#fardamento" class="block py-3 px-4 text-gray-300 hover:bg-black hover:text-gold-accent">Fardamentos</a>
-            <a href="#elite" class="block py-3 px-4 text-gray-300 hover:bg-black hover:text-gold-accent">Linha Elite</a>
-            <a href="#acampamento" class="block py-3 px-4 text-gray-300 hover:bg-black hover:text-gold-accent">Acampamento</a>
-            <a href="#depoimentos" class="block py-3 px-4 text-gray-300 hover:bg-black hover:text-gold-accent">Depoimentos</a>
+        <div id="mobile-menu" class="hidden bg-tactical-gray border-t border-gray-800 md:hidden absolute w-full shadow-2xl">
+            <a href="#fardamento" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-4 px-6 text-gray-300 hover:bg-black hover:text-gold-accent font-bold border-b border-gray-800">Fardamentos</a>
+            <a href="#elite" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-4 px-6 text-gray-300 hover:bg-black hover:text-gold-accent font-bold border-b border-gray-800">Linha Elite</a>
+            <a href="#acampamento" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-4 px-6 text-gray-300 hover:bg-black hover:text-gold-accent font-bold border-b border-gray-800">Acampamento</a>
+            <a href="#depoimentos" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-4 px-6 text-gray-300 hover:bg-black hover:text-gold-accent font-bold">Depoimentos</a>
         </div>
     </header>
 
-    <button onclick="window.openCartModal()" class="fixed bottom-6 right-6 z-40 btn-gold rounded-full w-16 h-16 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform animate-float border-2 border-white/10 group">
+    <button onclick="window.openCartModal()" class="fixed bottom-6 right-4 md:bottom-6 md:right-6 z-40 btn-gold rounded-full w-14 h-14 md:w-16 md:h-16 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:scale-110 transition-transform animate-float border-2 border-white/10 group">
         <div class="relative">
-            <i class="fa-solid fa-cart-shopping text-2xl text-black"></i>
-            <span id="cartCountFloat" class="absolute -top-3 -right-3 bg-red-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-[#0F1115] hidden">0</span>
+            <i class="fa-solid fa-cart-shopping text-xl md:text-2xl text-black"></i>
+            <span id="cartCountFloat" class="absolute -top-3 -right-3 bg-red-600 text-white text-xs font-bold w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center border-2 border-[#0F1115] hidden">0</span>
         </div>
-        <span class="absolute right-full mr-3 bg-tactical-black text-gold-accent px-3 py-1 rounded text-xs font-bold uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-gray-700">
+        <span class="absolute right-full mr-3 bg-tactical-black text-gold-accent px-3 py-1 rounded text-xs font-bold uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-gray-700 hidden md:block">
             Meu Pedido
         </span>
     </button>
 
     <main>
-        <section class="relative h-[500px] md:h-[600px] flex items-center bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed">
-            <div class="container mx-auto px-4 relative z-10 pt-20">
-                <div class="max-w-3xl border-l-4 border-gold-accent pl-6 md:pl-10">
-                    <span class="text-gold-accent font-bold tracking-[0.2em] text-sm uppercase mb-2 block animate-pulse">Prontidão e Excelência</span>
-                    <h2 class="text-4xl md:text-6xl font-display font-bold text-white mb-6 leading-tight drop-shadow-2xl uppercase">
-                        BRAVUS <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-700">Artigos Militares</span>
+        <section class="relative min-h-[100dvh] md:min-h-[600px] flex items-center bg-hero-pattern bg-cover bg-center bg-no-repeat md:bg-fixed pt-24 pb-12">
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-3xl border-l-4 border-gold-accent pl-4 md:pl-10">
+                    <span class="text-gold-accent font-bold tracking-[0.2em] text-xs md:text-sm uppercase mb-2 block animate-pulse">Prontidão e Excelência</span>
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-2xl uppercase">
+                        BRAVUS <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-700 block md:inline">Artigos Militares</span>
                     </h2>
-                    <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-xl font-light">
+                    <p class="text-gray-300 text-base md:text-xl mb-8 max-w-xl font-light">
                         Equipamentos táticos de alta performance para Bombeiros Civis e Operações de Resgate. O padrão que a sua farda exige.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#fardamento" class="btn-gold py-4 px-10 rounded text-center shadow-lg shadow-yellow-900/20">
+                    <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
+                        <a href="#fardamento" class="btn-gold py-4 px-8 rounded text-center shadow-lg shadow-yellow-900/20 text-sm md:text-base">
                             Ver Equipamentos
                         </a>
-                        <a href="#footer" class="btn-outline py-4 px-10 rounded text-center">
+                        <a href="#footer" class="btn-outline py-4 px-8 rounded text-center text-sm md:text-base">
                             Falar com Instrutor
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0F1115] to-transparent"></div>
+            <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0F1115] to-transparent"></div>
         </section>
 
         <!-- Busca -->
         <div class="container mx-auto px-4 -mt-8 relative z-20 mb-12">
-            <div class="glass-panel p-4 rounded-lg shadow-2xl max-w-4xl mx-auto flex gap-2">
+            <div class="glass-panel p-3 md:p-4 rounded-lg shadow-2xl max-w-4xl mx-auto flex flex-col sm:flex-row gap-2">
                 <div class="flex-1 relative">
                     <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                    <input type="text" id="searchInput" placeholder="Busque por item ou kit operacional..." class="w-full bg-tactical-black border border-gray-700 rounded-md py-3 pl-12 pr-4 text-white focus:outline-none focus:border-gold-accent transition-all">
+                    <input type="text" id="searchInput" placeholder="Busque por item ou kit operacional..." class="w-full bg-tactical-black border border-gray-700 rounded-md py-3 pl-12 pr-4 text-white text-base focus:outline-none focus:border-gold-accent transition-all">
                 </div>
-                <button class="bg-tactical-card hover:bg-gold-accent hover:text-black border border-gray-700 text-white px-6 rounded-md transition-colors font-bold uppercase text-sm">
+                <button class="bg-tactical-card hover:bg-gold-accent hover:text-black border border-gray-700 text-white px-6 py-3 sm:py-0 rounded-md transition-colors font-bold uppercase text-sm w-full sm:w-auto">
                     Buscar
                 </button>
             </div>
         </div>
 
-        <section id="fardamento" class="py-16 container mx-auto px-4">
-            <div class="flex items-end justify-between mb-10 border-b border-gray-800 pb-4">
+        <section id="fardamento" class="py-12 md:py-16 container mx-auto px-4">
+            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 md:mb-10 border-b border-gray-800 pb-4 gap-4">
                 <div>
-                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-sm mb-1">Linha Operacional</h3>
-                    <h2 class="text-3xl font-display font-bold text-white uppercase">Kits de Fardamento</h2>
+                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-xs md:text-sm mb-1">Linha Operacional</h3>
+                    <h2 class="text-2xl md:text-3xl font-display font-bold text-white uppercase">Kits de Fardamento</h2>
                 </div>
-                <i class="fa-solid fa-shirt text-4xl text-gray-800"></i>
+                <i class="fa-solid fa-shirt text-3xl md:text-4xl text-gray-800 hidden sm:block"></i>
             </div>
-            <div id="fardamento-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <div id="fardamento-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
         </section>
 
-        <section id="elite" class="py-16 bg-tactical-card relative overflow-hidden">
+        <section id="elite" class="py-12 md:py-16 bg-tactical-card relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-gold-accent opacity-5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
             <div class="container mx-auto px-4 relative z-10">
-                <div class="flex items-end justify-between mb-10 border-b border-gray-700 pb-4">
+                <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 md:mb-10 border-b border-gray-700 pb-4 gap-4">
                     <div>
-                        <span class="bg-gold-accent text-black text-xs font-bold px-2 py-1 rounded mb-2 inline-block uppercase tracking-wider">Padrão Bravus</span>
-                        <h2 class="text-3xl font-display font-bold text-white uppercase">Linha Elite</h2>
+                        <span class="bg-gold-accent text-black text-[10px] md:text-xs font-bold px-2 py-1 rounded mb-2 inline-block uppercase tracking-wider">Padrão Bravus</span>
+                        <h2 class="text-2xl md:text-3xl font-display font-bold text-white uppercase">Linha Elite</h2>
                     </div>
-                    <i class="fa-solid fa-medal text-4xl text-gray-700"></i>
+                    <i class="fa-solid fa-medal text-3xl md:text-4xl text-gray-700 hidden sm:block"></i>
                 </div>
-                <div id="elite-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                <div id="elite-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
             </div>
         </section>
 
-        <section id="acampamento" class="py-16 container mx-auto px-4">
-            <div class="flex items-end justify-between mb-10 border-b border-gray-800 pb-4">
+        <section id="acampamento" class="py-12 md:py-16 container mx-auto px-4">
+            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 md:mb-10 border-b border-gray-800 pb-4 gap-4">
                 <div>
-                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-sm mb-1">Missão e Campo</h3>
-                    <h2 class="text-3xl font-display font-bold text-white uppercase">Itens de Sobrevivência</h2>
+                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-xs md:text-sm mb-1">Missão e Campo</h3>
+                    <h2 class="text-2xl md:text-3xl font-display font-bold text-white uppercase">Itens de Sobrevivência</h2>
                 </div>
-                <i class="fa-solid fa-campground text-4xl text-gray-800"></i>
+                <i class="fa-solid fa-campground text-3xl md:text-4xl text-gray-800 hidden sm:block"></i>
             </div>
-            <div id="acampamento-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            <div id="acampamento-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
         </section>
 
-        <section id="depoimentos" class="py-20 bg-[#0A0C10] border-t border-gray-900 relative overflow-hidden">
+        <section id="depoimentos" class="py-16 md:py-20 bg-[#0A0C10] border-t border-gray-900 relative overflow-hidden">
              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gold-accent/5 rounded-full blur-[100px]"></div>
              <div class="container mx-auto px-4 relative z-10">
-                <div class="flex justify-between items-center mb-12">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
                     <div class="text-center md:text-left flex-1">
-                        <h3 class="text-gold-accent font-bold uppercase tracking-widest text-sm mb-2">Vozes do Campo</h3>
-                        <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase">O que dizem os alunos</h2>
+                        <h3 class="text-gold-accent font-bold uppercase tracking-widest text-xs md:text-sm mb-2">Vozes do Campo</h3>
+                        <h2 class="text-2xl md:text-4xl font-display font-bold text-white uppercase">O que dizem os alunos</h2>
                     </div>
-                    <div id="admin-testimonial-btn" class="hidden">
-                        <button onclick="window.addTestimonial()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs shadow-lg transition-colors">
+                    <div id="admin-testimonial-btn" class="hidden w-full md:w-auto">
+                        <button onclick="window.addTestimonial()" class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 md:py-2 px-4 rounded text-sm md:text-xs shadow-lg transition-colors">
                             <i class="fa-solid fa-plus mr-1"></i> Add Depoimento
                         </button>
                     </div>
                 </div>
                 <div class="carousel-container max-w-7xl mx-auto">
-                    <button onclick="window.moveCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-gold-accent hover:text-black text-white p-3 rounded-full border border-gray-700 transition backdrop-blur-sm">
+                    <button onclick="window.moveCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/70 md:bg-black/50 hover:bg-gold-accent hover:text-black text-white p-3 rounded-r-lg md:rounded-full border border-l-0 md:border-l border-gray-700 transition backdrop-blur-sm">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
                     <div class="carousel-track" id="testimonial-track"></div>
-                    <button onclick="window.moveCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-gold-accent hover:text-black text-white p-3 rounded-full border border-gray-700 transition backdrop-blur-sm">
+                    <button onclick="window.moveCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/70 md:bg-black/50 hover:bg-gold-accent hover:text-black text-white p-3 rounded-l-lg md:rounded-full border border-r-0 md:border-r border-gray-700 transition backdrop-blur-sm">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
                 </div>
              </div>
         </section>
 
-        <section id="contato" class="py-20 bg-tactical-black border-t border-gray-800">
+        <section id="contato" class="py-16 md:py-20 bg-tactical-black border-t border-gray-800">
             <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto glass-panel p-8 md:p-12 rounded-xl relative">
-                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-gold-accent text-black p-4 rounded-full shadow-lg shadow-gold-accent/20">
-                        <i class="fa-brands fa-whatsapp text-3xl"></i>
+                <div class="max-w-3xl mx-auto glass-panel p-6 md:p-12 rounded-xl relative mt-8 md:mt-0">
+                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gold-accent text-black p-4 md:p-5 rounded-full shadow-lg shadow-gold-accent/20 border-4 border-tactical-black">
+                        <i class="fa-brands fa-whatsapp text-3xl md:text-4xl"></i>
                     </div>
-                    <h2 class="text-3xl font-display font-bold text-center text-white mb-2 mt-4 uppercase">Finalizar Pedido</h2>
-                    <p class="text-gray-400 text-center mb-8">Envie sua lista de equipamentos para a Bravus.</p>
-                    <form onsubmit="event.preventDefault(); window.checkout();" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
+                    <h2 class="text-2xl md:text-3xl font-display font-bold text-center text-white mb-2 mt-6 md:mt-4 uppercase">Finalizar Pedido</h2>
+                    <p class="text-gray-400 text-center mb-8 text-sm md:text-base">Envie sua lista de equipamentos para a Bravus.</p>
+                    <form onsubmit="event.preventDefault(); window.checkout();" class="space-y-5 md:space-y-6">
+                        <div class="grid md:grid-cols-2 gap-5 md:gap-6">
                             <div>
                                 <label class="block text-xs font-bold text-gold-accent mb-2 uppercase">Nome Completo</label>
-                                <input type="text" id="student-name" placeholder="Nome do Aluno/Militar" required class="w-full bg-black/50 border border-gray-700 rounded p-3 text-white focus:border-gold-accent focus:outline-none transition">
+                                <input type="text" id="student-name" placeholder="Nome do Aluno/Militar" required class="w-full bg-black/50 border border-gray-700 rounded p-3 md:p-4 text-white text-base focus:border-gold-accent focus:outline-none transition shadow-inner">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-gold-accent mb-2 uppercase">Turma / Batalhão</label>
-                                <input type="text" id="student-class" placeholder="Ex: Turma Bravo" required class="w-full bg-black/50 border border-gray-700 rounded p-3 text-white focus:border-gold-accent focus:outline-none transition">
+                                <input type="text" id="student-class" placeholder="Ex: Turma Bravo" required class="w-full bg-black/50 border border-gray-700 rounded p-3 md:p-4 text-white text-base focus:border-gold-accent focus:outline-none transition shadow-inner">
                             </div>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gold-accent mb-2 uppercase">Forma de Pagamento</label>
-                            <select id="payment-method" required class="w-full bg-black/50 border border-gray-700 rounded p-3 text-white focus:border-gold-accent focus:outline-none transition">
+                            <select id="payment-method" required class="w-full bg-black/50 border border-gray-700 rounded p-3 md:p-4 text-white text-base focus:border-gold-accent focus:outline-none transition shadow-inner appearance-none">
                                 <option value="" disabled selected>Selecione...</option>
                                 <option value="PIX">PIX</option>
                                 <option value="Cartão de Crédito">Cartão de Crédito</option>
                                 <option value="Cartão de Débito">Cartão de Débito</option>
                             </select>
                         </div>
-                        <button type="submit" class="w-full btn-gold py-4 rounded text-lg shadow-xl hover:brightness-110 transition">
+                        <button type="submit" class="w-full btn-gold py-4 md:py-5 rounded text-base md:text-lg shadow-xl hover:brightness-110 transition mt-4">
                             ENVIAR PEDIDO AGORA
                         </button>
                     </form>
@@ -318,74 +326,85 @@
         </section>
     </main>
 
-    <footer id="footer" class="bg-[#050608] border-t border-gray-900 pt-16 pb-8">
+    <footer id="footer" class="bg-[#050608] border-t border-gray-900 pt-12 md:pt-16 pb-8">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-left">
                 <div>
-                    <h4 class="text-white font-display font-bold text-xl mb-4 uppercase tracking-widest">BRAVUS Artigos Militares</h4>
+                    <h4 class="text-white font-display font-bold text-lg md:text-xl mb-4 uppercase tracking-widest">BRAVUS Artigos Militares</h4>
                     <p class="text-gray-500 text-sm leading-relaxed">Excelência técnica em fardamentos e equipamentos operacionais para bombeiros civis e forças táticas.</p>
                 </div>
                 <div>
-                    <h4 class="text-white font-display font-bold text-xl mb-4 uppercase tracking-widest">Contato</h4>
+                    <h4 class="text-white font-display font-bold text-lg md:text-xl mb-4 uppercase tracking-widest">Contato</h4>
                     <p class="text-gray-400 text-sm mb-2"><i class="fa-solid fa-phone text-gold-accent mr-2"></i> (61) 99830-0711</p>
-                    <p class="text-gray-400 text-sm mb-2"><i class="fa-solid fa-envelope text-gold-accent mr-2"></i> coordenadormedeiros@gmail.com</p>
+                    <p class="text-gray-400 text-sm mb-2 break-all"><i class="fa-solid fa-envelope text-gold-accent mr-2"></i> coordenadormedeiros@gmail.com</p>
                 </div>
                 <div>
-                    <h4 class="text-white font-display font-bold text-xl mb-4 uppercase tracking-widest">Acompanhe</h4>
+                    <h4 class="text-white font-display font-bold text-lg md:text-xl mb-4 uppercase tracking-widest">Acompanhe</h4>
                     <div class="flex justify-center md:justify-start gap-4">
-                        <a href="https://wa.me/5561998300711" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gold-accent hover:text-black transition-all">
+                        <a href="https://wa.me/5561998300711" target="_blank" class="w-12 h-12 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gold-accent hover:text-black transition-all text-lg md:text-base">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="https://instagram.com/bombeirocivilbrasilia" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gold-accent hover:text-black transition-all">
+                        <a href="https://instagram.com/bombeirocivilbrasilia" target="_blank" class="w-12 h-12 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gold-accent hover:text-black transition-all text-lg md:text-base">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-900 mt-12 pt-8 text-center text-xs text-gray-600 uppercase tracking-widest">
+            <div class="border-t border-gray-900 mt-12 pt-8 text-center text-[10px] md:text-xs text-gray-600 uppercase tracking-widest px-4">
                 &copy; 2026 BRAVUS ARTIGOS MILITARES. TODOS OS DIREITOS RESERVADOS.
             </div>
         </div>
     </footer>
 
-    <!-- MODAIS -->
-    <div id="admin-modal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="glass-panel p-8 rounded-lg max-w-sm w-full border border-gray-700">
-            <h3 class="text-white font-display font-bold text-xl mb-4 text-center">ACESSO RESTRITO - BRAVUS</h3>
+    <!-- MODAIS (Mobile Optimized) -->
+    <div id="admin-modal" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="glass-panel p-6 md:p-8 rounded-lg max-w-sm w-full border border-gray-700">
+            <h3 class="text-white font-display font-bold text-xl mb-4 text-center">ACESSO RESTRITO</h3>
             <div class="space-y-4">
-                <input type="text" id="admin-user" placeholder="Usuário" class="w-full bg-black border border-gray-600 rounded p-2 text-white">
-                <input type="password" id="admin-pass" placeholder="Senha" class="w-full bg-black border border-gray-600 rounded p-2 text-white">
-                <button onclick="window.adminLogin()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded transition">ENTRAR</button>
-                <button onclick="window.toggleAdminModal()" class="w-full text-gray-500 text-sm hover:text-white">Cancelar</button>
+                <input type="text" id="admin-user" placeholder="Usuário" class="w-full bg-black border border-gray-600 rounded p-3 md:p-2 text-white text-base md:text-sm">
+                <input type="password" id="admin-pass" placeholder="Senha" class="w-full bg-black border border-gray-600 rounded p-3 md:p-2 text-white text-base md:text-sm">
+                <button onclick="window.adminLogin()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 md:py-2 rounded transition">ENTRAR</button>
+                <button onclick="window.toggleAdminModal()" class="w-full text-gray-500 text-sm hover:text-white py-2">Cancelar</button>
             </div>
         </div>
     </div>
 
-    <div id="cart-modal" class="hidden fixed inset-0 bg-black/80 z-[90] flex items-center justify-center p-4 backdrop-blur-sm" onclick="window.closeCartModal()">
-        <div class="glass-panel w-full max-w-md max-h-[90vh] flex flex-col rounded-xl border border-gray-700" onclick="event.stopPropagation()">
-            <div class="p-5 border-b border-gray-700 flex justify-between items-center">
-                <h3 class="text-xl font-display font-bold text-white uppercase"><i class="fa-solid fa-cart-shopping mr-2 text-gold-accent"></i> Pedido Bravus</h3>
-                <button onclick="window.closeCartModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+    <!-- Carrinho Moda Mobile Full -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black/90 z-[90] flex items-end sm:items-center justify-center p-0 sm:p-4 backdrop-blur-sm" onclick="window.closeCartModal()">
+        <div class="bg-tactical-card w-full h-[90dvh] sm:h-auto sm:max-h-[90vh] max-w-md flex flex-col rounded-t-2xl sm:rounded-xl border border-gray-700 shadow-2xl animate-[slideUp_0.3s_ease-out]" onclick="event.stopPropagation()">
+            <div class="p-5 border-b border-gray-700 flex justify-between items-center bg-gray-900 rounded-t-2xl sm:rounded-t-xl">
+                <h3 class="text-lg font-display font-bold text-white uppercase"><i class="fa-solid fa-cart-shopping mr-2 text-gold-accent"></i> Pedido Bravus</h3>
+                <button onclick="window.closeCartModal()" class="text-gray-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center bg-black/50 rounded-full">&times;</button>
             </div>
-            <div class="p-5 flex-1 overflow-y-auto"><ul id="cart-items-list" class="space-y-3"></ul></div>
-            <div class="p-5 border-t border-gray-700 bg-black/30">
-                <div id="cart-total" class="flex flex-col items-end font-bold text-xl text-white mb-4">
-                    <div class="flex justify-between w-full">
-                        <span>INVESTIMENTO:</span>
+            <div class="p-4 flex-1 overflow-y-auto custom-scrollbar bg-tactical-black/50"><ul id="cart-items-list" class="space-y-3"></ul></div>
+            <div class="p-5 border-t border-gray-700 bg-black">
+                <div id="cart-total" class="flex flex-col items-end font-bold text-lg md:text-xl text-white mb-4">
+                    <div class="flex justify-between w-full items-center">
+                        <span class="text-sm md:text-base">INVESTIMENTO:</span>
                         <span class="text-gold-accent" id="cart-total-value">0,00 em 12x</span>
                     </div>
                 </div>
-                <button onclick="window.closeCartModal(); document.getElementById('contato').scrollIntoView({behavior: 'smooth'});" class="w-full btn-gold py-3 rounded text-center">FINALIZAR PEDIDO</button>
+                <button onclick="window.closeCartModal(); document.getElementById('contato').scrollIntoView({behavior: 'smooth'});" class="w-full btn-gold py-4 rounded text-center text-sm md:text-base">FINALIZAR PEDIDO</button>
             </div>
         </div>
     </div>
 
-    <div id="product-modal" class="hidden fixed inset-0 bg-black/90 z-[90] flex items-center justify-center p-2 sm:p-4 backdrop-blur-md" onclick="window.closeModal()">
-        <div class="bg-tactical-card w-full max-w-4xl max-h-[95vh] overflow-y-auto rounded-xl border border-gray-700 relative" onclick="event.stopPropagation()">
-            <button class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl z-10" onclick="window.closeModal()">&times;</button>
-            <div id="modal-content" class="p-6 md:p-10"></div>
+    <!-- Produto Modal Mobile Full -->
+    <div id="product-modal" class="hidden fixed inset-0 bg-black/95 z-[90] flex items-end sm:items-center justify-center p-0 sm:p-4 backdrop-blur-md" onclick="window.closeModal()">
+        <div class="bg-tactical-card w-full h-[95dvh] sm:h-auto sm:max-h-[95vh] max-w-4xl overflow-y-auto custom-scrollbar rounded-t-2xl sm:rounded-xl border border-gray-700 relative flex flex-col shadow-2xl animate-[slideUp_0.3s_ease-out]" onclick="event.stopPropagation()">
+            
+            <button class="absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/60 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none text-white sm:text-gray-400 hover:text-white text-2xl z-20 w-10 h-10 flex items-center justify-center rounded-full" onclick="window.closeModal()">&times;</button>
+            
+            <div id="modal-content" class="p-0 sm:p-8 flex-1 flex flex-col"></div>
         </div>
     </div>
+
+    <style>
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+    </style>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -486,13 +505,13 @@
             if(!grid || !items) return;
             grid.innerHTML = items.map(kit => `
                 <div class="glass-panel rounded-lg overflow-hidden group cursor-pointer hover:border-gold-accent transition-all duration-300 relative flex flex-col h-full" onclick="window.openProductModal('${kit.title}')">
-                    <div class="h-56 overflow-hidden bg-gray-900 relative">
+                    <div class="h-48 sm:h-56 overflow-hidden bg-gray-900 relative">
                         <img src="${kit.image}" alt="${kit.title}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
                     </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <h3 class="text-xl font-display font-bold text-white mb-2 uppercase group-hover:text-gold-accent transition-colors">${kit.title}</h3>
-                        <p class="text-sm text-gray-400 mb-4 line-clamp-2">${kit.description}</p>
-                        <button class="w-full btn-outline py-2 rounded text-sm uppercase mt-auto group-hover:bg-gold-accent group-hover:text-black transition-all">Detalhes</button>
+                    <div class="p-4 sm:p-5 flex flex-col flex-1">
+                        <h3 class="text-lg sm:text-xl font-display font-bold text-white mb-2 uppercase group-hover:text-gold-accent transition-colors">${kit.title}</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 mb-4 line-clamp-2">${kit.description}</p>
+                        <button class="w-full btn-outline py-2.5 sm:py-2 rounded text-xs sm:text-sm uppercase mt-auto group-hover:bg-gold-accent group-hover:text-black transition-all font-bold">Detalhes</button>
                     </div>
                 </div>
             `).join('');
@@ -504,28 +523,28 @@
 
             track.innerHTML = db.testimonials.map((t, index) => `
                 <div class="testimonial-card">
-                    <div class="glass-panel p-6 rounded-lg h-full border border-gray-800 flex flex-col">
+                    <div class="glass-panel p-6 sm:p-8 rounded-lg h-full border border-gray-800 flex flex-col">
                         
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-1 items-center">
                                 ${isAdmin ? 
                                     `<input type="number" min="1" max="5" value="${t.stars}" onchange="window.updateTestimonial(${index}, 'stars', this.value)" class="admin-input w-12 text-xs text-center" title="Avaliação (1 a 5)"> <i class="fa-solid fa-star text-gold-accent text-[10px]"></i>` 
-                                    : Array(t.stars).fill('<i class="fa-solid fa-star text-gold-accent text-xs"></i>').join('')
+                                    : Array(t.stars).fill('<i class="fa-solid fa-star text-gold-accent text-sm"></i>').join('')
                                 }
                             </div>
-                            ${isAdmin ? `<button onclick="window.removeTestimonial(${index})" class="text-red-500 hover:text-red-400 text-xs px-2 py-1 border border-red-900 rounded bg-black" title="Excluir"><i class="fa-solid fa-trash"></i></button>` : ''}
+                            ${isAdmin ? `<button onclick="window.removeTestimonial(${index})" class="text-red-500 hover:text-red-400 text-xs px-3 py-2 border border-red-900 rounded bg-black" title="Excluir"><i class="fa-solid fa-trash"></i></button>` : ''}
                         </div>
                         
                         ${isAdmin ? 
-                            `<textarea onchange="window.updateTestimonial(${index}, 'text', this.value)" class="admin-textarea flex-1 mb-4 h-24">${t.text}</textarea>`
-                            : `<p class="text-gray-300 italic mb-6 text-sm flex-1">"${t.text}"</p>`
+                            `<textarea onchange="window.updateTestimonial(${index}, 'text', this.value)" class="admin-textarea flex-1 mb-4 h-24 text-base">${t.text}</textarea>`
+                            : `<p class="text-gray-300 italic mb-6 text-sm md:text-base flex-1">"${t.text}"</p>`
                         }
                         
                         <div class="mt-4 pt-4 border-t border-gray-800">
                             ${isAdmin ? `
-                                <div class="space-y-2">
-                                    <input type="text" value="${t.name}" onchange="window.updateTestimonial(${index}, 'name', this.value)" class="admin-input w-full text-xs" placeholder="Nome do Aluno">
-                                    <input type="text" value="${t.squad}" onchange="window.updateTestimonial(${index}, 'squad', this.value)" class="admin-input w-full text-xs" placeholder="Ex: Turma Alfa">
+                                <div class="space-y-3">
+                                    <input type="text" value="${t.name}" onchange="window.updateTestimonial(${index}, 'name', this.value)" class="admin-input w-full text-base md:text-xs py-2" placeholder="Nome do Aluno">
+                                    <input type="text" value="${t.squad}" onchange="window.updateTestimonial(${index}, 'squad', this.value)" class="admin-input w-full text-base md:text-xs py-2" placeholder="Ex: Turma Alfa">
                                 </div>
                             ` : `
                                 <h4 class="font-bold text-white text-sm uppercase">${t.name}</h4>
@@ -598,70 +617,72 @@
             
             const modalContent = document.getElementById('modal-content');
             modalContent.innerHTML = `
-                <div class="grid md:grid-cols-12 gap-8">
-                    <div class="md:col-span-5">
-                        <div class="relative rounded overflow-hidden border border-gray-700 shadow-2xl">
-                            <img src="${kit.image}" class="w-full h-full object-cover">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 w-full">
+                    <div class="md:col-span-5 flex flex-col">
+                        <div class="relative rounded-t-2xl sm:rounded-xl overflow-hidden border-b sm:border border-gray-700 shadow-2xl h-48 sm:h-auto shrink-0 w-full bg-black">
+                            <img src="${kit.image}" class="w-full h-full object-cover opacity-90">
+                            <div class="absolute inset-0 bg-gradient-to-t from-tactical-card to-transparent sm:hidden"></div>
                             ${kit.badge ? `<div class="absolute top-4 left-4 bg-red-600 text-white font-bold px-3 py-1 rounded text-xs shadow-lg uppercase">${kit.badge}</div>` : ''}
                         </div>
-                        <div class="mt-4 bg-gray-800/50 border border-gray-700 p-4 rounded-lg">
+                        <div class="mt-4 bg-gray-800/50 border border-gray-700 p-4 rounded-lg hidden sm:block">
                             <p class="text-gold-accent font-bold text-xs uppercase mb-2"><i class="fa-solid fa-truck-fast mr-2"></i> Logística</p>
                             <p class="text-gray-400 text-xs">Os itens são separados mediante confirmação do pedido. Retirada a combinar com o comando.</p>
                         </div>
                     </div>
                     
-                    <div class="md:col-span-7 flex flex-col max-h-[80vh]">
-                        <h2 class="text-3xl font-display font-bold text-white mb-2 uppercase">${kit.title}</h2>
-                        <p class="text-gray-400 mb-6 border-l-2 border-gold-accent pl-4 text-sm">${kit.description}</p>
+                    <div class="md:col-span-7 flex flex-col flex-1 pb-20 sm:pb-0 px-5 sm:px-0">
+                        <h2 class="text-2xl sm:text-3xl font-display font-bold text-white mb-2 uppercase leading-tight mt-[-2rem] sm:mt-0 relative z-10 drop-shadow-md">${kit.title}</h2>
+                        <p class="text-gray-400 mb-6 sm:border-l-2 border-gold-accent sm:pl-4 text-xs sm:text-sm leading-relaxed">${kit.description}</p>
                         
-                        <div class="bg-black/30 rounded-t-lg border-b border-gray-700 p-3 flex justify-between items-center">
-                            <h4 class="font-bold text-white uppercase text-sm">Itens Inclusos</h4>
-                            <span class="text-xs text-gray-500">${kit.items.length} itens</span>
+                        <div class="bg-black/30 rounded-t-lg border-b border-gray-700 p-3 flex justify-between items-center sticky top-0 z-10 backdrop-blur-md">
+                            <h4 class="font-bold text-white uppercase text-xs sm:text-sm">Itens Inclusos</h4>
+                            <span class="text-[10px] sm:text-xs text-gray-500 font-bold bg-gray-800 px-2 py-1 rounded">${kit.items.length} itens</span>
                         </div>
                         
-                        <div class="flex-1 overflow-y-auto custom-scrollbar pr-2">
-                            <ul class="space-y-1 mb-8">
+                        <div class="flex-1 overflow-y-visible sm:overflow-y-auto custom-scrollbar sm:pr-2">
+                            <ul class="space-y-2 py-2">
                                 ${kit.items.map((item, index) => `
-                                    <li class="flex flex-col sm:flex-row justify-between items-center py-4 border-b border-gray-700 gap-4 group hover:bg-gray-800/50 rounded px-2 transition">
-                                        <div class="flex items-center gap-4 w-full sm:w-auto flex-1">
-                                            <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gold-accent border border-gray-700 shrink-0">
-                                                <i class="fa-solid ${item.icon || 'fa-box'}"></i>
+                                    <li class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 sm:py-4 border sm:border-b border-gray-800 sm:border-gray-700 gap-3 group bg-tactical-black sm:bg-transparent hover:bg-gray-800/50 rounded-lg sm:rounded transition shadow-sm sm:shadow-none">
+                                        
+                                        <div class="flex items-center gap-3 sm:gap-4 w-full sm:w-auto flex-1">
+                                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-md sm:rounded-full bg-gray-800 flex items-center justify-center text-gold-accent border border-gray-700 shrink-0 shadow-inner">
+                                                <i class="fa-solid ${item.icon || 'fa-box'} text-sm"></i>
                                             </div>
-                                            <div class="flex flex-col justify-center">
-                                                <span class="font-medium text-gray-200 text-sm md:text-base">${item.name}</span>
+                                            <div class="flex flex-col justify-center flex-1">
+                                                <span class="font-bold sm:font-medium text-gray-100 text-sm md:text-base leading-tight">${item.name}</span>
                                             </div>
                                             
                                             ${isAdmin ? `
-                                                <div class="flex items-center gap-1 ml-4 shrink-0 bg-black p-1 rounded border border-red-900">
-                                                    <span class="text-[10px] text-red-500 font-bold uppercase">Base:</span>
+                                                <div class="flex items-center gap-1 shrink-0 bg-black p-1 rounded border border-red-900 ml-auto">
+                                                    <span class="text-[9px] text-red-500 font-bold uppercase hidden sm:inline">Base:</span>
                                                     <input type="number" step="0.01" value="${item.price}" 
                                                         onchange="window.updatePrice('${kit.title}', ${index}, this.value)" 
-                                                        class="admin-input" onclick="event.stopPropagation()">
+                                                        class="admin-input w-16 sm:w-20 text-base sm:text-sm" onclick="event.stopPropagation()">
                                                 </div>
                                             ` : ''}
                                         </div>
                                         
-                                        <div class="flex items-center gap-3 w-full sm:w-auto justify-end shrink-0">
+                                        <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-start sm:justify-end shrink-0 pt-2 sm:pt-0 border-t border-gray-800 sm:border-0 mt-1 sm:mt-0">
                                             ${item.hasSize ? `
-                                                <select class="bg-black border border-gray-600 text-gray-300 text-xs rounded p-1 focus:border-gold-accent outline-none">
+                                                <select class="bg-gray-900 sm:bg-black border border-gray-700 sm:border-gray-600 text-gray-300 text-sm sm:text-xs rounded py-2 sm:py-1 px-2 focus:border-gold-accent outline-none appearance-none font-bold">
                                                     <option value="" disabled selected>Tam.</option>
                                                     ${item.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
                                                 </select>
                                             ` : ''}
                                             ${item.hasColor ? `
-                                                <select class="bg-black border border-gray-600 text-gray-300 text-xs rounded p-1 focus:border-gold-accent outline-none">
+                                                <select class="bg-gray-900 sm:bg-black border border-gray-700 sm:border-gray-600 text-gray-300 text-sm sm:text-xs rounded py-2 sm:py-1 px-2 focus:border-gold-accent outline-none appearance-none font-bold">
                                                     <option value="" disabled selected>Cor</option>
                                                     ${item.colors.map(c => `<option value="${c}">${c}</option>`).join('')}
                                                 </select>
                                             ` : ''}
                                             ${item.hasGender ? `
-                                                <select class="bg-black border border-gray-600 text-gray-300 text-xs rounded p-1 focus:border-gold-accent outline-none">
+                                                <select class="bg-gray-900 sm:bg-black border border-gray-700 sm:border-gray-600 text-gray-300 text-sm sm:text-xs rounded py-2 sm:py-1 px-2 focus:border-gold-accent outline-none appearance-none font-bold">
                                                     <option value="" disabled selected>Modelo</option>
                                                     ${item.genders.map(g => `<option value="${g}">${g}</option>`).join('')}
                                                 </select>
                                             ` : ''}
                                             
-                                            <button onclick="window.addToCart(this, '${item.name}', ${item.price})" class="bg-gray-700 hover:bg-gold-accent hover:text-black text-white px-4 py-1.5 rounded text-xs font-bold uppercase transition-all whitespace-nowrap">
+                                            <button onclick="window.addToCart(this, '${item.name}', ${item.price})" class="bg-gray-700 hover:bg-gold-accent hover:text-black text-white px-5 sm:px-4 py-2 sm:py-1.5 rounded text-xs font-bold uppercase transition-all whitespace-nowrap ml-auto sm:ml-0 shadow-md">
                                                 Incluir
                                             </button>
                                         </div>
@@ -670,9 +691,14 @@
                             </ul>
                         </div>
                         
-                        <div class="mt-4 pt-4 border-t border-gray-700">
-                            <button onclick="window.addFullKit('${kit.title}')" class="w-full btn-gold py-4 rounded font-bold shadow-lg">ADICIONAR KIT COMPLETO AO PEDIDO</button>
+                        <div class="mt-4 pt-4 border-t border-gray-700 hidden sm:block">
+                            <button onclick="window.addFullKit('${kit.title}')" class="w-full btn-gold py-4 rounded font-bold shadow-lg">ADICIONAR KIT COMPLETO</button>
                             <p class="text-center text-xs text-gray-500 mt-2">Você pode ajustar as quantidades no carrinho.</p>
+                        </div>
+
+                        <!-- Sticky Button for Mobile -->
+                        <div class="fixed sm:hidden bottom-0 left-0 w-full p-4 bg-tactical-black border-t border-gray-800 z-50 shadow-[0_-10px_20px_rgba(0,0,0,0.5)]">
+                             <button onclick="window.addFullKit('${kit.title}')" class="w-full btn-gold py-4 rounded font-bold shadow-lg text-sm">ADICIONAR KIT COMPLETO</button>
                         </div>
                     </div>
                 </div>
@@ -729,18 +755,18 @@
             list.innerHTML = cart.map((item, idx) => {
                 baseTotal += item.price * item.qty;
                 return `
-                    <li class="flex justify-between items-center bg-gray-800/50 p-3 rounded border border-gray-700">
-                        <div class="text-[11px] leading-tight flex-1 pr-2">
-                            <span class="font-bold text-gold-accent mr-2">${item.qty}x</span> 
-                            <span class="text-white">${item.name}</span>
+                    <li class="flex justify-between items-center bg-gray-800/50 p-3 md:p-4 rounded-lg border border-gray-700 shadow-sm">
+                        <div class="text-xs md:text-sm leading-tight flex-1 pr-3">
+                            <span class="font-bold text-gold-accent mr-2 bg-black px-2 py-1 rounded border border-gray-800">${item.qty}x</span> 
+                            <span class="text-white font-medium">${item.name}</span>
                         </div>
-                        <button onclick="window.removeFromCart(${idx})" class="text-red-500 hover:text-red-400 p-2"><i class="fa-solid fa-trash-can"></i></button>
+                        <button onclick="window.removeFromCart(${idx})" class="text-red-500 hover:text-white hover:bg-red-600 w-8 h-8 rounded flex items-center justify-center transition-colors bg-black border border-red-900/50"><i class="fa-solid fa-trash-can"></i></button>
                     </li>
                 `;
-            }).join('') || '<div class="text-center py-8 text-gray-500 italic text-sm">Seu pedido está vazio.</div>';
+            }).join('') || '<div class="text-center py-10 text-gray-500 italic text-sm">Seu pedido está vazio.</div>';
             
             if(baseTotal > 0) {
-                totalEl.innerHTML = `${window.getInstallmentText(baseTotal)} <span class="block text-xs text-gray-500 font-normal mt-1 text-right">ou ${window.getFullPriceText(baseTotal)} à vista</span>`;
+                totalEl.innerHTML = `${window.getInstallmentText(baseTotal)} <span class="block text-[10px] md:text-xs text-gray-500 font-normal mt-1 text-right">ou ${window.getFullPriceText(baseTotal)} à vista</span>`;
             } else {
                 totalEl.innerHTML = `0,00 em 12x`;
             }
@@ -796,7 +822,7 @@
             
             cart.forEach(i => msg += `• ${i.qty}x ${i.name}\n`);
             
-            msg += `\n*TOTAL:* ${window.getInstallmentText(baseTotal)} (ou ${window.getFullPriceText(baseTotal)} à vista)\n\n`;
+            msg += `\n*INVESTIMENTO:* ${window.getInstallmentText(baseTotal)} (ou ${window.getFullPriceText(baseTotal)} à vista)\n\n`;
             msg += `_Solicito confirmação para pagamento e prazo para recebimento._`;
             
             window.open(`https://wa.me/5561998300711?text=${encodeURIComponent(msg)}`, '_blank');
@@ -808,7 +834,7 @@
             const p = document.getElementById('admin-pass').value;
             if (u === 'admin' && p === '559988') {
                 isAdmin = true;
-                localStorage.setItem('bravus_admin_session', 'active'); // Grava a sessão no cache do navegador
+                localStorage.setItem('bravus_admin_session', 'active');
                 window.toggleAdminModal();
                 window.renderAll();
                 alert("Acesso Administrativo Bravus Ativo.");
@@ -817,7 +843,7 @@
 
         window.adminLogout = () => { 
             isAdmin = false; 
-            localStorage.removeItem('bravus_admin_session'); // Limpa o cache
+            localStorage.removeItem('bravus_admin_session');
             window.renderAll(); 
         };
         window.toggleAdminModal = () => document.getElementById('admin-modal').classList.toggle('hidden');
