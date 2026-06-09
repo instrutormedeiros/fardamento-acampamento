@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRAVUS | Fardamentos e Kits de Acampamento</title>
+    <title>BRAVUS 2.0 | Fardamentos e Kits de Acampamento</title>
     <meta name="description" content="Monte seu pedido de fardamento e equipamentos de acampamento para alunos da formação.">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,10 +38,25 @@
     <style>
         html { scroll-behavior: smooth; }
         body {
-            background: #101216;
+            background:
+                radial-gradient(circle at 18% 8%, rgba(198,168,124,.12), transparent 28rem),
+                radial-gradient(circle at 82% 22%, rgba(46,182,125,.08), transparent 24rem),
+                linear-gradient(180deg, #101216 0%, #0B0D10 46%, #101216 100%);
             color: #E8EBEF;
             font-family: Montserrat, sans-serif;
             -webkit-tap-highlight-color: transparent;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -10;
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,.4), transparent 72%);
         }
         button, a, input, select { touch-action: manipulation; }
         .btn-primary {
@@ -62,6 +77,59 @@
         .surface {
             background: rgba(26,31,37,.96);
             border: 1px solid rgba(255,255,255,.08);
+        }
+        .surface-v2 {
+            background:
+                linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.018)),
+                rgba(26,31,37,.9);
+            border: 1px solid rgba(255,255,255,.09);
+            box-shadow: 0 24px 70px rgba(0,0,0,.26);
+        }
+        .section-shell {
+            position: relative;
+            isolation: isolate;
+        }
+        .section-shell::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 0%, rgba(198,168,124,.08), transparent 32rem);
+            opacity: .75;
+        }
+        .eyebrow {
+            color: #C6A87C;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+        }
+        .kit-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+        }
+        .kit-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(198,168,124,.58);
+            box-shadow: 0 26px 60px rgba(0,0,0,.34);
+        }
+        .kit-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(135deg, rgba(255,255,255,.08), transparent 32%);
+            opacity: 0;
+            transition: opacity .22s ease;
+        }
+        .kit-card:hover::after { opacity: 1; }
+        .glass-nav {
+            background: rgba(10,12,16,.74);
+            border: 1px solid rgba(255,255,255,.08);
+            box-shadow: 0 12px 50px rgba(0,0,0,.26);
         }
         .field {
             background: rgba(5,6,8,.45);
@@ -85,11 +153,11 @@
             position: absolute;
             inset: -12px;
             z-index: -2;
-            background-image: url('https://i.imgur.com/L2PUx6z.jpeg');
+            background-image: url('assets/hero-background.png');
             background-size: cover;
             background-position: center;
-            filter: blur(6px);
-            transform: scale(1.02);
+            filter: blur(3px);
+            transform: scale(1.01);
         }
         .hero-bg::after {
             content: "";
@@ -148,7 +216,7 @@
 </head>
 
 <body class="antialiased">
-    <header class="fixed inset-x-0 top-0 z-50 border-b border-line bg-ink/95 backdrop-blur">
+    <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/80 backdrop-blur-xl">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
             <a href="#inicio" class="flex items-center gap-3" aria-label="Início BRAVUS">
                 <img src="https://i.imgur.com/pNd3LVh.png" alt="Logo BRAVUS" class="h-10 w-auto">
@@ -158,11 +226,11 @@
                 </div>
             </a>
 
-            <nav class="hidden items-center gap-7 text-sm font-bold uppercase text-gray-400 md:flex">
-                <a class="hover:text-brass" href="#fardamento">Fardamento</a>
-                <a class="hover:text-brass" href="#elite">Elite</a>
-                <a class="hover:text-brass" href="#acampamento">Acampamento</a>
-                <a class="hover:text-brass" href="#contato">Finalizar</a>
+            <nav class="glass-nav hidden items-center gap-1 rounded-lg p-1 text-xs font-bold uppercase text-gray-400 md:flex">
+                <a class="rounded-md px-4 py-2 hover:bg-white/5 hover:text-brass" href="#acampamento">Acampamento</a>
+                <a class="rounded-md px-4 py-2 hover:bg-white/5 hover:text-brass" href="#fardamento">Fardamento</a>
+                <a class="rounded-md px-4 py-2 hover:bg-white/5 hover:text-brass" href="#elite">Elite</a>
+                <a class="rounded-md px-4 py-2 hover:bg-white/5 hover:text-brass" href="#contato">Finalizar</a>
             </nav>
 
             <div class="flex items-center gap-2">
@@ -179,9 +247,9 @@
             </div>
         </div>
         <div id="mobileMenu" class="hidden border-t border-line bg-panel md:hidden">
+            <a class="block border-b border-line px-6 py-4 font-bold text-gray-200" href="#acampamento">Acampamento</a>
             <a class="block border-b border-line px-6 py-4 font-bold text-gray-200" href="#fardamento">Fardamento</a>
             <a class="block border-b border-line px-6 py-4 font-bold text-gray-200" href="#elite">Elite</a>
-            <a class="block border-b border-line px-6 py-4 font-bold text-gray-200" href="#acampamento">Acampamento</a>
             <a class="block px-6 py-4 font-bold text-gray-200" href="#contato">Finalizar pedido</a>
         </div>
     </header>
@@ -195,20 +263,40 @@
     <main id="inicio">
         <section class="hero-bg flex min-h-[92dvh] items-center pt-24">
             <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[1.05fr_.95fr] lg:items-end">
-                <div class="max-w-3xl border-l-4 border-brass pl-5 md:pl-8">
-                    <p class="mb-3 text-xs font-extrabold uppercase tracking-[.24em] text-brass">Pedido orientado para alunos</p>
-                    <h1 class="font-display text-4xl font-bold uppercase leading-tight text-white sm:text-5xl md:text-6xl">
-                        Fardamentos e kits de acampamento
+                <div class="max-w-3xl">
+                    <h1 class="font-display text-4xl font-bold uppercase leading-[.98] text-white sm:text-5xl md:text-7xl">
+                        Equipamento certo, pedido sem erro
                     </h1>
-                    <p class="mt-5 max-w-2xl text-base leading-relaxed text-gray-300 md:text-lg">
-                        Escolha os itens necessários, informe tamanhos e modelos, revise o pedido e envie tudo pelo WhatsApp.
+                    <p class="mt-6 max-w-2xl text-base leading-relaxed text-gray-300 md:text-lg">
+                        Uma experiência rápida para montar fardamentos, linha elite e kits de acampamento com tamanhos, modelos e revisão final antes do WhatsApp.
                     </p>
                     <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-                        <a href="#fardamento" class="btn-primary rounded-md px-7 py-4 text-center text-sm">Montar pedido</a>
+                        <a href="#acampamento" class="btn-primary rounded-md px-7 py-4 text-center text-sm">Montar pedido</a>
                         <a href="#contato" class="btn-secondary rounded-md px-7 py-4 text-center text-sm">Enviar pelo WhatsApp</a>
                     </div>
+                    <div class="mt-8 grid max-w-xl grid-cols-3 gap-3">
+                        <div class="border-l border-brass/50 pl-3">
+                            <p class="font-display text-2xl font-bold text-white">9</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wide text-gray-400">kits prontos</p>
+                        </div>
+                        <div class="border-l border-brass/50 pl-3">
+                            <p class="font-display text-2xl font-bold text-white">15</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wide text-gray-400">depoimentos</p>
+                        </div>
+                        <div class="border-l border-brass/50 pl-3">
+                            <p class="font-display text-2xl font-bold text-white">1</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wide text-gray-400">resumo final</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="surface max-w-xl rounded-lg p-5">
+                <div class="surface-v2 max-w-xl rounded-xl p-5">
+                    <div class="mb-4 flex items-center justify-between border-b border-line pb-4">
+                        <div>
+                            <p class="eyebrow">Fluxo assistido</p>
+                            <p class="mt-1 font-display text-2xl font-bold uppercase text-white">Do kit ao WhatsApp</p>
+                        </div>
+                        <i class="fa-solid fa-route text-2xl text-brass"></i>
+                    </div>
                     <div class="grid gap-3 sm:grid-cols-3">
                         <div class="rounded-md border border-line bg-ink/50 p-4">
                             <i class="fa-solid fa-ruler-combined mb-3 text-xl text-brass"></i>
@@ -230,8 +318,22 @@
             </div>
         </section>
 
-        <section class="border-y border-line bg-panel">
+        <section class="border-y border-white/10 bg-panel/85 backdrop-blur">
             <div class="mx-auto max-w-7xl px-4 py-5">
+                <div class="mb-4 grid gap-3 md:grid-cols-3">
+                    <a href="#acampamento" class="rounded-lg border border-line bg-ink/45 p-4 hover:border-brass/60">
+                        <p class="text-xs font-bold uppercase tracking-wide text-brass">01 · Campo</p>
+                        <p class="mt-1 text-sm font-semibold text-white">Acampamento e pernoite</p>
+                    </a>
+                    <a href="#fardamento" class="rounded-lg border border-line bg-ink/45 p-4 hover:border-brass/60">
+                        <p class="text-xs font-bold uppercase tracking-wide text-brass">02 · Uniforme</p>
+                        <p class="mt-1 text-sm font-semibold text-white">Fardamento principal</p>
+                    </a>
+                    <a href="#elite" class="rounded-lg border border-line bg-ink/45 p-4 hover:border-brass/60">
+                        <p class="text-xs font-bold uppercase tracking-wide text-brass">03 · Elite</p>
+                        <p class="mt-1 text-sm font-semibold text-white">Peças e acessórios avançados</p>
+                    </a>
+                </div>
                 <div class="grid gap-3 md:grid-cols-[1fr_auto]">
                     <label class="relative block">
                         <span class="sr-only">Buscar kit ou item</span>
@@ -246,57 +348,64 @@
             </div>
         </section>
 
-        <section id="fardamento" class="mx-auto max-w-7xl px-4 py-14 md:py-16">
+        <section id="acampamento" class="section-shell mx-auto max-w-7xl px-4 py-14 md:py-16">
             <div class="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
                 <div>
-                    <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Uniforme principal</p>
-                    <h2 class="font-display text-3xl font-bold uppercase text-white">Kits de Fardamento</h2>
-                </div>
-                <i class="fa-solid fa-shirt hidden text-4xl text-line sm:block"></i>
-            </div>
-            <div id="fardamentoGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
-        </section>
-
-        <section id="elite" class="bg-panel py-14 md:py-16">
-            <div class="mx-auto max-w-7xl px-4">
-                <div class="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
-                    <div>
-                        <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Linha Elite</p>
-                        <h2 class="font-display text-3xl font-bold uppercase text-white">Kits Elite</h2>
-                    </div>
-                    <i class="fa-solid fa-kit-medical hidden text-4xl text-line sm:block"></i>
-                </div>
-                <div id="eliteGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
-            </div>
-        </section>
-
-        <section id="acampamento" class="mx-auto max-w-7xl px-4 py-14 md:py-16">
-            <div class="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
-                <div>
-                    <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Campo e pernoite</p>
+                    <p class="eyebrow mb-1">Campo e pernoite</p>
                     <h2 class="font-display text-3xl font-bold uppercase text-white">Kits de Acampamento</h2>
+                    <p class="mt-2 max-w-2xl text-sm leading-relaxed text-gray-400">Itens organizados para pernoite, deslocamento, proteção e conforto durante instruções de campo.</p>
                 </div>
                 <i class="fa-solid fa-campground hidden text-4xl text-line sm:block"></i>
             </div>
             <div id="acampamentoGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
         </section>
 
-        <section class="border-y border-line bg-[#0B0D10] py-14">
+        <section id="fardamento" class="section-shell mx-auto max-w-7xl px-4 py-14 md:py-16">
+            <div class="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
+                <div>
+                    <p class="eyebrow mb-1">Uniforme principal</p>
+                    <h2 class="font-display text-3xl font-bold uppercase text-white">Kits de Fardamento</h2>
+                    <p class="mt-2 max-w-2xl text-sm leading-relaxed text-gray-400">Kits para montar a base do uniforme com tamanhos e modelos conferidos antes do envio.</p>
+                </div>
+                <i class="fa-solid fa-shirt hidden text-4xl text-line sm:block"></i>
+            </div>
+            <div id="fardamentoGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+        </section>
+
+        <section id="elite" class="section-shell bg-panel/75 py-14 md:py-16">
+            <div class="mx-auto max-w-7xl px-4">
+                <div class="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
+                    <div>
+                        <p class="eyebrow mb-1">Linha Elite</p>
+                        <h2 class="font-display text-3xl font-bold uppercase text-white">Kits Elite</h2>
+                        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-gray-400">Peças reforçadas, complementos e escolhas mais completas para quem quer elevar o padrão.</p>
+                    </div>
+                    <i class="fa-solid fa-medal hidden text-4xl text-line sm:block"></i>
+                </div>
+                <div id="eliteGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+            </div>
+        </section>
+
+        <section class="border-y border-white/10 bg-[#0B0D10] py-14">
             <div class="mx-auto max-w-7xl px-4">
                 <div class="mb-8">
-                    <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Orientação rápida</p>
+                    <p class="eyebrow mb-1">Orientação rápida</p>
                     <h2 class="font-display text-3xl font-bold uppercase text-white">Como o pedido funciona</h2>
+                    <p class="mt-2 max-w-2xl text-sm leading-relaxed text-gray-400">Um fluxo guiado para reduzir erro de tamanho, esquecer itens ou enviar pedido incompleto.</p>
                 </div>
                 <div class="grid gap-4 md:grid-cols-3">
-                    <div class="surface rounded-lg p-5">
+                    <div class="surface-v2 rounded-lg p-5">
+                        <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-md bg-brass text-lg text-ink"><i class="fa-solid fa-box-open"></i></div>
                         <p class="mb-3 text-sm font-extrabold uppercase text-brass">1. Escolha</p>
                         <p class="text-sm leading-relaxed text-gray-300">Abra um kit, confira os itens inclusos e selecione tamanho, cor ou modelo quando aparecer.</p>
                     </div>
-                    <div class="surface rounded-lg p-5">
+                    <div class="surface-v2 rounded-lg p-5">
+                        <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-md bg-brass text-lg text-ink"><i class="fa-solid fa-clipboard-check"></i></div>
                         <p class="mb-3 text-sm font-extrabold uppercase text-brass">2. Revise</p>
                         <p class="text-sm leading-relaxed text-gray-300">No carrinho, confira quantidades e detalhes. O valor aparecerá no total final.</p>
                     </div>
-                    <div class="surface rounded-lg p-5">
+                    <div class="surface-v2 rounded-lg p-5">
+                        <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-md bg-brass text-lg text-ink"><i class="fa-brands fa-whatsapp"></i></div>
                         <p class="mb-3 text-sm font-extrabold uppercase text-brass">3. Envie</p>
                         <p class="text-sm leading-relaxed text-gray-300">Preencha nome, turma e forma de pagamento para enviar o pedido pelo WhatsApp.</p>
                     </div>
@@ -304,12 +413,13 @@
             </div>
         </section>
 
-        <section class="bg-panel/60 py-12">
+        <section class="section-shell bg-panel/60 py-14">
             <div class="mx-auto max-w-7xl px-4">
                 <div class="mb-6 flex items-end justify-between gap-4 border-b border-line pb-4">
                     <div>
-                        <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Experiência dos alunos</p>
-                        <h2 class="font-display text-2xl font-bold uppercase text-white">Depoimentos</h2>
+                        <p class="eyebrow mb-1">Experiência dos alunos</p>
+                        <h2 class="font-display text-3xl font-bold uppercase text-white">Depoimentos</h2>
+                        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-gray-400">Relatos curtos para mostrar que o fluxo ajuda na preparação e evita pedido incompleto.</p>
                     </div>
                     <div class="flex gap-2">
                         <button class="flex h-10 w-10 items-center justify-center rounded-md border border-line text-brass hover:bg-brass hover:text-ink" type="button" data-testimonial-dir="-1" aria-label="Depoimento anterior">
@@ -327,9 +437,9 @@
             </div>
         </section>
 
-        <section id="contato" class="bg-ink py-16 md:py-20">
+        <section id="contato" class="section-shell bg-ink py-16 md:py-20">
             <div class="mx-auto max-w-3xl px-4">
-                <div class="surface rounded-lg p-6 md:p-9">
+                <div class="surface-v2 rounded-xl p-6 md:p-9">
                     <div class="mb-7 flex items-center gap-4">
                         <div class="flex h-14 w-14 items-center justify-center rounded-md bg-brass text-2xl text-ink">
                             <i class="fa-brands fa-whatsapp"></i>
@@ -397,7 +507,7 @@
     </footer>
 
     <div id="productModal" class="fixed inset-0 z-[80] hidden bg-black/90 p-0 backdrop-blur-sm md:p-5" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="modal-panel mx-auto flex h-full max-w-5xl flex-col overflow-hidden rounded-none border border-line bg-panel md:h-auto md:max-h-[92dvh] md:rounded-lg">
+        <div class="modal-panel mx-auto flex h-full max-w-5xl flex-col overflow-hidden rounded-none border border-line bg-panel md:h-auto md:max-h-[92dvh] md:rounded-xl">
             <div class="flex items-center justify-between border-b border-line bg-[#12161B] px-5 py-4">
                 <div>
                     <p class="text-[11px] font-extrabold uppercase tracking-[.2em] text-brass">Detalhes do kit</p>
@@ -410,7 +520,7 @@
     </div>
 
     <div id="cartModal" class="fixed inset-0 z-[90] hidden items-end justify-center bg-black/85 p-0 backdrop-blur-sm sm:items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
-        <div class="modal-panel flex h-[92dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-lg border border-line bg-panel sm:h-auto sm:max-h-[90vh] sm:rounded-lg">
+        <div class="modal-panel flex h-[92dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-lg border border-line bg-panel sm:h-auto sm:max-h-[90vh] sm:rounded-xl">
             <div class="flex items-center justify-between border-b border-line bg-[#12161B] px-5 py-4">
                 <h3 id="cartTitle" class="font-display text-2xl font-bold uppercase text-white">
                     <i class="fa-solid fa-cart-shopping mr-2 text-brass"></i> Meu pedido
@@ -857,7 +967,7 @@
                 const grid = document.getElementById(group.gridId);
                 const products = group.products.filter(product => !query || productSearchText(product).includes(query));
                 visibleCount += products.length;
-                grid.innerHTML = products.map(renderCard).join('') || emptyGroup();
+                grid.innerHTML = products.map(product => renderCard(product, group.id)).join('') || emptyGroup();
             });
 
             els.searchStatus.textContent = query
@@ -875,13 +985,16 @@
             if (!els.testimonialsTrack || !els.testimonialDots) return;
             els.testimonialsTrack.innerHTML = testimonials.map(testimonial => `
                 <article class="testimonial-slide">
-                    <div class="flex h-full min-h-[190px] flex-col rounded-lg border border-line bg-ink/45 p-5">
-                        <div class="mb-3 text-xs text-brass">
+                    <div class="surface-v2 flex h-full min-h-[210px] flex-col rounded-lg p-5">
+                        <div class="mb-4 flex items-center justify-between">
+                            <div class="text-xs text-brass">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
+                            </div>
+                            <i class="fa-solid fa-quote-right text-xl text-line"></i>
                         </div>
                         <p class="flex-1 text-sm leading-relaxed text-gray-300">“${escapeHtml(testimonial.text)}”</p>
                         <p class="mt-4 border-t border-line pt-4 text-xs font-bold uppercase tracking-wide text-gray-500">${escapeHtml(testimonial.name)}</p>
@@ -912,24 +1025,38 @@
             updateTestimonials();
         }
 
-        function renderCard(product) {
+        function renderCard(product, groupId) {
             const isBestSeller = product.badge && normalize(product.badge) === 'mais vendido';
+            const groupLabel = {
+                fardamento: 'Fardamento',
+                elite: 'Elite',
+                acampamento: 'Acampamento'
+            }[groupId] || 'Kit';
             return `
-                <article class="surface flex h-full flex-col overflow-hidden rounded-lg ${isBestSeller ? 'ring-2 ring-brass shadow-[0_0_28px_rgba(198,168,124,.18)]' : ''}">
-                    <div class="relative h-52 bg-black">
-                        <img src="${product.image}" alt="${escapeHtml(product.title)}" class="h-full w-full object-cover opacity-85">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
+                <article class="surface-v2 kit-card flex h-full flex-col ${isBestSeller ? 'ring-2 ring-brass shadow-[0_0_34px_rgba(198,168,124,.22)]' : ''}">
+                    <div class="relative h-60 bg-black">
+                        <img src="${product.image}" alt="${escapeHtml(product.title)}" class="h-full w-full object-cover opacity-90 transition duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                         <span class="absolute left-4 top-4 rounded px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink ${isBestSeller ? 'bg-gradient-to-r from-yellow-300 to-brass shadow-lg shadow-black/40' : 'bg-brass'}">
                             ${isBestSeller ? '<i class="fa-solid fa-fire mr-1"></i>' : ''}${escapeHtml(product.badge || 'Kit')}
                         </span>
                         ${isBestSeller ? '<span class="absolute bottom-4 left-4 rounded bg-black/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[.18em] text-brass backdrop-blur">Escolha mais popular</span>' : ''}
+                        <span class="absolute right-4 top-4 rounded border border-white/15 bg-black/55 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-gray-200 backdrop-blur">${escapeHtml(groupLabel)}</span>
                     </div>
                     <div class="flex flex-1 flex-col p-5">
-                        <h3 class="font-display text-2xl font-bold uppercase text-white">${escapeHtml(product.title)}</h3>
+                        <div class="mb-3 flex items-start justify-between gap-3">
+                            <h3 class="font-display text-2xl font-bold uppercase leading-none text-white">${escapeHtml(product.title)}</h3>
+                            <span class="rounded bg-black/35 px-2 py-1 text-xs font-bold text-brass">${product.items.length} itens</span>
+                        </div>
                         <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-400">${escapeHtml(product.description)}</p>
-                        <div class="mt-5 flex items-center justify-between border-t border-line pt-4">
-                            <span class="text-xs font-bold uppercase text-gray-500">${product.items.length} itens</span>
-                            <button class="btn-secondary rounded-md px-4 py-2 text-xs" type="button" data-open-product="${product.id}">Ver detalhes</button>
+                        <div class="mt-5 grid grid-cols-2 gap-2 text-[11px] font-bold uppercase tracking-wide text-gray-500">
+                            <span class="rounded border border-line bg-black/25 px-3 py-2"><i class="fa-solid fa-list-check mr-1 text-brass"></i> Revisável</span>
+                            <span class="rounded border border-line bg-black/25 px-3 py-2"><i class="fa-solid fa-ruler mr-1 text-brass"></i> Opções</span>
+                        </div>
+                        <div class="mt-5 border-t border-line pt-4">
+                            <button class="btn-secondary w-full rounded-md px-4 py-3 text-xs" type="button" data-open-product="${product.id}">
+                                Ver composição <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
                         </div>
                     </div>
                 </article>
@@ -962,13 +1089,13 @@
         function renderProductModal(product) {
             const isBestSeller = product.badge && normalize(product.badge) === 'mais vendido';
             return `
-                <div class="grid gap-6 p-5 md:grid-cols-[320px_1fr] md:p-6">
+                <div class="grid gap-6 p-5 md:grid-cols-[340px_1fr] md:p-6">
                     <div>
-                        <div class="overflow-hidden rounded-lg border border-line bg-black">
-                            <img src="${product.image}" alt="${escapeHtml(product.title)}" class="h-56 w-full object-cover md:h-72">
+                        <div class="overflow-hidden rounded-xl border border-line bg-black">
+                            <img src="${product.image}" alt="${escapeHtml(product.title)}" class="h-56 w-full object-cover opacity-90 md:h-72">
                         </div>
                         <div class="mt-4 rounded-lg border border-line bg-ink/50 p-4">
-                            <p class="text-xs font-extrabold uppercase text-brass">Conferência</p>
+                            <p class="text-xs font-extrabold uppercase tracking-[.18em] text-brass">Conferência</p>
                             <p class="mt-2 text-sm leading-relaxed text-gray-400">Itens com tamanho, cor ou modelo precisam ser preenchidos antes de entrar no pedido.</p>
                         </div>
                     </div>
@@ -994,7 +1121,7 @@
 
         function renderProductItem(productItem, index) {
             return `
-                <div class="rounded-lg border border-line bg-ink/55 p-4" data-item-row="${index}">
+                <div class="rounded-lg border border-line bg-ink/55 p-4 transition-colors hover:border-brass/35" data-item-row="${index}">
                     <div class="flex gap-3">
                         <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line bg-panelSoft text-brass">
                             <i class="fa-solid ${productItem.icon || 'fa-box'}"></i>
@@ -1457,17 +1584,17 @@
             const total = cartTotalValue();
             const lines = cart.map(line => {
                 const detailText = line.details.length ? ` (${line.details.join(', ')})` : '';
-                return `• ${line.qty}x ${line.name}${detailText}`;
+                return `- ${line.qty}x ${line.name}${detailText}`;
             }).join('\n');
 
-            let message = '*PEDIDO BRAVUS Artigos Militares*\\n\\n';
-            message += `*Nome:* ${name}\\n`;
-            message += `*Turma:* ${studentClass}\\n`;
-            message += `*Pagamento:* ${payment}\\n\\n`;
-            message += '*ITENS DO PEDIDO:*\\n';
-            message += `${lines}\\n\\n`;
-            message += `*TOTAL FINAL:* ${formatAmount(total * CARD_FEE / 12)} em 12x ou ${formatAmount(total)} à vista\\n\\n`;
-            message += '_Solicito confirmação do pedido, pagamento e prazo de recebimento._';
+            let message = '*PEDIDO BRAVUS Artigos Militares*\n\n';
+            message += `*Nome:* ${name}\n`;
+            message += `*Turma:* ${studentClass}\n`;
+            message += `*Pagamento:* ${payment}\n\n`;
+            message += '*ITENS DO PEDIDO:*\n';
+            message += `${lines}\n\n`;
+            message += `*TOTAL FINAL:* ${formatAmount(total * CARD_FEE / 12)} em 12x ou ${formatAmount(total)} à vista\n\n`;
+            message += '_Aguardo confirmação do pedido e mais informações para pagamento e recebimento._';
 
             window.open(`https://wa.me/${BRAVUS_PHONE}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
         }
