@@ -2,416 +2,468 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BRAVUS Artigos Militares - Equipamento de Elite</title>
-    
-    <!-- Tailwind CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRAVUS | Fardamentos e Kits de Acampamento</title>
+    <meta name="description" content="Monte seu pedido de fardamento e equipamentos de acampamento para alunos da formação.">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
-    <!-- Fontes Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Oswald:wght@400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { 
-                        'tactical-black': '#0F1115', 
-                        'tactical-gray': '#1A1D24',
-                        'tactical-card': '#232730',
-                        'gold-accent': '#C6A87C', 
-                        'gold-hover': '#E0C090',
-                        'success': '#27C96E',
-                        'danger': '#E74C3C'
+                    colors: {
+                        ink: '#101216',
+                        panel: '#1A1F25',
+                        panelSoft: '#222933',
+                        line: '#303946',
+                        brass: '#C6A87C',
+                        brassLight: '#E0C090',
+                        green: '#2EB67D',
+                        red: '#D94B4B'
                     },
-                    fontFamily: { 
+                    fontFamily: {
                         sans: ['Montserrat', 'sans-serif'],
                         display: ['Oswald', 'sans-serif']
-                    },
-                    backgroundImage: {
-                        'hero-pattern': "linear-gradient(to bottom, rgba(15,17,21,0.8), rgba(15,17,21,1)), url('https://i.imgur.com/L2PUx6z.jpeg')"
                     }
                 }
             }
-        }
+        };
     </script>
-    
+
     <style>
-        /* Estilização Premium BRAVUS */
-        body { background-color: #0F1115; color: #E5E7EB; -webkit-tap-highlight-color: transparent; }
-        
-        .gold-text { color: #C6A87C; }
-        .gold-border { border-color: #C6A87C; }
-        
-        .btn-gold {
+        html { scroll-behavior: smooth; }
+        body {
+            background: #101216;
+            color: #E8EBEF;
+            font-family: Montserrat, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        button, a, input, select { touch-action: manipulation; }
+        .btn-primary {
             background: linear-gradient(135deg, #B88A44 0%, #E6C685 100%);
-            color: #0F1115;
+            color: #101216;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+            transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
         }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(198, 168, 124, 0.3); }
-
-        .btn-outline {
+        .btn-primary:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 8px 20px rgba(198,168,124,.16); }
+        .btn-secondary {
             border: 1px solid #C6A87C;
-            color: #C6A87C;
-            background: transparent;
-            font-weight: 600;
+            color: #E0C090;
+            font-weight: 700;
+            transition: background .2s ease, color .2s ease;
         }
-        .btn-outline:hover { background: rgba(198, 168, 124, 0.1); color: white; }
-
-        .admin-input {
-            background: #000;
-            border: 1px solid #ef4444;
-            color: #fff;
-            padding: 2px 5px;
-            width: 80px;
-            font-size: 0.9rem;
-            border-radius: 4px;
+        .btn-secondary:hover { background: rgba(198,168,124,.12); color: white; }
+        .surface {
+            background: rgba(26,31,37,.96);
+            border: 1px solid rgba(255,255,255,.08);
         }
-        
-        .admin-textarea {
-            background: #000;
-            border: 1px solid #ef4444;
-            color: #fff;
-            padding: 8px;
-            width: 100%;
-            font-size: 0.85rem;
-            border-radius: 4px;
-            resize: none;
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0F1115; }
-        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #C6A87C; }
-
-        /* Otimização Mobile Scroll */
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-
-        .glass-panel {
-            background: rgba(35, 39, 48, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .admin-badge {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: #ef4444;
+        .field {
+            background: rgba(5,6,8,.45);
+            border: 1px solid #303946;
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 9999;
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
-            display: none;
+            outline: none;
+            transition: border .2s ease, background .2s ease;
         }
-
-        .carousel-container { overflow: hidden; position: relative; }
-        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
-        .testimonial-card { flex: 0 0 100%; padding: 0 10px; }
-        @media (min-width: 768px) { .testimonial-card { flex: 0 0 50%; } }
-        @media (min-width: 1024px) { .testimonial-card { flex: 0 0 33.333%; } }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
+        .field:focus { border-color: #C6A87C; background: rgba(5,6,8,.68); }
+        .hidden-scrollbar::-webkit-scrollbar { width: 5px; }
+        .hidden-scrollbar::-webkit-scrollbar-track { background: #101216; }
+        .hidden-scrollbar::-webkit-scrollbar-thumb { background: #3C4653; border-radius: 999px; }
+        .hero-bg {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background: #101216;
         }
-        .animate-float { animation: float 3s ease-in-out infinite; }
-        
-        /* Previne zoom no iOS em inputs e selects */
-        @media screen and (max-width: 768px) {
-            select, input { font-size: 16px !important; }
+        .hero-bg::before {
+            content: "";
+            position: absolute;
+            inset: -12px;
+            z-index: -2;
+            background-image: url('https://i.imgur.com/L2PUx6z.jpeg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(6px);
+            transform: scale(1.02);
+        }
+        .hero-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 18% 42%, rgba(5,6,8,.74) 0%, rgba(5,6,8,.46) 34%, rgba(5,6,8,.12) 62%),
+                linear-gradient(90deg, rgba(16,18,22,.92) 0%, rgba(16,18,22,.68) 48%, rgba(16,18,22,.44) 100%);
+        }
+        @keyframes rise {
+            from { transform: translateY(32px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes cartPulse {
+            0% { transform: scale(1); }
+            45% { transform: scale(1.14); }
+            100% { transform: scale(1); }
+        }
+        .modal-panel { animation: rise .22s ease-out; }
+        .cart-pulse { animation: cartPulse .38s ease-out; }
+        .cart-float-label { display: none; }
+        .testimonial-track {
+            display: flex;
+            transition: transform .35s ease;
+            will-change: transform;
+        }
+        .testimonial-slide {
+            flex: 0 0 100%;
+            padding: 0 8px;
+        }
+        @media (min-width: 768px) {
+            .testimonial-slide { flex-basis: 50%; }
+        }
+        @media (min-width: 1024px) {
+            .testimonial-slide { flex-basis: 33.3333%; }
+        }
+        @media (max-width: 480px) {
+            body.product-modal-open #cartFloatButton {
+                bottom: auto;
+                top: calc(env(safe-area-inset-top, 0px) + 76px);
+                right: 12px;
+                width: auto;
+                height: 44px;
+                gap: 8px;
+                border-radius: 8px;
+                padding: 0 14px;
+            }
+            body.product-modal-open #cartFloatButton .cart-float-label {
+                display: inline;
+                font-size: 12px;
+                line-height: 1;
+            }
         }
     </style>
 </head>
-<body class="antialiased relative">
 
-    <div id="admin-indicator" class="admin-badge flex items-center gap-2">
-        <i class="fa-solid fa-user-shield"></i> MODO ADMIN
-        <button onclick="window.adminLogout()" class="ml-2 bg-white text-red-600 px-2 py-0.5 rounded text-[10px] font-bold hover:bg-gray-200 transition-colors shadow">Sair do Modo Admin</button>
-    </div>
-
-    <!-- Header BRAVUS -->
-    <header class="fixed w-full z-50 bg-tactical-black/95 border-b border-gray-800 backdrop-blur-md">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-2 md:gap-3">
-                <img src="https://i.imgur.com/pNd3LVh.png" alt="Bravus Logo" class="h-8 md:h-12 drop-shadow-lg">
+<body class="antialiased">
+    <header class="fixed inset-x-0 top-0 z-50 border-b border-line bg-ink/95 backdrop-blur">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+            <a href="#inicio" class="flex items-center gap-3" aria-label="Início BRAVUS">
+                <img src="https://i.imgur.com/pNd3LVh.png" alt="Logo BRAVUS" class="h-10 w-auto">
                 <div class="leading-tight">
-                    <h1 class="font-display font-bold text-lg md:text-2xl text-white tracking-widest uppercase">BRAVUS</h1>
-                    <p class="text-[8px] md:text-xs text-gold-accent uppercase tracking-[0.2em]">Artigos Militares</p>
+                    <p class="font-display text-2xl font-bold tracking-wider text-white">BRAVUS</p>
+                    <p class="text-[10px] font-bold uppercase tracking-[.22em] text-brass">Artigos Militares</p>
                 </div>
-            </div>
+            </a>
 
-            <nav class="hidden md:flex gap-8 text-sm font-semibold tracking-wide text-gray-400">
-                <a href="#" onclick="window.filterCategory('all')" class="hover:text-gold-accent transition-colors">INÍCIO</a>
-                <a href="#fardamento" class="hover:text-gold-accent transition-colors">FARDAMENTOS</a>
-                <a href="#elite" class="hover:text-gold-accent transition-colors">ELITE</a>
-                <a href="#acampamento" class="hover:text-gold-accent transition-colors">CAMPO</a>
-                <a href="#depoimentos" class="hover:text-gold-accent transition-colors">FEEDBACK</a>
+            <nav class="hidden items-center gap-7 text-sm font-bold uppercase text-gray-400 md:flex">
+                <a class="hover:text-brass" href="#fardamento">Fardamento</a>
+                <a class="hover:text-brass" href="#elite">Elite</a>
+                <a class="hover:text-brass" href="#acampamento">Acampamento</a>
+                <a class="hover:text-brass" href="#contato">Finalizar</a>
             </nav>
 
-            <div class="flex items-center gap-4">
-                <button onclick="window.toggleAdminModal()" class="text-gray-500 hover:text-white transition-colors p-2" title="Acesso Restrito">
-                    <i class="fa-solid fa-lock text-sm md:text-base"></i>
+            <div class="flex items-center gap-2">
+                <button id="cartHeaderButton" class="relative rounded-md border border-line px-3 py-2 text-brass hover:bg-panelSoft" type="button" aria-label="Abrir pedido">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="cartCountHeader" class="absolute -right-2 -top-2 hidden h-5 min-w-5 rounded-full bg-red px-1 text-center text-[11px] font-bold text-white">0</span>
                 </button>
-                <div class="relative cursor-pointer p-2" onclick="window.openCartModal()">
-                    <i class="fa-solid fa-bag-shopping text-xl text-gold-accent hover:text-white transition-colors"></i>
-                    <span id="cartCountHeader" class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
-                </div>
-                <button class="md:hidden text-gold-accent text-2xl p-1" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <button id="adminButton" class="rounded-md border border-line px-3 py-2 text-gray-500 hover:bg-panelSoft hover:text-brass" type="button" aria-label="Modo administrador">
+                    <i class="fa-solid fa-lock"></i>
+                </button>
+                <button id="menuButton" class="rounded-md border border-line px-3 py-2 text-brass md:hidden" type="button" aria-label="Abrir menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden bg-tactical-gray border-t border-gray-800 md:hidden absolute w-full shadow-2xl">
-            <a href="#fardamento" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-4 px-6 text-gray-300 hover:bg-black hover:text-gold-accent font-bold border-b border-gray-800">Fardamentos</a>
-            <a href="#elite" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-4 px-6 text-gray-300 hover:bg-black hover:text-gold-accent font-bold border-b border-gray-800">Linha Elite</a>
-            <a href="#acampamento" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-4 px-6 text-gray-300 hover:bg-black hover:text-gold-accent font-bold border-b border-gray-800">Acampamento</a>
-            <a href="#depoimentos" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block py-4 px-6 text-gray-300 hover:bg-black hover:text-gold-accent font-bold">Depoimentos</a>
+        <div id="mobileMenu" class="hidden border-t border-line bg-panel md:hidden">
+            <a class="block border-b border-line px-6 py-4 font-bold text-gray-200" href="#fardamento">Fardamento</a>
+            <a class="block border-b border-line px-6 py-4 font-bold text-gray-200" href="#elite">Elite</a>
+            <a class="block border-b border-line px-6 py-4 font-bold text-gray-200" href="#acampamento">Acampamento</a>
+            <a class="block px-6 py-4 font-bold text-gray-200" href="#contato">Finalizar pedido</a>
         </div>
     </header>
 
-    <button onclick="window.openCartModal()" class="fixed bottom-6 right-4 md:bottom-6 md:right-6 z-40 btn-gold rounded-full w-14 h-14 md:w-16 md:h-16 flex items-center justify-center shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:scale-110 transition-transform animate-float border-2 border-white/10 group">
-        <div class="relative">
-            <i class="fa-solid fa-cart-shopping text-xl md:text-2xl text-black"></i>
-            <span id="cartCountFloat" class="absolute -top-3 -right-3 bg-red-600 text-white text-xs font-bold w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center border-2 border-[#0F1115] hidden">0</span>
-        </div>
-        <span class="absolute right-full mr-3 bg-tactical-black text-gold-accent px-3 py-1 rounded text-xs font-bold uppercase whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity border border-gray-700 hidden md:block">
-            Meu Pedido
-        </span>
+    <button id="cartFloatButton" class="btn-primary fixed bottom-5 right-4 z-[95] flex h-14 w-14 items-center justify-center rounded-full border border-white/20 shadow-2xl md:h-16 md:w-16" type="button" aria-label="Abrir pedido">
+        <i class="fa-solid fa-cart-shopping text-xl"></i>
+        <span class="cart-float-label">Pedido</span>
+        <span id="cartCountFloat" class="absolute -right-1 -top-1 hidden h-6 min-w-6 rounded-full border-2 border-ink bg-red px-1 text-center text-xs font-bold text-white">0</span>
     </button>
 
-    <main>
-        <section class="relative min-h-[100dvh] md:min-h-[600px] flex items-center bg-hero-pattern bg-cover bg-center bg-no-repeat md:bg-fixed pt-24 pb-12">
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="max-w-3xl border-l-4 border-gold-accent pl-4 md:pl-10">
-                    <span class="text-gold-accent font-bold tracking-[0.2em] text-xs md:text-sm uppercase mb-2 block animate-pulse">Prontidão e Excelência</span>
-                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-2xl uppercase">
-                        BRAVUS <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-700 block md:inline">Artigos Militares</span>
-                    </h2>
-                    <p class="text-gray-300 text-base md:text-xl mb-8 max-w-xl font-light">
-                        Equipamentos táticos de alta performance para Bombeiros Civis e Operações de Resgate. O padrão que a sua farda exige.
+    <main id="inicio">
+        <section class="hero-bg flex min-h-[92dvh] items-center pt-24">
+            <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[1.05fr_.95fr] lg:items-end">
+                <div class="max-w-3xl border-l-4 border-brass pl-5 md:pl-8">
+                    <p class="mb-3 text-xs font-extrabold uppercase tracking-[.24em] text-brass">Pedido orientado para alunos</p>
+                    <h1 class="font-display text-4xl font-bold uppercase leading-tight text-white sm:text-5xl md:text-6xl">
+                        Fardamentos e kits de acampamento
+                    </h1>
+                    <p class="mt-5 max-w-2xl text-base leading-relaxed text-gray-300 md:text-lg">
+                        Escolha os itens necessários, informe tamanhos e modelos, revise o pedido e envie tudo pelo WhatsApp.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
-                        <a href="#fardamento" class="btn-gold py-4 px-8 rounded text-center shadow-lg shadow-yellow-900/20 text-sm md:text-base">
-                            Ver Equipamentos
-                        </a>
-                        <a href="#footer" class="btn-outline py-4 px-8 rounded text-center text-sm md:text-base">
-                            Falar com Instrutor
-                        </a>
+                    <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+                        <a href="#fardamento" class="btn-primary rounded-md px-7 py-4 text-center text-sm">Montar pedido</a>
+                        <a href="#contato" class="btn-secondary rounded-md px-7 py-4 text-center text-sm">Enviar pelo WhatsApp</a>
+                    </div>
+                </div>
+                <div class="surface max-w-xl rounded-lg p-5">
+                    <div class="grid gap-3 sm:grid-cols-3">
+                        <div class="rounded-md border border-line bg-ink/50 p-4">
+                            <i class="fa-solid fa-ruler-combined mb-3 text-xl text-brass"></i>
+                            <p class="text-sm font-bold text-white">Tamanhos obrigatórios</p>
+                            <p class="mt-1 text-xs leading-relaxed text-gray-400">O pedido avisa se faltar alguma escolha.</p>
+                        </div>
+                        <div class="rounded-md border border-line bg-ink/50 p-4">
+                            <i class="fa-solid fa-list-check mb-3 text-xl text-brass"></i>
+                            <p class="text-sm font-bold text-white">Resumo claro</p>
+                            <p class="mt-1 text-xs leading-relaxed text-gray-400">Itens organizados antes do envio.</p>
+                        </div>
+                        <div class="rounded-md border border-line bg-ink/50 p-4">
+                            <i class="fa-solid fa-cart-plus mb-3 text-xl text-brass"></i>
+                            <p class="text-sm font-bold text-white">Pedido acompanhado</p>
+                            <p class="mt-1 text-xs leading-relaxed text-gray-400">O carrinho confirma cada item incluído.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0F1115] to-transparent"></div>
         </section>
 
-        <!-- Busca -->
-        <div class="container mx-auto px-4 -mt-8 relative z-20 mb-12">
-            <div class="glass-panel p-3 md:p-4 rounded-lg shadow-2xl max-w-4xl mx-auto flex flex-col sm:flex-row gap-2">
-                <div class="flex-1 relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                    <input type="text" id="searchInput" placeholder="Busque por item ou kit operacional..." class="w-full bg-tactical-black border border-gray-700 rounded-md py-3 pl-12 pr-4 text-white text-base focus:outline-none focus:border-gold-accent transition-all">
+        <section class="border-y border-line bg-panel">
+            <div class="mx-auto max-w-7xl px-4 py-5">
+                <div class="grid gap-3 md:grid-cols-[1fr_auto]">
+                    <label class="relative block">
+                        <span class="sr-only">Buscar kit ou item</span>
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                        <input id="searchInput" class="field w-full rounded-md py-4 pl-12 pr-4 text-base" type="search" placeholder="Buscar por kit, item, tamanho, acampamento...">
+                    </label>
+                    <button id="clearSearch" class="btn-secondary rounded-md px-5 py-3 text-sm" type="button">
+                        Limpar busca
+                    </button>
                 </div>
-                <button class="bg-tactical-card hover:bg-gold-accent hover:text-black border border-gray-700 text-white px-6 py-3 sm:py-0 rounded-md transition-colors font-bold uppercase text-sm w-full sm:w-auto">
-                    Buscar
-                </button>
+                <p id="searchStatus" class="mt-3 text-sm text-gray-400"></p>
             </div>
-        </div>
+        </section>
 
-        <section id="fardamento" class="py-12 md:py-16 container mx-auto px-4">
-            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 md:mb-10 border-b border-gray-800 pb-4 gap-4">
+        <section id="fardamento" class="mx-auto max-w-7xl px-4 py-14 md:py-16">
+            <div class="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
                 <div>
-                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-xs md:text-sm mb-1">Linha Operacional</h3>
-                    <h2 class="text-2xl md:text-3xl font-display font-bold text-white uppercase">Kits de Fardamento</h2>
+                    <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Uniforme principal</p>
+                    <h2 class="font-display text-3xl font-bold uppercase text-white">Kits de Fardamento</h2>
                 </div>
-                <i class="fa-solid fa-shirt text-3xl md:text-4xl text-gray-800 hidden sm:block"></i>
+                <i class="fa-solid fa-shirt hidden text-4xl text-line sm:block"></i>
             </div>
-            <div id="fardamento-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
+            <div id="fardamentoGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
         </section>
 
-        <section id="elite" class="py-12 md:py-16 bg-tactical-card relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-gold-accent opacity-5 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 md:mb-10 border-b border-gray-700 pb-4 gap-4">
+        <section id="elite" class="bg-panel py-14 md:py-16">
+            <div class="mx-auto max-w-7xl px-4">
+                <div class="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
                     <div>
-                        <span class="bg-gold-accent text-black text-[10px] md:text-xs font-bold px-2 py-1 rounded mb-2 inline-block uppercase tracking-wider">Padrão Bravus</span>
-                        <h2 class="text-2xl md:text-3xl font-display font-bold text-white uppercase">Linha Elite</h2>
+                        <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Linha Elite</p>
+                        <h2 class="font-display text-3xl font-bold uppercase text-white">Kits Elite</h2>
                     </div>
-                    <i class="fa-solid fa-medal text-3xl md:text-4xl text-gray-700 hidden sm:block"></i>
+                    <i class="fa-solid fa-kit-medical hidden text-4xl text-line sm:block"></i>
                 </div>
-                <div id="elite-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
+                <div id="eliteGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
             </div>
         </section>
 
-        <section id="acampamento" class="py-12 md:py-16 container mx-auto px-4">
-            <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-8 md:mb-10 border-b border-gray-800 pb-4 gap-4">
+        <section id="acampamento" class="mx-auto max-w-7xl px-4 py-14 md:py-16">
+            <div class="mb-8 flex items-end justify-between gap-4 border-b border-line pb-4">
                 <div>
-                    <h3 class="text-gold-accent font-bold uppercase tracking-widest text-xs md:text-sm mb-1">Missão e Campo</h3>
-                    <h2 class="text-2xl md:text-3xl font-display font-bold text-white uppercase">Itens de Sobrevivência</h2>
+                    <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Campo e pernoite</p>
+                    <h2 class="font-display text-3xl font-bold uppercase text-white">Kits de Acampamento</h2>
                 </div>
-                <i class="fa-solid fa-campground text-3xl md:text-4xl text-gray-800 hidden sm:block"></i>
+                <i class="fa-solid fa-campground hidden text-4xl text-line sm:block"></i>
             </div>
-            <div id="acampamento-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
+            <div id="acampamentoGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
         </section>
 
-        <section id="depoimentos" class="py-16 md:py-20 bg-[#0A0C10] border-t border-gray-900 relative overflow-hidden">
-             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gold-accent/5 rounded-full blur-[100px]"></div>
-             <div class="container mx-auto px-4 relative z-10">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
-                    <div class="text-center md:text-left flex-1">
-                        <h3 class="text-gold-accent font-bold uppercase tracking-widest text-xs md:text-sm mb-2">Vozes do Campo</h3>
-                        <h2 class="text-2xl md:text-4xl font-display font-bold text-white uppercase">O que dizem os alunos</h2>
+        <section class="border-y border-line bg-[#0B0D10] py-14">
+            <div class="mx-auto max-w-7xl px-4">
+                <div class="mb-8">
+                    <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Orientação rápida</p>
+                    <h2 class="font-display text-3xl font-bold uppercase text-white">Como o pedido funciona</h2>
+                </div>
+                <div class="grid gap-4 md:grid-cols-3">
+                    <div class="surface rounded-lg p-5">
+                        <p class="mb-3 text-sm font-extrabold uppercase text-brass">1. Escolha</p>
+                        <p class="text-sm leading-relaxed text-gray-300">Abra um kit, confira os itens inclusos e selecione tamanho, cor ou modelo quando aparecer.</p>
                     </div>
-                    <div id="admin-testimonial-btn" class="hidden w-full md:w-auto">
-                        <button onclick="window.addTestimonial()" class="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 md:py-2 px-4 rounded text-sm md:text-xs shadow-lg transition-colors">
-                            <i class="fa-solid fa-plus mr-1"></i> Add Depoimento
+                    <div class="surface rounded-lg p-5">
+                        <p class="mb-3 text-sm font-extrabold uppercase text-brass">2. Revise</p>
+                        <p class="text-sm leading-relaxed text-gray-300">No carrinho, confira quantidades e detalhes. O valor aparecerá no total final.</p>
+                    </div>
+                    <div class="surface rounded-lg p-5">
+                        <p class="mb-3 text-sm font-extrabold uppercase text-brass">3. Envie</p>
+                        <p class="text-sm leading-relaxed text-gray-300">Preencha nome, turma e forma de pagamento para enviar o pedido pelo WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-panel/60 py-12">
+            <div class="mx-auto max-w-7xl px-4">
+                <div class="mb-6 flex items-end justify-between gap-4 border-b border-line pb-4">
+                    <div>
+                        <p class="mb-1 text-xs font-extrabold uppercase tracking-[.2em] text-brass">Experiência dos alunos</p>
+                        <h2 class="font-display text-2xl font-bold uppercase text-white">Depoimentos</h2>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="flex h-10 w-10 items-center justify-center rounded-md border border-line text-brass hover:bg-brass hover:text-ink" type="button" data-testimonial-dir="-1" aria-label="Depoimento anterior">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="flex h-10 w-10 items-center justify-center rounded-md border border-line text-brass hover:bg-brass hover:text-ink" type="button" data-testimonial-dir="1" aria-label="Próximo depoimento">
+                            <i class="fa-solid fa-chevron-right"></i>
                         </button>
                     </div>
                 </div>
-                <div class="carousel-container max-w-7xl mx-auto">
-                    <button onclick="window.moveCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/70 md:bg-black/50 hover:bg-gold-accent hover:text-black text-white p-3 rounded-r-lg md:rounded-full border border-l-0 md:border-l border-gray-700 transition backdrop-blur-sm">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <div class="carousel-track" id="testimonial-track"></div>
-                    <button onclick="window.moveCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/70 md:bg-black/50 hover:bg-gold-accent hover:text-black text-white p-3 rounded-l-lg md:rounded-full border border-r-0 md:border-r border-gray-700 transition backdrop-blur-sm">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
+                <div class="-mx-2 overflow-hidden">
+                    <div id="testimonialsTrack" class="testimonial-track"></div>
                 </div>
-             </div>
+                <div id="testimonialDots" class="mt-5 flex justify-center gap-2"></div>
+            </div>
         </section>
 
-        <section id="contato" class="py-16 md:py-20 bg-tactical-black border-t border-gray-800">
-            <div class="container mx-auto px-4">
-                <div class="max-w-3xl mx-auto glass-panel p-6 md:p-12 rounded-xl relative mt-8 md:mt-0">
-                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gold-accent text-black p-4 md:p-5 rounded-full shadow-lg shadow-gold-accent/20 border-4 border-tactical-black">
-                        <i class="fa-brands fa-whatsapp text-3xl md:text-4xl"></i>
-                    </div>
-                    <h2 class="text-2xl md:text-3xl font-display font-bold text-center text-white mb-2 mt-6 md:mt-4 uppercase">Finalizar Pedido</h2>
-                    <p class="text-gray-400 text-center mb-8 text-sm md:text-base">Envie sua lista de equipamentos para a Bravus.</p>
-                    <form onsubmit="event.preventDefault(); window.checkout();" class="space-y-5 md:space-y-6">
-                        <div class="grid md:grid-cols-2 gap-5 md:gap-6">
-                            <div>
-                                <label class="block text-xs font-bold text-gold-accent mb-2 uppercase">Nome Completo</label>
-                                <input type="text" id="student-name" placeholder="Nome do Aluno/Militar" required class="w-full bg-black/50 border border-gray-700 rounded p-3 md:p-4 text-white text-base focus:border-gold-accent focus:outline-none transition shadow-inner">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gold-accent mb-2 uppercase">Turma / Batalhão</label>
-                                <input type="text" id="student-class" placeholder="Ex: Turma Bravo" required class="w-full bg-black/50 border border-gray-700 rounded p-3 md:p-4 text-white text-base focus:border-gold-accent focus:outline-none transition shadow-inner">
-                            </div>
+        <section id="contato" class="bg-ink py-16 md:py-20">
+            <div class="mx-auto max-w-3xl px-4">
+                <div class="surface rounded-lg p-6 md:p-9">
+                    <div class="mb-7 flex items-center gap-4">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-md bg-brass text-2xl text-ink">
+                            <i class="fa-brands fa-whatsapp"></i>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gold-accent mb-2 uppercase">Forma de Pagamento</label>
-                            <select id="payment-method" required class="w-full bg-black/50 border border-gray-700 rounded p-3 md:p-4 text-white text-base focus:border-gold-accent focus:outline-none transition shadow-inner appearance-none">
-                                <option value="" disabled selected>Selecione...</option>
-                                <option value="PIX">PIX</option>
-                                <option value="Cartão de Crédito">Cartão de Crédito</option>
-                                <option value="Cartão de Débito">Cartão de Débito</option>
-                            </select>
+                            <p class="text-xs font-extrabold uppercase tracking-[.2em] text-brass">Finalização</p>
+                            <h2 class="font-display text-3xl font-bold uppercase text-white">Enviar pedido</h2>
                         </div>
-                        <button type="submit" class="w-full btn-gold py-4 md:py-5 rounded text-base md:text-lg shadow-xl hover:brightness-110 transition mt-4">
-                            ENVIAR PEDIDO AGORA
-                        </button>
+                    </div>
+                    <form id="checkoutForm" class="space-y-5">
+                        <div class="grid gap-5 md:grid-cols-2">
+                            <label class="block">
+                                <span class="mb-2 block text-xs font-bold uppercase text-brass">Nome completo</span>
+                                <input id="studentName" class="field w-full rounded-md p-4 text-base" type="text" placeholder="Nome do aluno" required>
+                            </label>
+                            <label class="block">
+                                <span class="mb-2 block text-xs font-bold uppercase text-brass">Turma</span>
+                                <input id="studentClass" class="field w-full rounded-md p-4 text-base" type="text" placeholder="Ex: Turma Bravo" required>
+                            </label>
+                        </div>
+                        <label class="block">
+                            <span class="mb-2 block text-xs font-bold uppercase text-brass">Forma de pagamento</span>
+                            <select id="paymentMethod" class="field w-full rounded-md p-4 text-base" required>
+                                <option value="" selected disabled>Selecione...</option>
+                                <option value="PIX">PIX</option>
+                                <option value="Cartão de crédito">Cartão de crédito</option>
+                                <option value="Cartão de débito">Cartão de débito</option>
+                                <option value="Dinheiro">Dinheiro</option>
+                            </select>
+                        </label>
+                        <div id="checkoutTotal" class="rounded-md border border-line bg-black/30 p-4 text-right">
+                            <p class="text-xs font-bold uppercase text-gray-400">Total do pedido</p>
+                            <p class="mt-1 text-xl font-extrabold text-brass">Pedido vazio</p>
+                        </div>
+                        <button class="btn-primary w-full rounded-md py-4 text-base" type="submit">Enviar pedido agora</button>
                     </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer id="footer" class="bg-[#050608] border-t border-gray-900 pt-12 md:pt-16 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-10 text-center md:text-left">
-                <div>
-                    <h4 class="text-white font-display font-bold text-lg md:text-xl mb-4 uppercase tracking-widest">BRAVUS Artigos Militares</h4>
-                    <p class="text-gray-500 text-sm leading-relaxed">Excelência técnica em fardamentos e equipamentos operacionais para bombeiros civis e forças táticas.</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-display font-bold text-lg md:text-xl mb-4 uppercase tracking-widest">Contato</h4>
-                    <p class="text-gray-400 text-sm mb-2"><i class="fa-solid fa-phone text-gold-accent mr-2"></i> (61) 99830-0711</p>
-                    <p class="text-gray-400 text-sm mb-2 break-all"><i class="fa-solid fa-envelope text-gold-accent mr-2"></i> coordenadormedeiros@gmail.com</p>
-                </div>
-                <div>
-                    <h4 class="text-white font-display font-bold text-lg md:text-xl mb-4 uppercase tracking-widest">Acompanhe</h4>
-                    <div class="flex justify-center md:justify-start gap-4">
-                        <a href="https://wa.me/5561998300711" target="_blank" class="w-12 h-12 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gold-accent hover:text-black transition-all text-lg md:text-base">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="https://instagram.com/bombeirocivilbrasilia" target="_blank" class="w-12 h-12 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gold-accent hover:text-black transition-all text-lg md:text-base">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
+    <footer class="border-t border-line bg-[#07080A] py-10">
+        <div class="mx-auto grid max-w-7xl gap-8 px-4 text-center md:grid-cols-3 md:text-left">
+            <div>
+                <p class="font-display text-xl font-bold uppercase tracking-wider text-white">BRAVUS Artigos Militares</p>
+                <p class="mt-3 text-sm leading-relaxed text-gray-500">Fardamentos e equipamentos organizados para facilitar o pedido dos alunos.</p>
             </div>
-            <div class="border-t border-gray-900 mt-12 pt-8 text-center text-[10px] md:text-xs text-gray-600 uppercase tracking-widest px-4">
-                &copy; 2026 BRAVUS ARTIGOS MILITARES. TODOS OS DIREITOS RESERVADOS.
+            <div>
+                <p class="mb-3 font-bold uppercase text-white">Contato</p>
+                <p class="text-sm text-gray-400"><i class="fa-solid fa-phone mr-2 text-brass"></i> (61) 99830-0711</p>
+                <p class="mt-2 break-all text-sm text-gray-400"><i class="fa-solid fa-envelope mr-2 text-brass"></i> coordenadormedeiros@gmail.com</p>
+            </div>
+            <div>
+                <p class="mb-3 font-bold uppercase text-white">Canais</p>
+                <div class="flex justify-center gap-3 md:justify-start">
+                    <a class="flex h-11 w-11 items-center justify-center rounded-md bg-panel text-brass hover:bg-brass hover:text-ink" href="https://wa.me/5561998300711" target="_blank" rel="noopener" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a class="flex h-11 w-11 items-center justify-center rounded-md bg-panel text-brass hover:bg-brass hover:text-ink" href="https://instagram.com/bombeirocivilbrasilia" target="_blank" rel="noopener" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- MODAIS (Mobile Optimized) -->
-    <div id="admin-modal" class="hidden fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="glass-panel p-6 md:p-8 rounded-lg max-w-sm w-full border border-gray-700">
-            <h3 class="text-white font-display font-bold text-xl mb-4 text-center">ACESSO RESTRITO</h3>
-            <div class="space-y-4">
-                <input type="text" id="admin-user" placeholder="Usuário" class="w-full bg-black border border-gray-600 rounded p-3 md:p-2 text-white text-base md:text-sm">
-                <input type="password" id="admin-pass" placeholder="Senha" class="w-full bg-black border border-gray-600 rounded p-3 md:p-2 text-white text-base md:text-sm">
-                <button onclick="window.adminLogin()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 md:py-2 rounded transition">ENTRAR</button>
-                <button onclick="window.toggleAdminModal()" class="w-full text-gray-500 text-sm hover:text-white py-2">Cancelar</button>
+    <div id="productModal" class="fixed inset-0 z-[80] hidden bg-black/90 p-0 backdrop-blur-sm md:p-5" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-panel mx-auto flex h-full max-w-5xl flex-col overflow-hidden rounded-none border border-line bg-panel md:h-auto md:max-h-[92dvh] md:rounded-lg">
+            <div class="flex items-center justify-between border-b border-line bg-[#12161B] px-5 py-4">
+                <div>
+                    <p class="text-[11px] font-extrabold uppercase tracking-[.2em] text-brass">Detalhes do kit</p>
+                    <h3 id="modalTitle" class="font-display text-2xl font-bold uppercase text-white"></h3>
+                </div>
+                <button id="closeProductModal" class="flex h-10 w-10 items-center justify-center rounded-md border border-line text-2xl text-gray-300 hover:text-white" type="button" aria-label="Fechar">&times;</button>
             </div>
+            <div id="modalBody" class="hidden-scrollbar overflow-y-auto"></div>
         </div>
     </div>
 
-    <!-- Carrinho Moda Mobile Full -->
-    <div id="cart-modal" class="hidden fixed inset-0 bg-black/90 z-[90] flex items-end sm:items-center justify-center p-0 sm:p-4 backdrop-blur-sm" onclick="window.closeCartModal()">
-        <div class="bg-tactical-card w-full h-[90dvh] sm:h-auto sm:max-h-[90vh] max-w-md flex flex-col rounded-t-2xl sm:rounded-xl border border-gray-700 shadow-2xl animate-[slideUp_0.3s_ease-out]" onclick="event.stopPropagation()">
-            <div class="p-5 border-b border-gray-700 flex justify-between items-center bg-gray-900 rounded-t-2xl sm:rounded-t-xl">
-                <h3 class="text-lg font-display font-bold text-white uppercase"><i class="fa-solid fa-cart-shopping mr-2 text-gold-accent"></i> Pedido Bravus</h3>
-                <button onclick="window.closeCartModal()" class="text-gray-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center bg-black/50 rounded-full">&times;</button>
+    <div id="cartModal" class="fixed inset-0 z-[90] hidden items-end justify-center bg-black/85 p-0 backdrop-blur-sm sm:items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+        <div class="modal-panel flex h-[92dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-lg border border-line bg-panel sm:h-auto sm:max-h-[90vh] sm:rounded-lg">
+            <div class="flex items-center justify-between border-b border-line bg-[#12161B] px-5 py-4">
+                <h3 id="cartTitle" class="font-display text-2xl font-bold uppercase text-white">
+                    <i class="fa-solid fa-cart-shopping mr-2 text-brass"></i> Meu pedido
+                </h3>
+                <button id="closeCartModal" class="flex h-10 w-10 items-center justify-center rounded-md border border-line text-2xl text-gray-300 hover:text-white" type="button" aria-label="Fechar">&times;</button>
             </div>
-            <div class="p-4 flex-1 overflow-y-auto custom-scrollbar bg-tactical-black/50"><ul id="cart-items-list" class="space-y-3"></ul></div>
-            <div class="p-5 border-t border-gray-700 bg-black">
-                <div id="cart-total" class="flex flex-col items-end font-bold text-lg md:text-xl text-white mb-4">
-                    <div class="flex justify-between w-full items-center">
-                        <span class="text-sm md:text-base">INVESTIMENTO:</span>
-                        <span class="text-gold-accent" id="cart-total-value">0,00 em 12x</span>
+            <div class="hidden-scrollbar flex-1 overflow-y-auto bg-ink/60 p-4">
+                <ul id="cartItems" class="space-y-3"></ul>
+            </div>
+            <div class="border-t border-line bg-[#07080A] p-5">
+                <div class="mb-4 rounded-md border border-line bg-black/35 p-4">
+                    <div class="flex items-start justify-between gap-4">
+                        <span class="text-sm font-bold uppercase text-gray-300">Total final</span>
+                        <div id="cartTotal" class="text-right text-lg font-extrabold text-brass">Pedido vazio</div>
                     </div>
                 </div>
-                <button onclick="window.closeCartModal(); document.getElementById('contato').scrollIntoView({behavior: 'smooth'});" class="w-full btn-gold py-4 rounded text-center text-sm md:text-base">FINALIZAR PEDIDO</button>
+                <button id="goCheckout" class="btn-primary w-full rounded-md py-4 text-sm" type="button">Finalizar pedido</button>
             </div>
         </div>
     </div>
 
-    <!-- Produto Modal Mobile Full -->
-    <div id="product-modal" class="hidden fixed inset-0 bg-black/95 z-[90] flex items-end sm:items-center justify-center p-0 sm:p-4 backdrop-blur-md" onclick="window.closeModal()">
-        <div class="bg-tactical-card w-full h-[95dvh] sm:h-auto sm:max-h-[95vh] max-w-4xl overflow-y-auto custom-scrollbar rounded-t-2xl sm:rounded-xl border border-gray-700 relative flex flex-col shadow-2xl animate-[slideUp_0.3s_ease-out]" onclick="event.stopPropagation()">
-            
-            <button class="absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/60 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none text-white sm:text-gray-400 hover:text-white text-2xl z-20 w-10 h-10 flex items-center justify-center rounded-full" onclick="window.closeModal()">&times;</button>
-            
-            <div id="modal-content" class="p-0 sm:p-8 flex-1 flex flex-col"></div>
+    <div id="adminModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+        <div class="modal-panel w-full max-w-sm rounded-lg border border-line bg-panel p-6">
+            <div class="mb-5 flex items-start justify-between gap-4">
+                <div>
+                    <p class="text-[11px] font-extrabold uppercase tracking-[.2em] text-brass">Acesso restrito</p>
+                    <h3 id="adminTitle" class="font-display text-2xl font-bold uppercase text-white">Modo admin</h3>
+                </div>
+                <button id="closeAdminModal" class="flex h-9 w-9 items-center justify-center rounded-md border border-line text-xl text-gray-300 hover:text-white" type="button" aria-label="Fechar">&times;</button>
+            </div>
+            <form id="adminLoginForm" class="space-y-4">
+                <label class="block">
+                    <span class="mb-2 block text-xs font-bold uppercase text-brass">Senha</span>
+                    <input id="adminPassword" class="field w-full rounded-md p-4 text-base" type="password" autocomplete="current-password" placeholder="Digite sua senha" required>
+                </label>
+                <p id="adminLoginStatus" class="hidden rounded-md border border-red/40 bg-red/10 p-3 text-sm text-red-100"></p>
+                <button class="btn-primary w-full rounded-md py-3 text-sm" type="submit">Entrar</button>
+            </form>
+            <div id="adminLoggedPanel" class="hidden space-y-4">
+                <div class="rounded-md border border-green/40 bg-green/10 p-3 text-sm font-semibold text-green">
+                    <i class="fa-solid fa-circle-check mr-2"></i>Modo admin ativo.
+                </div>
+                <p class="text-sm leading-relaxed text-gray-400">Abra qualquer kit para editar os valores. As alterações são salvas para todos.</p>
+                <button id="adminLogoutButton" class="w-full rounded-md border border-red/50 px-4 py-3 text-sm font-bold uppercase text-red hover:bg-red hover:text-white" type="button">Sair do modo admin</button>
+            </div>
         </div>
     </div>
-
-    <style>
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-    </style>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-        // Firebase Configurado
         const firebaseConfig = {
             apiKey: "AIzaSyDTXuF1Tgrqn7PM9dURpZ4GS2pBRgpFomQ",
             authDomain: "medeiros-artigos-militares.firebaseapp.com",
@@ -421,439 +473,1100 @@
             appId: "1:75959891752:web:c02349e98a5771b7ed821d"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const firestore = getFirestore(app);
-        const auth = getAuth(app);
-        
-        // Memória Secundária completa com todas as variáveis originais
-        const defaultData = {
-            fardamento: [
-                { title: 'Kit Básico', image: 'https://i.imgur.com/t2VQ9MF.jpeg', description: 'Kit inicial prático e durável. Ideal para quem está começando.', items: [{name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
-                { title: 'Kit Avançado', badge: 'Mais Vendido', image: 'https://i.imgur.com/2w9HPjA.jpeg', description: 'Uniforme tático completo. O preferido dos bombeiros.', items: [{name: 'Colete tático modular', price: 489.90, icon: 'fa-vest', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Suspensório', price: 189.90, icon: 'fa-grip-lines-vertical'}, {name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 89.90, icon: 'fa-briefcase'}, {name: 'Distintivo Bombeiro Civil', price: 149.90, icon: 'fa-medal'}, {name: 'Caneta quebra vidro', price: 79.90, icon: 'fa-pen-nib'}, {name: 'Luva tática preta', price: 79.90, icon: 'fa-hand-fist'}, {name: 'Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Algema invictus', price: 199.90, icon: 'fa-lock'}, {name: 'Lanterna tática com LED lateral', price: 59.90, icon: 'fa-lightbulb'}, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
-                { title: 'Kit Monstro', image: 'https://i.imgur.com/Y6LT4jq.jpeg', description: 'O kit definitivo para operações extremas. Prontidão total.', items: [{name: 'Colete tático modular', price: 489.90, icon: 'fa-vest', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Suspensório', price: 189.90, icon: 'fa-grip-lines-vertical'}, {name: 'Camiseta preta manga longa', price: 79.90, icon: 'fa-tshirt', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Calça tática ripstop', price: 169.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG', 'EXG']}, {name: 'Coturno extra leve com zíper', price: 169.90, icon: 'fa-shoe-prints', hasSize: true, sizes: ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46']}, {name: 'Cinto', price: 39.90, icon: 'fa-circle-notch'}, {name: 'Bornal', price: 39.90, icon: 'fa-briefcase'}, {name: 'Distintivo Bombeiro Civil', price: 149.90, icon: 'fa-medal'}, {name: 'Caneta quebra vidro', price: 79.90, icon: 'fa-pen-nib'}, {name: 'Luva tática preta', price: 79.90, icon: 'fa-hand-fist'}, {name: 'Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Algema invictus', price: 199.90, icon: 'fa-lock'}, {name: 'Lanterna tática com LED lateral', price: 59.90, icon: 'fa-lightbulb'}, {name: 'Calça tática bege / P.R.F., P.F.', price: 179.90, icon: 'fa-person-hiking', hasSize: true, sizes: ['P', 'M', 'G', 'GG']}, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
-            ],
-            elite: [
-                { title: "Kit Auxiliar", image: "https://i.imgur.com/ih87A5E.jpeg", description: "Equipamentos essenciais para suporte tático e APH.", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática foxboy", price: 289.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Atalaia", price: 389.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heart-pulse" }, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
-                { title: "Kit Instrutor", image: "https://i.imgur.com/aYGnbsv.jpeg", description: "Projetado para instrutores, este kit garante durabilidade extrema.", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Acero", price: 499.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
-                { title: "Kit G.A.T.E", image: "https://i.imgur.com/L2PUx6z.jpeg", description: "Kit para operações de alto risco. O topo de linha.", items: [{ name: "Camiseta Combat Shirt", price: 189.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Camiseta Bombeiro Civil", price: 79.90, icon: "fa-tshirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preta", "Branca", "Vermelha"] }, { name: "Moletom Bombeiro Civil", price: 129.90, icon: "fa-shirt", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Preto", "Vermelho"] }, { name: "Calça tática invictus", price: 349.90, icon: "fa-person-hiking", hasSize: true, sizes: ["P", "M", "G", "GG"], hasColor: true, colors: ["Bege", "Preta", "Camuflada"] }, { name: "Coturno Guartelá", price: 569.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Coturno Invictus", price: 649.90, icon: "fa-shoe-prints", hasSize: true, sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"], hasColor: true, colors: ["Bege", "Preto"] }, { name: "Colar Bombeiro aço", price: 69.90, icon: "fa-medal" }, { name: "Sutache com NOME e Tipo sanguíneo", price: 24.99, icon: "fa-id-badge" }, { name: "Balaclava Preta", price: 24.99, icon: "fa-mask-ventilator" }, { name: "Palmilha ortopédica", price: 39.99, icon: "fa-shoe-prints" }, { name: "Meia preta cano longo militar", price: 29.90, icon: "fa-socks" }, { name: "Nugget para engraxar coturno preto", price: 29.90, icon: "fa-brush" }, { name: "Manguito Preto", price: 19.90, icon: "fa-mitten", hasSize: true, sizes: ["P", "M", "G", "GG"] }, { name: "Oxímetro de dedo", price: 34.90, icon: "fa-heart-pulse" }, { name: "Monitor digital de pressão", price: 119.90, icon: "fa-stethoscope" }, { name: "Gorro vermelho Bombeiro Civil", price: 89.90, icon: "fa-hat-winter" }, {name: 'Relógio Tático Militar G-Shock', price: 199.90, icon: 'fa-clock', hasGender: true, genders: ['Masculino', 'Feminino']}]},
-            ],
-            acampamento: [
-                { title: 'Kit Recruta (Básico)', image: 'https://i.imgur.com/adECSak.jpeg', description: 'O essencial para missões seguras.', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
-                { title: 'Kit Capitão (Intermediário)', image: 'https://i.imgur.com/FkZVMfX.jpeg', description: 'Equilíbrio entre conforto e funcionalidade.', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Kit térmico', price: 100.00, icon: 'fa-temperature-full'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Garrafa Tática Cantil', price: 59.90, icon: 'fa-bottle-water'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Mosquetão Tático com Trava', price: 50.00, icon: 'fa-link'}, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Protetor Labial com FPS', price: 20.00, icon: 'fa-sun'}, {name: 'Protetor de Pescoço (Buff)', price: 25.00, icon: 'fa-user-ninja'}, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
-                { title: 'Kit Comandos (Avançado)', badge: 'Mais Completo', image: 'https://i.imgur.com/jbpqCx4.png', description: 'Equipamentos de ponta para missões críticas.', items: [{name: 'Barraca Camuflada', price: 150.00, icon: 'fa-tent'}, {name: 'Saco de dormir Individual', price: 100.00, icon: 'fa-bed'}, {name: 'Kit térmico', price: 100.00, icon: 'fa-temperature-full'}, {name: 'Lanterna de cabeça', price: 40.00, icon: 'fa-lightbulb'}, {name: 'Mochila Tática', price: 150.00, icon: 'fa-bag-shopping'}, {name: 'Kit Joelheira e Cotoveleira', price: 159.90, icon: 'fa-shield-halved'}, {name: 'Pulseira Tática de Sobrevivência', price: 40.00, icon: 'fa-compass'}, {name: 'Garrafa Tática Cantil', price: 59.90, icon: 'fa-bottle-water'}, {name: 'Cinto Tático', price: 40.00, icon: 'fa-circle-notch'}, {name: 'Mosquetão Tático com Trava', price: 50.00, icon: 'fa-link'}, {name: 'Toalha de Microfibra Compacta', price: 40.00, icon: 'fa-square-full' }, {name: 'Protetor Solar em Bastão', price: 80.00, icon: 'fa-sun'}, {name: 'Luvas Táticas Leves', price: 50.00, icon: 'fa-hand-fist' }, {name: 'Repelente em Spray Compacto', price: 30.00, icon: 'fa-bug'}, {name: 'Protetor Labial com FPS', price: 20.00, icon: 'fa-sun'}, {name: 'Protetor de Pescoço (Buff)', price: 25.00, icon: 'fa-user-ninja'}, {name: 'Lenço umedecido', price: 20.00, icon: 'fa-box-tissue'}]},
-            ],
-            testimonials: [
-                { name: "BC Carlos", squad: "Turma Alfa", role: "Aluno", text: "A barraca camuflada que peguei com a Bravus aguentou uma chuva pesada no acampamento e não entrou uma gota. Salvou minha noite!", stars: 5 },
-                { name: "BC Ana", squad: "Turma Bravo", role: "Aluna", text: "Fui pro campo achando que ia congelar, mas com o kit térmico que ele me indicou eu dormi super bem no saco de dormir.", stars: 5 },
-                { name: "BC Roberto", squad: "Turma Charlie", role: "Aluno", text: "Peguei o Kit Comandos pro acampamento. A lanterna de cabeça clareia muito longe, ajudou demais na trilha noturna. Material profissional.", stars: 4 },
-                { name: "BC Mendes", squad: "Turma Delta", role: "Líder de Equipe", text: "A calça tática ripstop é guerreira demais. Rastejei no barro, passei em galho e não rasgou nada. O material da Bravus não decepciona.", stars: 5 },
-                { name: "BC Juliana", squad: "Turma B05", role: "Aluna", text: "Gente, a lona da barraca é bem grossa. Montagem fácil e rápida, essencial pra quem tá correndo contra o tempo na instrução de acampamento.", stars: 5 }
-            ]
-        };
+        const ADMIN_EMAIL = 'admin@bravus.local';
+        const PRICE_DOC_PATH = ['loja', 'valoresCatalogo'];
+        const BRAVUS_PHONE = '5561998300711';
+        const CARD_FEE = 1.124;
+        const firebaseApp = initializeApp(firebaseConfig);
+        const firestore = getFirestore(firebaseApp);
+        const auth = getAuth(firebaseApp);
+        const priceDocRef = doc(firestore, ...PRICE_DOC_PATH);
 
-        let db = JSON.parse(JSON.stringify(defaultData)); 
-        let cart = [];
-        let isAdmin = localStorage.getItem('bravus_admin_session') === 'active'; // Verifica memória do navegador
-        let currentSlide = 0;
-
-        // Função utilitária para Ancoragem de Preço
-        window.getInstallmentText = function(basePrice) {
-            const withFee = basePrice * 1.124;
-            const installment = withFee / 12;
-            return `${installment.toFixed(2).replace('.', ',')} em 12x`;
-        };
-
-        window.getFullPriceText = function(basePrice) {
-            return `${basePrice.toFixed(2).replace('.', ',')}`;
-        };
-
-        // --- SISTEMA FIREBASE ---
-        async function initFirebaseDB() {
-            try {
-                await signInAnonymously(auth).catch(e => console.warn("Aviso Auth Firebase:", e.message));
-                
-                const docRef = doc(firestore, "loja", "dadosPrincipais");
-                onSnapshot(docRef, (snapshot) => {
-                    if (snapshot.exists()) {
-                        db = snapshot.data();
-                        window.renderAll();
+        const productGroups = [
+            {
+                id: 'fardamento',
+                gridId: 'fardamentoGrid',
+                products: [
+                    {
+                        id: 'kit-basico',
+                        title: 'Kit Básico',
+                        image: 'https://i.imgur.com/t2VQ9MF.jpeg',
+                        badge: 'Entrada',
+                        description: 'Conjunto inicial para quem precisa montar o fardamento principal sem excessos.',
+                        items: [
+                            apparel('Camiseta preta manga longa', 79.90, 'fa-shirt'),
+                            apparel('Calça tática ripstop', 169.90, 'fa-person-hiking'),
+                            boot('Coturno extra leve com zíper', 169.90),
+                            item('Cinto', 39.90, 'fa-circle-notch'),
+                            item('Bornal', 89.90, 'fa-briefcase'),
+                            choice('Relógio tático militar', 'fa-clock', 'Modelo', [
+                                option('Masculino', 199.90),
+                                option('Feminino', 199.90)
+                            ])
+                        ]
+                    },
+                    {
+                        id: 'kit-avancado',
+                        title: 'Kit Avançado',
+                        image: 'https://i.imgur.com/2w9HPjA.jpeg',
+                        badge: 'Mais pedido',
+                        description: 'Fardamento completo com acessórios de uso frequente na formação.',
+                        items: [
+                            sized('Colete tático modular', 489.90, 'fa-vest', ['P', 'M', 'G', 'GG', 'EXG']),
+                            item('Suspensório', 189.90, 'fa-grip-lines-vertical'),
+                            apparel('Camiseta preta manga longa', 79.90, 'fa-shirt'),
+                            apparel('Calça tática ripstop', 169.90, 'fa-person-hiking'),
+                            boot('Coturno extra leve com zíper', 169.90),
+                            item('Cinto', 39.90, 'fa-circle-notch'),
+                            item('Bornal', 89.90, 'fa-briefcase'),
+                            item('Distintivo Bombeiro Civil', 149.90, 'fa-medal'),
+                            item('Caneta quebra vidro', 79.90, 'fa-pen-nib'),
+                            item('Luva tática preta', 79.90, 'fa-hand-fist'),
+                            item('Joelheira e cotoveleira', 159.90, 'fa-shield-halved'),
+                            item('Algema invictus', 199.90, 'fa-lock'),
+                            item('Lanterna tática com LED lateral', 59.90, 'fa-lightbulb'),
+                            choice('Relógio tático militar', 'fa-clock', 'Modelo', [
+                                option('Masculino', 199.90),
+                                option('Feminino', 199.90)
+                            ])
+                        ]
+                    },
+                    {
+                        id: 'kit-completo',
+                        title: 'Kit Completo',
+                        image: 'https://i.imgur.com/Y6LT4jq.jpeg',
+                        badge: 'Mais vendido',
+                        description: 'Opção mais ampla para quem quer deixar fardamento e acessórios resolvidos de uma vez.',
+                        items: [
+                            sized('Colete tático modular', 489.90, 'fa-vest', ['P', 'M', 'G', 'GG', 'EXG']),
+                            item('Suspensório', 189.90, 'fa-grip-lines-vertical'),
+                            apparel('Camiseta preta manga longa', 79.90, 'fa-shirt'),
+                            apparel('Calça tática ripstop', 169.90, 'fa-person-hiking'),
+                            boot('Coturno extra leve com zíper', 169.90),
+                            item('Cinto', 39.90, 'fa-circle-notch'),
+                            item('Bornal', 89.90, 'fa-briefcase'),
+                            item('Distintivo Bombeiro Civil', 149.90, 'fa-medal'),
+                            item('Caneta quebra vidro', 79.90, 'fa-pen-nib'),
+                            item('Luva tática preta', 79.90, 'fa-hand-fist'),
+                            item('Joelheira e cotoveleira', 159.90, 'fa-shield-halved'),
+                            item('Algema invictus', 199.90, 'fa-lock'),
+                            item('Lanterna tática com LED lateral', 59.90, 'fa-lightbulb'),
+                            sized('Calça tática bege / PRF / PF', 179.90, 'fa-person-hiking', ['P', 'M', 'G', 'GG']),
+                            choice('Relógio tático militar', 'fa-clock', 'Modelo', [
+                                option('Masculino', 199.90),
+                                option('Feminino', 199.90)
+                            ])
+                        ]
                     }
-                }, (err) => {
-                    console.warn("Acesso bloqueado por regras de segurança no Firebase. O site continuará funcionando com o catálogo local.", err.message);
-                    window.renderAll();
-                });
-            } catch (error) {
-                console.warn("Falha na autenticação do Firebase. Usando catálogo local.", error.message);
-                window.renderAll();
+                ]
+            },
+            {
+                id: 'elite',
+                gridId: 'eliteGrid',
+                products: [
+                    {
+                        id: 'kit-elite',
+                        title: 'Kit Elite',
+                        image: 'https://i.imgur.com/ih87A5E.jpeg',
+                        badge: 'Complementar',
+                        description: 'Itens selecionados para melhorar conforto, apresentação e desempenho na rotina de treinamento.',
+                        items: [
+                            sized('Camiseta Combat Shirt', 189.90, 'fa-shirt', ['P', 'M', 'G', 'GG']),
+                            colorSized('Camiseta Bombeiro Civil', 79.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preta', 'Branca', 'Vermelha']),
+                            colorSized('Moletom Bombeiro Civil', 129.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preto', 'Vermelho']),
+                            colorSized('Calça tática foxboy', 289.90, 'fa-person-hiking', ['P', 'M', 'G', 'GG'], ['Bege', 'Preta', 'Camuflada']),
+                            choice('Coturno Atalaia', 'fa-shoe-prints', 'Cor', [
+                                option('Bege', 389.90, { Tamanho: shoeSizes() }),
+                                option('Preto', 389.90, { Tamanho: shoeSizes() })
+                            ]),
+                            item('Balaclava preta', 24.99, 'fa-mask-ventilator'),
+                            item('Palmilha ortopédica', 39.99, 'fa-shoe-prints'),
+                            item('Meia preta cano longo militar', 29.90, 'fa-socks'),
+                            sized('Manguito preto', 19.90, 'fa-mitten', ['P', 'M', 'G', 'GG']),
+                            item('Oxímetro de dedo', 34.90, 'fa-heart-pulse'),
+                            choice('Relógio tático militar', 'fa-clock', 'Modelo', [
+                                option('Masculino', 199.90),
+                                option('Feminino', 199.90)
+                            ])
+                        ]
+                    },
+                    {
+                        id: 'kit-instrutor',
+                        title: 'Kit Instrutor',
+                        image: 'https://i.imgur.com/aYGnbsv.jpeg',
+                        badge: 'Reforçado',
+                        description: 'Conjunto com peças mais robustas e itens de identificação.',
+                        items: [
+                            sized('Camiseta Combat Shirt', 189.90, 'fa-shirt', ['P', 'M', 'G', 'GG']),
+                            colorSized('Camiseta Bombeiro Civil', 79.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preta', 'Branca', 'Vermelha']),
+                            colorSized('Moletom Bombeiro Civil', 129.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preto', 'Vermelho']),
+                            colorSized('Calça tática invictus', 349.90, 'fa-person-hiking', ['P', 'M', 'G', 'GG'], ['Bege', 'Preta', 'Camuflada']),
+                            choice('Coturno Acero', 'fa-shoe-prints', 'Cor', [
+                                option('Bege', 499.90, { Tamanho: shoeSizes() }),
+                                option('Preto', 499.90, { Tamanho: shoeSizes() })
+                            ]),
+                            item('Colar Bombeiro aço', 69.90, 'fa-medal'),
+                            item('Sutache com nome e tipo sanguíneo', 24.99, 'fa-id-badge'),
+                            item('Balaclava preta', 24.99, 'fa-mask-ventilator'),
+                            item('Palmilha ortopédica', 39.99, 'fa-shoe-prints'),
+                            item('Meia preta cano longo militar', 29.90, 'fa-socks'),
+                            item('Nugget para engraxar coturno preto', 29.90, 'fa-brush'),
+                            sized('Manguito preto', 19.90, 'fa-mitten', ['P', 'M', 'G', 'GG']),
+                            item('Monitor digital de pressão', 119.90, 'fa-stethoscope'),
+                            choice('Relógio tático militar', 'fa-clock', 'Modelo', [
+                                option('Masculino', 199.90),
+                                option('Feminino', 199.90)
+                            ])
+                        ]
+                    },
+                    {
+                        id: 'kit-gate',
+                        title: 'Kit G.A.T.E',
+                        image: 'https://i.imgur.com/L2PUx6z.jpeg',
+                        badge: 'Topo de linha',
+                        description: 'Kit premium para quem quer um conjunto mais robusto, com peças reforçadas, identificação completa e escolha do coturno ideal.',
+                        items: [
+                            sized('Camiseta Combat Shirt', 189.90, 'fa-shirt', ['P', 'M', 'G', 'GG']),
+                            colorSized('Camiseta Bombeiro Civil', 79.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preta', 'Branca', 'Vermelha']),
+                            colorSized('Moletom Bombeiro Civil', 129.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preto', 'Vermelho']),
+                            colorSized('Calça tática invictus', 349.90, 'fa-person-hiking', ['P', 'M', 'G', 'GG'], ['Bege', 'Preta', 'Camuflada']),
+                            choice('Coturno', 'fa-shoe-prints', 'Modelo', [
+                                option('Guartelá bege', 569.90, { Tamanho: shoeSizes() }),
+                                option('Guartelá preto', 569.90, { Tamanho: shoeSizes() }),
+                                option('Invictus bege', 649.90, { Tamanho: shoeSizes() }),
+                                option('Invictus preto', 649.90, { Tamanho: shoeSizes() })
+                            ]),
+                            item('Colar Bombeiro aço', 69.90, 'fa-medal'),
+                            item('Sutache com nome e tipo sanguíneo', 24.99, 'fa-id-badge'),
+                            item('Balaclava preta', 24.99, 'fa-mask-ventilator'),
+                            item('Palmilha ortopédica', 39.99, 'fa-shoe-prints'),
+                            item('Meia preta cano longo militar', 29.90, 'fa-socks'),
+                            item('Nugget para engraxar coturno preto', 29.90, 'fa-brush'),
+                            sized('Manguito preto', 19.90, 'fa-mitten', ['P', 'M', 'G', 'GG']),
+                            item('Oxímetro de dedo', 34.90, 'fa-heart-pulse'),
+                            item('Monitor digital de pressão', 119.90, 'fa-stethoscope'),
+                            item('Gorro vermelho Bombeiro Civil', 89.90, 'fa-hat-winter'),
+                            choice('Relógio tático militar', 'fa-clock', 'Modelo', [
+                                option('Masculino', 199.90),
+                                option('Feminino', 199.90)
+                            ])
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'acampamento',
+                gridId: 'acampamentoGrid',
+                products: [
+                    {
+                        id: 'kit-recruta',
+                        title: 'Kit Recruta',
+                        image: 'https://i.imgur.com/adECSak.jpeg',
+                        badge: 'Básico',
+                        description: 'Itens essenciais para pernoite e deslocamento no acampamento.',
+                        items: [
+                            item('Barraca camuflada', 150.00, 'fa-tent'),
+                            item('Saco de dormir individual', 100.00, 'fa-bed'),
+                            item('Lanterna de cabeça', 40.00, 'fa-lightbulb'),
+                            item('Pulseira tática de sobrevivência', 40.00, 'fa-compass'),
+                            item('Repelente em spray compacto', 30.00, 'fa-bug'),
+                            item('Toalha de microfibra compacta', 40.00, 'fa-square-full'),
+                            item('Lenço umedecido', 20.00, 'fa-box-tissue')
+                        ]
+                    },
+                    {
+                        id: 'kit-capitao',
+                        title: 'Kit Capitão',
+                        image: 'https://i.imgur.com/FkZVMfX.jpeg',
+                        badge: 'Intermediário',
+                        description: 'Mais conforto e organização para atividades de campo.',
+                        items: [
+                            item('Barraca camuflada', 150.00, 'fa-tent'),
+                            item('Saco de dormir individual', 100.00, 'fa-bed'),
+                            item('Kit térmico', 100.00, 'fa-temperature-full'),
+                            item('Lanterna de cabeça', 40.00, 'fa-lightbulb'),
+                            item('Pulseira tática de sobrevivência', 40.00, 'fa-compass'),
+                            item('Garrafa tática cantil', 59.90, 'fa-bottle-water'),
+                            item('Toalha de microfibra compacta', 40.00, 'fa-square-full'),
+                            item('Mosquetão tático com trava', 50.00, 'fa-link'),
+                            item('Repelente em spray compacto', 30.00, 'fa-bug'),
+                            item('Protetor labial com FPS', 20.00, 'fa-sun'),
+                            item('Protetor de pescoço Buff', 25.00, 'fa-user-ninja'),
+                            item('Lenço umedecido', 20.00, 'fa-box-tissue')
+                        ]
+                    },
+                    {
+                        id: 'kit-comandos',
+                        title: 'Kit Comandos',
+                        image: 'https://i.imgur.com/jbpqCx4.png',
+                        badge: 'Mais vendido',
+                        description: 'Kit completo de campo para quem quer reduzir improvisos no acampamento.',
+                        items: [
+                            item('Barraca camuflada', 150.00, 'fa-tent'),
+                            item('Saco de dormir individual', 100.00, 'fa-bed'),
+                            item('Kit térmico', 100.00, 'fa-temperature-full'),
+                            item('Lanterna de cabeça', 40.00, 'fa-lightbulb'),
+                            item('Mochila tática', 150.00, 'fa-bag-shopping'),
+                            item('Kit joelheira e cotoveleira', 159.90, 'fa-shield-halved'),
+                            item('Pulseira tática de sobrevivência', 40.00, 'fa-compass'),
+                            item('Garrafa tática cantil', 59.90, 'fa-bottle-water'),
+                            item('Cinto tático', 40.00, 'fa-circle-notch'),
+                            item('Mosquetão tático com trava', 50.00, 'fa-link'),
+                            item('Toalha de microfibra compacta', 40.00, 'fa-square-full'),
+                            item('Protetor solar em bastão', 80.00, 'fa-sun'),
+                            item('Luvas táticas leves', 50.00, 'fa-hand-fist'),
+                            item('Repelente em spray compacto', 30.00, 'fa-bug'),
+                            item('Protetor labial com FPS', 20.00, 'fa-sun'),
+                            item('Protetor de pescoço Buff', 25.00, 'fa-user-ninja'),
+                            item('Lenço umedecido', 20.00, 'fa-box-tissue')
+                        ]
+                    }
+                ]
             }
-        }
+        ];
 
-        // --- RENDERIZAÇÃO UI ---
-        window.renderAll = function() {
-            renderGrid('fardamento', db.fardamento);
-            renderGrid('elite', db.elite);
-            renderGrid('acampamento', db.acampamento);
-            window.renderTestimonials();
-            
-            document.getElementById('admin-indicator').style.display = isAdmin ? 'flex' : 'none';
-            const adminTestimonialBtn = document.getElementById('admin-testimonial-btn');
-            if(adminTestimonialBtn) adminTestimonialBtn.style.display = isAdmin ? 'block' : 'none';
+        const testimonials = [
+            { name: 'Aluno Turma Charlie', text: 'O pedido ficou bem organizado. Escolhi os tamanhos e já mandei tudo certo pelo WhatsApp.' },
+            { name: 'Aluno Turma B06', text: 'No acampamento fez diferença ter os itens certos. Evitei improviso e consegui me preparar melhor.' },
+            { name: 'Aluno Turma B05', text: 'Gostei porque consegui revisar o pedido antes de enviar e não esqueci tamanho nem modelo.' },
+            { name: 'Aluno Turma B07', text: 'O kit me ajudou a chegar mais preparado. Ficou claro o que eu precisava levar para a instrução.' },
+            { name: 'Aluno Turma Delta', text: 'A lanterna de cabeça foi indispensável. Ter colocado tudo no pedido antes facilitou bastante.' },
+            { name: 'Aluno Turma Charlie', text: 'O carrinho deixou fácil conferir quantidades e detalhes antes de mandar para confirmação.' },
+            { name: 'Aluno Turma B06', text: 'A parte dos tamanhos evitou erro no fardamento. Só enviei depois de conferir tudo.' },
+            { name: 'Aluno Turma B05', text: 'Achei prático escolher o kit completo e depois revisar item por item no pedido.' },
+            { name: 'Aluno Turma Delta', text: 'Eu não sabia exatamente por onde começar. Os kits deram uma direção melhor para montar o material.' },
+            { name: 'Aluno Turma B07', text: 'Os itens de apoio fizeram sentido na rotina de aula. O resumo de cada item ajudou na escolha.' },
+            { name: 'Aluno Turma Charlie', text: 'O processo ficou simples: escolhi o kit, ajustei modelo e mandei o pedido sem confusão.' },
+            { name: 'Aluno Turma B06', text: 'Ter barraca, lanterna e saco de dormir organizados no mesmo pedido economizou tempo.' },
+            { name: 'Aluno Turma Delta', text: 'O fardamento ficou mais fácil de comprar porque o site já mostra as opções de tamanho.' },
+            { name: 'Aluno Turma B07', text: 'Gostei da confirmação quando adiciona item. Dá segurança de que entrou no pedido.' },
+            { name: 'Aluno Turma B05', text: 'A revisão final pelo WhatsApp ficou bem completa, com os detalhes que eu tinha escolhido.' }
+        ];
+
+        let activeProduct = null;
+        let cart = [];
+        let isAdmin = false;
+        let priceOverrides = {};
+        let testimonialIndex = 0;
+
+        const els = {
+            searchInput: document.getElementById('searchInput'),
+            clearSearch: document.getElementById('clearSearch'),
+            searchStatus: document.getElementById('searchStatus'),
+            productModal: document.getElementById('productModal'),
+            modalTitle: document.getElementById('modalTitle'),
+            modalBody: document.getElementById('modalBody'),
+            cartModal: document.getElementById('cartModal'),
+            cartItems: document.getElementById('cartItems'),
+            cartTotal: document.getElementById('cartTotal'),
+            checkoutTotal: document.getElementById('checkoutTotal'),
+            cartCountHeader: document.getElementById('cartCountHeader'),
+            cartCountFloat: document.getElementById('cartCountFloat'),
+            mobileMenu: document.getElementById('mobileMenu'),
+            adminButton: document.getElementById('adminButton'),
+            adminModal: document.getElementById('adminModal'),
+            adminLoginForm: document.getElementById('adminLoginForm'),
+            adminLoggedPanel: document.getElementById('adminLoggedPanel'),
+            adminPassword: document.getElementById('adminPassword'),
+            adminLoginStatus: document.getElementById('adminLoginStatus'),
+            testimonialsTrack: document.getElementById('testimonialsTrack'),
+            testimonialDots: document.getElementById('testimonialDots')
         };
 
-        function renderGrid(sectionId, items) {
-            const grid = document.getElementById(`${sectionId}-grid`);
-            if(!grid || !items) return;
-            grid.innerHTML = items.map(kit => `
-                <div class="glass-panel rounded-lg overflow-hidden group cursor-pointer hover:border-gold-accent transition-all duration-300 relative flex flex-col h-full" onclick="window.openProductModal('${kit.title}')">
-                    <div class="h-48 sm:h-56 overflow-hidden bg-gray-900 relative">
-                        <img src="${kit.image}" alt="${kit.title}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+        function item(name, price, icon, config = {}) {
+            return { name, price, icon, ...config };
+        }
+
+        function option(label, price, details = {}) {
+            return { label, price, details };
+        }
+
+        function sized(name, price, icon, sizes) {
+            return item(name, price, icon, { selectors: { Tamanho: sizes } });
+        }
+
+        function apparel(name, price, icon) {
+            return sized(name, price, icon, ['P', 'M', 'G', 'GG', 'EXG']);
+        }
+
+        function boot(name, price) {
+            return sized(name, price, 'fa-shoe-prints', shoeSizes());
+        }
+
+        function colorSized(name, price, icon, sizes, colors) {
+            return item(name, price, icon, { selectors: { Tamanho: sizes, Cor: colors } });
+        }
+
+        function choice(name, icon, label, options) {
+            return { name, icon, choiceLabel: label, options };
+        }
+
+        function shoeSizes() {
+            return ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46'];
+        }
+
+        function formatAmount(value) {
+            return value.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        function formatTotal(value) {
+            if (!value) return 'Pedido vazio';
+            const installments = value * CARD_FEE / 12;
+            return `<span class="block">${formatAmount(installments)} em 12x</span><span class="mt-1 block text-xs font-medium text-gray-400">ou ${formatAmount(value)} à vista</span>`;
+        }
+
+        function normalize(text) {
+            return String(text).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        }
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            }[char]));
+        }
+
+        function allProducts() {
+            return productGroups.flatMap(group => group.products.map(product => ({ ...product, groupId: group.id })));
+        }
+
+        function findProduct(id) {
+            return allProducts().find(product => product.id === id);
+        }
+
+        function productSearchText(product) {
+            const itemText = product.items.flatMap(productItem => {
+                const selectors = Object.values(productItem.selectors || {}).flat();
+                const options = (productItem.options || []).flatMap(opt => [opt.label, ...Object.values(opt.details || {}).flat()]);
+                return [productItem.name, ...selectors, ...options];
+            }).join(' ');
+            return normalize(`${product.title} ${product.badge || ''} ${product.description} ${itemText}`);
+        }
+
+        function renderCatalog() {
+            const query = normalize(els.searchInput.value.trim());
+            let visibleCount = 0;
+
+            productGroups.forEach(group => {
+                const grid = document.getElementById(group.gridId);
+                const products = group.products.filter(product => !query || productSearchText(product).includes(query));
+                visibleCount += products.length;
+                grid.innerHTML = products.map(renderCard).join('') || emptyGroup();
+            });
+
+            els.searchStatus.textContent = query
+                ? `${visibleCount} kit${visibleCount === 1 ? '' : 's'} encontrado${visibleCount === 1 ? '' : 's'}.`
+                : 'Digite para filtrar kits e itens.';
+        }
+
+        function testimonialVisibleCount() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 768) return 2;
+            return 1;
+        }
+
+        function renderTestimonials() {
+            if (!els.testimonialsTrack || !els.testimonialDots) return;
+            els.testimonialsTrack.innerHTML = testimonials.map(testimonial => `
+                <article class="testimonial-slide">
+                    <div class="flex h-full min-h-[190px] flex-col rounded-lg border border-line bg-ink/45 p-5">
+                        <div class="mb-3 text-xs text-brass">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="flex-1 text-sm leading-relaxed text-gray-300">“${escapeHtml(testimonial.text)}”</p>
+                        <p class="mt-4 border-t border-line pt-4 text-xs font-bold uppercase tracking-wide text-gray-500">${escapeHtml(testimonial.name)}</p>
                     </div>
-                    <div class="p-4 sm:p-5 flex flex-col flex-1">
-                        <h3 class="text-lg sm:text-xl font-display font-bold text-white mb-2 uppercase group-hover:text-gold-accent transition-colors">${kit.title}</h3>
-                        <p class="text-xs sm:text-sm text-gray-400 mb-4 line-clamp-2">${kit.description}</p>
-                        <button class="w-full btn-outline py-2.5 sm:py-2 rounded text-xs sm:text-sm uppercase mt-auto group-hover:bg-gold-accent group-hover:text-black transition-all font-bold">Detalhes</button>
-                    </div>
-                </div>
+                </article>
+            `).join('');
+            updateTestimonials();
+        }
+
+        function updateTestimonials() {
+            if (!els.testimonialsTrack || !els.testimonialDots) return;
+            const visible = testimonialVisibleCount();
+            const maxIndex = Math.max(0, testimonials.length - visible);
+            testimonialIndex = Math.min(testimonialIndex, maxIndex);
+            const offset = testimonialIndex * (100 / visible);
+            els.testimonialsTrack.style.transform = `translateX(-${offset}%)`;
+            els.testimonialDots.innerHTML = Array.from({ length: maxIndex + 1 }, (_, index) => `
+                <button class="h-2.5 rounded-full transition-all ${index === testimonialIndex ? 'w-7 bg-brass' : 'w-2.5 bg-line'}" type="button" data-testimonial-dot="${index}" aria-label="Ir para depoimento ${index + 1}"></button>
             `).join('');
         }
 
-        window.renderTestimonials = function() {
-            const track = document.getElementById('testimonial-track');
-            if(!track || !db.testimonials) return;
+        function moveTestimonials(direction) {
+            const visible = testimonialVisibleCount();
+            const maxIndex = Math.max(0, testimonials.length - visible);
+            testimonialIndex += direction;
+            if (testimonialIndex < 0) testimonialIndex = maxIndex;
+            if (testimonialIndex > maxIndex) testimonialIndex = 0;
+            updateTestimonials();
+        }
 
-            track.innerHTML = db.testimonials.map((t, index) => `
-                <div class="testimonial-card">
-                    <div class="glass-panel p-6 sm:p-8 rounded-lg h-full border border-gray-800 flex flex-col">
-                        
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="flex gap-1 items-center">
-                                ${isAdmin ? 
-                                    `<input type="number" min="1" max="5" value="${t.stars}" onchange="window.updateTestimonial(${index}, 'stars', this.value)" class="admin-input w-12 text-xs text-center" title="Avaliação (1 a 5)"> <i class="fa-solid fa-star text-gold-accent text-[10px]"></i>` 
-                                    : Array(t.stars).fill('<i class="fa-solid fa-star text-gold-accent text-sm"></i>').join('')
-                                }
+        function renderCard(product) {
+            const isBestSeller = product.badge && normalize(product.badge) === 'mais vendido';
+            return `
+                <article class="surface flex h-full flex-col overflow-hidden rounded-lg ${isBestSeller ? 'ring-2 ring-brass shadow-[0_0_28px_rgba(198,168,124,.18)]' : ''}">
+                    <div class="relative h-52 bg-black">
+                        <img src="${product.image}" alt="${escapeHtml(product.title)}" class="h-full w-full object-cover opacity-85">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"></div>
+                        <span class="absolute left-4 top-4 rounded px-3 py-1 text-[11px] font-extrabold uppercase tracking-wide text-ink ${isBestSeller ? 'bg-gradient-to-r from-yellow-300 to-brass shadow-lg shadow-black/40' : 'bg-brass'}">
+                            ${isBestSeller ? '<i class="fa-solid fa-fire mr-1"></i>' : ''}${escapeHtml(product.badge || 'Kit')}
+                        </span>
+                        ${isBestSeller ? '<span class="absolute bottom-4 left-4 rounded bg-black/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[.18em] text-brass backdrop-blur">Escolha mais popular</span>' : ''}
+                    </div>
+                    <div class="flex flex-1 flex-col p-5">
+                        <h3 class="font-display text-2xl font-bold uppercase text-white">${escapeHtml(product.title)}</h3>
+                        <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-400">${escapeHtml(product.description)}</p>
+                        <div class="mt-5 flex items-center justify-between border-t border-line pt-4">
+                            <span class="text-xs font-bold uppercase text-gray-500">${product.items.length} itens</span>
+                            <button class="btn-secondary rounded-md px-4 py-2 text-xs" type="button" data-open-product="${product.id}">Ver detalhes</button>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function emptyGroup() {
+            return '<div class="rounded-lg border border-dashed border-line p-6 text-sm text-gray-500 md:col-span-2 lg:col-span-3">Nenhum kit encontrado nesta seção.</div>';
+        }
+
+        function openProduct(productId) {
+            activeProduct = findProduct(productId);
+            if (!activeProduct) return;
+            els.modalTitle.textContent = activeProduct.title;
+            els.modalBody.innerHTML = renderProductModal(activeProduct);
+            els.productModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            document.body.classList.add('product-modal-open');
+        }
+
+        function closeProduct() {
+            els.productModal.classList.add('hidden');
+            document.body.classList.remove('product-modal-open');
+            if (els.cartModal.classList.contains('hidden')) {
+                document.body.classList.remove('overflow-hidden');
+            }
+            activeProduct = null;
+        }
+
+        function renderProductModal(product) {
+            const isBestSeller = product.badge && normalize(product.badge) === 'mais vendido';
+            return `
+                <div class="grid gap-6 p-5 md:grid-cols-[320px_1fr] md:p-6">
+                    <div>
+                        <div class="overflow-hidden rounded-lg border border-line bg-black">
+                            <img src="${product.image}" alt="${escapeHtml(product.title)}" class="h-56 w-full object-cover md:h-72">
+                        </div>
+                        <div class="mt-4 rounded-lg border border-line bg-ink/50 p-4">
+                            <p class="text-xs font-extrabold uppercase text-brass">Conferência</p>
+                            <p class="mt-2 text-sm leading-relaxed text-gray-400">Itens com tamanho, cor ou modelo precisam ser preenchidos antes de entrar no pedido.</p>
+                        </div>
+                    </div>
+                    <div>
+                        ${isBestSeller ? `
+                            <div class="mb-4 rounded-md border border-brass/60 bg-brass/10 p-3 text-sm font-bold uppercase tracking-wide text-brass">
+                                <i class="fa-solid fa-fire mr-2"></i>Mais vendido entre os alunos
                             </div>
-                            ${isAdmin ? `<button onclick="window.removeTestimonial(${index})" class="text-red-500 hover:text-red-400 text-xs px-3 py-2 border border-red-900 rounded bg-black" title="Excluir"><i class="fa-solid fa-trash"></i></button>` : ''}
+                        ` : ''}
+                        <p class="mb-5 text-sm leading-relaxed text-gray-300">${escapeHtml(product.description)}</p>
+                        <div class="space-y-3">
+                            ${product.items.map((productItem, index) => renderProductItem(productItem, index)).join('')}
                         </div>
-                        
-                        ${isAdmin ? 
-                            `<textarea onchange="window.updateTestimonial(${index}, 'text', this.value)" class="admin-textarea flex-1 mb-4 h-24 text-base">${t.text}</textarea>`
-                            : `<p class="text-gray-300 italic mb-6 text-sm md:text-base flex-1">"${t.text}"</p>`
-                        }
-                        
-                        <div class="mt-4 pt-4 border-t border-gray-800">
-                            ${isAdmin ? `
-                                <div class="space-y-3">
-                                    <input type="text" value="${t.name}" onchange="window.updateTestimonial(${index}, 'name', this.value)" class="admin-input w-full text-base md:text-xs py-2" placeholder="Nome do Aluno">
-                                    <input type="text" value="${t.squad}" onchange="window.updateTestimonial(${index}, 'squad', this.value)" class="admin-input w-full text-base md:text-xs py-2" placeholder="Ex: Turma Alfa">
-                                </div>
-                            ` : `
-                                <h4 class="font-bold text-white text-sm uppercase">${t.name}</h4>
-                                <p class="text-[10px] text-gold-accent uppercase tracking-widest">${t.squad}</p>
-                            `}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            window.updateCarouselPosition();
-        };
-
-        // --- CARROSSEL ---
-        window.moveCarousel = function(dir) {
-            const items = document.querySelectorAll('.testimonial-card');
-            if(!items.length) return;
-            currentSlide = (currentSlide + dir + items.length) % items.length;
-            window.updateCarouselPosition();
-        };
-
-        window.updateCarouselPosition = function() {
-            const track = document.getElementById('testimonial-track');
-            const items = document.querySelectorAll('.testimonial-card');
-            if(!track || !items.length) return;
-            const width = items[0].offsetWidth;
-            track.style.transform = `translateX(-${currentSlide * width}px)`;
-        };
-
-        // --- ADMIN DEPOIMENTOS ---
-        window.updateTestimonial = async function(index, field, value) {
-            if(!isAdmin) return;
-            if(field === 'stars') {
-                value = parseInt(value);
-                if(value < 1) value = 1;
-                if(value > 5) value = 5;
-            }
-            db.testimonials[index][field] = value;
-            try {
-                const docRef = doc(firestore, "loja", "dadosPrincipais");
-                await setDoc(docRef, db);
-            } catch (e) { alert("Erro ao salvar no banco: " + e.message); }
-        };
-
-        window.removeTestimonial = async function(index) {
-            if(!isAdmin) return;
-            if(confirm("Tem certeza que deseja excluir este depoimento?")) {
-                db.testimonials.splice(index, 1);
-                try {
-                    const docRef = doc(firestore, "loja", "dadosPrincipais");
-                    await setDoc(docRef, db);
-                    window.renderAll();
-                } catch (e) { alert("Erro ao deletar do banco: " + e.message); }
-            }
-        };
-
-        window.addTestimonial = async function() {
-            if(!isAdmin) return;
-            db.testimonials.unshift({ name: "Novo Aluno", squad: "Turma Nova", role: "Aluno", text: "Escreva o depoimento aqui...", stars: 5 });
-            try {
-                const docRef = doc(firestore, "loja", "dadosPrincipais");
-                await setDoc(docRef, db);
-                window.renderAll();
-            } catch (e) { alert("Erro ao adicionar no banco: " + e.message); }
-        };
-
-        // --- CARRINHO E MODAIS ---
-        window.openProductModal = function(title) {
-            let kit = [...db.fardamento, ...db.elite, ...db.acampamento].find(k => k.title === title);
-            if(!kit) return;
-            
-            const modalContent = document.getElementById('modal-content');
-            modalContent.innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 w-full">
-                    <div class="md:col-span-5 flex flex-col">
-                        <div class="relative rounded-t-2xl sm:rounded-xl overflow-hidden border-b sm:border border-gray-700 shadow-2xl h-48 sm:h-auto shrink-0 w-full bg-black">
-                            <img src="${kit.image}" class="w-full h-full object-cover opacity-90">
-                            <div class="absolute inset-0 bg-gradient-to-t from-tactical-card to-transparent sm:hidden"></div>
-                            ${kit.badge ? `<div class="absolute top-4 left-4 bg-red-600 text-white font-bold px-3 py-1 rounded text-xs shadow-lg uppercase">${kit.badge}</div>` : ''}
-                        </div>
-                        <div class="mt-4 bg-gray-800/50 border border-gray-700 p-4 rounded-lg hidden sm:block">
-                            <p class="text-gold-accent font-bold text-xs uppercase mb-2"><i class="fa-solid fa-truck-fast mr-2"></i> Logística</p>
-                            <p class="text-gray-400 text-xs">Os itens são separados mediante confirmação do pedido. Retirada a combinar com o comando.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="md:col-span-7 flex flex-col flex-1 pb-20 sm:pb-0 px-5 sm:px-0">
-                        <h2 class="text-2xl sm:text-3xl font-display font-bold text-white mb-2 uppercase leading-tight mt-[-2rem] sm:mt-0 relative z-10 drop-shadow-md">${kit.title}</h2>
-                        <p class="text-gray-400 mb-6 sm:border-l-2 border-gold-accent sm:pl-4 text-xs sm:text-sm leading-relaxed">${kit.description}</p>
-                        
-                        <div class="bg-black/30 rounded-t-lg border-b border-gray-700 p-3 flex justify-between items-center sticky top-0 z-10 backdrop-blur-md">
-                            <h4 class="font-bold text-white uppercase text-xs sm:text-sm">Itens Inclusos</h4>
-                            <span class="text-[10px] sm:text-xs text-gray-500 font-bold bg-gray-800 px-2 py-1 rounded">${kit.items.length} itens</span>
-                        </div>
-                        
-                        <div class="flex-1 overflow-y-visible sm:overflow-y-auto custom-scrollbar sm:pr-2">
-                            <ul class="space-y-2 py-2">
-                                ${kit.items.map((item, index) => `
-                                    <li class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 sm:py-4 border sm:border-b border-gray-800 sm:border-gray-700 gap-3 group bg-tactical-black sm:bg-transparent hover:bg-gray-800/50 rounded-lg sm:rounded transition shadow-sm sm:shadow-none">
-                                        
-                                        <div class="flex items-center gap-3 sm:gap-4 w-full sm:w-auto flex-1">
-                                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-md sm:rounded-full bg-gray-800 flex items-center justify-center text-gold-accent border border-gray-700 shrink-0 shadow-inner">
-                                                <i class="fa-solid ${item.icon || 'fa-box'} text-sm"></i>
-                                            </div>
-                                            <div class="flex flex-col justify-center flex-1">
-                                                <span class="font-bold sm:font-medium text-gray-100 text-sm md:text-base leading-tight">${item.name}</span>
-                                            </div>
-                                            
-                                            ${isAdmin ? `
-                                                <div class="flex items-center gap-1 shrink-0 bg-black p-1 rounded border border-red-900 ml-auto">
-                                                    <span class="text-[9px] text-red-500 font-bold uppercase hidden sm:inline">Base:</span>
-                                                    <input type="number" step="0.01" value="${item.price}" 
-                                                        onchange="window.updatePrice('${kit.title}', ${index}, this.value)" 
-                                                        class="admin-input w-16 sm:w-20 text-base sm:text-sm" onclick="event.stopPropagation()">
-                                                </div>
-                                            ` : ''}
-                                        </div>
-                                        
-                                        <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-start sm:justify-end shrink-0 pt-2 sm:pt-0 border-t border-gray-800 sm:border-0 mt-1 sm:mt-0">
-                                            ${item.hasSize ? `
-                                                <select class="bg-gray-900 sm:bg-black border border-gray-700 sm:border-gray-600 text-gray-300 text-sm sm:text-xs rounded py-2 sm:py-1 px-2 focus:border-gold-accent outline-none appearance-none font-bold">
-                                                    <option value="" disabled selected>Tam.</option>
-                                                    ${item.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
-                                                </select>
-                                            ` : ''}
-                                            ${item.hasColor ? `
-                                                <select class="bg-gray-900 sm:bg-black border border-gray-700 sm:border-gray-600 text-gray-300 text-sm sm:text-xs rounded py-2 sm:py-1 px-2 focus:border-gold-accent outline-none appearance-none font-bold">
-                                                    <option value="" disabled selected>Cor</option>
-                                                    ${item.colors.map(c => `<option value="${c}">${c}</option>`).join('')}
-                                                </select>
-                                            ` : ''}
-                                            ${item.hasGender ? `
-                                                <select class="bg-gray-900 sm:bg-black border border-gray-700 sm:border-gray-600 text-gray-300 text-sm sm:text-xs rounded py-2 sm:py-1 px-2 focus:border-gold-accent outline-none appearance-none font-bold">
-                                                    <option value="" disabled selected>Modelo</option>
-                                                    ${item.genders.map(g => `<option value="${g}">${g}</option>`).join('')}
-                                                </select>
-                                            ` : ''}
-                                            
-                                            <button onclick="window.addToCart(this, '${item.name}', ${item.price})" class="bg-gray-700 hover:bg-gold-accent hover:text-black text-white px-5 sm:px-4 py-2 sm:py-1.5 rounded text-xs font-bold uppercase transition-all whitespace-nowrap ml-auto sm:ml-0 shadow-md">
-                                                Incluir
-                                            </button>
-                                        </div>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                        
-                        <div class="mt-4 pt-4 border-t border-gray-700 hidden sm:block">
-                            <button onclick="window.addFullKit('${kit.title}')" class="w-full btn-gold py-4 rounded font-bold shadow-lg">ADICIONAR KIT COMPLETO</button>
-                            <p class="text-center text-xs text-gray-500 mt-2">Você pode ajustar as quantidades no carrinho.</p>
-                        </div>
-
-                        <!-- Sticky Button for Mobile -->
-                        <div class="fixed sm:hidden bottom-0 left-0 w-full p-4 bg-tactical-black border-t border-gray-800 z-50 shadow-[0_-10px_20px_rgba(0,0,0,0.5)]">
-                             <button onclick="window.addFullKit('${kit.title}')" class="w-full btn-gold py-4 rounded font-bold shadow-lg text-sm">ADICIONAR KIT COMPLETO</button>
+                        <div id="modalSuccess" class="mt-4 hidden rounded-md border border-green/50 bg-green/10 p-3 text-sm font-semibold text-green"></div>
+                        <div id="modalError" class="mt-4 hidden rounded-md border border-red/50 bg-red/10 p-3 text-sm text-red-100"></div>
+                        <div class="sticky bottom-0 mt-5 border-t border-line bg-panel/95 pt-4 backdrop-blur">
+                            <button class="btn-primary w-full rounded-md py-4 text-sm" type="button" data-add-kit>Adicionar kit completo</button>
                         </div>
                     </div>
                 </div>
             `;
-            document.getElementById('product-modal').classList.remove('hidden');
-        };
+        }
 
-        window.addToCart = function(btnOrName, nameOrPrice, priceOpt) {
-            let name, price;
-            
-            if (typeof btnOrName === 'object' && btnOrName !== null) {
-                name = nameOrPrice;
-                price = priceOpt;
-                const parentLi = btnOrName.closest('li');
-                if (parentLi) {
-                    const selects = parentLi.querySelectorAll('select');
-                    selects.forEach(sel => {
-                        if(sel.value) name += ` (${sel.value})`;
+        function renderProductItem(productItem, index) {
+            return `
+                <div class="rounded-lg border border-line bg-ink/55 p-4" data-item-row="${index}">
+                    <div class="flex gap-3">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line bg-panelSoft text-brass">
+                            <i class="fa-solid ${productItem.icon || 'fa-box'}"></i>
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <p class="font-bold text-white">${escapeHtml(productItem.name)}</p>
+                            <div class="mt-3 grid gap-2 sm:grid-cols-2">
+                                ${renderSelectors(productItem)}
+                            </div>
+                            ${isAdmin ? renderAdminPriceEditor(activeProduct, productItem, index) : ''}
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button class="rounded-md border border-line bg-panelSoft px-4 py-2 text-xs font-bold uppercase text-white transition-colors hover:border-brass hover:text-brass" type="button" data-add-item="${index}">Incluir item</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAdminPriceEditor(product, productItem, index) {
+            if (!product) return '';
+
+            if (productItem.options) {
+                return `
+                    <div class="mt-4 rounded-md border border-brass/40 bg-black/35 p-3">
+                        <p class="mb-3 text-[11px] font-extrabold uppercase tracking-[.16em] text-brass">Editar valores</p>
+                        <div class="grid gap-2 sm:grid-cols-2">
+                            ${productItem.options.map(optionItem => `
+                                <label class="block">
+                                    <span class="mb-1 block text-[11px] font-bold uppercase text-gray-400">${escapeHtml(optionItem.label)}</span>
+                                    <input class="field w-full rounded-md px-3 py-2 text-sm" type="number" min="0" step="0.01" value="${optionItem.price.toFixed(2)}" data-price-key="${escapeHtml(optionPriceKey(product.id, index, optionItem.label))}">
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="mt-4 rounded-md border border-brass/40 bg-black/35 p-3">
+                    <label class="block">
+                        <span class="mb-1 block text-[11px] font-extrabold uppercase tracking-[.16em] text-brass">Editar valor</span>
+                        <input class="field w-full rounded-md px-3 py-2 text-sm" type="number" min="0" step="0.01" value="${productItem.price.toFixed(2)}" data-price-key="${escapeHtml(priceKey(product.id, index))}">
+                    </label>
+                </div>
+            `;
+        }
+
+        function renderSelectors(productItem) {
+            const controls = [];
+
+            if (productItem.options) {
+                controls.push(renderSelect(productItem.choiceLabel, 'option', productItem.options.map(opt => opt.label)));
+            }
+
+            Object.entries(productItem.selectors || {}).forEach(([label, values]) => {
+                controls.push(renderSelect(label, label, values));
+            });
+
+            if (!controls.length) {
+                return `<p class="text-xs leading-relaxed text-gray-500 sm:col-span-2">${escapeHtml(itemImportance(productItem.name))}</p>`;
+            }
+            return controls.join('');
+        }
+
+        function itemImportance(name) {
+            const normalized = normalize(name);
+            const notes = [
+                [/barraca/, 'Abrigo básico para pernoite, proteção contra vento e organização do espaço no campo.'],
+                [/saco de dormir/, 'Ajuda a preservar conforto térmico e descanso durante a noite de acampamento.'],
+                [/lanterna/, 'Mantém as mãos livres e melhora a segurança em deslocamentos noturnos.'],
+                [/pulseira/, 'Recurso compacto para pequenas necessidades de orientação e sobrevivência.'],
+                [/repelente/, 'Reduz incômodo com insetos e ajuda o aluno a manter foco na atividade.'],
+                [/toalha/, 'Secagem rápida e pouco volume na mochila, útil para rotina de campo.'],
+                [/lenco umedecido/, 'Facilita higiene pessoal quando o acesso a água é limitado.'],
+                [/cinto/, 'Mantém o fardamento ajustado e apoia pequenos acessórios de uso rápido.'],
+                [/bornal/, 'Organiza itens menores para acesso rápido durante instruções e deslocamentos.'],
+                [/suspensorio/, 'Distribui melhor o peso dos equipamentos durante uso prolongado.'],
+                [/distintivo/, 'Identificação visual importante para padronização do uniforme.'],
+                [/caneta quebra vidro/, 'Ferramenta compacta de apoio para situações de emergência.'],
+                [/luva/, 'Protege as mãos em manuseio de equipamentos, trilha e atividades práticas.'],
+                [/joelheira|cotoveleira/, 'Proteção adicional para atividades com impacto, rastejo ou apoio no solo.'],
+                [/algema/, 'Item de apoio operacional usado em simulações e treinamento técnico.'],
+                [/balaclava/, 'Ajuda na proteção do rosto contra frio, poeira e exposição prolongada.'],
+                [/palmilha/, 'Melhora o conforto no coturno durante longas horas em pé ou caminhando.'],
+                [/meia/, 'Reduz atrito no coturno e ajuda a evitar desconforto durante marcha.'],
+                [/oximetro/, 'Apoia avaliações rápidas em atividades de atendimento pré-hospitalar.'],
+                [/colar/, 'Item de identificação pessoal e apresentação ligada à formação.'],
+                [/sutache/, 'Padroniza identificação com nome e tipo sanguíneo no uniforme.'],
+                [/nugget/, 'Mantém o coturno conservado e com melhor apresentação.'],
+                [/monitor digital de pressao/, 'Apoia aferições e práticas de atendimento com mais agilidade.'],
+                [/gorro/, 'Protege em ambientes frios e reforça a identificação visual.'],
+                [/kit termico/, 'Ajuda a manter temperatura corporal em noites frias no acampamento.'],
+                [/garrafa|cantil/, 'Mantém hidratação acessível durante trilhas e instruções prolongadas.'],
+                [/mosquetao/, 'Facilita prender e organizar pequenos acessórios na mochila ou cinto.'],
+                [/protetor labial/, 'Evita ressecamento em atividades com sol, vento ou frio.'],
+                [/protetor de pescoco|buff/, 'Protege pescoço e rosto contra sol, poeira e frio.'],
+                [/mochila/, 'Centraliza o transporte dos itens do campo com melhor organização.'],
+                [/protetor solar/, 'Proteção essencial para exposição prolongada ao sol.']
+            ];
+            const match = notes.find(([pattern]) => pattern.test(normalized));
+            return match ? match[1] : 'Item incluído para completar o kit e apoiar a rotina de treinamento.';
+        }
+
+        function renderSelect(label, key, values) {
+            return `
+                <label class="block">
+                    <span class="mb-1 block text-[11px] font-bold uppercase text-gray-400">${escapeHtml(label)}</span>
+                    <select class="field w-full rounded-md px-3 py-3 text-sm" data-select-key="${escapeHtml(key)}" aria-label="${escapeHtml(label)}" required>
+                        <option value="" selected>Selecionar</option>
+                        ${values.map(value => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`).join('')}
+                    </select>
+                </label>
+            `;
+        }
+
+        function priceKey(productId, itemIndex) {
+            return `${productId}.item.${itemIndex}`;
+        }
+
+        function optionPriceKey(productId, itemIndex, label) {
+            return `${productId}.item.${itemIndex}.option.${label}`;
+        }
+
+        function setCatalogPrice(key, value) {
+            for (const group of productGroups) {
+                for (const product of group.products) {
+                    product.items.forEach((productItem, index) => {
+                        if (key === priceKey(product.id, index) && !productItem.options) {
+                            productItem.price = value;
+                        }
+                        if (productItem.options) {
+                            productItem.options.forEach(optionItem => {
+                                if (key === optionPriceKey(product.id, index, optionItem.label)) {
+                                    optionItem.price = value;
+                                }
+                            });
+                        }
                     });
                 }
-            } else {
-                name = btnOrName;
-                price = nameOrPrice;
             }
+        }
 
-            const existing = cart.find(i => i.name === name);
-            if(existing) existing.qty++;
-            else cart.push({name, price, qty: 1});
-            window.updateCartUI();
-        };
-
-        window.addFullKit = function(title) {
-            let kit = [...db.fardamento, ...db.elite, ...db.acampamento].find(k => k.title === title);
-            if(kit) {
-                kit.items.forEach(i => window.addToCart(i.name, i.price));
-                window.closeModal();
-                window.openCartModal();
-            }
-        };
-
-        window.updateCartUI = function() {
-            const list = document.getElementById('cart-items-list');
-            const countH = document.getElementById('cartCountHeader');
-            const countF = document.getElementById('cartCountFloat');
-            const totalEl = document.getElementById('cart-total-value');
-            
-            const totalQty = cart.reduce((a, b) => a + b.qty, 0);
-            countH.innerText = totalQty;
-            countF.innerText = totalQty;
-            countH.classList.toggle('hidden', totalQty === 0);
-            countF.classList.toggle('hidden', totalQty === 0);
-
-            let baseTotal = 0;
-            list.innerHTML = cart.map((item, idx) => {
-                baseTotal += item.price * item.qty;
-                return `
-                    <li class="flex justify-between items-center bg-gray-800/50 p-3 md:p-4 rounded-lg border border-gray-700 shadow-sm">
-                        <div class="text-xs md:text-sm leading-tight flex-1 pr-3">
-                            <span class="font-bold text-gold-accent mr-2 bg-black px-2 py-1 rounded border border-gray-800">${item.qty}x</span> 
-                            <span class="text-white font-medium">${item.name}</span>
-                        </div>
-                        <button onclick="window.removeFromCart(${idx})" class="text-red-500 hover:text-white hover:bg-red-600 w-8 h-8 rounded flex items-center justify-center transition-colors bg-black border border-red-900/50"><i class="fa-solid fa-trash-can"></i></button>
-                    </li>
-                `;
-            }).join('') || '<div class="text-center py-10 text-gray-500 italic text-sm">Seu pedido está vazio.</div>';
-            
-            if(baseTotal > 0) {
-                totalEl.innerHTML = `${window.getInstallmentText(baseTotal)} <span class="block text-[10px] md:text-xs text-gray-500 font-normal mt-1 text-right">ou ${window.getFullPriceText(baseTotal)} à vista</span>`;
-            } else {
-                totalEl.innerHTML = `0,00 em 12x`;
-            }
-        };
-
-        window.removeFromCart = function(idx) {
-            cart.splice(idx, 1);
-            window.updateCartUI();
-        };
-
-        // --- ATUALIZAÇÃO DE PREÇO NO FIREBASE (MODO ADMIN) ---
-        window.updatePrice = async function(kitTitle, itemIndex, newPrice) {
-            if(!isAdmin) return;
-            
-            let category;
-            for(let cat in db) {
-                if(cat === 'testimonials') continue;
-                if(db[cat].find(k => k.title === kitTitle)) { category = cat; break; }
-            }
-            
-            if(category) {
-                const kit = db[category].find(k => k.title === kitTitle);
-                if(kit) {
-                    kit.items[itemIndex].price = parseFloat(newPrice);
-                    try {
-                        const docRef = doc(firestore, "loja", "dadosPrincipais");
-                        await setDoc(docRef, db);
-                    } catch (error) {
-                        console.error("Erro ao gravar novo valor no banco de dados", error);
-                        alert("Erro ao sincronizar preço com o banco de dados. " + error.message);
-                    }
+        function applyPriceOverrides(overrides = {}) {
+            Object.entries(overrides).forEach(([key, value]) => {
+                const parsed = Number(value);
+                if (Number.isFinite(parsed) && parsed >= 0) {
+                    setCatalogPrice(key, parsed);
                 }
+            });
+        }
+
+        async function savePrice(key, value) {
+            if (!isAdmin) return;
+            const parsed = Number(value);
+            if (!Number.isFinite(parsed) || parsed < 0) {
+                showModalError('Informe um valor válido.');
+                return;
             }
-        };
 
-        // --- CHECKOUT WHATSAPP ---
-        window.checkout = function() {
-            if(!cart.length) return alert("Adicione itens ao seu pedido primeiro.");
-            
-            const name = document.getElementById('student-name').value;
-            const turma = document.getElementById('student-class').value;
-            const pay = document.getElementById('payment-method').value;
-            
-            if(!name || !turma || !pay) return alert("Por favor, preencha todos os campos obrigatórios.");
+            priceOverrides[key] = parsed;
+            setCatalogPrice(key, parsed);
 
-            let baseTotal = cart.reduce((a, b) => a + (b.price * b.qty), 0);
-            
-            let msg = `*PEDIDO BRAVUS Artigos Militares*\n\n`;
-            msg += `*Nome:* ${name}\n`;
-            msg += `*Turma/Bat.:* ${turma}\n`;
-            msg += `*Pagamento:* ${pay}\n\n`;
-            msg += `*ITENS DO PEDIDO:*\n`;
-            
-            cart.forEach(i => msg += `• ${i.qty}x ${i.name}\n`);
-            
-            msg += `\n*INVESTIMENTO:* ${window.getInstallmentText(baseTotal)} (ou ${window.getFullPriceText(baseTotal)} à vista)\n\n`;
-            msg += `_Solicito confirmação para pagamento e prazo para recebimento._`;
-            
-            window.open(`https://wa.me/5561998300711?text=${encodeURIComponent(msg)}`, '_blank');
-        };
+            try {
+                await setDoc(priceDocRef, { prices: priceOverrides, updatedAt: new Date().toISOString() }, { merge: true });
+                showModalSuccess('Valor atualizado e salvo.');
+                updateCart();
+            } catch (error) {
+                showModalError('Não foi possível salvar. Confira as regras do Firebase.');
+                console.error('Erro ao salvar valor', error);
+            }
+        }
 
-        // --- ADMIN ---
-        window.adminLogin = function() {
-            const u = document.getElementById('admin-user').value;
-            const p = document.getElementById('admin-pass').value;
-            if (u === 'admin' && p === '559988') {
-                isAdmin = true;
-                localStorage.setItem('bravus_admin_session', 'active');
-                window.toggleAdminModal();
-                window.renderAll();
-                alert("Acesso Administrativo Bravus Ativo.");
-            } else alert("Credenciais Incorretas.");
-        };
+        function collectItem(product, index) {
+            const row = els.modalBody.querySelector(`[data-item-row="${index}"]`);
+            const productItem = product.items[index];
+            const selected = {};
+            const details = [];
+            let price = productItem.price || 0;
+            let name = productItem.name;
 
-        window.adminLogout = () => { 
-            isAdmin = false; 
-            localStorage.removeItem('bravus_admin_session');
-            window.renderAll(); 
-        };
-        window.toggleAdminModal = () => document.getElementById('admin-modal').classList.toggle('hidden');
-        window.closeModal = () => document.getElementById('product-modal').classList.add('hidden');
-        window.openCartModal = () => document.getElementById('cart-modal').classList.remove('hidden');
-        window.closeCartModal = () => document.getElementById('cart-modal').classList.add('hidden');
-        window.filterCategory = (cat) => cat === 'all' && window.scrollTo({top: 0, behavior: 'smooth'});
+            row.querySelectorAll('select').forEach(select => {
+                if (!select.value) {
+                    select.classList.add('border-red');
+                    return;
+                }
+                select.classList.remove('border-red');
+                selected[select.dataset.selectKey] = select.value;
+            });
 
-        // Inicialização
-        initFirebaseDB();
+            if (row.querySelector('select.border-red')) {
+                return { error: `Escolha as opções de ${productItem.name}.` };
+            }
+
+            if (productItem.options) {
+                const chosen = productItem.options.find(opt => opt.label === selected.option);
+                if (!chosen) return { error: `Escolha o ${productItem.choiceLabel.toLowerCase()} de ${productItem.name}.` };
+                price = chosen.price;
+                name = productItem.name === 'Coturno' ? `Coturno ${chosen.label}` : productItem.name;
+                details.push(`${productItem.choiceLabel}: ${chosen.label}`);
+
+                Object.entries(chosen.details || {}).forEach(([label, values]) => {
+                    const value = selected[label];
+                    if (!value) return;
+                    details.push(`${label}: ${value}`);
+                });
+            }
+
+            Object.entries(productItem.selectors || {}).forEach(([label]) => {
+                details.push(`${label}: ${selected[label]}`);
+            });
+
+            return {
+                id: `${product.id}-${index}-${details.join('|') || 'padrao'}`,
+                name,
+                price,
+                details,
+                qty: 1,
+                source: product.title
+            };
+        }
+
+        function showModalError(message) {
+            const error = document.getElementById('modalError');
+            clearModalSuccess();
+            error.textContent = message;
+            error.classList.remove('hidden');
+        }
+
+        function clearModalError() {
+            const error = document.getElementById('modalError');
+            if (!error) return;
+            error.textContent = '';
+            error.classList.add('hidden');
+        }
+
+        function showModalSuccess(message) {
+            const success = document.getElementById('modalSuccess');
+            if (!success) return;
+            success.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i>${escapeHtml(message)}`;
+            success.classList.remove('hidden');
+            window.clearTimeout(showModalSuccess.timer);
+            showModalSuccess.timer = window.setTimeout(clearModalSuccess, 2400);
+        }
+
+        function clearModalSuccess() {
+            const success = document.getElementById('modalSuccess');
+            if (!success) return;
+            success.textContent = '';
+            success.classList.add('hidden');
+        }
+
+        function pulseCartIndicator() {
+            const targets = [document.getElementById('cartFloatButton'), els.cartCountHeader, els.cartCountFloat].filter(Boolean);
+            targets.forEach(target => {
+                target.classList.remove('cart-pulse');
+                void target.offsetWidth;
+                target.classList.add('cart-pulse');
+            });
+        }
+
+        function acknowledgeAddButton(button) {
+            if (!button) return;
+            const original = button.dataset.originalText || button.textContent.trim();
+            button.dataset.originalText = original;
+            button.innerHTML = '<i class="fa-solid fa-check mr-1"></i>Adicionado';
+            button.style.backgroundColor = '#2EB67D';
+            button.style.borderColor = '#2EB67D';
+            button.style.color = '#101216';
+            window.clearTimeout(acknowledgeAddButton.timer);
+            acknowledgeAddButton.timer = window.setTimeout(() => {
+                button.textContent = original;
+                button.style.backgroundColor = '';
+                button.style.borderColor = '';
+                button.style.color = '';
+            }, 1400);
+        }
+
+        function addCartLine(line) {
+            const existing = cart.find(itemInCart => itemInCart.id === line.id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push(line);
+            }
+            updateCart();
+            pulseCartIndicator();
+        }
+
+        function addSingleItem(index, button) {
+            if (!activeProduct) return;
+            clearModalError();
+            const line = collectItem(activeProduct, index);
+            if (line.error) {
+                showModalError(line.error);
+                return;
+            }
+            addCartLine(line);
+            acknowledgeAddButton(button);
+            showModalSuccess(`Item adicionado ao pedido: ${line.name}.`);
+        }
+
+        function addCompleteKit() {
+            if (!activeProduct) return;
+            clearModalError();
+            const lines = activeProduct.items.map((_, index) => collectItem(activeProduct, index));
+            const firstError = lines.find(line => line.error);
+            if (firstError) {
+                showModalError(firstError.error);
+                return;
+            }
+            lines.forEach(addCartLine);
+            closeProduct();
+            openCart();
+        }
+
+        function cartTotalValue() {
+            return cart.reduce((sum, line) => sum + line.price * line.qty, 0);
+        }
+
+        function updateCart() {
+            const totalQty = cart.reduce((sum, line) => sum + line.qty, 0);
+            els.cartCountHeader.textContent = totalQty;
+            els.cartCountFloat.textContent = totalQty;
+            els.cartCountHeader.classList.toggle('hidden', totalQty === 0);
+            els.cartCountFloat.classList.toggle('hidden', totalQty === 0);
+
+            els.cartItems.innerHTML = cart.length ? cart.map(renderCartLine).join('') : `
+                <li class="rounded-lg border border-dashed border-line p-8 text-center text-sm text-gray-500">Seu pedido ainda está vazio.</li>
+            `;
+
+            const totalHtml = formatTotal(cartTotalValue());
+            els.cartTotal.innerHTML = totalHtml;
+            els.checkoutTotal.innerHTML = `
+                <p class="text-xs font-bold uppercase text-gray-400">Total do pedido</p>
+                <div class="mt-1 text-xl font-extrabold text-brass">${totalHtml}</div>
+            `;
+        }
+
+        function renderCartLine(line, index) {
+            return `
+                <li class="rounded-lg border border-line bg-panelSoft p-4">
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="text-sm font-bold text-white">${escapeHtml(line.name)}</p>
+                            <p class="mt-1 text-xs text-gray-500">${escapeHtml(line.source)}</p>
+                            ${line.details.length ? `<p class="mt-2 text-xs leading-relaxed text-gray-300">${line.details.map(escapeHtml).join(' · ')}</p>` : ''}
+                        </div>
+                        <button class="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-red/40 text-red hover:bg-red hover:text-white" type="button" data-remove-line="${index}" aria-label="Remover item">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                    <div class="mt-3 flex items-center justify-between border-t border-line pt-3">
+                        <span class="text-xs font-bold uppercase text-gray-500">Quantidade</span>
+                        <div class="flex items-center overflow-hidden rounded-md border border-line">
+                            <button class="h-9 w-10 bg-ink text-white hover:bg-line" type="button" data-change-qty="${index}" data-delta="-1" aria-label="Diminuir quantidade">-</button>
+                            <span class="flex h-9 min-w-10 items-center justify-center bg-black px-3 text-sm font-bold text-brass">${line.qty}</span>
+                            <button class="h-9 w-10 bg-ink text-white hover:bg-line" type="button" data-change-qty="${index}" data-delta="1" aria-label="Aumentar quantidade">+</button>
+                        </div>
+                    </div>
+                </li>
+            `;
+        }
+
+        function removeLine(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) cart.splice(index, 1);
+            updateCart();
+        }
+
+        function openCart() {
+            els.cartModal.classList.remove('hidden');
+            els.cartModal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeCart() {
+            els.cartModal.classList.add('hidden');
+            els.cartModal.classList.remove('flex');
+            if (els.productModal.classList.contains('hidden')) {
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        function openAdminModal() {
+            els.adminModal.classList.remove('hidden');
+            els.adminModal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+            updateAdminUI();
+        }
+
+        function closeAdminModal() {
+            els.adminModal.classList.add('hidden');
+            els.adminModal.classList.remove('flex');
+            if (els.productModal.classList.contains('hidden') && els.cartModal.classList.contains('hidden')) {
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        function showAdminLoginError(message) {
+            els.adminLoginStatus.textContent = message;
+            els.adminLoginStatus.classList.remove('hidden');
+        }
+
+        function clearAdminLoginError() {
+            els.adminLoginStatus.textContent = '';
+            els.adminLoginStatus.classList.add('hidden');
+        }
+
+        function updateAdminUI() {
+            els.adminButton.innerHTML = isAdmin ? '<i class="fa-solid fa-user-shield"></i>' : '<i class="fa-solid fa-lock"></i>';
+            els.adminButton.classList.toggle('text-brass', isAdmin);
+            els.adminButton.classList.toggle('text-gray-500', !isAdmin);
+            els.adminLoginForm.classList.toggle('hidden', isAdmin);
+            els.adminLoggedPanel.classList.toggle('hidden', !isAdmin);
+        }
+
+        async function loginAdmin(event) {
+            event.preventDefault();
+            clearAdminLoginError();
+            const password = els.adminPassword.value;
+            if (!password) return;
+
+            try {
+                await signInWithEmailAndPassword(auth, ADMIN_EMAIL, password);
+                els.adminPassword.value = '';
+                closeAdminModal();
+            } catch (error) {
+                console.error('Erro de login admin', error);
+                showAdminLoginError('Senha incorreta ou usuário admin ainda não configurado no Firebase.');
+            }
+        }
+
+        async function logoutAdmin() {
+            await signOut(auth);
+            closeAdminModal();
+        }
+
+        function checkout(event) {
+            event.preventDefault();
+            if (!cart.length) {
+                alert('Adicione pelo menos um item ao pedido.');
+                return;
+            }
+
+            const name = document.getElementById('studentName').value.trim();
+            const studentClass = document.getElementById('studentClass').value.trim();
+            const payment = document.getElementById('paymentMethod').value;
+
+            if (!name || !studentClass || !payment) {
+                alert('Preencha nome, turma e forma de pagamento.');
+                return;
+            }
+
+            const total = cartTotalValue();
+            const lines = cart.map(line => {
+                const detailText = line.details.length ? ` (${line.details.join(', ')})` : '';
+                return `• ${line.qty}x ${line.name}${detailText}`;
+            }).join('\n');
+
+            let message = '*PEDIDO BRAVUS Artigos Militares*\\n\\n';
+            message += `*Nome:* ${name}\\n`;
+            message += `*Turma:* ${studentClass}\\n`;
+            message += `*Pagamento:* ${payment}\\n\\n`;
+            message += '*ITENS DO PEDIDO:*\\n';
+            message += `${lines}\\n\\n`;
+            message += `*TOTAL FINAL:* ${formatAmount(total * CARD_FEE / 12)} em 12x ou ${formatAmount(total)} à vista\\n\\n`;
+            message += '_Solicito confirmação do pedido, pagamento e prazo de recebimento._';
+
+            window.open(`https://wa.me/${BRAVUS_PHONE}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+        }
+
+        document.addEventListener('click', event => {
+            const openButton = event.target.closest('[data-open-product]');
+            if (openButton) openProduct(openButton.dataset.openProduct);
+
+            const addItemButton = event.target.closest('[data-add-item]');
+            if (addItemButton) addSingleItem(Number(addItemButton.dataset.addItem), addItemButton);
+
+            if (event.target.closest('[data-add-kit]')) addCompleteKit();
+
+            const removeButton = event.target.closest('[data-remove-line]');
+            if (removeButton) removeLine(Number(removeButton.dataset.removeLine));
+
+            const qtyButton = event.target.closest('[data-change-qty]');
+            if (qtyButton) changeQty(Number(qtyButton.dataset.changeQty), Number(qtyButton.dataset.delta));
+
+            const testimonialButton = event.target.closest('[data-testimonial-dir]');
+            if (testimonialButton) moveTestimonials(Number(testimonialButton.dataset.testimonialDir));
+
+            const testimonialDot = event.target.closest('[data-testimonial-dot]');
+            if (testimonialDot) {
+                testimonialIndex = Number(testimonialDot.dataset.testimonialDot);
+                updateTestimonials();
+            }
+        });
+
+        document.addEventListener('change', event => {
+            const priceInput = event.target.closest('[data-price-key]');
+            if (priceInput) savePrice(priceInput.dataset.priceKey, priceInput.value);
+        });
+
+        document.getElementById('closeProductModal').addEventListener('click', closeProduct);
+        document.getElementById('closeCartModal').addEventListener('click', closeCart);
+        document.getElementById('closeAdminModal').addEventListener('click', closeAdminModal);
+        document.getElementById('cartHeaderButton').addEventListener('click', openCart);
+        document.getElementById('cartFloatButton').addEventListener('click', openCart);
+        document.getElementById('adminButton').addEventListener('click', openAdminModal);
+        document.getElementById('adminLogoutButton').addEventListener('click', logoutAdmin);
+        els.adminLoginForm.addEventListener('submit', loginAdmin);
+        document.getElementById('goCheckout').addEventListener('click', () => {
+            closeCart();
+            document.getElementById('contato').scrollIntoView({ behavior: 'smooth' });
+        });
+        document.getElementById('checkoutForm').addEventListener('submit', checkout);
+        document.getElementById('menuButton').addEventListener('click', () => els.mobileMenu.classList.toggle('hidden'));
+        els.mobileMenu.addEventListener('click', event => {
+            if (event.target.matches('a')) els.mobileMenu.classList.add('hidden');
+        });
+        els.searchInput.addEventListener('input', renderCatalog);
+        els.clearSearch.addEventListener('click', () => {
+            els.searchInput.value = '';
+            renderCatalog();
+            els.searchInput.focus();
+        });
+        els.productModal.addEventListener('click', event => {
+            if (event.target === els.productModal) closeProduct();
+        });
+        els.cartModal.addEventListener('click', event => {
+            if (event.target === els.cartModal) closeCart();
+        });
+        els.adminModal.addEventListener('click', event => {
+            if (event.target === els.adminModal) closeAdminModal();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key !== 'Escape') return;
+            closeProduct();
+            closeCart();
+            closeAdminModal();
+        });
+        window.addEventListener('resize', updateTestimonials);
+
+        onAuthStateChanged(auth, user => {
+            isAdmin = Boolean(user && user.email === ADMIN_EMAIL);
+            updateAdminUI();
+            if (activeProduct) {
+                els.modalBody.innerHTML = renderProductModal(activeProduct);
+            }
+        });
+
+        onSnapshot(priceDocRef, snapshot => {
+            if (!snapshot.exists()) return;
+            priceOverrides = snapshot.data().prices || {};
+            applyPriceOverrides(priceOverrides);
+            renderCatalog();
+            updateCart();
+            if (activeProduct) {
+                els.modalBody.innerHTML = renderProductModal(activeProduct);
+            }
+        }, error => {
+            console.warn('Valores remotos indisponíveis. Usando valores locais.', error);
+        });
+
+        renderCatalog();
+        renderTestimonials();
+        updateCart();
+        updateAdminUI();
     </script>
 </body>
 </html>
