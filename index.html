@@ -590,7 +590,7 @@
         const ADMIN_EMAIL = 'admin@bravus.local';
         const PRICE_DOC_PATH = ['loja', 'valoresCatalogo'];
         const BRAVUS_PHONE = '5561998300711';
-        const CARD_FEE = 1.124;
+        const CARD_INSTALLMENT_FEE = 0.124;
         const firebaseApp = initializeApp(firebaseConfig);
         const firestore = getFirestore(firebaseApp);
         const auth = getAuth(firebaseApp);
@@ -651,7 +651,7 @@
                             item('Lanterna de cabeça', 40.00, 'fa-lightbulb'),
                             item('Mochila tática', 150.00, 'fa-bag-shopping'),
                             item('Kit joelheira e cotoveleira', 159.90, 'fa-shield-halved'),
-                            item('Pulseira tática de sobrevivência', 40.00, 'fa-compass'),
+                            item('Kit alimentação', 25.00, 'fa-utensils'),
                             item('Garrafa tática cantil', 59.90, 'fa-bottle-water'),
                             item('Cinto tático', 40.00, 'fa-circle-notch'),
                             item('Mosquetão tático com trava', 50.00, 'fa-link'),
@@ -928,8 +928,12 @@
 
         function formatTotal(value) {
             if (!value) return 'Pedido vazio';
-            const installments = value * CARD_FEE / 12;
+            const installments = installmentValue(value);
             return `<span class="block">${formatAmount(installments)} em 12x</span><span class="mt-1 block text-xs font-medium text-gray-400">ou ${formatAmount(value)} à vista</span>`;
+        }
+
+        function installmentValue(value) {
+            return value / (1 - CARD_INSTALLMENT_FEE) / 12;
         }
 
         function normalize(text) {
@@ -1605,7 +1609,7 @@
             message += `*Pagamento:* ${payment}\n\n`;
             message += '*ITENS DO PEDIDO:*\n';
             message += `${lines}\n\n`;
-            message += `*TOTAL FINAL:* ${formatAmount(total * CARD_FEE / 12)} em 12x ou ${formatAmount(total)} à vista\n\n`;
+            message += `*TOTAL FINAL:* ${formatAmount(installmentValue(total))} em 12x ou ${formatAmount(total)} à vista\n\n`;
             message += '_Aguardo confirmação do pedido e mais informações para pagamento e recebimento._';
 
             window.open(`https://wa.me/${BRAVUS_PHONE}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
