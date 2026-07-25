@@ -408,7 +408,7 @@
                     <div class="surface-v2 rounded-lg p-5">
                         <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-md bg-brass text-lg text-ink"><i class="fa-brands fa-whatsapp"></i></div>
                         <p class="mb-3 text-sm font-extrabold uppercase text-brass">3. Envie</p>
-                        <p class="text-sm leading-relaxed text-gray-300">Preencha nome, turma e forma de pagamento para enviar o pedido pelo WhatsApp.</p>
+                        <p class="text-sm leading-relaxed text-gray-300">Preencha nome, turma, telefone e forma de pagamento para enviar o pedido pelo WhatsApp.</p>
                     </div>
                 </div>
             </div>
@@ -461,16 +461,43 @@
                                 <input id="studentClass" class="field w-full rounded-md p-4 text-base" type="text" placeholder="Ex: Turma Bravo" required>
                             </label>
                         </div>
-                        <label class="block">
-                            <span class="mb-2 block text-xs font-bold uppercase text-brass">Forma de pagamento</span>
-                            <select id="paymentMethod" class="field w-full rounded-md p-4 text-base" required>
-                                <option value="" selected disabled>Selecione...</option>
-                                <option value="PIX">PIX</option>
-                                <option value="Cartão de crédito">Cartão de crédito</option>
-                                <option value="Cartão de débito">Cartão de débito</option>
-                                <option value="Dinheiro">Dinheiro</option>
-                            </select>
-                        </label>
+                        <div class="grid gap-5 md:grid-cols-2">
+                            <label class="block">
+                                <span class="mb-2 block text-xs font-bold uppercase text-brass">Telefone</span>
+                                <input id="studentPhone" class="field w-full rounded-md p-4 text-base" type="tel" inputmode="tel" autocomplete="tel" placeholder="(61) 99999-9999" minlength="10" maxlength="20" required>
+                            </label>
+                            <label class="block">
+                                <span class="mb-2 block text-xs font-bold uppercase text-brass">Forma de pagamento</span>
+                                <select id="paymentMethod" class="field w-full rounded-md p-4 text-base" required>
+                                    <option value="" selected disabled>Selecione...</option>
+                                    <option value="PIX">PIX</option>
+                                    <option value="Cartão de crédito">Cartão de crédito</option>
+                                    <option value="Cartão de débito">Cartão de débito</option>
+                                    <option value="Dinheiro">Dinheiro</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div id="pixPaymentOptions" class="hidden rounded-lg border border-brass/35 bg-brass/5 p-4">
+                            <p class="mb-3 text-xs font-extrabold uppercase tracking-[.16em] text-brass">Como será o PIX?</p>
+                            <div class="grid grid-cols-2 gap-2">
+                                <label class="cursor-pointer">
+                                    <input class="peer sr-only" type="radio" name="pixCondition" value="À vista">
+                                    <span class="flex min-h-12 items-center justify-center rounded-md border border-line bg-ink px-3 text-center text-sm font-bold text-gray-300 transition peer-checked:border-brass peer-checked:bg-brass peer-checked:text-ink">À vista</span>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input class="peer sr-only" type="radio" name="pixCondition" value="Parcelado">
+                                    <span class="flex min-h-12 items-center justify-center rounded-md border border-line bg-ink px-3 text-center text-sm font-bold text-gray-300 transition peer-checked:border-brass peer-checked:bg-brass peer-checked:text-ink">Parcelado</span>
+                                </label>
+                            </div>
+                            <div id="pixInstallmentOptions" class="mt-4 hidden border-t border-line pt-4">
+                                <label class="block">
+                                    <span class="mb-2 block text-xs font-bold uppercase text-gray-300">Quantidade de parcelas</span>
+                                    <input id="pixInstallmentCount" class="field w-full rounded-md p-3 text-base" type="number" inputmode="numeric" min="2" step="1" value="3" placeholder="Digite a quantidade" required>
+                                </label>
+                                <p class="mt-4 text-xs leading-relaxed text-gray-400">Informe o dia e o mês de cada pagamento.</p>
+                                <div id="pixInstallmentDates" class="mt-3 grid gap-3 sm:grid-cols-2"></div>
+                            </div>
+                        </div>
                         <div id="checkoutTotal" class="rounded-md border border-line bg-black/30 p-4 text-right">
                             <p class="text-xs font-bold uppercase text-gray-400">Total do pedido</p>
                             <p class="mt-1 text-xl font-extrabold text-brass">Pedido vazio</p>
@@ -1590,11 +1617,52 @@
 
             const name = document.getElementById('studentName').value.trim();
             const studentClass = document.getElementById('studentClass').value.trim();
+            const studentPhone = document.getElementById('studentPhone').value.trim();
             const payment = document.getElementById('paymentMethod').value;
 
-            if (!name || !studentClass || !payment) {
-                alert('Preencha nome, turma e forma de pagamento.');
+            if (!name || !studentClass || !studentPhone || !payment) {
+                alert('Preencha nome, turma, telefone e forma de pagamento.');
                 return;
+            }
+
+            const phoneDigits = studentPhone.replace(/\D/g, '');
+            if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+                alert('Informe um telefone válido com DDD.');
+                return;
+            }
+
+            let paymentDescription = payment;
+            let pixInstallmentCountDescription = '';
+            let pixDatesDescription = '';
+
+            if (payment === 'PIX') {
+                const pixCondition = document.querySelector('input[name="pixCondition"]:checked')?.value;
+                if (!pixCondition) {
+                    alert('Escolha se o PIX será à vista ou parcelado.');
+                    return;
+                }
+
+                paymentDescription = `PIX ${pixCondition.toLowerCase()}`;
+
+                if (pixCondition === 'Parcelado') {
+                    const installmentCount = Number(document.getElementById('pixInstallmentCount').value);
+                    const dateInputs = [...document.querySelectorAll('[data-pix-installment-date]')];
+                    const installmentDates = dateInputs.map(input => input.value.trim());
+
+                    if (!Number.isInteger(installmentCount) || installmentCount < 2) {
+                        alert('Informe uma quantidade válida de parcelas, a partir de 2.');
+                        return;
+                    }
+
+                    if (dateInputs.length !== installmentCount || installmentDates.some(date => !isValidPixDate(date))) {
+                        alert('Preencha corretamente todas as datas das parcelas no formato dia/mês.');
+                        return;
+                    }
+
+                    paymentDescription = 'PIX parcelado';
+                    pixInstallmentCountDescription = `*Quantidade de parcelas:* ${installmentCount}\n`;
+                    pixDatesDescription = `*Datas das parcelas:* ${installmentDates.join(', ')}\n`;
+                }
             }
 
             const total = cartTotalValue();
@@ -1606,13 +1674,87 @@
             let message = '*PEDIDO BRAVUS Artigos Militares*\n\n';
             message += `*Nome:* ${name}\n`;
             message += `*Turma:* ${studentClass}\n`;
-            message += `*Pagamento:* ${payment}\n\n`;
+            message += `*Número do aluno:* ${studentPhone}\n`;
+            message += `*Pagamento:* ${paymentDescription}\n`;
+            message += pixInstallmentCountDescription;
+            message += pixDatesDescription;
+            message += '\n';
             message += '*ITENS DO PEDIDO:*\n';
             message += `${lines}\n\n`;
-            message += `*TOTAL FINAL:* ${formatAmount(installmentValue(total))} em 12x ou ${formatAmount(total)} à vista\n\n`;
-            message += '_Aguardo confirmação do pedido e mais informações para pagamento e recebimento._';
+            if (payment === 'PIX') {
+                const pixCondition = document.querySelector('input[name="pixCondition"]:checked')?.value;
+                const totalLabel = pixCondition === 'Parcelado' ? 'via PIX parcelado' : 'à vista';
+                message += `*TOTAL FINAL:* ${formatAmount(total)} ${totalLabel}`;
+            } else {
+                message += `*TOTAL FINAL:* ${formatAmount(installmentValue(total))} em 12x ou ${formatAmount(total)} à vista`;
+            }
 
             window.open(`https://wa.me/${BRAVUS_PHONE}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+        }
+
+        function renderPixInstallmentDates() {
+            const count = Number(document.getElementById('pixInstallmentCount').value);
+            const container = document.getElementById('pixInstallmentDates');
+            const currentValues = [...container.querySelectorAll('input')].map(input => input.value);
+
+            if (!Number.isInteger(count) || count < 2) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = Array.from({ length: count }, (_, index) => `
+                <label class="block">
+                    <span class="mb-1 block text-[11px] font-bold uppercase text-gray-400">${index + 1}ª parcela</span>
+                    <input
+                        class="field w-full rounded-md px-3 py-3 text-base"
+                        type="text"
+                        inputmode="numeric"
+                        maxlength="5"
+                        placeholder="10/${String(((index + 6) % 12) + 1).padStart(2, '0')}"
+                        value="${escapeHtml(currentValues[index] || '')}"
+                        data-pix-installment-date
+                        aria-label="Data da ${index + 1}ª parcela"
+                        required
+                    >
+                </label>
+            `).join('');
+        }
+
+        function updatePixPaymentOptions() {
+            const payment = document.getElementById('paymentMethod').value;
+            const pixOptions = document.getElementById('pixPaymentOptions');
+            const installmentOptions = document.getElementById('pixInstallmentOptions');
+            const pixCondition = document.querySelector('input[name="pixCondition"]:checked')?.value;
+            const isPix = payment === 'PIX';
+            const isInstallment = isPix && pixCondition === 'Parcelado';
+
+            pixOptions.classList.toggle('hidden', !isPix);
+            installmentOptions.classList.toggle('hidden', !isInstallment);
+
+            document.querySelectorAll('input[name="pixCondition"]').forEach(input => {
+                input.required = isPix;
+            });
+
+            if (isInstallment) {
+                renderPixInstallmentDates();
+            } else {
+                document.getElementById('pixInstallmentDates').innerHTML = '';
+            }
+        }
+
+        function formatPixDateInput(input) {
+            const digits = input.value.replace(/\D/g, '').slice(0, 4);
+            input.value = digits.length > 2 ? `${digits.slice(0, 2)}/${digits.slice(2)}` : digits;
+        }
+
+        function isValidPixDate(value) {
+            const match = value.match(/^(\d{2})\/(\d{2})$/);
+            if (!match) return false;
+            const day = Number(match[1]);
+            const month = Number(match[2]);
+            if (month < 1 || month > 12) return false;
+            const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            return day >= 1 && day <= daysInMonth[month - 1];
         }
 
         document.addEventListener('click', event => {
@@ -1643,6 +1785,21 @@
         document.addEventListener('change', event => {
             const priceInput = event.target.closest('[data-price-key]');
             if (priceInput) savePrice(priceInput.dataset.priceKey, priceInput.value);
+
+            if (event.target.matches('#paymentMethod, input[name="pixCondition"]')) {
+                updatePixPaymentOptions();
+            }
+
+        });
+
+        document.addEventListener('input', event => {
+            if (event.target.matches('#pixInstallmentCount')) {
+                renderPixInstallmentDates();
+            }
+
+            if (event.target.matches('[data-pix-installment-date]')) {
+                formatPixDateInput(event.target);
+            }
         });
 
         document.getElementById('closeProductModal').addEventListener('click', closeProduct);
@@ -1663,6 +1820,12 @@
         els.mobileMenu.addEventListener('click', event => {
             if (event.target.matches('a')) els.mobileMenu.classList.add('hidden');
         });
+
+        const checkoutObserver = new IntersectionObserver(([entry]) => {
+            document.getElementById('cartFloatButton').classList.toggle('hidden', entry.isIntersecting);
+        }, { threshold: 0.15 });
+        checkoutObserver.observe(document.getElementById('contato'));
+
         els.searchInput.addEventListener('input', renderCatalog);
         els.clearSearch.addEventListener('click', () => {
             els.searchInput.value = '';
