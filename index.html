@@ -547,6 +547,24 @@
         </div>
     </div>
 
+    <div id="itemImageModal" class="fixed inset-0 z-[110] hidden items-center justify-center bg-black/95 p-3 backdrop-blur-md sm:p-6" role="dialog" aria-modal="true" aria-labelledby="itemImageTitle">
+        <div class="modal-panel flex max-h-[94dvh] w-full max-w-2xl flex-col overflow-hidden rounded-lg border border-line bg-panel shadow-2xl">
+            <div class="flex items-center justify-between gap-4 border-b border-line bg-[#12161B] px-4 py-3 sm:px-5">
+                <div class="min-w-0">
+                    <p class="text-[10px] font-extrabold uppercase tracking-[.18em] text-brass">Visualizar produto</p>
+                    <h3 id="itemImageTitle" class="truncate font-display text-xl font-bold uppercase text-white"></h3>
+                </div>
+                <button id="closeItemImageModal" class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line text-gray-300 hover:border-brass hover:text-white" type="button" aria-label="Fechar foto">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="flex min-h-0 flex-1 items-center justify-center bg-black p-2 sm:p-4">
+                <img id="itemImageMain" src="" alt="" class="max-h-[72dvh] w-full object-contain">
+            </div>
+            <div id="itemImageThumbs" class="hidden gap-2 overflow-x-auto border-t border-line bg-[#12161B] p-3"></div>
+        </div>
+    </div>
+
     <div id="cartModal" class="fixed inset-0 z-[90] hidden items-end justify-center bg-black/85 p-0 backdrop-blur-sm sm:items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
         <div class="modal-panel flex h-[92dvh] w-full max-w-lg flex-col overflow-hidden rounded-t-lg border border-line bg-panel sm:h-auto sm:max-h-[90vh] sm:rounded-xl">
             <div class="flex items-center justify-between border-b border-line bg-[#12161B] px-5 py-4">
@@ -622,6 +640,37 @@
         const firestore = getFirestore(firebaseApp);
         const auth = getAuth(firebaseApp);
         const priceDocRef = doc(firestore, ...PRICE_DOC_PATH);
+
+        function campingImage(filename, label) {
+            return {
+                src: `assets/items/acampamento/${filename}.jpg`,
+                thumb: `assets/items/acampamento/thumbs/${filename}.jpg`,
+                label
+            };
+        }
+
+        const ITEM_IMAGES = {
+            'Barraca camuflada': [campingImage('barraca', 'Barraca camuflada')],
+            'Saco de dormir individual': [campingImage('saco-dormir', 'Saco de dormir individual')],
+            'Kit térmico': [
+                campingImage('kit-termico-masculino', 'Modelo masculino'),
+                campingImage('kit-termico-feminino', 'Modelo feminino')
+            ],
+            'Lanterna de cabeça': [campingImage('lanterna', 'Lanterna de cabeça')],
+            'Mochila tática': [campingImage('mochila', 'Mochila tática')],
+            'Kit joelheira e cotoveleira': [campingImage('joelheira-cotoveleira', 'Kit joelheira e cotoveleira')],
+            'Kit alimentação': [campingImage('kit-alimentacao', 'Kit alimentação')],
+            'Garrafa tática cantil': [campingImage('cantil', 'Garrafa tática cantil')],
+            'Cinto tático': [campingImage('cinto-tatico', 'Cinto tático')],
+            'Mosquetão tático com trava': [campingImage('mosquetao', 'Mosquetão tático com trava')],
+            'Toalha de microfibra compacta': [campingImage('toalha', 'Toalha de microfibra compacta')],
+            'Protetor solar em bastão': [campingImage('protetor-solar', 'Protetor solar')],
+            'Luvas táticas leves': [campingImage('luvas', 'Luvas táticas leves')],
+            'Repelente em spray compacto': [campingImage('repelente', 'Repelente')],
+            'Protetor labial com FPS': [campingImage('protetor-labial', 'Protetor labial com FPS')],
+            'Protetor de pescoço Buff': [campingImage('protetor-pescoco', 'Protetor de pescoço Buff')],
+            'Lenço umedecido': [campingImage('lenco-umedecido', 'Lenço umedecido')]
+        };
 
         const productGroups = [
 {
@@ -889,6 +938,9 @@
         let isAdmin = false;
         let priceOverrides = {};
         let testimonialIndex = 0;
+        let activeItemImages = [];
+        let activeItemImageIndex = 0;
+        let activeItemImageName = '';
 
         const els = {
             searchInput: document.getElementById('searchInput'),
@@ -897,6 +949,10 @@
             productModal: document.getElementById('productModal'),
             modalTitle: document.getElementById('modalTitle'),
             modalBody: document.getElementById('modalBody'),
+            itemImageModal: document.getElementById('itemImageModal'),
+            itemImageTitle: document.getElementById('itemImageTitle'),
+            itemImageMain: document.getElementById('itemImageMain'),
+            itemImageThumbs: document.getElementById('itemImageThumbs'),
             cartModal: document.getElementById('cartModal'),
             cartItems: document.getElementById('cartItems'),
             cartTotal: document.getElementById('cartTotal'),
@@ -915,7 +971,8 @@
         };
 
         function item(name, price, icon, config = {}) {
-            return { name, price, icon, ...config };
+            const images = ITEM_IMAGES[name] || [];
+            return { name, price, icon, images, ...config };
         }
 
         function option(label, price, details = {}) {
@@ -1113,10 +1170,64 @@
         }
 
         function closeProduct() {
+            closeItemImage();
             els.productModal.classList.add('hidden');
             document.body.classList.remove('product-modal-open');
             activeProduct = null;
             syncBodyLock();
+        }
+
+        function openItemImage(itemIndex) {
+            const productItem = activeProduct?.items[itemIndex];
+            if (!productItem?.images?.length) return;
+
+            activeItemImages = productItem.images;
+            activeItemImageIndex = 0;
+            activeItemImageName = productItem.name;
+            renderItemImageViewer();
+            els.itemImageModal.classList.remove('hidden');
+            els.itemImageModal.classList.add('flex');
+            syncBodyLock();
+            document.getElementById('closeItemImageModal').focus();
+        }
+
+        function closeItemImage() {
+            els.itemImageModal.classList.add('hidden');
+            els.itemImageModal.classList.remove('flex');
+            els.itemImageMain.removeAttribute('src');
+            els.itemImageMain.alt = '';
+            activeItemImages = [];
+            activeItemImageIndex = 0;
+            activeItemImageName = '';
+            syncBodyLock();
+        }
+
+        function selectItemImage(imageIndex) {
+            if (!activeItemImages[imageIndex]) return;
+            activeItemImageIndex = imageIndex;
+            renderItemImageViewer();
+        }
+
+        function renderItemImageViewer() {
+            const selectedImage = activeItemImages[activeItemImageIndex];
+            if (!selectedImage) return;
+
+            els.itemImageTitle.textContent = activeItemImageName;
+            els.itemImageMain.src = selectedImage.src;
+            els.itemImageMain.alt = `${activeItemImageName} - ${selectedImage.label}`;
+            els.itemImageThumbs.classList.toggle('hidden', activeItemImages.length < 2);
+            els.itemImageThumbs.classList.toggle('flex', activeItemImages.length > 1);
+            els.itemImageThumbs.innerHTML = activeItemImages.map((image, index) => `
+                <button
+                    class="flex min-w-24 items-center gap-2 rounded-md border p-1.5 text-left text-[11px] font-bold transition-colors ${index === activeItemImageIndex ? 'border-brass bg-brass/10 text-brass' : 'border-line bg-ink text-gray-400 hover:border-brass/50'}"
+                    type="button"
+                    data-select-item-image="${index}"
+                    aria-label="Ver ${escapeHtml(image.label)}"
+                >
+                    <img src="${escapeHtml(image.thumb)}" alt="" class="h-11 w-11 shrink-0 rounded object-cover" loading="lazy">
+                    <span>${escapeHtml(image.label)}</span>
+                </button>
+            `).join('');
         }
 
         function renderProductModal(product) {
@@ -1153,12 +1264,31 @@
         }
 
         function renderProductItem(productItem, index) {
+            const hasImage = productItem.images?.length;
+            const visual = hasImage ? `
+                <button
+                    class="group relative h-14 w-14 shrink-0 overflow-hidden rounded-md border border-line bg-black transition hover:border-brass focus:border-brass focus:outline-none sm:h-16 sm:w-16"
+                    type="button"
+                    data-view-item-image="${index}"
+                    aria-label="Ver foto de ${escapeHtml(productItem.name)}"
+                    title="Ver foto"
+                >
+                    <img src="${escapeHtml(productItem.images[0].thumb)}" alt="" class="h-full w-full object-cover transition duration-200 group-hover:scale-105" loading="lazy">
+                    <span class="absolute bottom-1 right-1 flex h-5 w-5 items-center justify-center rounded bg-black/80 text-[9px] text-white">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                    </span>
+                    ${productItem.images.length > 1 ? `<span class="absolute right-1 top-1 rounded bg-black/80 px-1.5 py-0.5 text-[9px] font-bold text-white">${productItem.images.length}</span>` : ''}
+                </button>
+            ` : `
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line bg-panelSoft text-brass">
+                    <i class="fa-solid ${productItem.icon || 'fa-box'}"></i>
+                </div>
+            `;
+
             return `
                 <div class="rounded-lg border border-line bg-ink/55 p-4 transition-colors hover:border-brass/35" data-item-row="${index}">
                     <div class="flex gap-3">
-                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line bg-panelSoft text-brass">
-                            <i class="fa-solid ${productItem.icon || 'fa-box'}"></i>
-                        </div>
+                        ${visual}
                         <div class="min-w-0 flex-1">
                             <p class="font-bold text-white">${escapeHtml(productItem.name)}</p>
                             <div class="mt-3 grid gap-2 sm:grid-cols-2">
@@ -1564,6 +1694,7 @@
 
         function syncBodyLock() {
             const anyModalOpen = !els.productModal.classList.contains('hidden')
+                || !els.itemImageModal.classList.contains('hidden')
                 || !els.cartModal.classList.contains('hidden')
                 || !els.adminModal.classList.contains('hidden');
             document.body.classList.toggle('overflow-hidden', anyModalOpen);
@@ -1761,6 +1892,12 @@
             const openButton = event.target.closest('[data-open-product]');
             if (openButton) openProduct(openButton.dataset.openProduct);
 
+            const itemImageButton = event.target.closest('[data-view-item-image]');
+            if (itemImageButton) openItemImage(Number(itemImageButton.dataset.viewItemImage));
+
+            const itemImageSelector = event.target.closest('[data-select-item-image]');
+            if (itemImageSelector) selectItemImage(Number(itemImageSelector.dataset.selectItemImage));
+
             const addItemButton = event.target.closest('[data-add-item]');
             if (addItemButton) addSingleItem(Number(addItemButton.dataset.addItem), addItemButton);
 
@@ -1803,6 +1940,7 @@
         });
 
         document.getElementById('closeProductModal').addEventListener('click', closeProduct);
+        document.getElementById('closeItemImageModal').addEventListener('click', closeItemImage);
         document.getElementById('closeCartModal').addEventListener('click', closeCart);
         document.getElementById('closeAdminModal').addEventListener('click', closeAdminModal);
         document.getElementById('cartHeaderButton').addEventListener('click', openCart);
@@ -1835,6 +1973,9 @@
         els.productModal.addEventListener('click', event => {
             if (event.target === els.productModal) closeProduct();
         });
+        els.itemImageModal.addEventListener('click', event => {
+            if (event.target === els.itemImageModal) closeItemImage();
+        });
         els.cartModal.addEventListener('click', event => {
             if (event.target === els.cartModal) closeCart();
         });
@@ -1843,6 +1984,10 @@
         });
         document.addEventListener('keydown', event => {
             if (event.key !== 'Escape') return;
+            if (!els.itemImageModal.classList.contains('hidden')) {
+                closeItemImage();
+                return;
+            }
             closeProduct();
             closeCart();
             closeAdminModal();
