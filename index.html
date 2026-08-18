@@ -754,7 +754,7 @@
                         description: 'Conjunto inicial para quem precisa montar o fardamento principal sem excessos.',
                         items: [
                             apparel('Camiseta preta manga longa', 79.90, 'fa-shirt'),
-                            apparel('Calça tática ripstop', 169.90, 'fa-person-hiking'),
+                            pants('Calça tática ripstop', 169.90, 'fa-person-hiking'),
                             boot('Coturno extra leve com zíper', 169.90),
                             item('Cinto', 39.90, 'fa-circle-notch'),
                             item('Bornal', 89.90, 'fa-briefcase'),
@@ -774,7 +774,7 @@
                             sized('Colete tático modular', 489.90, 'fa-vest', ['P', 'M', 'G', 'GG', 'EXG']),
                             item('Suspensório', 189.90, 'fa-grip-lines-vertical'),
                             apparel('Camiseta preta manga longa', 79.90, 'fa-shirt'),
-                            apparel('Calça tática ripstop', 169.90, 'fa-person-hiking'),
+                            pants('Calça tática ripstop', 169.90, 'fa-person-hiking'),
                             boot('Coturno extra leve com zíper', 169.90),
                             item('Cinto', 39.90, 'fa-circle-notch'),
                             item('Bornal', 89.90, 'fa-briefcase'),
@@ -800,7 +800,7 @@
                             sized('Colete tático modular', 489.90, 'fa-vest', ['P', 'M', 'G', 'GG', 'EXG']),
                             item('Suspensório', 189.90, 'fa-grip-lines-vertical'),
                             apparel('Camiseta preta manga longa', 79.90, 'fa-shirt'),
-                            apparel('Calça tática ripstop', 169.90, 'fa-person-hiking'),
+                            pants('Calça tática ripstop', 169.90, 'fa-person-hiking'),
                             boot('Coturno extra leve com zíper', 169.90),
                             item('Cinto', 39.90, 'fa-circle-notch'),
                             item('Bornal', 89.90, 'fa-briefcase'),
@@ -810,7 +810,7 @@
                             item('Joelheira e cotoveleira', 159.90, 'fa-shield-halved'),
                             item('Algema invictus', 199.90, 'fa-lock'),
                             item('Lanterna tática com LED lateral', 59.90, 'fa-lightbulb'),
-                            sized('Calça tática bege / PRF / PF', 179.90, 'fa-person-hiking', ['P', 'M', 'G', 'GG']),
+                            pants('Calça tática bege / PRF / PF', 179.90, 'fa-person-hiking'),
                             choice('Relógio tático militar', 'fa-clock', 'Modelo', [
                                 option('Masculino', 199.90),
                                 option('Feminino', 199.90)
@@ -833,7 +833,7 @@
                             sized('Camiseta Combat Shirt', 189.90, 'fa-shirt', ['P', 'M', 'G', 'GG']),
                             colorSized('Camiseta Bombeiro Civil', 79.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preta', 'Branca', 'Vermelha']),
                             colorSized('Moletom Bombeiro Civil', 129.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preto', 'Vermelho']),
-                            colorSized('Calça tática foxboy', 289.90, 'fa-person-hiking', ['P', 'M', 'G', 'GG'], ['Bege', 'Preta', 'Camuflada']),
+                            colorSized('Calça tática foxboy', 289.90, 'fa-person-hiking', pantsSizes(), ['Bege', 'Preta', 'Camuflada']),
                             choice('Coturno Atalaia', 'fa-shoe-prints', 'Cor', [
                                 option('Bege', 389.90, { Tamanho: shoeSizes() }),
                                 option('Preto', 389.90, { Tamanho: shoeSizes() })
@@ -859,7 +859,7 @@
                             sized('Camiseta Combat Shirt', 189.90, 'fa-shirt', ['P', 'M', 'G', 'GG']),
                             colorSized('Camiseta Bombeiro Civil', 79.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preta', 'Branca', 'Vermelha']),
                             colorSized('Moletom Bombeiro Civil', 129.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preto', 'Vermelho']),
-                            colorSized('Calça tática invictus', 349.90, 'fa-person-hiking', ['P', 'M', 'G', 'GG'], ['Bege', 'Preta', 'Camuflada']),
+                            colorSized('Calça tática invictus', 349.90, 'fa-person-hiking', pantsSizes(), ['Bege', 'Preta', 'Camuflada']),
                             choice('Coturno Acero', 'fa-shoe-prints', 'Cor', [
                                 option('Bege', 499.90, { Tamanho: shoeSizes() }),
                                 option('Preto', 499.90, { Tamanho: shoeSizes() })
@@ -888,7 +888,7 @@
                             sized('Camiseta Combat Shirt', 189.90, 'fa-shirt', ['P', 'M', 'G', 'GG']),
                             colorSized('Camiseta Bombeiro Civil', 79.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preta', 'Branca', 'Vermelha']),
                             colorSized('Moletom Bombeiro Civil', 129.90, 'fa-shirt', ['P', 'M', 'G', 'GG'], ['Preto', 'Vermelho']),
-                            colorSized('Calça tática invictus', 349.90, 'fa-person-hiking', ['P', 'M', 'G', 'GG'], ['Bege', 'Preta', 'Camuflada']),
+                            colorSized('Calça tática invictus', 349.90, 'fa-person-hiking', pantsSizes(), ['Bege', 'Preta', 'Camuflada']),
                             choice('Coturno', 'fa-shoe-prints', 'Modelo', [
                                 option('Guartelá bege', 569.90, { Tamanho: shoeSizes() }),
                                 option('Guartelá preto', 569.90, { Tamanho: shoeSizes() }),
@@ -987,6 +987,10 @@
             return sized(name, price, icon, ['P', 'M', 'G', 'GG', 'EXG']);
         }
 
+        function pants(name, price, icon) {
+            return sized(name, price, icon, pantsSizes());
+        }
+
         function boot(name, price) {
             return sized(name, price, 'fa-shoe-prints', shoeSizes());
         }
@@ -1001,6 +1005,10 @@
 
         function shoeSizes() {
             return ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46'];
+        }
+
+        function pantsSizes() {
+            return ['36', '38', '40', '42', '44', '46', '48', '50', '52', '54'];
         }
 
         function formatAmount(value) {
