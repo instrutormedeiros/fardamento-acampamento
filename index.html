@@ -134,17 +134,11 @@
             border: 1px solid rgba(255,255,255,.08);
             box-shadow: 0 12px 50px rgba(0,0,0,.26);
         }
-        .brand-mark {
-            display: grid;
-            width: 42px;
-            height: 42px;
-            flex: 0 0 42px;
-            place-items: center;
-            border: 1px solid rgba(224,192,144,.65);
-            border-radius: 6px;
-            background: linear-gradient(145deg, rgba(224,192,144,.16), rgba(198,168,124,.03));
-            color: #E0C090;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 8px 24px rgba(0,0,0,.24);
+        .brand-logo {
+            width: auto;
+            height: 56px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 18px rgba(0,0,0,.28));
         }
         section[id] { scroll-margin-top: 88px; }
         .field {
@@ -228,6 +222,9 @@
                 line-height: 1;
             }
         }
+        @media (max-width: 359px) {
+            .brand-subtitle { display: none; }
+        }
     </style>
 </head>
 
@@ -235,10 +232,10 @@
     <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/80 backdrop-blur-xl">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
             <a href="#inicio" class="flex items-center gap-3" aria-label="Início Reino Artigos Militares">
-                <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-crown"></i></span>
-                <div class="leading-tight">
-                    <p class="font-display text-2xl font-bold tracking-wider text-white">REINO</p>
-                    <p class="text-[10px] font-bold uppercase tracking-[.22em] text-brass">Artigos Militares</p>
+                <img src="assets/reino-logo.png" alt="Reino" class="brand-logo" width="720" height="459">
+                <div class="brand-subtitle leading-tight">
+                    <p class="text-[10px] font-bold uppercase tracking-[.18em] text-brass">Artigos</p>
+                    <p class="mt-1 text-[10px] font-bold uppercase tracking-[.18em] text-white">Militares</p>
                 </div>
             </a>
 
@@ -528,7 +525,8 @@
     <footer class="border-t border-line bg-[#07080A] py-10">
         <div class="mx-auto grid max-w-7xl gap-8 px-4 text-center md:grid-cols-3 md:text-left">
             <div>
-                <p class="font-display text-xl font-bold uppercase tracking-wider text-white"><i class="fa-solid fa-crown mr-2 text-brass" aria-hidden="true"></i>Reino Artigos Militares</p>
+                <img src="assets/reino-logo.png" alt="Reino" class="mx-auto h-24 w-auto md:mx-0" width="720" height="459" loading="lazy">
+                <p class="mt-3 text-xs font-bold uppercase tracking-[.2em] text-brass">Artigos Militares</p>
                 <p class="mt-3 text-sm leading-relaxed text-gray-500">Kits de acampamento, fardamentos e equipamentos organizados para facilitar o pedido dos alunos.</p>
             </div>
             <div>
