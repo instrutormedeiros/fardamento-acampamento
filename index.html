@@ -704,7 +704,8 @@
                             item('Pulseira tática de sobrevivência', 40.00, 'fa-compass'),
                             item('Repelente em spray compacto', 30.00, 'fa-bug'),
                             item('Toalha de microfibra compacta', 40.00, 'fa-square-full'),
-                            item('Lenço umedecido', 20.00, 'fa-box-tissue')
+                            item('Lenço umedecido', 20.00, 'fa-box-tissue'),
+                            item('Carregador portátil', 117.00, 'fa-battery-full')
                         ]
                     },
                     {
@@ -725,7 +726,8 @@
                             item('Repelente em spray compacto', 30.00, 'fa-bug'),
                             item('Protetor labial com FPS', 20.00, 'fa-sun'),
                             item('Protetor de pescoço Buff', 25.00, 'fa-user-ninja'),
-                            item('Lenço umedecido', 20.00, 'fa-box-tissue')
+                            item('Lenço umedecido', 20.00, 'fa-box-tissue'),
+                            item('Carregador portátil', 117.00, 'fa-battery-full')
                         ]
                     },
                     {
@@ -751,7 +753,8 @@
                             item('Repelente em spray compacto', 30.00, 'fa-bug'),
                             item('Protetor labial com FPS', 20.00, 'fa-sun'),
                             item('Protetor de pescoço Buff', 25.00, 'fa-user-ninja'),
-                            item('Lenço umedecido', 20.00, 'fa-box-tissue')
+                            item('Lenço umedecido', 20.00, 'fa-box-tissue'),
+                            item('Carregador portátil', 117.00, 'fa-battery-full')
                         ]
                     }
                 ]
@@ -1375,6 +1378,7 @@
         function itemImportance(name) {
             const normalized = normalize(name);
             const notes = [
+                [/carregador portatil/, 'Permite recarregar a lanterna de cabeça e o celular durante o acampamento.'],
                 [/barraca/, 'Abrigo básico para pernoite, proteção contra vento e organização do espaço no campo.'],
                 [/saco de dormir/, 'Ajuda a preservar conforto térmico e descanso durante a noite de acampamento.'],
                 [/lanterna/, 'Mantém as mãos livres e melhora a segurança em deslocamentos noturnos.'],
